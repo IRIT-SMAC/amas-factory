@@ -62,8 +62,8 @@ public class AmasFactoryInstantiator implements IAmasFactoryInstantiator {
         IInfraService<A, M> service = this.createInstanceFromClassNameField(configuration);
         service.init(
             (IInfrastructure<A, M>) infrastructure,
-            this.convertToMap(configuration.get(CONF_KEY).getAsJsonObject()
-        ));
+            configuration.get(CONF_KEY)
+        );
         
         return service;
     }
@@ -81,20 +81,5 @@ public class AmasFactoryInstantiator implements IAmasFactoryInstantiator {
         {
             throw new IllegalArgumentException("Bad class name : "+className,e);
         }
-    }
-
-    private Map<String,Object> convertToMap(JsonObject conf) {
-        
-        Builder<String, Object> builder = ImmutableMap.<String,Object>builder();
-        for (Entry<String, JsonElement> entry : conf.entrySet())
-        {
-            try {
-                builder.put(entry.getKey(),entry.getValue().getAsDouble());
-            } catch(NumberFormatException e) {
-                builder.put(entry.getKey(),entry.getValue().getAsString());
-            }
-        }
-        
-        return builder.build();
     }
 }

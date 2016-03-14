@@ -2,6 +2,8 @@ package fr.irit.smac.amasfactory.service.impl;
 
 import java.util.Map;
 
+import com.google.gson.JsonElement;
+
 import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.IInfraService;
@@ -9,17 +11,20 @@ import fr.irit.smac.amasfactory.service.IInfraService;
 public abstract class AbstractInfraService<A extends IInfrastructureAgent<M>,M> implements IInfraService<A,M>
 {
 
-    private IInfrastructure<A,M> infrastructure;
+    public IInfrastructure<A,M> infrastructure;
+    public static final String SERVICES_CONF_KEY = "services";
+    public static final String INFRA_CONF_KEY    = "infrastructure";
 
     @Override
-    public void init(IInfrastructure<A,M> infrastructure, Map<String, Object> parameters)
+    public void init(IInfrastructure<A,M> infrastructure, JsonElement parameters)
     {
         this.infrastructure = infrastructure;
+        
         this.initParameters(parameters);
         
     }
 
-    protected abstract void initParameters(Map<String, Object> parameters);
+    protected abstract void initParameters(JsonElement parameters);
 
     protected IInfrastructure<A,M> getInfrastructure()
     {

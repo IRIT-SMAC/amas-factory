@@ -2,6 +2,8 @@ package fr.irit.smac.amasfactory.service.messaging.impl;
 
 import java.util.Map;
 
+import com.google.gson.JsonElement;
+
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
@@ -93,9 +95,9 @@ public class MessagingService<M> extends AbstractInfraService<IInfrastructureAge
     }
 
     @Override
-    protected void initParameters(Map<String, Object> parameters)
+    protected void initParameters(JsonElement parameters)
     {
-        this.messageClassName = this.readParameter(MSG_CLASS_CONFIG_KEY, parameters);
+    	this.messageClassName = parameters.getAsJsonObject().get(MSG_CLASS_CONFIG_KEY).getAsString();
     }
 
 }

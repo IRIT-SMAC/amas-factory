@@ -4,6 +4,8 @@ import java.util.Map;
 
 import org.slf4j.Logger;
 
+import com.google.gson.JsonElement;
+
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
@@ -22,7 +24,7 @@ public class AgentLogLoggingService<M> extends   AbstractInfraService< IInfrastr
     }
 
     @Override
-    protected void initParameters(Map<String, Object> parameters) {
+    protected void initParameters(JsonElement parameters) {
         // NOTHING to do
     }
 

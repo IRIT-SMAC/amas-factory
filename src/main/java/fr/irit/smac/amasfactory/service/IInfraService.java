@@ -1,13 +1,13 @@
 package fr.irit.smac.amasfactory.service;
 
-import java.util.Map;
+import com.google.gson.JsonElement;
 
 import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 
 public interface IInfraService<A extends IInfrastructureAgent<M>,M>
 {
-    public void init(IInfrastructure<A,M> infrastructure, Map<String,Object> parameters); // TODO Change Map to JSon Element in order to have more flexibility
+    public void init(IInfrastructure<A,M> infrastructure, JsonElement parameters);
 
     public void start();
 
