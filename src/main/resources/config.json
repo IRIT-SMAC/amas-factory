@@ -1,0 +1,36 @@
+{
+    infrastructure: {
+        className: "fr.irit.smac.amasfactory.impl.BasicInfrastructure",
+        configuration: { }
+    },
+    
+    services: {
+        messaginService: {
+             className:"fr.irit.smac.amasfactory.service.messaging.impl.MessagingService",
+             configuration:{messageClassName:"fr.irit.smac.amasfactory.factoryclientdemo.DemoMessage"}
+        },
+        executionService: {
+             className:"fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService",
+             configuration:{nbThreads:8}
+        },
+        agentHandlerService: {
+             className:"fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler",
+             configuration:{}
+        },
+        loggingService: {
+             className:"fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService",
+             configuration:{}
+        }
+    },
+    
+    agents: {
+        ag1: {
+            className:"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent",
+            configuration:{messageContent:"Hello agents"}
+        },
+        ag2: {
+            className:"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent",
+            configuration:{messageContent:"Hello infratrouctour"}
+        }
+    }
+}
