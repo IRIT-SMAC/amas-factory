@@ -4,7 +4,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Map.Entry;
 
-import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -12,11 +11,8 @@ import com.google.gson.JsonParser;
 import fr.irit.smac.amasfactory.IAmasFactory;
 import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
-import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
-import fr.irit.smac.amasfactory.service.execution.IExecutionService;
-import fr.irit.smac.amasfactory.service.logging.ILoggingService;
-import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
 import fr.irit.smac.amasfactory.util.impl.AmasFactoryInstantiator;
+import fr.irit.smac.amasfactory.util.impl.AmasFactoryParser;
 
 /**
  * 
@@ -27,28 +23,22 @@ import fr.irit.smac.amasfactory.util.impl.AmasFactoryInstantiator;
  */
 public class BasicAmasFactory implements IAmasFactory {
 
-    public static final String INFRA_CONF_KEY    = "infrastructure";
-    public static final String AGENTS_CONF_KEY   = "agents";
-    public static final String CLASS_NAME_CONF_KEY = "className";
-    public static final String CONF_KEY = "configuration";
-
     private AmasFactoryInstantiator amasFactoryInstantiator;
+    private AmasFactoryParser amasFactoryParser;
     
     @Override
     public <A extends IInfrastructureAgent<M>, M> IInfrastructure<A, M> createInfrastructure(
         InputStream configuration) {
 
-        JsonElement confObj = new JsonParser().parse(new InputStreamReader(configuration));
-
         this.amasFactoryInstantiator = AmasFactoryInstantiator.getInstance();
+        this.amasFactoryParser = AmasFactoryParser.getInstance();
+        this.amasFactoryParser.init(configuration);
         
-        JsonObject infraConf = confObj.getAsJsonObject().getAsJsonObject(INFRA_CONF_KEY);
-        IInfrastructure<A, M> infrastructure = amasFactoryInstantiator.createInstanceFromClassNameField(infraConf);
-        infrastructure.init(null,confObj);
+        IInfrastructure<A, M> infrastructure = amasFactoryInstantiator.createInstanceFromClassNameField(this.amasFactoryParser.getInfrastructure());
+        infrastructure.init(null, amasFactoryParser.getConfiguration());
         infrastructure.start();
         
-        JsonObject agentsConf = confObj.getAsJsonObject().getAsJsonObject(AGENTS_CONF_KEY);
-        this.createAndInitAgentsCollection(infrastructure, agentsConf);
+        this.createAndInitAgentsCollection(infrastructure, amasFactoryParser.getAgents());
 
         return infrastructure;
     }

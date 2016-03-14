@@ -12,8 +12,6 @@ public abstract class AbstractInfraService<A extends IInfrastructureAgent<M>,M> 
 {
 
     public IInfrastructure<A,M> infrastructure;
-    public static final String SERVICES_CONF_KEY = "services";
-    public static final String INFRA_CONF_KEY    = "infrastructure";
 
     @Override
     public void init(IInfrastructure<A,M> infrastructure, JsonElement parameters)

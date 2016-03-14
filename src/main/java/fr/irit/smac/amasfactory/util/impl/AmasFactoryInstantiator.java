@@ -1,10 +1,5 @@
 package fr.irit.smac.amasfactory.util.impl;
 
-import java.util.Map;
-import java.util.Map.Entry;
-
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableMap.Builder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 

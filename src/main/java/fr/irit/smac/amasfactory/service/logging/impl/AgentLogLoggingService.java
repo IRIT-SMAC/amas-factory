@@ -1,7 +1,5 @@
 package fr.irit.smac.amasfactory.service.logging.impl;
 
-import java.util.Map;
-
 import org.slf4j.Logger;
 
 import com.google.gson.JsonElement;

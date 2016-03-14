@@ -1,7 +1,5 @@
 package fr.irit.smac.amasfactory.service.messaging.impl;
 
-import java.util.Map;
-
 import com.google.gson.JsonElement;
 
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;

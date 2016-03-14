@@ -1,7 +1,5 @@
 package fr.irit.smac.amasfactory.impl;
 
-import java.util.Map;
-
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
@@ -13,6 +11,7 @@ import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
 import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
 import fr.irit.smac.amasfactory.util.impl.AmasFactoryInstantiator;
+import fr.irit.smac.amasfactory.util.impl.AmasFactoryParser;
 
 public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends AbstractInfraService<A, M>
 		implements IInfrastructure<A, M> {
@@ -75,23 +74,22 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 
         AmasFactoryInstantiator amasFactoryInstantiator = AmasFactoryInstantiator.getInstance();
 
-        JsonObject servicesConf = parameters.getAsJsonObject().getAsJsonObject(SERVICES_CONF_KEY);
-
         IInfrastructure<A,M> infrastructure = this.infrastructure;
 
+        AmasFactoryParser amasFactoryParser = AmasFactoryParser.getInstance();
 		this.messagingService = (IMessagingService<M>) amasFactoryInstantiator.instantiateAndInitService(
-				infrastructure, servicesConf.getAsJsonObject(IInfrastructure.MESSAGING_SERVICE_CONFIG_KEY));
+				infrastructure, amasFactoryParser.getMessagingService());
 		
 		this.executionService = (IExecutionService<A, M>) amasFactoryInstantiator
 				.instantiateAndInitService(infrastructure,
-						servicesConf.getAsJsonObject(IInfrastructure.EXECUTION_SERVICE_CONFIG_KEY));
+						amasFactoryParser.getExecutionService());
 		
 		this.agentHandler = (IAgentHandlerService<A, M>) amasFactoryInstantiator
 				.instantiateAndInitService(infrastructure,
-						servicesConf.getAsJsonObject(IInfrastructure.AGENT_HANDLER_SERVICE_CONFIG_KEY));
+						amasFactoryParser.getHandlerService());
 		
 		this.loggingService = (ILoggingService<M>) amasFactoryInstantiator.instantiateAndInitService(
-				infrastructure, servicesConf.getAsJsonObject(IInfrastructure.LOGGING_SERVICE_CONFIG_KEY));
+				infrastructure, amasFactoryParser.getLoggingService());
 	}
 
 	@Override

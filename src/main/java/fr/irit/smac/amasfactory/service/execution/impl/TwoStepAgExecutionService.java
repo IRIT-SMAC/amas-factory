@@ -7,10 +7,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
-import fr.irit.smac.amasfactory.impl.BasicAmasFactory;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
