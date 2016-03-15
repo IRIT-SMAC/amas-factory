@@ -26,6 +26,7 @@ public class AmasFactoryParser implements IAmasFactoryParser{
 	private JsonObject executionService;
 	private JsonObject handlerService;
 	private JsonObject loggingService;
+	private JsonObject dataSharingService;
     
     private AmasFactoryParser() {
     	
@@ -47,6 +48,7 @@ public class AmasFactoryParser implements IAmasFactoryParser{
         this.executionService = this.services.getAsJsonObject(IInfrastructure.EXECUTION_SERVICE_CONFIG_KEY);
         this.handlerService = this.services.getAsJsonObject(IInfrastructure.AGENT_HANDLER_SERVICE_CONFIG_KEY);
         this.loggingService = this.services.getAsJsonObject(IInfrastructure.LOGGING_SERVICE_CONFIG_KEY);
+        this.dataSharingService = this.services.getAsJsonObject(IInfrastructure.DATA_SHARING_SERVICE_CONFIG_KEY);
         
         System.out.println(this.executionService);
     }
@@ -81,5 +83,9 @@ public class AmasFactoryParser implements IAmasFactoryParser{
 
 	public JsonObject getLoggingService() {
 		return loggingService;
+	}
+	
+	public JsonObject getDataSharingService() {
+		return dataSharingService;
 	}
 }

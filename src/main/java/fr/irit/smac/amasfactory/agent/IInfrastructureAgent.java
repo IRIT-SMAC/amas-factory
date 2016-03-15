@@ -12,7 +12,9 @@ import fr.irit.smac.amasfactory.IAgentSideInfrastructure;
  */
 public interface IInfrastructureAgent<M>
 {
-    public void init(IAgentSideInfrastructure<M> infrastructure, String agentId, JsonObject configuration);
+    public void init(IAgentSideInfrastructure<M> infrastructure, String agentId, IKnowledge knowledge, JsonObject configuration);
     
     public String getId();
+    
+    public IKnowledge getInnerKnowledge();
 }

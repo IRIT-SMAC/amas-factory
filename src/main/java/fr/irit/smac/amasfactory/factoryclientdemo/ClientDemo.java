@@ -18,6 +18,7 @@ public class ClientDemo
             System.out.println("\n=== step "+i+" ===");
             infra.getExecutionService().step().get();
         }
+        
         infra.shutdown();
        
         

@@ -114,6 +114,11 @@
 			<version>1.0.13</version>
 			<optional>false</optional>
 		</dependency>
+			<dependency>
+			<groupId>com.hazelcast</groupId>
+			<artifactId>hazelcast</artifactId>
+			<version>3.6.1</version>
+		</dependency>
 	</dependencies>
 
 </project>

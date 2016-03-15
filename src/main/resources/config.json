@@ -20,6 +20,10 @@
         loggingService: {
              className:"fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService",
              configuration:{}
+        },
+        hazelcastService: {
+             className:"fr.irit.smac.amasfactory.service.datasharing.impl.HazelcastSharingService",
+             configuration:{}
         }
     },
     

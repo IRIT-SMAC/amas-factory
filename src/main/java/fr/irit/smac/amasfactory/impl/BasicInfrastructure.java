@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
+import fr.irit.smac.amasfactory.service.datasharing.IDataSharingService;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
@@ -20,11 +21,14 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 	private IExecutionService<A, M> executionService;
 	private ILoggingService<M> loggingService;
 
+	private IDataSharingService<A, M> hazelcastService;
+
 	public BasicInfrastructure() {
 		super();
 		this.messagingService = null;
 		this.agentHandler = null;
 		this.executionService = null;
+		this.hazelcastService = null;
 	}
 
 	@Override
@@ -43,6 +47,11 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 	}
 
 	@Override
+	public IDataSharingService<A, M> getDataSharingService() {
+		return this.hazelcastService;
+	}
+	
+	@Override
 	public void init(IInfrastructure<A, M> infrastructure, JsonElement parameters) {
 		if (infrastructure != null) {
 			throw new IllegalArgumentException("An instance of infrastructure already exists");
@@ -57,6 +66,7 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 		this.messagingService.start();
 		this.executionService.start();
 		this.loggingService.start();
+		this.hazelcastService.start();
 	}
 
 	@Override
@@ -66,30 +76,32 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 		this.messagingService.shutdown();
 		this.executionService.shutdown();
 		this.loggingService.shutdown();
+		this.hazelcastService.shutdown();
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void initParameters(JsonElement parameters) {
 
-        AmasFactoryInstantiator amasFactoryInstantiator = AmasFactoryInstantiator.getInstance();
+		AmasFactoryInstantiator amasFactoryInstantiator = AmasFactoryInstantiator.getInstance();
 
-        IInfrastructure<A,M> infrastructure = this.infrastructure;
+		IInfrastructure<A, M> infrastructure = this.infrastructure;
 
-        AmasFactoryParser amasFactoryParser = AmasFactoryParser.getInstance();
-		this.messagingService = (IMessagingService<M>) amasFactoryInstantiator.instantiateAndInitService(
-				infrastructure, amasFactoryParser.getMessagingService());
-		
+		AmasFactoryParser amasFactoryParser = AmasFactoryParser.getInstance();
+		this.messagingService = (IMessagingService<M>) amasFactoryInstantiator.instantiateAndInitService(infrastructure,
+				amasFactoryParser.getMessagingService());
+
 		this.executionService = (IExecutionService<A, M>) amasFactoryInstantiator
-				.instantiateAndInitService(infrastructure,
-						amasFactoryParser.getExecutionService());
-		
+				.instantiateAndInitService(infrastructure, amasFactoryParser.getExecutionService());
+
 		this.agentHandler = (IAgentHandlerService<A, M>) amasFactoryInstantiator
-				.instantiateAndInitService(infrastructure,
-						amasFactoryParser.getHandlerService());
-		
-		this.loggingService = (ILoggingService<M>) amasFactoryInstantiator.instantiateAndInitService(
-				infrastructure, amasFactoryParser.getLoggingService());
+				.instantiateAndInitService(infrastructure, amasFactoryParser.getHandlerService());
+
+		this.loggingService = (ILoggingService<M>) amasFactoryInstantiator.instantiateAndInitService(infrastructure,
+				amasFactoryParser.getLoggingService());
+
+		this.hazelcastService = (IDataSharingService<A, M>) amasFactoryInstantiator
+				.instantiateAndInitService(infrastructure, amasFactoryParser.getDataSharingService());
 	}
 
 	@Override
