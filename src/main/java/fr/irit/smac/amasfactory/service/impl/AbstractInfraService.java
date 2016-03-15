@@ -14,15 +14,15 @@ public abstract class AbstractInfraService<A extends IInfrastructureAgent<M>,M> 
     public IInfrastructure<A,M> infrastructure;
 
     @Override
-    public void init(IInfrastructure<A,M> infrastructure, JsonElement parameters)
+    public void init(IInfrastructure<A,M> infrastructure)
     {
         this.infrastructure = infrastructure;
         
-        this.initParameters(parameters);
+        this.initParameters();
         
     }
 
-    protected abstract void initParameters(JsonElement parameters);
+    protected abstract void initParameters();
 
     protected IInfrastructure<A,M> getInfrastructure()
     {

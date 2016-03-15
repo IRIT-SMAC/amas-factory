@@ -1,7 +1,5 @@
 package fr.irit.smac.amasfactory.agent;
 
-import com.google.gson.JsonObject;
-
 import fr.irit.smac.amasfactory.IAgentSideInfrastructure;
 
 /**
@@ -12,7 +10,7 @@ import fr.irit.smac.amasfactory.IAgentSideInfrastructure;
  */
 public interface IInfrastructureAgent<M>
 {
-    public void init(IAgentSideInfrastructure<M> infrastructure, String agentId, JsonObject configuration);
+    public void init(IAgentSideInfrastructure<M> infrastructure, String agentId);
     
     public String getId();
 }

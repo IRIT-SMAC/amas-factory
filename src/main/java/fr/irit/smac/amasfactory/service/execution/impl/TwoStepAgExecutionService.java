@@ -6,17 +6,15 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import com.google.gson.JsonElement;
-
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
+import fr.irit.smac.amasfactory.util.impl.AmasFactoryParser;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.TwoStepsSystemStrategy;
 
 public class TwoStepAgExecutionService<A extends ITwoStepsAgent & IInfrastructureAgent<M>, M>
 		extends AbstractInfraService<A, M>implements IExecutionService<A, M> {
-	public final static String NB_THREAD_CONFIG_KEY = "nbThreads";
 
 	private TwoStepsSystemStrategy systemStrategy;
 	private int nbThreads;
@@ -75,9 +73,10 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent & IInfrastructur
 	}
 
 	@Override
-	protected void initParameters(JsonElement parameters) {
-		this.nbThreads = parameters.getAsJsonObject().get(NB_THREAD_CONFIG_KEY).getAsInt();
-	}
+	protected void initParameters() {
+		
+    	this.nbThreads = AmasFactoryParser.getInstance().getExecutionServiceNbThreads();
+    }
 
 	@Override
 	public void addPreStepHook(Runnable task) {
