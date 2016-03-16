@@ -1,7 +1,5 @@
 package fr.irit.smac.amasfactory.service.datasharing.impl;
 
-import java.util.Set;
-
 import com.google.gson.JsonElement;
 
 import fr.irit.smac.amasfactory.IInfrastructure;

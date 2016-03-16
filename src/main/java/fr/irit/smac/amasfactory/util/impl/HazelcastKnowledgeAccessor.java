@@ -1,6 +1,7 @@
 package fr.irit.smac.amasfactory.util.impl;
 
 import java.util.Map;
+import java.util.Set;
 
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
@@ -29,4 +30,7 @@ public class HazelcastKnowledgeAccessor {
 		return mapKnowledge.get(knowledgeId);
 	}
 	
+	public Set<String> getKnowledgeIdSet(){
+		return mapKnowledge.keySet();
+	}
 }
