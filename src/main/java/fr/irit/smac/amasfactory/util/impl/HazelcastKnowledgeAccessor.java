@@ -9,6 +9,11 @@ import com.hazelcast.core.HazelcastInstance;
 
 import fr.irit.smac.amasfactory.agent.IKnowledge;
 
+/**
+ * Class allowing to connect to the shared knowledge map and to to basic operation on it.
+ * @author SVI
+ *
+ */
 public class HazelcastKnowledgeAccessor {
 	Map<String, IKnowledge> mapKnowledge;
 

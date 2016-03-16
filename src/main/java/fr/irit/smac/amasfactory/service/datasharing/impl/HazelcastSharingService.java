@@ -63,7 +63,8 @@ public class HazelcastSharingService<A extends IInfrastructureAgent<M>, M> exten
 	@Override
 	public void shutdown() {
 		// TODO clean the map?
-
+		// Delete le stephook
+		
 	}
 
 	@Override
