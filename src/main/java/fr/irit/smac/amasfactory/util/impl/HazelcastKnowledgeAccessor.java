@@ -17,11 +17,12 @@ import fr.irit.smac.amasfactory.util.IHazelcastKnowledgeAccessor;
  */
 public class HazelcastKnowledgeAccessor implements IHazelcastKnowledgeAccessor {
 	Map<String, IKnowledge> mapKnowledge;
-
+	HazelcastInstance instance ;
 	public HazelcastKnowledgeAccessor() {
 		Config cfg = new Config();
-		HazelcastInstance instance = Hazelcast.newHazelcastInstance(cfg);
+		instance = Hazelcast.newHazelcastInstance(cfg);
 		mapKnowledge = instance.getMap("knowledge");
+	
 	}
 	
 	/* (non-Javadoc)
@@ -54,5 +55,9 @@ public class HazelcastKnowledgeAccessor implements IHazelcastKnowledgeAccessor {
 	@Override
 	public Set<String> getKnowledgeIdSet(){
 		return mapKnowledge.keySet();
+	}
+	
+	public void shutdownInstance(){
+		this.instance.shutdown();
 	}
 }

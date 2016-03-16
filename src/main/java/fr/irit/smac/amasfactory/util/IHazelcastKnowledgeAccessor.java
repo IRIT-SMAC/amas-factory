@@ -13,5 +13,7 @@ public interface IHazelcastKnowledgeAccessor {
 	IKnowledge getKnowledge(String knowledgeId);
 
 	Set<String> getKnowledgeIdSet();
+	
+	void shutdownInstance();
 
 }
