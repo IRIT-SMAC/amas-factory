@@ -6,6 +6,7 @@ import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.datasharing.IDataSharingService;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
+import fr.irit.smac.amasfactory.util.IHazelcastKnowledgeAccessor;
 import fr.irit.smac.amasfactory.util.impl.HazelcastKnowledgeAccessor;
 
 /**
@@ -22,7 +23,7 @@ import fr.irit.smac.amasfactory.util.impl.HazelcastKnowledgeAccessor;
 public class HazelcastSharingService<A extends IInfrastructureAgent<M>, M> extends AbstractInfraService<A, M>
 		implements IDataSharingService<A, M> {
 
-	HazelcastKnowledgeAccessor hazelcastKnowledgeAccessor;
+	IHazelcastKnowledgeAccessor hazelcastKnowledgeAccessor;
 
 	public HazelcastSharingService() {
 		this.hazelcastKnowledgeAccessor = new HazelcastKnowledgeAccessor();

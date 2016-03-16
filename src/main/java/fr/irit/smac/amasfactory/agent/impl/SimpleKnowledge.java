@@ -20,5 +20,9 @@ public class SimpleKnowledge implements IKnowledge, Serializable {
 	public String getId() {
 		return this.id;
 	}
+	
+	public void setId(String id){
+		this.id = id;
+	}
 
 }
