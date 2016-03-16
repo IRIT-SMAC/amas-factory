@@ -1,7 +1,6 @@
 package fr.irit.smac.amasfactory.impl;
 
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
