@@ -49,6 +49,11 @@ public class HazelcastSharingService<A extends IInfrastructureAgent<M>, M> exten
 		this.getInfrastructure().getExecutionService().addPostStepHook(generatePostStepTask(this.getInfrastructure()));
 	}
 
+	/**
+	 * Persist the data in the map at the end of each iteration.
+	 * @param infrastructure
+	 * @return
+	 */
 	private Runnable generatePostStepTask(IInfrastructure<A, M> infrastructure) {
 		return new Runnable() {
             @Override
@@ -64,7 +69,8 @@ public class HazelcastSharingService<A extends IInfrastructureAgent<M>, M> exten
 	@Override
 	public void shutdown() {
 		// TODO clean the map?
-		// Delete le stephook
+
+		this.getInfrastructure().getExecutionService().removePostStepHook(generatePostStepTask(this.getInfrastructure()));
 		
 	}
 

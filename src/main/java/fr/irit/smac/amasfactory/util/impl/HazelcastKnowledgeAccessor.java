@@ -16,8 +16,12 @@ import fr.irit.smac.amasfactory.util.IHazelcastKnowledgeAccessor;
  *
  */
 public class HazelcastKnowledgeAccessor implements IHazelcastKnowledgeAccessor {
+	
 	Map<String, IKnowledge> mapKnowledge;
+	
 	HazelcastInstance instance ;
+	
+	
 	public HazelcastKnowledgeAccessor() {
 		Config cfg = new Config();
 		instance = Hazelcast.newHazelcastInstance(cfg);
@@ -57,6 +61,7 @@ public class HazelcastKnowledgeAccessor implements IHazelcastKnowledgeAccessor {
 		return mapKnowledge.keySet();
 	}
 	
+	@Override
 	public void shutdownInstance(){
 		this.instance.shutdown();
 	}
