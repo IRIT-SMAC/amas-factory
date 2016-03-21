@@ -7,6 +7,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.google.gson.JsonElement;
+
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
@@ -105,7 +107,7 @@ public class BasicAgentHandler<A extends IInfrastructureAgent<M>,M> extends Abst
     }
 
     @Override
-    protected void initParameters()
+    protected void initParameters(JsonElement configuration)
     {
        // nothing to do
     }

@@ -1,7 +1,5 @@
 package fr.irit.smac.amasfactory.agent.impl;
 
-import java.util.Map;
-
 import com.google.gson.JsonElement;
 
 import fr.irit.smac.amasfactory.IAgentSideInfrastructure;
@@ -23,15 +21,15 @@ public abstract class AbsInfrastructureAgent<M> implements IInfrastructureAgent<
         return this.id;
     }
     
-    protected abstract void initParameters();
+    protected abstract void initParameters(JsonElement configuration);
     
     @Override
-    public void init(IAgentSideInfrastructure<M> infrastructure, String id)
+    public void init(IAgentSideInfrastructure<M> infrastructure, String id, JsonElement configuration)
     {
         this.infrastructure = infrastructure;
         this.id = id;
         
-        this.initParameters();
+        this.initParameters(configuration);
     }
 
 }

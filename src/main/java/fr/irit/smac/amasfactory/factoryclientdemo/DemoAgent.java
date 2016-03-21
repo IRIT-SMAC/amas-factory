@@ -2,14 +2,14 @@ package fr.irit.smac.amasfactory.factoryclientdemo;
 
 import org.slf4j.Logger;
 
+import com.google.gson.JsonElement;
+
 import fr.irit.smac.amasfactory.agent.impl.AbsInfrastructureAgent;
-import fr.irit.smac.amasfactory.util.impl.AmasFactoryParser;
 import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 
 public class DemoAgent extends AbsInfrastructureAgent<DemoMessage> implements ITwoStepsAgent
 {
-
     private String message;
     private IMsgBox<DemoMessage> msgBox;
     private Logger logger;
@@ -19,6 +19,7 @@ public class DemoAgent extends AbsInfrastructureAgent<DemoMessage> implements IT
     {
         for (DemoMessage demoMessage : msgBox.getMsgs())
         {
+        	System.out.println(("agent "+this.getId()+" : I received "+demoMessage));
             logger.debug("agent "+this.getId()+" : I received "+demoMessage);
         }
     }
@@ -31,9 +32,9 @@ public class DemoAgent extends AbsInfrastructureAgent<DemoMessage> implements IT
     }
 
     @Override
-    protected void initParameters()
+    protected void initParameters(JsonElement configuration)
     {
-    	this.message = AmasFactoryParser.getInstance().getAgentMessageContent(this.getId());
+    	
     	this.msgBox = this.getInfra().getMessagingService().getMsgBox(this.getId());
         this.logger = this.getInfra().getLoggingService().getAgentLogger(this.getId());
     }

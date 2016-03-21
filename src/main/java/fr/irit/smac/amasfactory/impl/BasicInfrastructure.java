@@ -1,5 +1,7 @@
 package fr.irit.smac.amasfactory.impl;
 
+import com.google.gson.JsonElement;
+
 import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
@@ -7,7 +9,7 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
 import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
-import fr.irit.smac.amasfactory.util.impl.AmasFactoryParser;
+import fr.irit.smac.amasfactory.util.parser.impl.AmasFactoryParser;
 
 public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends AbstractInfraService<A, M>
 		implements IInfrastructure<A, M> {
@@ -15,6 +17,7 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 	private IAgentHandlerService<A, M> agentHandler;
 	private IExecutionService<A, M> executionService;
 	private ILoggingService<M> loggingService;
+	
 
 	public BasicInfrastructure() {
 		super();
@@ -39,11 +42,11 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 	}
 
 	@Override
-	public void init(IInfrastructure<A, M> infrastructure) {
+	public void init(IInfrastructure<A, M> infrastructure, JsonElement configuration) {
 		if (infrastructure != null) {
 			throw new IllegalArgumentException("An instance of infrastructure already exists");
 		}
-		super.init(this);
+		super.init(this, configuration);
 	}
 
 	@Override
@@ -66,24 +69,26 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 
 	@SuppressWarnings("unchecked")
 	@Override
-	protected void initParameters() {
+	protected void initParameters(JsonElement configuration) {
 
 		IInfrastructure<A, M> infrastructure = this.infrastructure;
 
-		AmasFactoryParser amasFactoryParser = AmasFactoryParser.getInstance();
+		AmasFactoryParser parser = AmasFactoryParser.getInstance();
+				
+		this.messagingService = (IMessagingService<M>) parser.instantiateAndInitService(infrastructure,
+				parser.getMessagingService());
+
+		this.executionService = (IExecutionService<A, M>) parser.instantiateAndInitService(infrastructure,
+				parser.getExecutionService());
+
+		this.agentHandler = (IAgentHandlerService<A, M>) parser.instantiateAndInitService(infrastructure,
+				parser.getHandlerService());
+
+		this.loggingService = (ILoggingService<M>) parser.instantiateAndInitService(infrastructure,
+				parser.getLoggingService());
 		
-		this.messagingService = (IMessagingService<M>) amasFactoryParser.instantiateAndInitService(infrastructure,
-				amasFactoryParser.getMessagingService());
+		infrastructure.start();
 
-		this.executionService = (IExecutionService<A, M>) amasFactoryParser.instantiateAndInitService(infrastructure,
-				amasFactoryParser.getExecutionService());
-
-		this.agentHandler = (IAgentHandlerService<A, M>) amasFactoryParser.instantiateAndInitService(infrastructure,
-				amasFactoryParser.getHandlerService());
-
-		this.loggingService = (ILoggingService<M>) amasFactoryParser.instantiateAndInitService(infrastructure,
-				amasFactoryParser.getLoggingService());
-		
 
 	}
 

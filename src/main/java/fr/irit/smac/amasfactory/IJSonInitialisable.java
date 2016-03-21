@@ -1,7 +1,7 @@
 package fr.irit.smac.amasfactory;
 
-import com.google.gson.JsonObject;
+import com.google.gson.JsonElement;
 
-public interface IJSonInitialisable {
-    public void init(JsonObject configuration); 
+public interface IJsonInitialisable {
+    public void init(JsonElement configuration); 
 }

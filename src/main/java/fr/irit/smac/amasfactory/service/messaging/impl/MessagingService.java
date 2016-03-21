@@ -1,9 +1,10 @@
 package fr.irit.smac.amasfactory.service.messaging.impl;
 
+import com.google.gson.JsonElement;
+
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
-import fr.irit.smac.amasfactory.util.impl.AmasFactoryParser;
 import fr.irit.smac.libs.tooling.messaging.AgentMessaging;
 import fr.irit.smac.libs.tooling.messaging.IDirectory;
 import fr.irit.smac.libs.tooling.messaging.IMsgBox;
@@ -14,7 +15,9 @@ public class MessagingService<M> extends AbstractInfraService<IInfrastructureAge
 {
     
     private IMsgService<M> delegatedMsgService;
+    
     private String messageClassName;
+    
     private Class<M> messageClass;
     
     public MessagingService()
@@ -91,9 +94,8 @@ public class MessagingService<M> extends AbstractInfraService<IInfrastructureAge
     }
 
     @Override
-    protected void initParameters()
+    protected void initParameters(JsonElement configuration)
     {  	
-    	this.messageClassName = AmasFactoryParser.getInstance().getMessagingServiceMessageClassName();
     }
 
 }

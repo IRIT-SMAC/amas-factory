@@ -2,6 +2,8 @@ package fr.irit.smac.amasfactory.service.logging.impl;
 
 import org.slf4j.Logger;
 
+import com.google.gson.JsonElement;
+
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
@@ -20,7 +22,7 @@ public class AgentLogLoggingService<M> extends   AbstractInfraService< IInfrastr
     }
 
     @Override
-    protected void initParameters() {
+    protected void initParameters(JsonElement configuration) {
         // NOTHING to do
     }
 

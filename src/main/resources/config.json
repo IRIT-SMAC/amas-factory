@@ -26,11 +26,11 @@
     agents: {
         ag1: {
             className:"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent",
-            configuration:{messageContent:"Hello agents"}
+            configuration:{message:"Hello agents"}
         },
         ag2: {
             className:"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent",
-            configuration:{messageContent:"Hello infratrouctour"}
+            configuration:{message:"Hello infratrouctour"}
         }
     }
 }
