@@ -1,7 +1,5 @@
 package fr.irit.smac.amasfactory.impl;
 
-import com.google.gson.JsonElement;
-
 import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
@@ -9,12 +7,12 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
 import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
-import fr.irit.smac.amasfactory.util.parser.impl.AmasFactoryParser;
 
 public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends AbstractInfraService<A, M>
 		implements IInfrastructure<A, M> {
+	
 	private IMessagingService<M> messagingService;
-	private IAgentHandlerService<A, M> agentHandler;
+	private IAgentHandlerService<A, M> agentHandlerService;
 	private IExecutionService<A, M> executionService;
 	private ILoggingService<M> loggingService;
 	
@@ -22,7 +20,7 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 	public BasicInfrastructure() {
 		super();
 		this.messagingService = null;
-		this.agentHandler = null;
+		this.agentHandlerService = null;
 		this.executionService = null;
 	}
 
@@ -33,7 +31,7 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 
 	@Override
 	public IAgentHandlerService<A, M> getAgentHandler() {
-		return this.agentHandler;
+		return this.agentHandlerService;
 	}
 
 	@Override
@@ -41,55 +39,65 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 		return this.executionService;
 	}
 
-	@Override
-	public void init(IInfrastructure<A, M> infrastructure, JsonElement configuration) {
-		if (infrastructure != null) {
-			throw new IllegalArgumentException("An instance of infrastructure already exists");
-		}
-		super.init(this, configuration);
+	public void setInfrastructure(BasicInfrastructure<A, M> basicInfrastructure) {
+		
 	}
 
 	@Override
+	public void init(IInfrastructure<A, M> infrastructure) {
+		if (infrastructure != null) {
+			throw new IllegalArgumentException("An instance of infrastructure already exists");
+		}
+		super.init(this);
+	}
+
+	public void setAgentHandlerService(IAgentHandlerService<A, M> agentHandlerService) {
+		
+		agentHandlerService.setInfrastructure(this);
+		this.agentHandlerService = agentHandlerService;
+	}
+	
+	public void setExecutionService(IExecutionService<A, M>  executionService) {
+		
+		executionService.setInfrastructure(this);
+		this.executionService = executionService;
+	}
+	
+	public void setMessagingService(IMessagingService<M> messagingService) {
+		
+		messagingService.setInfrastructure((BasicInfrastructure<IInfrastructureAgent<M>, M>) this);
+		this.messagingService = messagingService;
+	}
+	
+	public void setLoggingService(ILoggingService<M> loggingService) {
+		
+		loggingService.setInfrastructure((BasicInfrastructure<IInfrastructureAgent<M>, M>) this);
+		this.loggingService = loggingService;
+	}
+	
+	@Override
 	public void start() {
 		// starts each service sequencially
-		this.agentHandler.start();
-		this.messagingService.start();
+		this.agentHandlerService.start();
 		this.executionService.start();
+		this.messagingService.start();
 		this.loggingService.start();
 	}
 
 	@Override
 	public void shutdown() {
 		// shutdown each service sequencially
-		this.agentHandler.shutdown();
+		this.agentHandlerService.shutdown();
 		this.messagingService.shutdown();
 		this.executionService.shutdown();
 		this.loggingService.shutdown();
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	protected void initParameters(JsonElement configuration) {
+	protected void initParameters() {
 
-		IInfrastructure<A, M> infrastructure = this.infrastructure;
-
-		AmasFactoryParser parser = AmasFactoryParser.getInstance();
-				
-		this.messagingService = (IMessagingService<M>) parser.instantiateAndInitService(infrastructure,
-				parser.getMessagingService());
-
-		this.executionService = (IExecutionService<A, M>) parser.instantiateAndInitService(infrastructure,
-				parser.getExecutionService());
-
-		this.agentHandler = (IAgentHandlerService<A, M>) parser.instantiateAndInitService(infrastructure,
-				parser.getHandlerService());
-
-		this.loggingService = (ILoggingService<M>) parser.instantiateAndInitService(infrastructure,
-				parser.getLoggingService());
-		
 		infrastructure.start();
-
-
+		this.agentHandlerService.setInfrastructureAgent(this);
 	}
 
 	@Override

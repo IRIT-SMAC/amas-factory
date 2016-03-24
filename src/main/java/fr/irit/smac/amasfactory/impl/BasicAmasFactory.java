@@ -21,14 +21,10 @@ public class BasicAmasFactory implements IAmasFactory {
     public <A extends IInfrastructureAgent<M>, M> IInfrastructure<A, M> createInfrastructure(
         InputStream configuration) {
 
-    	
     	AmasFactoryParser parser = AmasFactoryParser.getInstance();
-        parser.init(configuration);
         
-        IInfrastructure<A, M> infrastructure = parser.instantiateAndInitInfrastructure();
-        parser.instantiateAndInitAgents(infrastructure);
+        IInfrastructure<A, M> infrastructure = parser.parseInfrastructure(configuration);
         
-
         return infrastructure;
     }
 }

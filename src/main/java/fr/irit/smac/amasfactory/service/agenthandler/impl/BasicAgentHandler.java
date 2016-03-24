@@ -7,9 +7,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.gson.JsonElement;
-
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.impl.BasicInfrastructure;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
@@ -17,8 +16,13 @@ import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 public class BasicAgentHandler<A extends IInfrastructureAgent<M>,M> extends AbstractInfraService<A, M> implements IAgentHandlerService<A,M>
 {
 
-    private Map<String,A> agentMap;
+    private Map<String,A> agentMap = new HashMap<String,A>();
     private Set<IAgentEventListener<A>> listenerSet;
+    
+    public void setAgentMap(Map<String,A> agentMap) {
+    	this.agentMap = agentMap;
+    	
+    }
     
     public BasicAgentHandler()
     {
@@ -28,9 +32,27 @@ public class BasicAgentHandler<A extends IInfrastructureAgent<M>,M> extends Abst
     }
 
     @Override
+	public void setInfrastructure(BasicInfrastructure<A, M> basicInfrastructure) {
+		
+		this.infrastructure = basicInfrastructure;
+
+
+	}
+	
+    public void setInfrastructureAgent(BasicInfrastructure<A, M> basicInfrastructure) {
+		for (Map.Entry<String, A> entry : agentMap.entrySet()) {
+		    String key = entry.getKey();
+		    A value = (A) entry.getValue();
+		    value.init(infrastructure, key);
+	    	this.notifyAgentAdded(value);
+
+		}
+    }
+    
+    @Override
     public void start()
     {
-        this.agentMap = Collections.synchronizedMap(new HashMap<String,A>());
+//        this.agentMap = Collections.synchronizedMap(new HashMap<String,A>());
         this.listenerSet = Collections.synchronizedSet(new HashSet<IAgentEventListener<A>>());
     }
 
@@ -107,7 +129,7 @@ public class BasicAgentHandler<A extends IInfrastructureAgent<M>,M> extends Abst
     }
 
     @Override
-    protected void initParameters(JsonElement configuration)
+    protected void initParameters()
     {
        // nothing to do
     }

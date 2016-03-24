@@ -1,6 +1,6 @@
 package fr.irit.smac.amasfactory.agent;
 
-import com.google.gson.JsonElement;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import fr.irit.smac.amasfactory.IAgentSideInfrastructure;
 
@@ -10,9 +10,10 @@ import fr.irit.smac.amasfactory.IAgentSideInfrastructure;
  * @author lemouzy
  *
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
 public interface IInfrastructureAgent<M>
 {
-    public void init(IAgentSideInfrastructure<M> infrastructure, String agentId, JsonElement configuration);
+    public void init(IAgentSideInfrastructure<M> infrastructure, String agentId);
     
     public String getId();
     

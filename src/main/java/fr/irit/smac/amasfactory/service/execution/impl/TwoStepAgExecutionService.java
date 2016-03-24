@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
-import com.google.gson.JsonElement;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
@@ -19,6 +19,7 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent & IInfrastructur
 
 	private TwoStepsSystemStrategy systemStrategy;
 	
+	@JsonProperty
 	private int nbThreads;
 
 	public TwoStepAgExecutionService() {
@@ -75,7 +76,7 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent & IInfrastructur
 	}
 
 	@Override
-	protected void initParameters(JsonElement configuration) {
+	protected void initParameters() {
 	}
 
 	@Override

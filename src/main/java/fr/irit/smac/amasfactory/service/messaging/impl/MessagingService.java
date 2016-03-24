@@ -1,6 +1,6 @@
 package fr.irit.smac.amasfactory.service.messaging.impl;
 
-import com.google.gson.JsonElement;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
@@ -16,6 +16,7 @@ public class MessagingService<M> extends AbstractInfraService<IInfrastructureAge
     
     private IMsgService<M> delegatedMsgService;
     
+    @JsonProperty
     private String messageClassName;
     
     private Class<M> messageClass;
@@ -94,7 +95,7 @@ public class MessagingService<M> extends AbstractInfraService<IInfrastructureAge
     }
 
     @Override
-    protected void initParameters(JsonElement configuration)
+    protected void initParameters()
     {  	
     }
 

@@ -4,8 +4,8 @@ import java.util.Collection;
 import java.util.Map;
 
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.impl.BasicInfrastructure;
 import fr.irit.smac.amasfactory.service.IInfraService;
-
 
 public interface IAgentHandlerService<A extends IInfrastructureAgent<M>,M> extends IInfraService<A,M>
 {
@@ -66,5 +66,8 @@ public interface IAgentHandlerService<A extends IInfrastructureAgent<M>,M> exten
      * @param listener the listener to be removed
      */
     void removeAgentEventListener(IAgentEventListener<A> listener);
+
+	void setInfrastructureAgent(BasicInfrastructure<A, M> basicInfrastructure);
+
     
 }
