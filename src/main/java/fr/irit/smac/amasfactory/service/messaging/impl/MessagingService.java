@@ -47,9 +47,9 @@ public class MessagingService<M> extends AbstractInfraService<IInfrastructureAge
     @Override
     public void shutdown()
     {
-//       AgentMessaging.shutdownMsgService(this.messageClass);
-//       this.delegatedMsgService = null;
-//       this.messageClass = null;
+       AgentMessaging.shutdownMsgService(this.messageClass);
+       this.delegatedMsgService = null;
+       this.messageClass = null;
     }
 
     @Override
