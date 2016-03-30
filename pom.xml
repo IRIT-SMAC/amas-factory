@@ -13,6 +13,11 @@
 		<maven-compiler-plugin-version>3.5.1</maven-compiler-plugin-version>
 		<maven-deploy-plugin-version>2.8.2</maven-deploy-plugin-version>
 		<jackson.version>2.7.3</jackson.version>
+		<spock-core-version>1.0-groovy-2.4</spock-core-version>
+		<cglib-nodep-version>3.2.1</cglib-nodep-version>
+		<jacoco-maven-plugin-version>0.7.6.201602180812</jacoco-maven-plugin-version>
+		<gmavenplus-plugin-version>1.5</gmavenplus-plugin-version>
+
 	</properties>
 
 	<repositories>
@@ -80,7 +85,94 @@
 					</execution>
 				</executions>
 			</plugin>
+
+			<!-- JaCoco -->
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>${jacoco-maven-plugin-version}</version>
+				<executions>
+					<execution>
+						<id>default-prepare-agent</id>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-report</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>report</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>default-check</id>
+						<goals>
+							<goal>check</goal>
+						</goals>
+						<configuration>
+							<rules />
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- Mandatory plugins for using Spock -->
+			<plugin>
+				<!-- The gmavenplus plugin is used to compile Groovy code. To learn more 
+					about this plugin, visit https://github.com/groovy/GMavenPlus/wiki -->
+				<groupId>org.codehaus.gmavenplus</groupId>
+				<artifactId>gmavenplus-plugin</artifactId>
+				<version>${gmavenplus-plugin-version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>testCompile</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<testSources>
+						<testSource>
+							<directory>${project.basedir}/src/test/groovy</directory>
+							<includes>
+								<include>**/*.groovy</include>
+							</includes>
+						</testSource>
+					</testSources>
+				</configuration>
+			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings 
+					only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.codehaus.gmavenplus</groupId>
+										<artifactId>gmavenplus-plugin</artifactId>
+										<versionRange>[${gmavenplus-plugin-version},)</versionRange>
+										<goals>
+											<goal>testCompile</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore />
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 
 	<dependencies>
@@ -130,7 +222,21 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.7.3</version>
 		</dependency>
-
+		<!-- Spock -->
+		<!-- Mandatory dependencies for using Spock -->
+		<dependency>
+			<groupId>org.spockframework</groupId>
+			<artifactId>spock-core</artifactId>
+			<version>${spock-core-version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- Optional dependencies for using Spock -->
+		<dependency> <!-- enables mocking of classes (in addition to interfaces) -->
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>${cglib-nodep-version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 </project>
