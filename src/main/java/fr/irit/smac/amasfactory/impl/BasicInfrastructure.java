@@ -19,9 +19,6 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 
 	public BasicInfrastructure() {
 		super();
-		this.messagingService = null;
-		this.agentHandlerService = null;
-		this.executionService = null;
 	}
 
 	@Override
@@ -63,12 +60,14 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 		this.executionService = executionService;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void setMessagingService(IMessagingService<M> messagingService) {
 		
 		messagingService.setInfrastructure((BasicInfrastructure<IInfrastructureAgent<M>, M>) this);
 		this.messagingService = messagingService;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public void setLoggingService(ILoggingService<M> loggingService) {
 		
 		loggingService.setInfrastructure((BasicInfrastructure<IInfrastructureAgent<M>, M>) this);

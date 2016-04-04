@@ -35,8 +35,6 @@ public class BasicAgentHandler<A extends IInfrastructureAgent<M>,M> extends Abst
 	public void setInfrastructure(BasicInfrastructure<A, M> basicInfrastructure) {
 		
 		this.infrastructure = basicInfrastructure;
-
-
 	}
 	
     public void setInfrastructureAgent(BasicInfrastructure<A, M> basicInfrastructure) {
@@ -52,7 +50,6 @@ public class BasicAgentHandler<A extends IInfrastructureAgent<M>,M> extends Abst
     @Override
     public void start()
     {
-//        this.agentMap = Collections.synchronizedMap(new HashMap<String,A>());
         this.listenerSet = Collections.synchronizedSet(new HashSet<IAgentEventListener<A>>());
     }
 

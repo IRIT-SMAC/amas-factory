@@ -25,6 +25,7 @@ public class AmasFactoryParser implements IAmasFactoryParser {
 		return INSTANCE;
 	}
 
+	@SuppressWarnings("unchecked")
 	public <A extends IInfrastructureAgent<M>, M> IInfrastructure<A, M> parseInfrastructure(InputStream configuration) {
 		
 		ObjectMapper mapper = new ObjectMapper();
