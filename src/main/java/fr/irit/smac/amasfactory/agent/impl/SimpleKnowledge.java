@@ -21,6 +21,10 @@ public class SimpleKnowledge implements IKnowledge, Serializable {
 	@JsonProperty
 	private String id;
 	
+	public SimpleKnowledge() {
+		
+	}
+	
 	public SimpleKnowledge(String id) {
 		this.id = id;
 	}
