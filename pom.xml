@@ -237,6 +237,11 @@
 			<version>${cglib-nodep-version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.hazelcast</groupId>
+			<artifactId>hazelcast</artifactId>
+			<version>3.6.1</version>
+		</dependency>
 	</dependencies>
 
 </project>

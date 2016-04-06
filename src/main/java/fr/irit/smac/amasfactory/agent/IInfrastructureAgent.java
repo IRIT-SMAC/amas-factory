@@ -17,5 +17,5 @@ public interface IInfrastructureAgent<M>
     
     public String getId();
     
-
+    public IKnowledge getInnerKnowledge();
 }

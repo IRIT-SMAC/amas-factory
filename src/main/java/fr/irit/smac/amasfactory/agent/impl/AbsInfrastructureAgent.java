@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.IAgentSideInfrastructure;
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.agent.IKnowledge;
 
 
 public abstract class AbsInfrastructureAgent<M> implements IInfrastructureAgent<M>
@@ -11,7 +12,11 @@ public abstract class AbsInfrastructureAgent<M> implements IInfrastructureAgent<
 	@JsonProperty
     private String id;
     private IAgentSideInfrastructure<M> infrastructure;
-
+    
+    @JsonProperty
+    private IKnowledge knowledge;
+    
+    
     protected IAgentSideInfrastructure<M> getInfra()
     {
         return this.infrastructure;
@@ -25,6 +30,12 @@ public abstract class AbsInfrastructureAgent<M> implements IInfrastructureAgent<
     
     protected abstract void initParameters();
     
+
+    @Override
+    public IKnowledge getInnerKnowledge(){
+    	return this.knowledge;
+    }
+    
     @Override
     public void init(IAgentSideInfrastructure<M> infrastructure, String id)
     {
@@ -33,5 +44,4 @@ public abstract class AbsInfrastructureAgent<M> implements IInfrastructureAgent<
         
         this.initParameters();
     }
-
 }

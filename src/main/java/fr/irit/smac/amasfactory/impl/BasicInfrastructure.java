@@ -3,6 +3,7 @@ package fr.irit.smac.amasfactory.impl;
 import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
+import fr.irit.smac.amasfactory.service.datasharing.IDataSharingService;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
@@ -15,7 +16,7 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 	private IAgentHandlerService<A, M> agentHandlerService;
 	private IExecutionService<A, M> executionService;
 	private ILoggingService<M> loggingService;
-	
+	private IDataSharingService<A, M> hazelcastService;
 
 	public BasicInfrastructure() {
 		super();
@@ -40,6 +41,11 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 		
 	}
 
+
+	public IDataSharingService<A, M> getDataSharingService() {
+		return this.hazelcastService;
+	}
+	
 	@Override
 	public void init(IInfrastructure<A, M> infrastructure) {
 		if (infrastructure != null) {
@@ -74,6 +80,12 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 		this.loggingService = loggingService;
 	}
 	
+	public void setHazelcastService(IDataSharingService<A, M> hazelcastService) {
+		
+		hazelcastService.setInfrastructure(this);
+		this.hazelcastService = hazelcastService;
+	}
+	
 	@Override
 	public void start() {
 		// starts each service sequencially
@@ -81,6 +93,8 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 		this.executionService.start();
 		this.messagingService.start();
 		this.loggingService.start();
+		this.agentHandlerService.setInfrastructureAgent(this);
+		this.hazelcastService.start();
 	}
 
 	@Override
@@ -90,13 +104,12 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 		this.messagingService.shutdown();
 		this.executionService.shutdown();
 		this.loggingService.shutdown();
+		this.hazelcastService.shutdown();
 	}
 
 	@Override
 	protected void initParameters() {
-
 		infrastructure.start();
-		this.agentHandlerService.setInfrastructureAgent(this);
 	}
 
 	@Override
