@@ -23,7 +23,7 @@
 	<repositories>
 		<repository>
 			<id>IRIT-SMAC-agent-tooling</id>
-			<url>https://github.com/IRIT-SMAC/agent-tooling/raw/mvn-repo</url>
+			<url>https://github.com/IRIT-SMAC/mvn-repo/raw/master</url>
 			<snapshots>
 				<enabled>true</enabled>
 				<updatePolicy>always</updatePolicy>
