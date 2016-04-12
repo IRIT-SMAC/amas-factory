@@ -22,12 +22,12 @@
 
 	<repositories>
 		<repository>
-			<id>IRIT-SMAC-agent-tooling</id>
-			<url>https://github.com/IRIT-SMAC/mvn-repo/raw/master</url>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
-			</snapshots>
+			<id>IRIT-SMAC-agent-tooling-releases</id>
+			<url>https://github.com/IRIT-SMAC/mvn-repo/raw/master/releases</url>
+		</repository>
+		<repository>
+			<id>IRIT-SMAC-agent-tooling-snapshots</id>
+			<url>https://github.com/IRIT-SMAC/mvn-repo/raw/master/snapshots</url>
 		</repository>
 	</repositories>
 
@@ -180,12 +180,12 @@
 		<dependency>
 			<groupId>fr.irit.smac</groupId>
 			<artifactId>agent-messaging</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>fr.irit.smac</groupId>
 			<artifactId>agent-scheduling</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
@@ -200,7 +200,7 @@
 		<dependency>
 			<groupId>fr.irit.smac</groupId>
 			<artifactId>agent-logging</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
