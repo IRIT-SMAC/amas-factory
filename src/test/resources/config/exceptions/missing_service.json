@@ -7,7 +7,7 @@
 				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent",
 				"id":"ag1",
 				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.SimpleKnowledge",
+					"className":"fr.irit.smac.amasfactory.agent.impl.Simpleknowledge",
 					"id":"ag1"
 				},
 				"message":"Hello agents"
@@ -16,7 +16,7 @@
 				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent",
 				"id":"ag2",
 				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.SimpleKnowledge",
+					"className":"fr.irit.smac.amasfactory.agent.impl.Simpleknowledge",
 					"id":"ag2"
 				},
 				"message":"Hello infratrouctour"
@@ -24,11 +24,7 @@
 			
 		}
 		
-	},
-	"messagingService":{
-		"className":"fr.irit.smac.amasfactory.service.messaging.impl.MessagingService",
-		"messageClassName":"fr.irit.smac.amasfactory.factoryclientdemo.DemoMessage"
-	},
+	}
 	"executionService":{
 		"className":"fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService",
 		"nbThreads":8

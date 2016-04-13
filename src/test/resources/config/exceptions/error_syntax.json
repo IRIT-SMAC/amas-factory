@@ -1,5 +1,5 @@
 {
-	"className":"fr.irit.smac.amasfactory.impl.BasicInfrastructure",
+	className":"fr.irit.smac.amasfactory.impl.BasicInfrastructure",
 	"agentHandlerService":{
 		"className":"fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler",
 		"agentMap":{

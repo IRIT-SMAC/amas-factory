@@ -1,6 +1,8 @@
 package fr.irit.smac.amasfactory.factoryclientdemo
 
 
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 import fr.irit.smac.amasfactory.IInfrastructure
 import fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent
 import fr.irit.smac.amasfactory.factoryclientdemo.DemoMessage
@@ -58,5 +60,45 @@ class AmasFactoryDemoTest extends Specification{
 			assert messages.size() == 2
 		}
 		infra.shutdown()
+	}
+	
+	def 'check if an exception is thrown when a service is missing'() {
+		
+		when:
+		BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
+
+		IInfrastructure<DemoAgent, DemoMessage> infra =
+						basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/missing_service.json"))
+		
+		then:
+		//thrown an exception
+		true == false
+		
+	}
+	
+	def 'check if an exception is thrown when the messageClassName of the messagingService is missing'() {
+		
+		when:
+		BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
+
+		IInfrastructure<DemoAgent, DemoMessage> infra =
+						basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/exceptions/missing_attribute_messaging_service.json"))
+		
+		then:
+		//thrown an exception
+		true == false
+	}
+	
+	def 'check if an exception is thrown when the configuration file has an error of syntax'() {
+		
+		when:
+		BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
+
+		IInfrastructure<DemoAgent, DemoMessage> infra =
+						basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/exceptions/error_syntax.json"))
+		
+		then:
+		//thrown an exception
+		true == false
 	}
 }
