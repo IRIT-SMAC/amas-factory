@@ -7,7 +7,7 @@
 				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent",
 				"id":"ag1",
 				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.Simpleknowledge",
+					"className":"fr.irit.smac.amasfactory.agent.impl.SimpleKnowledge",
 					"id":"ag1"
 				},
 				"message":"Hello agents"
@@ -16,7 +16,7 @@
 				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent",
 				"id":"ag2",
 				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.Simpleknowledge",
+					"className":"fr.irit.smac.amasfactory.agent.impl.SimpleKnowledge",
 					"id":"ag2"
 				},
 				"message":"Hello infratrouctour"
@@ -24,13 +24,14 @@
 			
 		}
 		
-	}
+	},
+	"messagingService":{
+		"className":"fr.irit.smac.amasfactory.service.messaging.impl.MessagingService",
+		"messageClass":"fr.irit.smac.amasfactory.factoryclientdemo.DemoMessage"
+	},
 	"executionService":{
 		"className":"fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService",
 		"nbThreads":8
-	},
-	"loggingService":{
-		"className":"fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService"
 	},
 	"hazelcastService":{
 		"className":"fr.irit.smac.amasfactory.service.datasharing.impl.HazelcastSharingService"

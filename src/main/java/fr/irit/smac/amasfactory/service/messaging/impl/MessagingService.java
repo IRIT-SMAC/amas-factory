@@ -1,5 +1,6 @@
 package fr.irit.smac.amasfactory.service.messaging.impl;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
@@ -15,33 +16,21 @@ public class MessagingService<M> extends AbstractInfraService<IInfrastructureAge
 {
     
     private IMsgService<M> delegatedMsgService;
-    
-    @JsonProperty
-    private String messageClassName;
-    
+        
     private Class<M> messageClass;
-    
-    public MessagingService()
+        
+    @JsonCreator
+    public MessagingService(@JsonProperty(value = "messageClass", required=true) Class<M> messageClass) 
     {
         super();
+        this.messageClass = messageClass;
         this.delegatedMsgService = null;
-        this.messageClassName = null;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public void start()
     {
-        try
-        {
-            this.messageClass = (Class<M>) Class.forName(messageClassName);
-            this.delegatedMsgService =
-                    AgentMessaging.getMsgService(messageClass);
-        }
-        catch (ClassNotFoundException e)
-        {
-            throw new IllegalArgumentException("Cannot load messageClassNme",e);
-        }
+    	this.delegatedMsgService = AgentMessaging.getMsgService(messageClass);
     }
 
     @Override

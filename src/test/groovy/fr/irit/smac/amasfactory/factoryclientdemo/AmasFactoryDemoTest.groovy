@@ -1,18 +1,16 @@
 package fr.irit.smac.amasfactory.factoryclientdemo
 
 
-import com.fasterxml.jackson.databind.JsonMappingException;
+import spock.lang.Specification
+
+import com.fasterxml.jackson.databind.JsonMappingException
 
 import fr.irit.smac.amasfactory.IInfrastructure
-import fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent
-import fr.irit.smac.amasfactory.factoryclientdemo.DemoMessage
 import fr.irit.smac.amasfactory.impl.BasicAmasFactory
 import fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler
 import fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService
 import fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService
 import fr.irit.smac.amasfactory.service.messaging.impl.MessagingService
-import fr.irit.smac.libs.tooling.messaging.IMsgBox
-import spock.lang.Specification
 
 class AmasFactoryDemoTest extends Specification{
 
@@ -68,15 +66,14 @@ class AmasFactoryDemoTest extends Specification{
 		BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
 
 		IInfrastructure<DemoAgent, DemoMessage> infra =
-						basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/missing_service.json"))
+						basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/exceptions/missing_service.json"))
 		
 		then:
-		//thrown an exception
-		true == false
+		thrown JsonMappingException
 		
 	}
 	
-	def 'check if an exception is thrown when the messageClassName of the messagingService is missing'() {
+	def 'check if an exception is thrown when the messageClass of the messagingService is missing'() {
 		
 		when:
 		BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
@@ -85,8 +82,7 @@ class AmasFactoryDemoTest extends Specification{
 						basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/exceptions/missing_attribute_messaging_service.json"))
 		
 		then:
-		//thrown an exception
-		true == false
+		thrown JsonMappingException
 	}
 	
 	def 'check if an exception is thrown when the configuration file has an error of syntax'() {
@@ -98,7 +94,8 @@ class AmasFactoryDemoTest extends Specification{
 						basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/exceptions/error_syntax.json"))
 		
 		then:
-		//thrown an exception
-		true == false
+		thrown JsonMappingException
 	}
+	
+	
 }

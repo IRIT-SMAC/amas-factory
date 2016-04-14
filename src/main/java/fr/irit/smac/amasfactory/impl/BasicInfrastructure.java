@@ -1,5 +1,7 @@
 package fr.irit.smac.amasfactory.impl;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
@@ -18,8 +20,25 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 	private ILoggingService<M> loggingService;
 	private IDataSharingService<A, M> hazelcastService;
 
-	public BasicInfrastructure() {
+	public BasicInfrastructure(@JsonProperty(value="messagingService", required=true) IMessagingService<M> messagingService,
+			@JsonProperty(value="agentHandlerService", required=true) IAgentHandlerService<A, M> agentHandlerService,
+			@JsonProperty(value="executionService", required=true) IExecutionService<A, M> executionService,
+			@JsonProperty(value="loggingService", required=true) ILoggingService<M> loggingService,
+			@JsonProperty(value="hazelcastService", required=true) IDataSharingService<A, M> hazelcastService) {
 		super();
+
+		//not working because type is Interface
+		this.messagingService = messagingService;
+		this.agentHandlerService = agentHandlerService;
+		this.executionService = executionService;
+		this.loggingService = loggingService;
+		this.hazelcastService = hazelcastService;
+		
+		messagingService.setInfrastructure((BasicInfrastructure<IInfrastructureAgent<M>, M>) this);
+		agentHandlerService.setInfrastructure(this);
+		executionService.setInfrastructure(this);
+		loggingService.setInfrastructure((BasicInfrastructure<IInfrastructureAgent<M>, M>) this);
+		hazelcastService.setInfrastructure(this);
 	}
 
 	@Override
@@ -53,63 +72,31 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 		}
 		super.init(this);
 	}
-
-	public void setAgentHandlerService(IAgentHandlerService<A, M> agentHandlerService) {
-		
-		agentHandlerService.setInfrastructure(this);
-		this.agentHandlerService = agentHandlerService;
-	}
-	
-	public void setExecutionService(IExecutionService<A, M>  executionService) {
-		
-		executionService.setInfrastructure(this);
-		this.executionService = executionService;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public void setMessagingService(IMessagingService<M> messagingService) {
-		
-		messagingService.setInfrastructure((BasicInfrastructure<IInfrastructureAgent<M>, M>) this);
-		this.messagingService = messagingService;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public void setLoggingService(ILoggingService<M> loggingService) {
-		
-		loggingService.setInfrastructure((BasicInfrastructure<IInfrastructureAgent<M>, M>) this);
-		this.loggingService = loggingService;
-	}
-	
-	public void setHazelcastService(IDataSharingService<A, M> hazelcastService) {
-		
-		hazelcastService.setInfrastructure(this);
-		this.hazelcastService = hazelcastService;
-	}
 	
 	@Override
 	public void start() {
 		// starts each service sequencially
-		this.agentHandlerService.start();
-		this.executionService.start();
-		this.messagingService.start();
-		this.loggingService.start();
-		this.agentHandlerService.setInfrastructureAgent(this);
-		this.hazelcastService.start();
+			this.agentHandlerService.start();
+			this.executionService.start();
+			this.messagingService.start();
+			this.loggingService.start();
+			this.agentHandlerService.setInfrastructureAgent(this);
+			this.hazelcastService.start();
 	}
 
 	@Override
 	public void shutdown() {
 		// shutdown each service sequencially
-		this.agentHandlerService.shutdown();
-		this.messagingService.shutdown();
-		this.executionService.shutdown();
-		this.loggingService.shutdown();
-		this.hazelcastService.shutdown();
+			this.agentHandlerService.shutdown();
+			this.executionService.shutdown();
+			this.messagingService.shutdown();
+			this.loggingService.shutdown();
+			this.hazelcastService.shutdown();
 	}
 
 	@Override
 	protected void initParameters() {
-		infrastructure.start();
+			infrastructure.start();
 	}
 
 	@Override

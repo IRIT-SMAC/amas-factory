@@ -27,7 +27,7 @@
 	},
 	"messagingService":{
 		"className":"fr.irit.smac.amasfactory.service.messaging.impl.MessagingService",
-		"messageClassName":"fr.irit.smac.amasfactory.factoryclientdemo.DemoMessage"
+		"messageClass":"fr.irit.smac.amasfactory.factoryclientdemo.DemoMessage"
 	},
 	"executionService":{
 		"className":"fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService",

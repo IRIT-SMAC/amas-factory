@@ -1,5 +1,6 @@
 package fr.irit.smac.amasfactory.impl;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import fr.irit.smac.amasfactory.IAmasFactory;
@@ -19,7 +20,7 @@ public class BasicAmasFactory implements IAmasFactory {
     
     @Override
     public <A extends IInfrastructureAgent<M>, M> IInfrastructure<A, M> createInfrastructure(
-        InputStream configuration) {
+        InputStream configuration) throws IOException {
 
     	AmasFactoryParser parser = AmasFactoryParser.getInstance();
         
