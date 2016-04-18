@@ -18,21 +18,39 @@ import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.TwoStepsSystemStrategy;
 import fr.irit.smac.libs.tooling.scheduling.impl.system.SynchronizedSystemStrategy;
 
+/**
+ * TwoStepAgExecutionService is a service which handles the execution of the
+ * multi-agent system.
+ *
+ * @param <A>
+ *            the generic type
+ * @param <M>
+ *            the generic type
+ */
 public class TwoStepAgExecutionService<A extends ITwoStepsAgent & IInfrastructureAgent<M>, M>
     extends AbstractInfraService<A, M>implements IExecutionService<A, M> {
 
     private TwoStepsSystemStrategy systemStrategy;
-    private static final Logger      LOGGER   = Logger.getLogger(SynchronizedSystemStrategy.class.getName());
+
+    private static final Logger LOGGER = Logger.getLogger(SynchronizedSystemStrategy.class.getName());
 
     @JsonProperty
     private int nbThreads;
 
+    /**
+     * Instantiates a new two step ag execution service.
+     */
     public TwoStepAgExecutionService() {
         super();
         this.systemStrategy = null;
         this.nbThreads = Integer.MIN_VALUE;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.irit.smac.amasfactory.service.IInfraService#start()
+     */
     @Override
     public void start() {
         // first create the scheduler instance before registering
@@ -46,21 +64,42 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent & IInfrastructur
         this.getInfrastructure().getAgentHandler().addAgentEventListener(this);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * fr.irit.smac.amasfactory.service.execution.IExecutionService#run(long)
+     */
     @Override
     public void run(long milis) {
         this.systemStrategy.run(milis);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.irit.smac.amasfactory.service.execution.IExecutionService#step()
+     */
     @Override
     public Future<?> step() {
         return this.systemStrategy.step();
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.irit.smac.amasfactory.service.execution.IExecutionService#pause()
+     */
     @Override
     public Future<?> pause() {
         return this.systemStrategy.step();
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.irit.smac.amasfactory.service.IInfraService#shutdown()
+     */
     @Override
     public void shutdown() throws ShutdownRuntimeException {
         try {
@@ -72,41 +111,91 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent & IInfrastructur
         }
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener#
+     * agentAdded(java.lang.Object)
+     */
     @Override
     public void agentAdded(A agent) {
         this.systemStrategy.addAgent(agent);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener#
+     * agentRemoved(java.lang.Object)
+     */
     @Override
     public void agentRemoved(A agent) {
         this.systemStrategy.removeAgent(agent);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * fr.irit.smac.libs.tooling.scheduling.IHookHandler#addPreStepHook(java.
+     * lang.Runnable)
+     */
     @Override
     public void addPreStepHook(Runnable task) {
         this.systemStrategy.addPreStepHook(task);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * fr.irit.smac.libs.tooling.scheduling.IHookHandler#addPostStepHook(java.
+     * lang.Runnable)
+     */
     @Override
     public void addPostStepHook(Runnable task) {
         this.systemStrategy.addPostStepHook(task);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * fr.irit.smac.libs.tooling.scheduling.IHookHandler#removePreStepHook(java.
+     * lang.Runnable)
+     */
     @Override
     public void removePreStepHook(Runnable task) {
         this.systemStrategy.removePreStepHook(task);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * fr.irit.smac.libs.tooling.scheduling.IHookHandler#removePostStepHook(java
+     * .lang.Runnable)
+     */
     @Override
     public void removePostStepHook(Runnable task) {
         this.systemStrategy.removePostStepHook(task);
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.irit.smac.libs.tooling.scheduling.IHookHandler#getPreStepHooks()
+     */
     @Override
     public Set<Runnable> getPreStepHooks() {
         return this.getPreStepHooks();
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.irit.smac.libs.tooling.scheduling.IHookHandler#getPostStepHooks()
+     */
     @Override
     public Set<Runnable> getPostStepHooks() {
         return this.getPostStepHooks();

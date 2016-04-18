@@ -7,19 +7,33 @@ import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
 import fr.irit.smac.libs.tooling.logging.AgentLog;
 
+/**
+ * AgentLogLoggingService is a service which allows to write logs about the agents.
+ *
+ * @param <M> the generic type
+ */
 public class AgentLogLoggingService<M> extends AbstractInfraService<IInfrastructureAgent<M>, M>
     implements ILoggingService<M> {
 
+    /* (non-Javadoc)
+     * @see fr.irit.smac.amasfactory.service.logging.ILoggingService#getAgentLogger(java.lang.String)
+     */
     @Override
     public Logger getAgentLogger(String loggerName) {
         return AgentLog.getAgentLogger(loggerName);
     }
 
+    /* (non-Javadoc)
+     * @see fr.irit.smac.amasfactory.service.logging.ILoggingService#getStandardLogger(java.lang.String)
+     */
     @Override
     public Logger getStandardLogger(String loggerName) {
         return AgentLog.getStandardLogger(loggerName);
     }
 
+    /* (non-Javadoc)
+     * @see fr.irit.smac.amasfactory.service.IInfraService#start()
+     */
     @Override
     public void start() {
         AgentLog.initializer()
@@ -38,6 +52,9 @@ public class AgentLogLoggingService<M> extends AbstractInfraService<IInfrastruct
         });
     }
 
+    /* (non-Javadoc)
+     * @see fr.irit.smac.amasfactory.service.IInfraService#shutdown()
+     */
     @Override
     public void shutdown() {
         // NOTHING to do

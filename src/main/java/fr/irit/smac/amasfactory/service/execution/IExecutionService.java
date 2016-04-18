@@ -8,6 +8,15 @@ import fr.irit.smac.amasfactory.service.IInfraService;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
 import fr.irit.smac.libs.tooling.scheduling.IHookHandler;
 
+/**
+ * The Interface IExecutionService exposes methods to control the execution of
+ * the multi-agent system.
+ *
+ * @param <A>
+ *            the generic type
+ * @param <M>
+ *            the generic type
+ */
 public interface IExecutionService<A extends IInfrastructureAgent<M>, M>
     extends IAgentEventListener<A>, IInfraService<A, M>, IHookHandler {
     /**
@@ -55,6 +64,9 @@ public interface IExecutionService<A extends IInfrastructureAgent<M>, M>
      * Shutdown the system definitively.
      * 
      * Implementations should ensure that this method is blocking
+     *
+     * @throws ShutdownRuntimeException
+     *             the shutdown runtime exception
      */
     @Override
     public void shutdown() throws ShutdownRuntimeException;

@@ -5,8 +5,26 @@ import org.slf4j.Logger;
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.IInfraService;
 
+/**
+ * The Interface ILoggingService exposes methods to use the logger service.
+ *
+ * @param <M> the generic type
+ */
 public interface ILoggingService<M> extends IInfraService<IInfrastructureAgent<M>, M> {
+    
+    /**
+     * Gets the standard logger.
+     *
+     * @param loggerName the logger name
+     * @return the standard logger
+     */
     public Logger getStandardLogger(String loggerName);
 
+    /**
+     * Gets the agent logger.
+     *
+     * @param loggerName the logger name
+     * @return the agent logger
+     */
     public Logger getAgentLogger(String loggerName);
 }

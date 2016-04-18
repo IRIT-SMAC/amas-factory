@@ -14,6 +14,6 @@ import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
  * @param <M>
  */
 public interface IDataSharingService<A extends IInfrastructureAgent<M>, M>
-		extends IAgentEventListener<A>, IInfraService<A, M> {
+    extends IAgentEventListener<A>, IInfraService<A, M> {
 
 }

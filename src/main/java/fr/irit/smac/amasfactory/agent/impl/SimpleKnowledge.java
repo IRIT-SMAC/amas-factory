@@ -1,3 +1,6 @@
+/*
+ * 
+ */
 package fr.irit.smac.amasfactory.agent.impl;
 
 import java.io.Serializable;
@@ -15,22 +18,33 @@ import fr.irit.smac.amasfactory.agent.IKnowledge;
  */
 public class SimpleKnowledge implements IKnowledge, Serializable {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = -6416845878147222262L;
 
     @JsonProperty
     private String id;
 
+    /**
+     * Instantiates a new simple knowledge.
+     */
     public SimpleKnowledge() {
-        //empty
+        // empty
     }
 
+    /**
+     * Instantiates a new simple knowledge.
+     *
+     * @param id
+     *            the id
+     */
     public SimpleKnowledge(String id) {
         this.id = id;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.irit.smac.amasfactory.agent.IKnowledge#getId()
+     */
     @Override
     public String getId() {
         return this.id;
@@ -38,8 +52,9 @@ public class SimpleKnowledge implements IKnowledge, Serializable {
 
     /**
      * Non interface method, used for specific debug purpose.
-     * 
+     *
      * @param id
+     *            the new id
      */
     public void setId(String id) {
         this.id = id;
