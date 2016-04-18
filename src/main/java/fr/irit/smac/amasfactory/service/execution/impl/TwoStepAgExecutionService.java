@@ -5,19 +5,24 @@ import java.util.Set;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.impl.ShutdownRuntimeException;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.TwoStepsSystemStrategy;
+import fr.irit.smac.libs.tooling.scheduling.impl.system.SynchronizedSystemStrategy;
 
 public class TwoStepAgExecutionService<A extends ITwoStepsAgent & IInfrastructureAgent<M>, M>
     extends AbstractInfraService<A, M>implements IExecutionService<A, M> {
 
     private TwoStepsSystemStrategy systemStrategy;
+    private static final Logger      LOGGER   = Logger.getLogger(SynchronizedSystemStrategy.class.getName());
 
     @JsonProperty
     private int nbThreads;
@@ -57,12 +62,13 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent & IInfrastructur
     }
 
     @Override
-    public void shutdown() {
+    public void shutdown() throws ShutdownRuntimeException {
         try {
             this.systemStrategy.shutdown().get();
         }
         catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException("Exception during shutdown", e);
+            LOGGER.log(Level.INFO, e.getMessage(), e);
+            throw new ShutdownRuntimeException("Exception during shutdown of TwoStepAgentExecutionService");
         }
     }
 

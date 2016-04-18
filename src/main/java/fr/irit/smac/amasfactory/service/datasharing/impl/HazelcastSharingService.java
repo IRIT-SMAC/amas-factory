@@ -78,7 +78,6 @@ public class HazelcastSharingService<A extends IInfrastructureAgent<M>, M> exten
                     hazelcastKnowledgeAccessor.registerKnowledge(agent.getInnerKnowledge());
                     // System.out.println("registering " + agent.getId() );
                 }
-                ;
             }
         };
     }

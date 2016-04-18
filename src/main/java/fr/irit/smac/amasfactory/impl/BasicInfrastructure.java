@@ -66,7 +66,7 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
 
     @Override
     public void setInfrastructure(BasicInfrastructure<A, M> basicInfrastructure) {
-
+        //BasicInfrastructure should not have a nested attribute "infrastucture"
     }
 
     @Override
@@ -81,7 +81,7 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
     }
 
     @Override
-    public void shutdown() {
+    public void shutdown() throws ShutdownRuntimeException {
         // shutdown each service sequencially
         this.agentHandlerService.shutdown();
         this.executionService.shutdown();

@@ -3,6 +3,7 @@ package fr.irit.smac.amasfactory.service.execution;
 import java.util.concurrent.Future;
 
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.impl.ShutdownRuntimeException;
 import fr.irit.smac.amasfactory.service.IInfraService;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
 import fr.irit.smac.libs.tooling.scheduling.IHookHandler;
@@ -56,5 +57,5 @@ public interface IExecutionService<A extends IInfrastructureAgent<M>, M>
      * Implementations should ensure that this method is blocking
      */
     @Override
-    public void shutdown();
+    public void shutdown() throws ShutdownRuntimeException;
 }

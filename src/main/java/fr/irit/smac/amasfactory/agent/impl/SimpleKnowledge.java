@@ -24,7 +24,7 @@ public class SimpleKnowledge implements IKnowledge, Serializable {
     private String id;
 
     public SimpleKnowledge() {
-
+        //empty
     }
 
     public SimpleKnowledge(String id) {

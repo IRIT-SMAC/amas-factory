@@ -7,7 +7,7 @@ import fr.irit.smac.amasfactory.service.IInfraService;
 
 public abstract class AbstractInfraService<A extends IInfrastructureAgent<M>, M> implements IInfraService<A, M> {
 
-    public IInfrastructure<A, M> infrastructure;
+    protected IInfrastructure<A, M> infrastructure;
 
     protected IInfrastructure<A, M> getInfrastructure() {
         return this.infrastructure;
