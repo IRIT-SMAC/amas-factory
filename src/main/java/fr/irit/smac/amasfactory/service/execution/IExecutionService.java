@@ -7,8 +7,8 @@ import fr.irit.smac.amasfactory.service.IInfraService;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
 import fr.irit.smac.libs.tooling.scheduling.IHookHandler;
 
-public interface IExecutionService<A extends IInfrastructureAgent<M>,M> extends IAgentEventListener<A> , IInfraService<A, M>, IHookHandler
-{
+public interface IExecutionService<A extends IInfrastructureAgent<M>, M>
+    extends IAgentEventListener<A>, IInfraService<A, M>, IHookHandler {
     /**
      * Launches the continuous execution of the system. The system will execute
      * according to the implemented strategy, until the {@link #pause} method is

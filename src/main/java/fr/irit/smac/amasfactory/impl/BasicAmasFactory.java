@@ -17,15 +17,14 @@ import fr.irit.smac.amasfactory.util.parser.impl.AmasFactoryParser;
  */
 public class BasicAmasFactory implements IAmasFactory {
 
-    
     @Override
     public <A extends IInfrastructureAgent<M>, M> IInfrastructure<A, M> createInfrastructure(
         InputStream configuration) throws IOException {
 
-    	AmasFactoryParser parser = AmasFactoryParser.getInstance();
-        
+        AmasFactoryParser parser = AmasFactoryParser.getInstance();
+
         IInfrastructure<A, M> infrastructure = parser.parseInfrastructure(configuration);
-        
+
         return infrastructure;
     }
 }

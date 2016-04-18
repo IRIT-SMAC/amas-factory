@@ -8,5 +8,6 @@ import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 
 public interface IAmasFactoryParser {
 
-	public <A extends IInfrastructureAgent<M>, M> IInfrastructure<A, M>  parseInfrastructure(InputStream configuration) throws IOException;
+    public <A extends IInfrastructureAgent<M>, M> IInfrastructure<A, M> parseInfrastructure(InputStream configuration)
+        throws IOException;
 }

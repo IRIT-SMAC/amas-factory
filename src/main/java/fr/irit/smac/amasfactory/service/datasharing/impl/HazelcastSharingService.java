@@ -19,94 +19,90 @@ import fr.irit.smac.amasfactory.util.hazelcast.impl.HazelcastKnowledgeAccessor;
  * @param <M>
  */
 public class HazelcastSharingService<A extends IInfrastructureAgent<M>, M> extends AbstractInfraService<A, M>
-		implements IDataSharingService<A, M> {
+    implements IDataSharingService<A, M> {
 
-	IHazelcastKnowledgeAccessor hazelcastKnowledgeAccessor;
+    IHazelcastKnowledgeAccessor hazelcastKnowledgeAccessor;
 
-	// BEFORE_ITERATION AFTER_ITERATION
-	public static final String PERSISTENCE_UPDATE_POLICY = "AFTER_ITERATION";
+    // BEFORE_ITERATION AFTER_ITERATION
+    public static final String PERSISTENCE_UPDATE_POLICY = "AFTER_ITERATION";
 
-	private Runnable persistencePolicy;
-	
-	public HazelcastSharingService() {
-		this.hazelcastKnowledgeAccessor = new HazelcastKnowledgeAccessor();
-	}
+    private Runnable persistencePolicy;
 
-	@Override
-	public void agentAdded(A agent) {
-		this.hazelcastKnowledgeAccessor.registerKnowledge(agent.getInnerKnowledge());
-	}
+    public HazelcastSharingService() {
+        this.hazelcastKnowledgeAccessor = new HazelcastKnowledgeAccessor();
+    }
 
-	@Override
-	public void agentRemoved(A agent) {
-		this.hazelcastKnowledgeAccessor.removeKnowledge(agent.getId());
-	}
+    @Override
+    public void agentAdded(A agent) {
+        this.hazelcastKnowledgeAccessor.registerKnowledge(agent.getInnerKnowledge());
+    }
 
-	@Override
-	public void start() {
+    @Override
+    public void agentRemoved(A agent) {
+        this.hazelcastKnowledgeAccessor.removeKnowledge(agent.getId());
+    }
 
-		// Register to react to agents creation, deletion.
-		this.getInfrastructure().getAgentHandler().addAgentEventListener(this);
+    @Override
+    public void start() {
 
-		this.persistencePolicy =  generatePersistenceUpdatePolicy(this.getInfrastructure());
-		
-		// Register to share the agent knowledge at the end of each step.
-		switch (PERSISTENCE_UPDATE_POLICY) {
-		case "AFTER_ITERATION":
-			this.getInfrastructure().getExecutionService()
-					.addPostStepHook(this.persistencePolicy );
-			break;
-		case "BEFORE_ITERATION":
-			this.getInfrastructure().getExecutionService()
-					.addPreStepHook(this.persistencePolicy );
-			break;
-		default:
-			break;
-		}
+        // Register to react to agents creation, deletion.
+        this.getInfrastructure().getAgentHandler().addAgentEventListener(this);
 
-	}
+        this.persistencePolicy = generatePersistenceUpdatePolicy(this.getInfrastructure());
 
-	/**
-	 * Persist the data in the map at the end of each iteration.
-	 * 
-	 * @param infrastructure
-	 * @return
-	 */
-	private Runnable generatePersistenceUpdatePolicy(IInfrastructure<A, M> infrastructure) {
-		return new Runnable() {
-			@Override
-			public void run() {
-				for (A agent : infrastructure.getAgentHandler().getAgents()) {
-					hazelcastKnowledgeAccessor.registerKnowledge(agent.getInnerKnowledge());
-					// System.out.println("registering " + agent.getId() );
-				}
-				;
-			}
-		};
-	}
+        // Register to share the agent knowledge at the end of each step.
+        switch (PERSISTENCE_UPDATE_POLICY) {
+            case "AFTER_ITERATION":
+                this.getInfrastructure().getExecutionService().addPostStepHook(this.persistencePolicy);
+                break;
+            case "BEFORE_ITERATION":
+                this.getInfrastructure().getExecutionService().addPreStepHook(this.persistencePolicy);
+                break;
+            default:
+                break;
+        }
 
-	@Override
-	public void shutdown() {
-		
-		this.getInfrastructure().getAgentHandler().removeAgentEventListener(this);
-		
-		switch (PERSISTENCE_UPDATE_POLICY) {
-		case "AFTER_ITERATION":
-			this.getInfrastructure().getExecutionService()
-					.removePostStepHook(this.persistencePolicy );
-			break;
-		case "BEFORE_ITERATION":
-			this.getInfrastructure().getExecutionService()
-					.removePreStepHook(this.persistencePolicy );
-			break;
-		default:
-			break;
-		}
+    }
 
-	}
+    /**
+     * Persist the data in the map at the end of each iteration.
+     * 
+     * @param infrastructure
+     * @return
+     */
+    private Runnable generatePersistenceUpdatePolicy(IInfrastructure<A, M> infrastructure) {
+        return new Runnable() {
+            @Override
+            public void run() {
+                for (A agent : infrastructure.getAgentHandler().getAgents()) {
+                    hazelcastKnowledgeAccessor.registerKnowledge(agent.getInnerKnowledge());
+                    // System.out.println("registering " + agent.getId() );
+                }
+                ;
+            }
+        };
+    }
 
-	@Override
-	protected void initParameters() {
-	}
+    @Override
+    public void shutdown() {
+
+        this.getInfrastructure().getAgentHandler().removeAgentEventListener(this);
+
+        switch (PERSISTENCE_UPDATE_POLICY) {
+            case "AFTER_ITERATION":
+                this.getInfrastructure().getExecutionService().removePostStepHook(this.persistencePolicy);
+                break;
+            case "BEFORE_ITERATION":
+                this.getInfrastructure().getExecutionService().removePreStepHook(this.persistencePolicy);
+                break;
+            default:
+                break;
+        }
+
+    }
+
+    @Override
+    protected void initParameters() {
+    }
 
 }

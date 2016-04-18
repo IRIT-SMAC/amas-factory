@@ -7,16 +7,16 @@ import fr.irit.smac.amasfactory.agent.IKnowledge;
 
 public interface IHazelcastKnowledgeAccessor {
 
-	void registerKnowledge(IKnowledge knowledge);
+    void registerKnowledge(IKnowledge knowledge);
 
-	void removeKnowledge(String knowledgeId);
+    void removeKnowledge(String knowledgeId);
 
-	IKnowledge getKnowledge(String knowledgeId);
+    IKnowledge getKnowledge(String knowledgeId);
 
-	Set<String> getKnowledgeIdSet();
-	
-	 Map<String, IKnowledge> getKnowledgeMap();
-	
-	void shutdownInstance();
+    Set<String> getKnowledgeIdSet();
+
+    Map<String, IKnowledge> getKnowledgeMap();
+
+    void shutdownInstance();
 
 }

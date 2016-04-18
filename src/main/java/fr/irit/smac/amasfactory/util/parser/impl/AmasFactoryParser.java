@@ -18,35 +18,38 @@ import fr.irit.smac.libs.tooling.scheduling.impl.system.SynchronizedSystemStrate
 
 public class AmasFactoryParser implements IAmasFactoryParser {
 
-	protected AmasFactoryParser() {
+    private static final Logger      LOGGER   = Logger.getLogger(SynchronizedSystemStrategy.class.getName());
+    private static final AmasFactoryParser INSTANCE = new AmasFactoryParser();
 
-	}
+    protected AmasFactoryParser() {
 
-	private static final Logger LOGGER = Logger.getLogger(SynchronizedSystemStrategy.class.getName());
-	private static AmasFactoryParser INSTANCE = new AmasFactoryParser();
+    }
 
-	public static AmasFactoryParser getInstance() {
-		return INSTANCE;
-	}
+    public static AmasFactoryParser getInstance() {
+        return INSTANCE;
+    }
 
-	@SuppressWarnings({ "unchecked" })
-	public <A extends IInfrastructureAgent<M>, M> IInfrastructure<A, M> parseInfrastructure(InputStream configuration) throws IOException {
+    @Override
+    @SuppressWarnings({ "unchecked" })
+    public <A extends IInfrastructureAgent<M>, M> IInfrastructure<A, M> parseInfrastructure(InputStream configuration)
+        throws IOException {
 
-		ObjectMapper mapper = new ObjectMapper();
+        ObjectMapper mapper = new ObjectMapper();
 
-		IInfrastructure<A, M> infrastructure = null;
-		try {
+        IInfrastructure<A, M> infrastructure = null;
+        try {
 
-			JsonElement configurationJson = new JsonParser().parse(new InputStreamReader(configuration));
-			infrastructure = mapper.readValue(configurationJson.getAsJsonObject().toString(),
-					BasicInfrastructure.class);
-			infrastructure.init(null);
+            JsonElement configurationJson = new JsonParser().parse(new InputStreamReader(configuration));
+            infrastructure = mapper.readValue(configurationJson.getAsJsonObject().toString(),
+                BasicInfrastructure.class);
+            infrastructure.init(null);
 
-		} catch (IOException e) {
- 			LOGGER.log(Level.INFO, e.getMessage(), e);
- 			throw e;
-		}
+        }
+        catch (IOException e) {
+            LOGGER.log(Level.INFO, e.getMessage(), e);
+            throw e;
+        }
 
-		return infrastructure;
-	}
+        return infrastructure;
+    }
 }

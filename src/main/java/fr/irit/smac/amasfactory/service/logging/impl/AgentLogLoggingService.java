@@ -7,16 +7,17 @@ import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
 import fr.irit.smac.libs.tooling.logging.AgentLog;
 
-public class AgentLogLoggingService<M> extends   AbstractInfraService< IInfrastructureAgent<M>, M> implements ILoggingService<M>{
+public class AgentLogLoggingService<M> extends AbstractInfraService<IInfrastructureAgent<M>, M>
+    implements ILoggingService<M> {
 
     @Override
     public Logger getAgentLogger(String loggerName) {
         return AgentLog.getAgentLogger(loggerName);
     }
-    
+
     @Override
     public Logger getStandardLogger(String loggerName) {
-       return AgentLog.getStandardLogger(loggerName);
+        return AgentLog.getStandardLogger(loggerName);
     }
 
     @Override
@@ -31,9 +32,10 @@ public class AgentLogLoggingService<M> extends   AbstractInfraService< IInfrastr
             .clearLogFolderOnStartup(true)
             .logFolderName("target/log")
             .initialize();
-        
-        this.getInfrastructure().getExecutionService().addPreStepHook( new Runnable() {
+
+        this.getInfrastructure().getExecutionService().addPreStepHook(new Runnable() {
             private int stepNum = 0;
+
             @Override
             public void run() {
                 AgentLog.setAmasStepNumber(stepNum++);
@@ -44,6 +46,6 @@ public class AgentLogLoggingService<M> extends   AbstractInfraService< IInfrastr
     @Override
     public void shutdown() {
         // NOTHING to do
-        
+
     }
 }

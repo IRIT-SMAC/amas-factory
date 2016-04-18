@@ -15,97 +15,98 @@ import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.TwoStepsSystemStrategy;
 
 public class TwoStepAgExecutionService<A extends ITwoStepsAgent & IInfrastructureAgent<M>, M>
-		extends AbstractInfraService<A, M>implements IExecutionService<A, M> {
+    extends AbstractInfraService<A, M>implements IExecutionService<A, M> {
 
-	private TwoStepsSystemStrategy systemStrategy;
-	
-	@JsonProperty
-	private int nbThreads;
+    private TwoStepsSystemStrategy systemStrategy;
 
-	public TwoStepAgExecutionService() {
-		super();
-		this.systemStrategy = null;
-		this.nbThreads = Integer.MIN_VALUE;
-	}
+    @JsonProperty
+    private int nbThreads;
 
-	@Override
-	public void start() {
-		// first create the scheduler instance before registering
-		// as agent listener (in order to assure that agentAdded and
-		// agentRemoved
-		// will not be called while this.systemStrategy = null)
+    public TwoStepAgExecutionService() {
+        super();
+        this.systemStrategy = null;
+        this.nbThreads = Integer.MIN_VALUE;
+    }
 
-		this.systemStrategy = new TwoStepsSystemStrategy(Collections.emptyList(),
-				Executors.newFixedThreadPool(this.nbThreads));
+    @Override
+    public void start() {
+        // first create the scheduler instance before registering
+        // as agent listener (in order to assure that agentAdded and
+        // agentRemoved
+        // will not be called while this.systemStrategy = null)
 
-		this.getInfrastructure().getAgentHandler().addAgentEventListener(this);
-	}
+        this.systemStrategy = new TwoStepsSystemStrategy(Collections.emptyList(),
+            Executors.newFixedThreadPool(this.nbThreads));
 
-	@Override
-	public void run(long milis) {
-		this.systemStrategy.run(milis);
-	}
+        this.getInfrastructure().getAgentHandler().addAgentEventListener(this);
+    }
 
-	@Override
-	public Future<?> step() {
-		return this.systemStrategy.step();
-	}
+    @Override
+    public void run(long milis) {
+        this.systemStrategy.run(milis);
+    }
 
-	@Override
-	public Future<?> pause() {
-		return this.systemStrategy.step();
-	}
+    @Override
+    public Future<?> step() {
+        return this.systemStrategy.step();
+    }
 
-	@Override
-	public void shutdown() {
-		try {
-			this.systemStrategy.shutdown().get();
-		} catch (InterruptedException | ExecutionException e) {
-			throw new RuntimeException("Exception during shutdown", e);
-		}
-	}
+    @Override
+    public Future<?> pause() {
+        return this.systemStrategy.step();
+    }
 
-	@Override
-	public void agentAdded(A agent) {
-		this.systemStrategy.addAgent(agent);
-	}
+    @Override
+    public void shutdown() {
+        try {
+            this.systemStrategy.shutdown().get();
+        }
+        catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Exception during shutdown", e);
+        }
+    }
 
-	@Override
-	public void agentRemoved(A agent) {
-		this.systemStrategy.removeAgent(agent);
-	}
+    @Override
+    public void agentAdded(A agent) {
+        this.systemStrategy.addAgent(agent);
+    }
 
-	@Override
-	protected void initParameters() {
-	}
+    @Override
+    public void agentRemoved(A agent) {
+        this.systemStrategy.removeAgent(agent);
+    }
 
-	@Override
-	public void addPreStepHook(Runnable task) {
-		this.systemStrategy.addPreStepHook(task);
-	}
+    @Override
+    protected void initParameters() {
+    }
 
-	@Override
-	public void addPostStepHook(Runnable task) {
-		this.systemStrategy.addPostStepHook(task);
-	}
+    @Override
+    public void addPreStepHook(Runnable task) {
+        this.systemStrategy.addPreStepHook(task);
+    }
 
-	@Override
-	public void removePreStepHook(Runnable task) {
-		this.systemStrategy.removePreStepHook(task);
-	}
+    @Override
+    public void addPostStepHook(Runnable task) {
+        this.systemStrategy.addPostStepHook(task);
+    }
 
-	@Override
-	public void removePostStepHook(Runnable task) {
-		this.systemStrategy.removePostStepHook(task);
-	}
+    @Override
+    public void removePreStepHook(Runnable task) {
+        this.systemStrategy.removePreStepHook(task);
+    }
 
-	@Override
-	public Set<Runnable> getPreStepHooks() {
-		return this.getPreStepHooks();
-	}
+    @Override
+    public void removePostStepHook(Runnable task) {
+        this.systemStrategy.removePostStepHook(task);
+    }
 
-	@Override
-	public Set<Runnable> getPostStepHooks() {
-		return this.getPostStepHooks();
-	}
+    @Override
+    public Set<Runnable> getPreStepHooks() {
+        return this.getPreStepHooks();
+    }
+
+    @Override
+    public Set<Runnable> getPostStepHooks() {
+        return this.getPostStepHooks();
+    }
 }

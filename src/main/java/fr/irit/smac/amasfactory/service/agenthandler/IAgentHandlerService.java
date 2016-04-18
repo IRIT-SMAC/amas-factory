@@ -7,19 +7,17 @@ import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.impl.BasicInfrastructure;
 import fr.irit.smac.amasfactory.service.IInfraService;
 
-public interface IAgentHandlerService<A extends IInfrastructureAgent<M>,M> extends IInfraService<A,M>
-{
+public interface IAgentHandlerService<A extends IInfrastructureAgent<M>, M> extends IInfraService<A, M> {
     /**
      * 
      * @return a collection containing the agents currently handled by the
      *         system
      */
     Collection<A> getAgents();
-    
-    Map<String,A> getAgentMap();
-    
-     A getAgent(String id);
 
+    Map<String, A> getAgentMap();
+
+    A getAgent(String id);
 
     /**
      * Add an agent to the system
@@ -52,22 +50,23 @@ public interface IAgentHandlerService<A extends IInfrastructureAgent<M>,M> exten
      *            the agents to be removed
      */
     void removeAgents(Collection<A> agents);
-    
-    
+
     /**
      * Add a agentEventListener to be notified when an agent is added
-     * @param listener the listener to be added
+     * 
+     * @param listener
+     *            the listener to be added
      */
     void addAgentEventListener(IAgentEventListener<A> listener);
-    
-    
+
     /**
      * Removes a agentEventListener
-     * @param listener the listener to be removed
+     * 
+     * @param listener
+     *            the listener to be removed
      */
     void removeAgentEventListener(IAgentEventListener<A> listener);
 
-	void setInfrastructureAgent(BasicInfrastructure<A, M> basicInfrastructure);
+    void setInfrastructureAgent(BasicInfrastructure<A, M> basicInfrastructure);
 
-    
 }
