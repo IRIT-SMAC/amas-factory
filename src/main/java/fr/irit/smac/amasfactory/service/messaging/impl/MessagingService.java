@@ -73,8 +73,4 @@ public class MessagingService<M> extends AbstractInfraService<IInfrastructureAge
         return this.delegatedMsgService.getMsgBox(agentId);
     }
 
-    @Override
-    protected void initParameters() {
-    }
-
 }

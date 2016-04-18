@@ -23,8 +23,6 @@ public class BasicAmasFactory implements IAmasFactory {
 
         AmasFactoryParser parser = AmasFactoryParser.getInstance();
 
-        IInfrastructure<A, M> infrastructure = parser.parseInfrastructure(configuration);
-
-        return infrastructure;
+        return parser.parseInfrastructure(configuration);
     }
 }

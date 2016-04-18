@@ -21,11 +21,6 @@ public class AgentLogLoggingService<M> extends AbstractInfraService<IInfrastruct
     }
 
     @Override
-    protected void initParameters() {
-        // NOTHING to do
-    }
-
-    @Override
     public void start() {
         AgentLog.initializer()
             .logEnabled(true)

@@ -112,11 +112,6 @@ public class BasicAgentHandler<A extends IInfrastructureAgent<M>, M> extends Abs
     }
 
     @Override
-    protected void initParameters() {
-        // nothing to do
-    }
-
-    @Override
     public Map<String, A> getAgentMap() {
         return Collections.unmodifiableMap(this.agentMap);
     }

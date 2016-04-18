@@ -77,10 +77,6 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent & IInfrastructur
     }
 
     @Override
-    protected void initParameters() {
-    }
-
-    @Override
     public void addPreStepHook(Runnable task) {
         this.systemStrategy.addPreStepHook(task);
     }

@@ -101,8 +101,4 @@ public class HazelcastSharingService<A extends IInfrastructureAgent<M>, M> exten
 
     }
 
-    @Override
-    protected void initParameters() {
-    }
-
 }

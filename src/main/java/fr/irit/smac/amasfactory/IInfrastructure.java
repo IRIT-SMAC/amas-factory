@@ -15,5 +15,4 @@ public interface IInfrastructure<A extends IInfrastructureAgent<M>, M>
 
     public IDataSharingService<A, M> getDataSharingService();
 
-    // public <S extends IInfraService<A, M>> S getService(String serviceId);
 }

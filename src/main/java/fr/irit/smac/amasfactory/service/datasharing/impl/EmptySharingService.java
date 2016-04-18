@@ -35,8 +35,4 @@ public class EmptySharingService<A extends IInfrastructureAgent<M>, M> extends A
         // empty
     }
 
-    @Override
-    protected void initParameters() {
-    }
-
 }

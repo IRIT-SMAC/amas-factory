@@ -42,7 +42,6 @@ public class AmasFactoryParser implements IAmasFactoryParser {
             JsonElement configurationJson = new JsonParser().parse(new InputStreamReader(configuration));
             infrastructure = mapper.readValue(configurationJson.getAsJsonObject().toString(),
                 BasicInfrastructure.class);
-            infrastructure.init(null);
 
         }
         catch (IOException e) {

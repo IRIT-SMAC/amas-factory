@@ -40,6 +40,8 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
         executionService.setInfrastructure(this);
         loggingService.setInfrastructure((BasicInfrastructure<IInfrastructureAgent<M>, M>) this);
         hazelcastService.setInfrastructure(this);
+        
+        this.start();
     }
 
     @Override
@@ -68,14 +70,6 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
     }
 
     @Override
-    public void init(IInfrastructure<A, M> infrastructure) {
-        if (infrastructure != null) {
-            throw new IllegalArgumentException("An instance of infrastructure already exists");
-        }
-        super.init(this);
-    }
-
-    @Override
     public void start() {
         // starts each service sequencially
         this.agentHandlerService.start();
@@ -94,11 +88,6 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
         this.messagingService.shutdown();
         this.loggingService.shutdown();
         this.hazelcastService.shutdown();
-    }
-
-    @Override
-    protected void initParameters() {
-        infrastructure.start();
     }
 
     @Override

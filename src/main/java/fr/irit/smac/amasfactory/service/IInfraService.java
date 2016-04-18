@@ -8,7 +8,6 @@ import fr.irit.smac.amasfactory.impl.BasicInfrastructure;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
 public interface IInfraService<A extends IInfrastructureAgent<M>, M> {
-    public void init(IInfrastructure<A, M> infrastructure);
 
     public void start();
 
