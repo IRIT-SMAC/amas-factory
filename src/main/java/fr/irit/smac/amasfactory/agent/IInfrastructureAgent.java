@@ -38,4 +38,9 @@ public interface IInfrastructureAgent<M> {
      * @return the inner knowledge
      */
     public IKnowledge getInnerKnowledge();
+    
+    /**
+     * Sends the output value of an agent to its targets
+     */
+    public void sendOutputToTargets();
 }

@@ -4,10 +4,14 @@
 package fr.irit.smac.amasfactory.agent.impl;
 
 import java.io.Serializable;
+import java.util.Map;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.IKnowledge;
+import fr.irit.smac.amasfactory.agent.IPort;
+import fr.irit.smac.amasfactory.agent.ITarget;
 
 /**
  * Simple implementation of an IKnowledge, implements Serializable for the data
@@ -23,6 +27,18 @@ public class SimpleKnowledge implements IKnowledge, Serializable {
     @JsonProperty
     private String id;
 
+    @JsonProperty
+    private Set<ITarget> targetSet;
+
+    @JsonProperty
+    protected Map<String, IPort> portMap;
+    
+    @JsonProperty
+    private Class<?> outputType;
+    
+    @JsonProperty
+    private Object outputValue;
+    
     /**
      * Instantiates a new simple knowledge.
      */
@@ -60,4 +76,28 @@ public class SimpleKnowledge implements IKnowledge, Serializable {
         this.id = id;
     }
 
+    @Override
+    public Set<ITarget> getTargetSet() {
+        return targetSet;
+    }
+    
+    @Override
+    public Map<String, IPort> getPortMap() {
+        return this.portMap;
+    }
+    
+    @Override
+    public Class<?> getOutputType() {
+        return outputType;
+    }
+    
+    @Override
+    public Object getOutputValue() {
+        return this.outputValue;
+    }
+
+    @Override
+    public void setOutputValue(Object outputValue) {
+        this.outputValue = outputValue;
+    }
 }

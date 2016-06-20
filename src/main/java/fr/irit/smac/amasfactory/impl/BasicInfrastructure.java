@@ -1,6 +1,7 @@
 package fr.irit.smac.amasfactory.impl;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
@@ -19,17 +20,23 @@ import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
  * @param <M>
  *            the generic type
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
 public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends AbstractInfraService<A, M>
     implements IInfrastructure<A, M> {
 
-    private IMessagingService<M> messagingService;
-
+    @JsonProperty
     private IAgentHandlerService<A, M> agentHandlerService;
 
+    @JsonProperty
+    private IMessagingService<M> messagingService;
+
+    @JsonProperty
     private IExecutionService<A, M> executionService;
 
+    @JsonProperty
     private ILoggingService<M> loggingService;
 
+    @JsonProperty
     private IDataSharingService<A, M> hazelcastService;
 
     /**
@@ -67,6 +74,10 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
         loggingService.setInfrastructure((BasicInfrastructure<IInfrastructureAgent<M>, M>) this);
         hazelcastService.setInfrastructure(this);
 
+        this.start();
+    }
+
+    public BasicInfrastructure() {
         this.start();
     }
 
@@ -142,6 +153,13 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
     @Override
     public void start() {
         // starts each service sequencially
+        
+        messagingService.setInfrastructure((BasicInfrastructure<IInfrastructureAgent<M>, M>) this);
+        agentHandlerService.setInfrastructure(this);
+        executionService.setInfrastructure(this);
+        loggingService.setInfrastructure((BasicInfrastructure<IInfrastructureAgent<M>, M>) this);
+
+        
         this.agentHandlerService.start();
         this.executionService.start();
         this.messagingService.start();
@@ -164,5 +182,6 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
         this.loggingService.shutdown();
         this.hazelcastService.shutdown();
     }
+    
 
 }

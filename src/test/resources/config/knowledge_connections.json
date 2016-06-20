@@ -1,0 +1,150 @@
+{
+	"className":"fr.irit.smac.amasfactory.impl.BasicInfrastructure",
+	"agentHandlerService":{
+		"className":"fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler",
+		"agentMap":{
+			"ag1":{
+				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent2",
+				"id":"ag1",
+				"knowledge":{
+					"className":"fr.irit.smac.amasfactory.agent.impl.SimpleKnowledge",
+					"id":"ag1",
+					"outputType":"java.lang.String",
+					"targetSet":[
+						{
+							"agentTarget":"ag2",
+							"portTarget":"port1",
+							"className":"fr.irit.smac.amasfactory.agent.impl.Target"
+						},
+						{
+							"agentTarget":"ag2",
+							"portTarget":"port3",
+							"className":"fr.irit.smac.amasfactory.agent.impl.Target"
+						}
+						
+					]
+					
+				}
+				
+			},
+			"ag2":{
+				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent2",
+				"id":"ag2",
+				"knowledge":{
+					"className":"fr.irit.smac.amasfactory.agent.impl.SimpleKnowledge",
+					"id":"ag2",
+					"outputType":"java.lang.String",
+					"portMap":{
+						"port1":{
+							"id":"port1",
+							"type":"java.lang.String",
+							"className":"fr.irit.smac.amasfactory.agent.impl.Port"
+						},
+						"port2":{
+							"id":"port2",
+							"type":"java.lang.String",
+							"className":"fr.irit.smac.amasfactory.agent.impl.Port"
+						},
+						"port3":{
+							"id":"port3",
+							"type":"java.lang.String",
+							"className":"fr.irit.smac.amasfactory.agent.impl.Port"
+						}
+						
+					},
+					"targetSet":[
+						{
+							"agentTarget":"ag3",
+							"portTarget":"port1",
+							"className":"fr.irit.smac.amasfactory.agent.impl.Target"
+						}
+						
+					]
+					
+				}
+				
+			},
+			"ag3":{
+				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent2",
+				"id":"ag3",
+				"knowledge":{
+					"className":"fr.irit.smac.amasfactory.agent.impl.SimpleKnowledge",
+					"id":"ag3",
+					"outputType":"java.lang.String",
+					"portMap":{
+						"port1":{
+							"id":"port1",
+							"type":"java.lang.String",
+							"className":"fr.irit.smac.amasfactory.agent.impl.Port"
+						}
+						
+					}
+					
+				}
+				
+			},
+			"ag4":{
+				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent2",
+				"id":"ag4",
+				"knowledge":{
+					"className":"fr.irit.smac.amasfactory.agent.impl.SimpleKnowledge",
+					"id":"ag4",
+					"outputType":"java.lang.String",
+					"portMap":{
+						"port1":{
+							"id":"port1",
+							"type":"java.lang.String",
+							"className":"fr.irit.smac.amasfactory.agent.impl.Port"
+						}
+						
+					},
+					"targetSet":[
+						{
+							"agentTarget":"ag2",
+							"portTarget":"port2",
+							"className":"fr.irit.smac.amasfactory.agent.impl.Target"
+						}
+						
+					]
+					
+				}
+				
+			},
+			"ag5":{
+				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent2",
+				"id":"ag4",
+				"knowledge":{
+					"className":"fr.irit.smac.amasfactory.agent.impl.SimpleKnowledge",
+					"id":"ag4",
+					"outputType":"java.lang.String",
+					"targetSet":[
+						{
+							"agentTarget":"ag4",
+							"portTarget":"port1",
+							"className":"fr.irit.smac.amasfactory.agent.impl.Target"
+						}
+						
+					]
+					
+				}
+				
+			}
+			
+		}
+		
+	},
+	"messagingService":{
+		"className":"fr.irit.smac.amasfactory.service.messaging.impl.MessagingService",
+		"messageClass":"fr.irit.smac.amasfactory.message.AbstractMessage"
+	},
+	"executionService":{
+		"className":"fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService",
+		"nbThreads":8
+	},
+	"loggingService":{
+		"className":"fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService"
+	},
+	"hazelcastService":{
+		"className":"fr.irit.smac.amasfactory.service.datasharing.impl.HazelcastSharingService"
+	}
+}

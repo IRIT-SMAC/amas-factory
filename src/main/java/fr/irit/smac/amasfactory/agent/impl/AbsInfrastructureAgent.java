@@ -3,11 +3,17 @@
  */
 package fr.irit.smac.amasfactory.agent.impl;
 
+import org.slf4j.Logger;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.IAgentSideInfrastructure;
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.agent.IKnowledge;
+import fr.irit.smac.amasfactory.agent.ITarget;
+import fr.irit.smac.amasfactory.message.IMessage;
+import fr.irit.smac.amasfactory.message.SendToTargetMessage;
+import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 
 /**
  * Abstract class used by subclasses implementing an agent
@@ -24,6 +30,9 @@ public abstract class AbsInfrastructureAgent<M> implements IInfrastructureAgent<
 
     @JsonProperty
     private IKnowledge knowledge;
+
+    protected IMsgBox<M> msgBox;
+    protected Logger     logger;
 
     /**
      * Gets the infra.
@@ -47,7 +56,11 @@ public abstract class AbsInfrastructureAgent<M> implements IInfrastructureAgent<
     /**
      * Inits the parameters.
      */
-    protected abstract void initParameters();
+    protected void initParameters() {
+
+        this.msgBox = this.getInfra().getMessagingService().getMsgBox(this.getId());
+        this.logger = this.getInfra().getLoggingService().getAgentLogger(this.getId());
+    }
 
     /*
      * (non-Javadoc)
@@ -73,5 +86,24 @@ public abstract class AbsInfrastructureAgent<M> implements IInfrastructureAgent<
         this.id = id;
 
         this.initParameters();
+    }
+
+    @Override
+    public void sendOutputToTargets() {
+        Object value = this.knowledge.getOutputValue();
+
+        if (this.knowledge.getTargetSet() != null) {
+            for (ITarget target : this.knowledge.getTargetSet()) {
+
+                String agentId = target.getAgentId();
+                String portTarget = target.getPortTarget();
+                String portSource = target.getPortSource();
+                // logger.info("send to target " + target.getAgentId() + "
+                // message= " + value);
+                this.msgBox.send(
+                    (M) new SendToTargetMessage(portTarget, portSource, value),
+                    agentId);
+            }
+        }
     }
 }

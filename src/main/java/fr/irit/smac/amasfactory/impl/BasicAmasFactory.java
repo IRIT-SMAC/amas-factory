@@ -12,8 +12,12 @@ import fr.irit.smac.amasfactory.util.deserializer.impl.AmasFactoryDeserializer;
  * A factory for creating a BasicAmas.
  *
  * @author lemouzy
+ * @param <M>
+ * @param <A>
  */
-public class BasicAmasFactory implements IAmasFactory {
+public class BasicAmasFactory<A extends IInfrastructureAgent<M>, M> implements IAmasFactory {
+
+    protected Class<IInfrastructure<A, M>> infrastructureClass;
 
     /*
      * (non-Javadoc)
@@ -27,6 +31,6 @@ public class BasicAmasFactory implements IAmasFactory {
 
         AmasFactoryDeserializer parser = AmasFactoryDeserializer.getInstance();
 
-        return parser.deserializeInfrastructure(configuration);
+        return (IInfrastructure<A, M>) parser.deserializeInfrastructure(configuration);
     }
 }

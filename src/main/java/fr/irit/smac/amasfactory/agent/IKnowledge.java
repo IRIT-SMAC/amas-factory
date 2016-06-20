@@ -1,5 +1,8 @@
 package fr.irit.smac.amasfactory.agent;
 
+import java.util.Map;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
@@ -8,7 +11,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * 
  * @author SVI
  */
-@FunctionalInterface
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
 public interface IKnowledge {
 
@@ -18,4 +20,29 @@ public interface IKnowledge {
      * @return the id
      */
     public String getId();
+
+    /**
+     * @return a map containing the ports of an agent
+     */
+    public Map<String, IPort> getPortMap();
+
+    /**
+     * @return a map containing the targets of an agent
+     */
+    public Set<ITarget> getTargetSet();
+
+    public Class<?> getOutputType();
+
+    /**
+     * @return the output value of the agent
+     */
+    public Object getOutputValue();
+
+    /**
+     * Sets the output value of the agent
+     * 
+     * @param outputValue
+     *            the output value
+     */
+    public void setOutputValue(Object outputValue);
 }

@@ -1,5 +1,7 @@
 package fr.irit.smac.amasfactory;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
 import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
 import fr.irit.smac.amasfactory.service.IInfraService;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
@@ -14,6 +16,7 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
  * @param <M>
  *            the generic type
  */
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
 public interface IInfrastructure<A extends IInfrastructureAgent<M>, M>
     extends IAgentSideInfrastructure<M>, IInfraService<A, M> {
 
