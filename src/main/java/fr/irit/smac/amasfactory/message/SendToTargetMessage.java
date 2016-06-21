@@ -32,7 +32,7 @@ public class SendToTargetMessage extends AbstractMessage {
 
     @Override
     public String toString() {
-        return "SendToTargetMessage [v=" + value + ", input=" + this.portTarget + ", source=" + this.portSource + "]";
+        return "SendToTargetMessage [v=" + value + ", target=" + this.portTarget + ", source=" + this.portSource + "]";
     }
 
 }

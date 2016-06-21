@@ -77,6 +77,11 @@ public class SimpleKnowledge implements IKnowledge, Serializable {
     }
 
     @Override
+    public void setTargetSet(Set<ITarget> targetSet) {
+        this.targetSet = targetSet;
+    }
+    
+    @Override
     public Set<ITarget> getTargetSet() {
         return targetSet;
     }

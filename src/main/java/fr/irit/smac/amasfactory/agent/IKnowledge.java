@@ -26,6 +26,8 @@ public interface IKnowledge {
      */
     public Map<String, IPort> getPortMap();
 
+    public void setTargetSet(Set<ITarget> targetSet);
+    
     /**
      * @return a map containing the targets of an agent
      */
