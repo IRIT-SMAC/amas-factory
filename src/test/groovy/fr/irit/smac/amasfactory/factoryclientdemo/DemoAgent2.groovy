@@ -1,42 +1,40 @@
 package fr.irit.smac.amasfactory.factoryclientdemo
 
-import java.util.Map
-
-import org.slf4j.Logger
-
-import com.fasterxml.jackson.annotation.JsonProperty
-
+import fr.irit.smac.amasfactory.agent.IKnowledge
 import fr.irit.smac.amasfactory.agent.IPort
 import fr.irit.smac.amasfactory.agent.impl.AbsInfrastructureAgent
-import fr.irit.smac.amasfactory.message.SendToTargetMessage
+import fr.irit.smac.amasfactory.message.AbstractMessage
+import fr.irit.smac.amasfactory.message.PortOfTargetMessage
+import fr.irit.smac.amasfactory.message.ValuePortMessage
 import fr.irit.smac.libs.tooling.messaging.IMsgBox
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 
 class DemoAgent2 extends AbsInfrastructureAgent<DemoMessage>implements ITwoStepsAgent{
 
+    private boolean send = false
+
     public DemoAgent2() {
         super()
     }
 
-    private boolean send = false
-
     @Override
     public void perceive() {
 
+        IKnowledge knowledge = this.getInnerKnowledge()
+        for (AbstractMessage demoMessage : msgBox.getMsgs()) {
 
-        for (SendToTargetMessage demoMessage : msgBox.getMsgs()) {
-            System.out.println(("agent " + this.getId() + " : I received " + demoMessage))
-            logger.debug("agent " + this.getId() + " : I received " + demoMessage)
-
-
-            logger.info("updating port "+demoMessage.getPortTarget()+" with "+demoMessage.getValue())
-            IPort p = this.getInnerKnowledge().getPortMap().get(demoMessage.getPortTarget())
-            p.setValue(demoMessage.getValue())
+            if (demoMessage instanceof ValuePortMessage) {
+                knowledge.getValuePortMessageCollection().add(demoMessage)
+            } else if (demoMessage instanceof PortOfTargetMessage) {
+                knowledge.getPortOfTargetMessageCollection().add(demoMessage)
+            }
         }
     }
 
     @Override
     public void decideAndAct() {
+
+        this.updatePortFromMessage()
 
         boolean ok = true
         for (e in this.getInnerKnowledge().getPortMap()) {
@@ -57,7 +55,7 @@ class DemoAgent2 extends AbsInfrastructureAgent<DemoMessage>implements ITwoSteps
 
                 this.getInnerKnowledge().setOutputValue(val)
             }
-            this.sendOutputToTargets()
+            this.sendOutputValue()
             send = true
         }
     }

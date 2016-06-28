@@ -9,7 +9,7 @@ import fr.irit.smac.libs.tooling.messaging.IMsgBox
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 
 class DemoAgent extends AbsInfrastructureAgent<DemoMessage>implements ITwoStepsAgent{
-    
+
     @JsonProperty
     private String               message
     private IMsgBox<DemoMessage> msgBox
@@ -23,13 +23,12 @@ class DemoAgent extends AbsInfrastructureAgent<DemoMessage>implements ITwoStepsA
     public void perceive() {
         for (DemoMessage demoMessage : msgBox.getMsgs()) {
             System.out.println(("agent " + this.getId() + " : I received " + demoMessage))
-            logger.debug("agent " + this.getId() + " : I received " + demoMessage)
         }
     }
 
     @Override
     public void decideAndAct() {
-        logger.debug("agent " + this.getId() + " : I send " + this.message)
+        System.out.println("agent " + this.getId() + " : I send " + this.message)
         this.msgBox.broadcast(new DemoMessage(this, this.message))
     }
 

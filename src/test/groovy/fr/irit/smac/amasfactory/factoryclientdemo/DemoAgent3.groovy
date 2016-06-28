@@ -1,23 +1,14 @@
 package fr.irit.smac.amasfactory.factoryclientdemo
 
-import java.util.Map
-
-import org.slf4j.Logger
-
-import com.fasterxml.jackson.annotation.JsonProperty
-
-import fr.irit.smac.amasfactory.agent.IPort
-import fr.irit.smac.amasfactory.agent.ITarget
+import fr.irit.smac.amasfactory.agent.IKnowledge
 import fr.irit.smac.amasfactory.agent.impl.AbsInfrastructureAgent
-import fr.irit.smac.amasfactory.message.SendToTargetMessage
+import fr.irit.smac.amasfactory.message.AbstractMessage
+import fr.irit.smac.amasfactory.message.PortOfTargetMessage
+import fr.irit.smac.amasfactory.message.ValuePortMessage
 import fr.irit.smac.libs.tooling.messaging.IMsgBox
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 
 class DemoAgent3 extends AbsInfrastructureAgent<DemoMessage>implements ITwoStepsAgent{
-
-    public DemoAgent3() {
-        super()
-    }
 
     private boolean send = false
 
@@ -25,39 +16,33 @@ class DemoAgent3 extends AbsInfrastructureAgent<DemoMessage>implements ITwoSteps
 
     private String valPort2 = null
 
+    public DemoAgent3() {
+        super()
+    }
+
     @Override
     public void perceive() {
 
 
-        for (SendToTargetMessage demoMessage : msgBox.getMsgs()) {
-            System.out.println(("agent " + this.getId() + " : I received " + demoMessage))
+        IKnowledge knowledge = this.getInnerKnowledge()
+        for (AbstractMessage demoMessage : msgBox.getMsgs()) {
 
-            IPort p = this.getInnerKnowledge().getPortMap().get(demoMessage.getPortTarget())
-            p.setValue(demoMessage.getValue())
+            if (demoMessage instanceof ValuePortMessage) {
+                knowledge.getValuePortMessageCollection().add(demoMessage)
+            } else if (demoMessage instanceof PortOfTargetMessage) {
+                knowledge.getPortOfTargetMessageCollection().add(demoMessage)
+            }
         }
     }
 
     @Override
     public void decideAndAct() {
 
+        this.updatePortFromMessage()
+
         if (!send) {
-            this.sendPortSourceToTargets()
+            this.sendPort()
             send = true
-        }
-    }
-
-    private void sendPortSourceToTargets() {
-
-        if (this.getInnerKnowledge().getTargetSet() != null) {
-            for (ITarget target : this.getInnerKnowledge().getTargetSet()) {
-
-                String agentId = target.getAgentId()
-                String portTarget = target.getPortTarget()
-                String portSource = target.getPortSource()
-                this.msgBox.send(
-                                new SendToTargetMessage(portTarget, portSource, this.getId()),
-                                agentId)
-            }
         }
     }
 }

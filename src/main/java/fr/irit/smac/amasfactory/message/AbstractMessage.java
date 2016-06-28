@@ -1,6 +1,8 @@
 package fr.irit.smac.amasfactory.message;
 
-public class AbstractMessage implements IMessage{
+import java.io.Serializable;
+
+public class AbstractMessage implements IMessage, Serializable{
 
 	final EMessageType messageType;
 	

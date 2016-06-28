@@ -1,9 +1,13 @@
 package fr.irit.smac.amasfactory.agent;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
+import fr.irit.smac.amasfactory.message.ValuePortMessage;
 
 /**
  * Minimal interface of the agent Knowledge uses to store all the data of the
@@ -47,4 +51,8 @@ public interface IKnowledge {
      *            the output value
      */
     public void setOutputValue(Object outputValue);
+
+    public Collection<ValuePortMessage> getValuePortMessageCollection();
+
+    public Collection<PortOfTargetMessage> getPortOfTargetMessageCollection();
 }

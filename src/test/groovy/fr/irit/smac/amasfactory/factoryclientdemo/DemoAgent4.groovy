@@ -1,11 +1,10 @@
 package fr.irit.smac.amasfactory.factoryclientdemo
 
-import org.slf4j.Logger
-
-import fr.irit.smac.amasfactory.agent.ITarget
+import fr.irit.smac.amasfactory.agent.IKnowledge
 import fr.irit.smac.amasfactory.agent.impl.AbsInfrastructureAgent
-import fr.irit.smac.amasfactory.agent.impl.Target
-import fr.irit.smac.amasfactory.message.SendToTargetMessage
+import fr.irit.smac.amasfactory.message.AbstractMessage
+import fr.irit.smac.amasfactory.message.PortOfTargetMessage
+import fr.irit.smac.amasfactory.message.ValuePortMessage
 import fr.irit.smac.libs.tooling.messaging.IMsgBox
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 
@@ -20,32 +19,21 @@ class DemoAgent4 extends AbsInfrastructureAgent<DemoMessage>implements ITwoSteps
     @Override
     public void perceive() {
 
+        IKnowledge knowledge = this.getInnerKnowledge()
+        for (AbstractMessage demoMessage : msgBox.getMsgs()) {
 
-        for (SendToTargetMessage demoMessage : msgBox.getMsgs()) {
-            System.out.println(("agent " + this.getId() + " : I received " + demoMessage))
-            logger.debug("agent " + this.getId() + " : I received " + demoMessage)
-
-
-            logger.info("updating port "+demoMessage.getPortTarget()+" with "+demoMessage.getValue())
-            Set<ITarget> targetSet = new HashSet<ITarget>()
-            ITarget target = new Target(demoMessage.getValue(), demoMessage.getPortSource(), demoMessage.getPortTarget())
-            targetSet.add(target)
-            this.getInnerKnowledge().setTargetSet(targetSet)
+            if (demoMessage instanceof ValuePortMessage) {
+                knowledge.getValuePortMessageCollection().add(demoMessage)
+            } else if (demoMessage instanceof PortOfTargetMessage) {
+                knowledge.getPortOfTargetMessageCollection().add(demoMessage)
+            }
         }
     }
 
     @Override
     public void decideAndAct() {
 
-        for (ITarget target : this.getInnerKnowledge().getTargetSet()) {
-
-            String agentId = target.getAgentId()
-            String portTarget = target.getPortTarget()
-            String portSource = target.getPortSource()
-            // logger.info("send to target " + target.getAgentId() + "
-            // message= " + value);
-            this.msgBox.send(
-                            new SendToTargetMessage(portTarget, portSource,this.getInnerKnowledge().getOutputValue()), agentId)
-        }
+        this.addTargetFromMessage()
+        this.sendOutputValue()
     }
 }

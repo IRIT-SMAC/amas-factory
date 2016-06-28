@@ -42,5 +42,11 @@ public interface IInfrastructureAgent<M> {
     /**
      * Sends the output value of an agent to its targets
      */
-    public void sendOutputToTargets();
+    public void sendOutputValue();
+    
+    public void sendPort();
+
+    public void addTargetFromMessage();
+
+    public void updatePortFromMessage();
 }
