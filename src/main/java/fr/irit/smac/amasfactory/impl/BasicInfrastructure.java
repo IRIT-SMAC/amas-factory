@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import fr.irit.smac.amasfactory.IInfrastructure;
-import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.amasfactory.service.datasharing.IDataSharingService;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
@@ -21,7 +21,7 @@ import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
  *            the generic type
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
-public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends AbstractInfraService<A, M>
+public class BasicInfrastructure<A extends IAgent<M>, M> extends AbstractInfraService<A, M>
     implements IInfrastructure<A, M> {
 
     @JsonProperty
@@ -68,10 +68,10 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
         this.loggingService = loggingService;
         this.hazelcastService = hazelcastService;
 
-        messagingService.setInfrastructure((BasicInfrastructure<IInfrastructureAgent<M>, M>) this);
+        messagingService.setInfrastructure((BasicInfrastructure<IAgent<M>, M>) this);
         agentHandlerService.setInfrastructure(this);
         executionService.setInfrastructure(this);
-        loggingService.setInfrastructure((BasicInfrastructure<IInfrastructureAgent<M>, M>) this);
+        loggingService.setInfrastructure((BasicInfrastructure<IAgent<M>, M>) this);
         hazelcastService.setInfrastructure(this);
 
         this.start();
@@ -154,10 +154,10 @@ public class BasicInfrastructure<A extends IInfrastructureAgent<M>, M> extends A
     public void start() {
         // starts each service sequencially
         
-        messagingService.setInfrastructure((BasicInfrastructure<IInfrastructureAgent<M>, M>) this);
+        messagingService.setInfrastructure((BasicInfrastructure<IAgent<M>, M>) this);
         agentHandlerService.setInfrastructure(this);
         executionService.setInfrastructure(this);
-        loggingService.setInfrastructure((BasicInfrastructure<IInfrastructureAgent<M>, M>) this);
+        loggingService.setInfrastructure((BasicInfrastructure<IAgent<M>, M>) this);
 
         
         this.agentHandlerService.start();

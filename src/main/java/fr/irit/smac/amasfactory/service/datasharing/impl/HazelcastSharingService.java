@@ -1,7 +1,7 @@
 package fr.irit.smac.amasfactory.service.datasharing.impl;
 
 import fr.irit.smac.amasfactory.IInfrastructure;
-import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.service.datasharing.IDataSharingService;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.amasfactory.util.IHazelcastKnowledgeAccessor;
@@ -18,7 +18,7 @@ import fr.irit.smac.amasfactory.util.hazelcast.impl.HazelcastKnowledgeAccessor;
  * @param <A>
  * @param <M>
  */
-public class HazelcastSharingService<A extends IInfrastructureAgent<M>, M> extends AbstractInfraService<A, M>
+public class HazelcastSharingService<A extends IAgent<M>, M> extends AbstractInfraService<A, M>
     implements IDataSharingService<A, M> {
 
     IHazelcastKnowledgeAccessor hazelcastKnowledgeAccessor;
@@ -34,7 +34,7 @@ public class HazelcastSharingService<A extends IInfrastructureAgent<M>, M> exten
 
     @Override
     public void agentAdded(A agent) {
-        this.hazelcastKnowledgeAccessor.registerKnowledge(agent.getInnerKnowledge());
+        this.hazelcastKnowledgeAccessor.registerKnowledge(agent.getKnowledge());
     }
 
     @Override
@@ -75,7 +75,7 @@ public class HazelcastSharingService<A extends IInfrastructureAgent<M>, M> exten
             @Override
             public void run() {
                 for (A agent : infrastructure.getAgentHandler().getAgents()) {
-                    hazelcastKnowledgeAccessor.registerKnowledge(agent.getInnerKnowledge());
+                    hazelcastKnowledgeAccessor.registerKnowledge(agent.getKnowledge());
                     // System.out.println("registering " + agent.getId() );
                 }
             }

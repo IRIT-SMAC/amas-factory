@@ -1,14 +1,11 @@
 package fr.irit.smac.amasfactory.factoryclientdemo
 
 import static org.junit.Assert.*
-import fr.irit.smac.amasfactory.IInfrastructure
-import fr.irit.smac.amasfactory.agent.IPort
-import fr.irit.smac.amasfactory.agent.impl.AbsInfrastructureAgent
-import fr.irit.smac.amasfactory.agent.impl.Port
-import fr.irit.smac.amasfactory.impl.BasicAmasFactory
-import fr.irit.smac.amasfactory.message.AbstractMessage
-import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 import spock.lang.Specification
+import fr.irit.smac.amasfactory.IInfrastructure
+import fr.irit.smac.amasfactory.agent.impl.Agent
+import fr.irit.smac.amasfactory.agent.social.IPort
+import fr.irit.smac.amasfactory.impl.BasicAmasFactory
 
 class KnowledgeConnectionsTest extends Specification {
 
@@ -21,8 +18,8 @@ class KnowledgeConnectionsTest extends Specification {
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/knowledge_connections.json"))
         Map<String,DemoAgent2> agents = infra.getAgentHandler().getAgentMap()
 
-        agents.get("ag1").getInnerKnowledge().setOutputValue("hello")
-        agents.get("ag5").getInnerKnowledge().setOutputValue("hallo")
+        agents.get("ag1").getKnowledge().setOutputValue("hello")
+        agents.get("ag5").getKnowledge().setOutputValue("hallo")
 
         when:
         for (int i = 0 ; i < 4; i++) {
@@ -35,7 +32,7 @@ class KnowledgeConnectionsTest extends Specification {
         int j = 0
         for (e in agents) {
             DemoAgent2 agent = e.value
-            assert agent.getInnerKnowledge().getOutputValue() == outputs[j]
+            assert agent.getKnowledge().getOutputValue() == outputs[j]
             j++
         }
         infra.shutdown()
@@ -48,10 +45,10 @@ class KnowledgeConnectionsTest extends Specification {
 
         IInfrastructure<DemoAgent, DemoMessage> infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/knowledge_connections2.json"))
-        Map<String,AbsInfrastructureAgent<DemoMessage>> agents = infra.getAgentHandler().getAgentMap()
+        Map<String,Agent<DemoMessage>> agents = infra.getAgentHandler().getAgentMap()
 
-        agents.get("ag1").getInnerKnowledge().setOutputValue("hello")
-        agents.get("ag2").getInnerKnowledge().setOutputValue("hallo")
+        agents.get("ag1").getKnowledge().setOutputValue("hello")
+        agents.get("ag2").getKnowledge().setOutputValue("hallo")
 
         when:
         for (int i = 0 ; i < 4; i++) {
@@ -63,8 +60,8 @@ class KnowledgeConnectionsTest extends Specification {
         int j = 0
         List outputs = ["hello", "hallo"]
 
-        AbsInfrastructureAgent<DemoMessage> agent = agents.get("ag3")
-        HashMap<IPort> portMap = agent.getInnerKnowledge().getPortMap()
+        Agent<DemoMessage> agent = agents.get("ag3")
+        HashMap<IPort> portMap = agent.getKnowledge().getPortMap()
         for (p in portMap) {
             IPort port = p.value
             assert port.getValue() == outputs[j]

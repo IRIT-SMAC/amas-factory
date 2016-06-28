@@ -1,15 +1,14 @@
 package fr.irit.smac.amasfactory.factoryclientdemo
 
-import fr.irit.smac.amasfactory.agent.IKnowledge
-import fr.irit.smac.amasfactory.agent.IPort
-import fr.irit.smac.amasfactory.agent.impl.AbsInfrastructureAgent
+import fr.irit.smac.amasfactory.agent.social.IKnowledgeSocial
+import fr.irit.smac.amasfactory.agent.social.IPort
+import fr.irit.smac.amasfactory.agent.social.impl.AgentSocial
 import fr.irit.smac.amasfactory.message.AbstractMessage
 import fr.irit.smac.amasfactory.message.PortOfTargetMessage
 import fr.irit.smac.amasfactory.message.ValuePortMessage
-import fr.irit.smac.libs.tooling.messaging.IMsgBox
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 
-class DemoAgent2 extends AbsInfrastructureAgent<DemoMessage>implements ITwoStepsAgent{
+class DemoAgent2 extends AgentSocial<DemoMessage>implements ITwoStepsAgent{
 
     private boolean send = false
 
@@ -20,7 +19,7 @@ class DemoAgent2 extends AbsInfrastructureAgent<DemoMessage>implements ITwoSteps
     @Override
     public void perceive() {
 
-        IKnowledge knowledge = this.getInnerKnowledge()
+        IKnowledgeSocial knowledge = this.getKnowledge()
         for (AbstractMessage demoMessage : msgBox.getMsgs()) {
 
             if (demoMessage instanceof ValuePortMessage) {
@@ -37,7 +36,7 @@ class DemoAgent2 extends AbsInfrastructureAgent<DemoMessage>implements ITwoSteps
         this.updatePortFromMessage()
 
         boolean ok = true
-        for (e in this.getInnerKnowledge().getPortMap()) {
+        for (e in this.getKnowledge().getPortMap()) {
             IPort port = e.value
             if (port.getValue() == null) {
                 ok = false
@@ -46,14 +45,14 @@ class DemoAgent2 extends AbsInfrastructureAgent<DemoMessage>implements ITwoSteps
 
         if (ok && !send) {
 
-            if (this.getInnerKnowledge().getOutputValue() == null) {
+            if (this.getKnowledge().getOutputValue() == null) {
                 String val = ""
-                for (e in this.getInnerKnowledge().getPortMap()) {
+                for (e in this.getKnowledge().getPortMap()) {
                     IPort port = e.value
                     val += port.getValue()
                 }
 
-                this.getInnerKnowledge().setOutputValue(val)
+                this.getKnowledge().setOutputValue(val)
             }
             this.sendOutputValue()
             send = true

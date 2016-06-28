@@ -3,7 +3,7 @@ package fr.irit.smac.amasfactory.service.messaging.impl;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
 import fr.irit.smac.libs.tooling.messaging.AgentMessaging;
@@ -17,7 +17,7 @@ import fr.irit.smac.libs.tooling.messaging.impl.Ref;
  *
  * @param <M> the generic type
  */
-public class MessagingService<M> extends AbstractInfraService<IInfrastructureAgent<M>, M>
+public class MessagingService<M> extends AbstractInfraService<IAgent<M>, M>
     implements IMessagingService<M>, IMsgService<M> {
 
     private IMsgService<M> delegatedMsgService;

@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import fr.irit.smac.amasfactory.IInfrastructure;
-import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.agent.IAgent;
 
 /**
  * The Interface IAmasFactoryDeserializer exposes a method to create a multi-agent
@@ -26,6 +26,6 @@ public interface IAmasFactoryDeserializer {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public <A extends IInfrastructureAgent<M>, M> IInfrastructure<A, M> deserializeInfrastructure(InputStream configuration)
+    public <A extends IAgent<M>, M> IInfrastructure<A, M> deserializeInfrastructure(InputStream configuration)
         throws IOException;
 }

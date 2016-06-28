@@ -7,7 +7,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.impl.BasicInfrastructure;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
@@ -19,7 +19,7 @@ import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
  * @param <A> the generic type
  * @param <M> the generic type
  */
-public class BasicAgentHandler<A extends IInfrastructureAgent<M>, M> extends AbstractInfraService<A, M>
+public class BasicAgentHandler<A extends IAgent<M>, M> extends AbstractInfraService<A, M>
     implements IAgentHandlerService<A, M> {
 
     private Map<String, A>              agentMap = new HashMap<>();

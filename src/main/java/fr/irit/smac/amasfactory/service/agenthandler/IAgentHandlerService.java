@@ -3,7 +3,7 @@ package fr.irit.smac.amasfactory.service.agenthandler;
 import java.util.Collection;
 import java.util.Map;
 
-import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.impl.BasicInfrastructure;
 import fr.irit.smac.amasfactory.service.IInfraService;
 
@@ -15,7 +15,7 @@ import fr.irit.smac.amasfactory.service.IInfraService;
  * @param <M>
  *            the generic type
  */
-public interface IAgentHandlerService<A extends IInfrastructureAgent<M>, M> extends IInfraService<A, M> {
+public interface IAgentHandlerService<A extends IAgent<M>, M> extends IInfraService<A, M> {
 
     /**
      * Gets the agents.

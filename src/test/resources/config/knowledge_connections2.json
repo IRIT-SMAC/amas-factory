@@ -7,14 +7,14 @@
 				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent4",
 				"id":"ag1",
 				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.SimpleKnowledge",
+					"className":"fr.irit.smac.amasfactory.agent.social.impl.KnowledgeSocial",
 					"id":"ag1",
 					"outputType":"java.lang.String",
 					"portMap":{
 						"port":{
 							"id":"port",
 							"type":"java.lang.String",
-							"className":"fr.irit.smac.amasfactory.agent.impl.Port"
+							"className":"fr.irit.smac.amasfactory.agent.social.impl.Port"
 						}
 						
 					}
@@ -26,14 +26,14 @@
 				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent4",
 				"id":"ag2",
 				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.SimpleKnowledge",
+					"className":"fr.irit.smac.amasfactory.agent.social.impl.KnowledgeSocial",
 					"id":"ag2",
 					"outputType":"java.lang.String",
 					"portMap":{
 						"port":{
 							"id":"port",
 							"type":"java.lang.String",
-							"className":"fr.irit.smac.amasfactory.agent.impl.Port"
+							"className":"fr.irit.smac.amasfactory.agent.social.impl.Port"
 						}
 						
 					}
@@ -45,19 +45,19 @@
 				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent3",
 				"id":"ag3",
 				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.SimpleKnowledge",
+					"className":"fr.irit.smac.amasfactory.agent.social.impl.KnowledgeSocial",
 					"id":"ag3",
 					"outputType":"java.lang.String",
 					"portMap":{
 						"port1":{
 							"id":"port1",
 							"type":"java.lang.String",
-							"className":"fr.irit.smac.amasfactory.agent.impl.Port"
+							"className":"fr.irit.smac.amasfactory.agent.social.impl.Port"
 						},
 						"port2":{
 							"id":"port2",
 							"type":"java.lang.String",
-							"className":"fr.irit.smac.amasfactory.agent.impl.Port"
+							"className":"fr.irit.smac.amasfactory.agent.social.impl.Port"
 						}
 						
 					},
@@ -66,13 +66,13 @@
 							"agentTarget":"ag1",
 							"portTarget":"port",
 							"portSource":"port1",
-							"className":"fr.irit.smac.amasfactory.agent.impl.Target"
+							"className":"fr.irit.smac.amasfactory.agent.social.impl.Target"
 						},
 						{
 							"agentTarget":"ag2",
 							"portTarget":"port",
 							"portSource":"port2",
-							"className":"fr.irit.smac.amasfactory.agent.impl.Target"
+							"className":"fr.irit.smac.amasfactory.agent.social.impl.Target"
 						}
 						
 					]

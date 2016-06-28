@@ -1,7 +1,7 @@
 package fr.irit.smac.amasfactory.service.impl;
 
 import fr.irit.smac.amasfactory.IInfrastructure;
-import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.impl.BasicInfrastructure;
 import fr.irit.smac.amasfactory.service.IInfraService;
 
@@ -14,7 +14,7 @@ import fr.irit.smac.amasfactory.service.IInfraService;
  * @param <M>
  *            the generic type
  */
-public abstract class AbstractInfraService<A extends IInfrastructureAgent<M>, M> implements IInfraService<A, M> {
+public abstract class AbstractInfraService<A extends IAgent<M>, M> implements IInfraService<A, M> {
 
     protected IInfrastructure<A, M> infrastructure;
 

@@ -2,7 +2,7 @@ package fr.irit.smac.amasfactory.service.logging.impl;
 
 import org.slf4j.Logger;
 
-import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
 import fr.irit.smac.libs.tooling.logging.AgentLog;
@@ -12,7 +12,7 @@ import fr.irit.smac.libs.tooling.logging.AgentLog;
  *
  * @param <M> the generic type
  */
-public class AgentLogLoggingService<M> extends AbstractInfraService<IInfrastructureAgent<M>, M>
+public class AgentLogLoggingService<M> extends AbstractInfraService<IAgent<M>, M>
     implements ILoggingService<M> {
 
     /* (non-Javadoc)

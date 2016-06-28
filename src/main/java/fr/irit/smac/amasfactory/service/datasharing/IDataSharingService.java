@@ -1,6 +1,6 @@
 package fr.irit.smac.amasfactory.service.datasharing;
 
-import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.service.IInfraService;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
 
@@ -13,7 +13,7 @@ import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
  * @param <A>
  * @param <M>
  */
-public interface IDataSharingService<A extends IInfrastructureAgent<M>, M>
+public interface IDataSharingService<A extends IAgent<M>, M>
     extends IAgentEventListener<A>, IInfraService<A, M> {
 
 }

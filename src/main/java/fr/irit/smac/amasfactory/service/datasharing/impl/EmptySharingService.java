@@ -1,6 +1,6 @@
 package fr.irit.smac.amasfactory.service.datasharing.impl;
 
-import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.service.datasharing.IDataSharingService;
 import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 
@@ -12,7 +12,7 @@ import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
  * @param <A>
  * @param <M>
  */
-public class EmptySharingService<A extends IInfrastructureAgent<M>, M> extends AbstractInfraService<A, M>
+public class EmptySharingService<A extends IAgent<M>, M> extends AbstractInfraService<A, M>
     implements IDataSharingService<A, M> {
 
     @Override

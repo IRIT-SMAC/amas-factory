@@ -4,11 +4,11 @@ import org.slf4j.Logger
 
 import com.fasterxml.jackson.annotation.JsonProperty
 
-import fr.irit.smac.amasfactory.agent.impl.AbsInfrastructureAgent
+import fr.irit.smac.amasfactory.agent.social.impl.AgentSocial
 import fr.irit.smac.libs.tooling.messaging.IMsgBox
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 
-class DemoAgent extends AbsInfrastructureAgent<DemoMessage>implements ITwoStepsAgent{
+class DemoAgent extends AgentSocial<DemoMessage>implements ITwoStepsAgent{
 
     @JsonProperty
     private String               message

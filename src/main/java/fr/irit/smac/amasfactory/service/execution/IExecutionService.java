@@ -2,7 +2,7 @@ package fr.irit.smac.amasfactory.service.execution;
 
 import java.util.concurrent.Future;
 
-import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.impl.ShutdownRuntimeException;
 import fr.irit.smac.amasfactory.service.IInfraService;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
@@ -17,7 +17,7 @@ import fr.irit.smac.libs.tooling.scheduling.IHookHandler;
  * @param <M>
  *            the generic type
  */
-public interface IExecutionService<A extends IInfrastructureAgent<M>, M>
+public interface IExecutionService<A extends IAgent<M>, M>
     extends IAgentEventListener<A>, IInfraService<A, M>, IHookHandler {
     /**
      * Launches the continuous execution of the system. The system will execute
