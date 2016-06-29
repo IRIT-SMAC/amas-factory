@@ -3,6 +3,7 @@ package fr.irit.smac.amasfactory.factoryclientdemo
 import static org.junit.Assert.*
 import spock.lang.Specification
 import fr.irit.smac.amasfactory.IInfrastructure
+import fr.irit.smac.amasfactory.agent.IAgent
 import fr.irit.smac.amasfactory.agent.impl.Agent
 import fr.irit.smac.amasfactory.agent.social.IPort
 import fr.irit.smac.amasfactory.impl.BasicAmasFactory
@@ -14,9 +15,9 @@ class KnowledgeConnectionsTest extends Specification {
         given:
         BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
 
-        IInfrastructure<DemoAgent, DemoMessage> infra =
+        IInfrastructure infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/knowledge_connections.json"))
-        Map<String,DemoAgent2> agents = infra.getAgentHandler().getAgentMap()
+        Map<String,IAgent> agents = infra.getAgentHandler().getAgentMap()
 
         agents.get("ag1").getKnowledge().setOutputValue("hello")
         agents.get("ag5").getKnowledge().setOutputValue("hallo")
@@ -43,9 +44,9 @@ class KnowledgeConnectionsTest extends Specification {
         given:
         BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
 
-        IInfrastructure<DemoAgent, DemoMessage> infra =
+        IInfrastructure infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/knowledge_connections2.json"))
-        Map<String,Agent<DemoMessage>> agents = infra.getAgentHandler().getAgentMap()
+        Map<String,IAgent> agents = infra.getAgentHandler().getAgentMap()
 
         agents.get("ag1").getKnowledge().setOutputValue("hello")
         agents.get("ag2").getKnowledge().setOutputValue("hallo")
@@ -60,7 +61,7 @@ class KnowledgeConnectionsTest extends Specification {
         int j = 0
         List outputs = ["hello", "hallo"]
 
-        Agent<DemoMessage> agent = agents.get("ag3")
+        Agent agent = agents.get("ag3")
         HashMap<IPort> portMap = agent.getKnowledge().getPortMap()
         for (p in portMap) {
             IPort port = p.value

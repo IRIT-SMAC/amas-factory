@@ -46,7 +46,4 @@ public class Target implements ITarget, Serializable {
     public String getPortSource() {
         return this.portSource;
     }
-
-    
-    
 }

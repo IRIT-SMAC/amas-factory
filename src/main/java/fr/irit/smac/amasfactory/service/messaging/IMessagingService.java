@@ -1,6 +1,6 @@
 package fr.irit.smac.amasfactory.service.messaging;
 
-import fr.irit.smac.amasfactory.agent.IAgent;
+import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.service.IInfraService;
 import fr.irit.smac.libs.tooling.messaging.IMsgService;
 
@@ -9,6 +9,7 @@ import fr.irit.smac.libs.tooling.messaging.IMsgService;
  *
  * @param <M> the generic type
  */
-public interface IMessagingService<M> extends IInfraService<IAgent<M>, M>, IMsgService<M> {
+@SuppressWarnings("hiding")
+public interface IMessagingService<IMessage> extends IInfraService, IMsgService<IMessage> {
 
 }

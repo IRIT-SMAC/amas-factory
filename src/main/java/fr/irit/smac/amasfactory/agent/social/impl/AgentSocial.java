@@ -9,14 +9,14 @@ import fr.irit.smac.amasfactory.agent.social.IAgentSocial;
 import fr.irit.smac.amasfactory.agent.social.IKnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.social.IPort;
 import fr.irit.smac.amasfactory.agent.social.ITarget;
+import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
+import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 
-public class AgentSocial<M> extends Agent<M> implements IAgentSocial{
-    
-    protected AgentSocial() {
-        super();
-    }
+public abstract class AgentSocial extends Agent implements IAgentSocial {
+
+    protected IMsgBox<IMessage> msgBox;
 
     @Override
     public void sendOutputValue() {
@@ -28,8 +28,8 @@ public class AgentSocial<M> extends Agent<M> implements IAgentSocial{
             String port = target.getPortTarget();
             // logger.info("send to target " + target.getAgentId() + "
             // message= " + value);
-            this.msgBox.send((M)
-                 new ValuePortMessage(port, value),
+            this.msgBox.send(
+                new ValuePortMessage(port, value),
                 agentId);
         }
     }
@@ -43,7 +43,7 @@ public class AgentSocial<M> extends Agent<M> implements IAgentSocial{
             String agentId = target.getAgentId();
             String portTarget = target.getPortTarget();
             String portSource = target.getPortSource();
-            this.msgBox.send((M) new PortOfTargetMessage(portTarget, portSource, this.getId()),
+            this.msgBox.send(new PortOfTargetMessage(portTarget, portSource, this.getId()),
                 agentId);
         }
     }
@@ -51,7 +51,8 @@ public class AgentSocial<M> extends Agent<M> implements IAgentSocial{
     @Override
     public void addTargetFromMessage() {
 
-        Collection<PortOfTargetMessage> portOfTargetsMessageCollection = ((IKnowledgeSocial) this.knowledge).getPortOfTargetMessageCollection();
+        Collection<PortOfTargetMessage> portOfTargetsMessageCollection = ((IKnowledgeSocial) this.knowledge)
+            .getPortOfTargetMessageCollection();
 
         for (PortOfTargetMessage message : portOfTargetsMessageCollection) {
             Set<ITarget> targetSet = new HashSet<ITarget>();
@@ -65,11 +66,16 @@ public class AgentSocial<M> extends Agent<M> implements IAgentSocial{
     @Override
     public void updatePortFromMessage() {
 
-        Collection<ValuePortMessage> valuePortMessageCollection = ((IKnowledgeSocial) this.knowledge).getValuePortMessageCollection();
+        Collection<ValuePortMessage> valuePortMessageCollection = ((IKnowledgeSocial) this.knowledge)
+            .getValuePortMessageCollection();
 
         for (ValuePortMessage message : valuePortMessageCollection) {
             IPort p = ((IKnowledgeSocial) this.knowledge).getPortMap().get(message.getPort());
             p.setValue(message.getValue());
         }
+    }
+    
+    public void setMsgBox(IMsgBox<IMessage> msgBox) {
+        this.msgBox = msgBox;
     }
 }

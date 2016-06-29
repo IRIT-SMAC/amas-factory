@@ -21,4 +21,5 @@ public interface IAgentSocial {
      * Updates the port if a value for this port is received
      */
     public void updatePortFromMessage();
+
 }

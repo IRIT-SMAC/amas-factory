@@ -1,9 +1,9 @@
 package fr.irit.smac.amasfactory.service.datasharing.impl;
 
-import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.agent.IAgent;
+import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.amasfactory.service.datasharing.IDataSharingService;
-import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
+import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 import fr.irit.smac.amasfactory.util.IHazelcastKnowledgeAccessor;
 import fr.irit.smac.amasfactory.util.hazelcast.impl.HazelcastKnowledgeAccessor;
 
@@ -18,8 +18,8 @@ import fr.irit.smac.amasfactory.util.hazelcast.impl.HazelcastKnowledgeAccessor;
  * @param <A>
  * @param <M>
  */
-public class HazelcastSharingService<A extends IAgent<M>, M> extends AbstractInfraService<A, M>
-    implements IDataSharingService<A, M> {
+public class HazelcastSharingService<A extends IAgent>
+    implements IDataSharingService<A> {
 
     IHazelcastKnowledgeAccessor hazelcastKnowledgeAccessor;
 
@@ -27,6 +27,10 @@ public class HazelcastSharingService<A extends IAgent<M>, M> extends AbstractInf
     public static final String PERSISTENCE_UPDATE_POLICY = "AFTER_ITERATION";
 
     private Runnable persistencePolicy;
+
+    private IAgentHandlerService<A> agentHandlerService;
+
+    private IExecutionService<A> executionService;
 
     public HazelcastSharingService() {
         this.hazelcastKnowledgeAccessor = new HazelcastKnowledgeAccessor();
@@ -46,17 +50,17 @@ public class HazelcastSharingService<A extends IAgent<M>, M> extends AbstractInf
     public void start() {
 
         // Register to react to agents creation, deletion.
-        this.getInfrastructure().getAgentHandler().addAgentEventListener(this);
+        this.agentHandlerService.addAgentEventListener(this);
 
-        this.persistencePolicy = generatePersistenceUpdatePolicy(this.getInfrastructure());
+        this.persistencePolicy = generatePersistenceUpdatePolicy(this.agentHandlerService);
 
         // Register to share the agent knowledge at the end of each step.
         switch (PERSISTENCE_UPDATE_POLICY) {
             case "AFTER_ITERATION":
-                this.getInfrastructure().getExecutionService().addPostStepHook(this.persistencePolicy);
+                this.executionService.addPostStepHook(this.persistencePolicy);
                 break;
             case "BEFORE_ITERATION":
-                this.getInfrastructure().getExecutionService().addPreStepHook(this.persistencePolicy);
+                this.executionService.addPreStepHook(this.persistencePolicy);
                 break;
             default:
                 break;
@@ -70,11 +74,11 @@ public class HazelcastSharingService<A extends IAgent<M>, M> extends AbstractInf
      * @param infrastructure
      * @return
      */
-    private Runnable generatePersistenceUpdatePolicy(IInfrastructure<A, M> infrastructure) {
+    private Runnable generatePersistenceUpdatePolicy(IAgentHandlerService<A> agentHandler) {
         return new Runnable() {
             @Override
             public void run() {
-                for (A agent : infrastructure.getAgentHandler().getAgents()) {
+                for (A agent : agentHandler.getAgents()) {
                     hazelcastKnowledgeAccessor.registerKnowledge(agent.getKnowledge());
                     // System.out.println("registering " + agent.getId() );
                 }
@@ -85,19 +89,29 @@ public class HazelcastSharingService<A extends IAgent<M>, M> extends AbstractInf
     @Override
     public void shutdown() {
 
-        this.getInfrastructure().getAgentHandler().removeAgentEventListener(this);
+        this.agentHandlerService.removeAgentEventListener(this);
 
         switch (PERSISTENCE_UPDATE_POLICY) {
             case "AFTER_ITERATION":
-                this.getInfrastructure().getExecutionService().removePostStepHook(this.persistencePolicy);
+                this.executionService.removePostStepHook(this.persistencePolicy);
                 break;
             case "BEFORE_ITERATION":
-                this.getInfrastructure().getExecutionService().removePreStepHook(this.persistencePolicy);
+                this.executionService.removePreStepHook(this.persistencePolicy);
                 break;
             default:
                 break;
         }
 
+    }
+
+    @Override
+    public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService) {
+        this.agentHandlerService = agentHandlerService;
+    }
+
+    @Override
+    public void setExecutionService(IExecutionService<A> executionService) {
+        this.executionService = executionService;
     }
 
 }

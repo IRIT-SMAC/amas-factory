@@ -15,9 +15,9 @@ import fr.irit.smac.amasfactory.util.deserializer.impl.AmasFactoryDeserializer;
  * @param <M>
  * @param <A>
  */
-public class BasicAmasFactory<A extends IAgent<M>, M> implements IAmasFactory {
+public class BasicAmasFactory<A extends IAgent> implements IAmasFactory<A> {
 
-    protected Class<IInfrastructure<A, M>> infrastructureClass;
+    protected Class<IInfrastructure<A>> infrastructureClass;
 
     /*
      * (non-Javadoc)
@@ -26,11 +26,11 @@ public class BasicAmasFactory<A extends IAgent<M>, M> implements IAmasFactory {
      * InputStream)
      */
     @Override
-    public <A extends IAgent<M>, M> IInfrastructure<A, M> createInfrastructure(
+    public IInfrastructure<A> createInfrastructure(
         InputStream configuration) throws IOException {
 
         AmasFactoryDeserializer parser = AmasFactoryDeserializer.getInstance();
 
-        return (IInfrastructure<A, M>) parser.deserializeInfrastructure(configuration);
+        return parser.deserializeInfrastructure(configuration);
     }
 }

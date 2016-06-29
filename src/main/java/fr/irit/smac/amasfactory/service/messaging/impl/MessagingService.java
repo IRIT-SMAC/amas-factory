@@ -3,8 +3,6 @@ package fr.irit.smac.amasfactory.service.messaging.impl;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import fr.irit.smac.amasfactory.agent.IAgent;
-import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
 import fr.irit.smac.libs.tooling.messaging.AgentMessaging;
 import fr.irit.smac.libs.tooling.messaging.IDirectory;
@@ -15,36 +13,44 @@ import fr.irit.smac.libs.tooling.messaging.impl.Ref;
 /**
  * MessagingService is a service which handles the communication of the agents.
  *
- * @param <M> the generic type
+ * @param <M>
+ *            the generic type
  */
-public class MessagingService<M> extends AbstractInfraService<IAgent<M>, M>
-    implements IMessagingService<M>, IMsgService<M> {
+public class MessagingService<IMessage>
+    implements IMessagingService<IMessage>, IMsgService<IMessage> {
 
-    private IMsgService<M> delegatedMsgService;
+    private IMsgService<IMessage> delegatedMsgService;
 
-    private Class<M> messageClass;
+    private Class<IMessage> messageClass;
 
     /**
      * Instantiates a new messaging service.
      *
-     * @param messageClass the message class
+     * @param messageClass
+     *            the message class
      */
     @JsonCreator
-    public MessagingService(@JsonProperty(value = "messageClass", required = true) Class<M> messageClass) {
+    public MessagingService(@JsonProperty(value = "messageClass", required = true) Class<IMessage> messageClass) {
         super();
         this.messageClass = messageClass;
         this.delegatedMsgService = null;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see fr.irit.smac.amasfactory.service.IInfraService#start()
      */
     @Override
     public void start() {
+
+        // not consistent
         this.delegatedMsgService = AgentMessaging.getMsgService(messageClass);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see fr.irit.smac.amasfactory.service.IInfraService#shutdown()
      */
     @Override
@@ -54,59 +60,81 @@ public class MessagingService<M> extends AbstractInfraService<IAgent<M>, M>
         this.messageClass = null;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
+     * 
      * @see fr.irit.smac.libs.tooling.messaging.ISender#getDirectory()
      */
     @Override
-    public IDirectory<M> getDirectory() {
+    public IDirectory<IMessage> getDirectory() {
         return this.delegatedMsgService.getDirectory();
     }
 
-    /* (non-Javadoc)
-     * @see fr.irit.smac.libs.tooling.messaging.ISender#send(java.lang.Object, java.lang.String)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.irit.smac.libs.tooling.messaging.ISender#send(java.lang.Object,
+     * java.lang.String)
      */
     @Override
-    public boolean send(M msg, String receiverId) {
+    public boolean send(IMessage msg, String receiverId) {
         return this.delegatedMsgService.send(msg, receiverId);
     }
 
-    /* (non-Javadoc)
-     * @see fr.irit.smac.libs.tooling.messaging.ISender#send(java.lang.Object, fr.irit.smac.libs.tooling.messaging.impl.Ref)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.irit.smac.libs.tooling.messaging.ISender#send(java.lang.Object,
+     * fr.irit.smac.libs.tooling.messaging.impl.Ref)
      */
     @Override
-    public boolean send(M msg, Ref<M> receiverRef) {
+    public boolean send(IMessage msg, Ref<IMessage> receiverRef) {
         return this.delegatedMsgService.send(msg, receiverRef);
     }
 
-    /* (non-Javadoc)
-     * @see fr.irit.smac.libs.tooling.messaging.ISender#sendToGroup(java.lang.Object, java.lang.String)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * fr.irit.smac.libs.tooling.messaging.ISender#sendToGroup(java.lang.Object,
+     * java.lang.String)
      */
     @Override
-    public boolean sendToGroup(M msg, String groupId) {
+    public boolean sendToGroup(IMessage msg, String groupId) {
         return this.delegatedMsgService.sendToGroup(msg, groupId);
     }
 
-    /* (non-Javadoc)
-     * @see fr.irit.smac.libs.tooling.messaging.ISender#sendToGroup(java.lang.Object, fr.irit.smac.libs.tooling.messaging.impl.Ref)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * fr.irit.smac.libs.tooling.messaging.ISender#sendToGroup(java.lang.Object,
+     * fr.irit.smac.libs.tooling.messaging.impl.Ref)
      */
     @Override
-    public boolean sendToGroup(M msg, Ref<M> groupRef) {
+    public boolean sendToGroup(IMessage msg, Ref<IMessage> groupRef) {
         return this.delegatedMsgService.sendToGroup(msg, groupRef);
     }
 
-    /* (non-Javadoc)
-     * @see fr.irit.smac.libs.tooling.messaging.ISender#broadcast(java.lang.Object)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * fr.irit.smac.libs.tooling.messaging.ISender#broadcast(java.lang.Object)
      */
     @Override
-    public boolean broadcast(M msg) {
+    public boolean broadcast(IMessage msg) {
         return this.delegatedMsgService.broadcast(msg);
     }
 
-    /* (non-Javadoc)
-     * @see fr.irit.smac.libs.tooling.messaging.IMsgService#getMsgBox(java.lang.String)
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.irit.smac.libs.tooling.messaging.IMsgService#getMsgBox(java.lang.
+     * String)
      */
     @Override
-    public IMsgBox<M> getMsgBox(String agentId) {
+    public IMsgBox<IMessage> getMsgBox(String agentId) {
         return this.delegatedMsgService.getMsgBox(agentId);
     }
 

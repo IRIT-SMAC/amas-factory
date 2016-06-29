@@ -3,7 +3,7 @@ package fr.irit.smac.amasfactory.service.logging.impl;
 import org.slf4j.Logger;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
-import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
+import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
 import fr.irit.smac.libs.tooling.logging.AgentLog;
 
@@ -12,8 +12,9 @@ import fr.irit.smac.libs.tooling.logging.AgentLog;
  *
  * @param <M> the generic type
  */
-public class AgentLogLoggingService<M> extends AbstractInfraService<IAgent<M>, M>
-    implements ILoggingService<M> {
+public class AgentLogLoggingService<A extends IAgent> implements ILoggingService<A> {
+
+    private IExecutionService<A> executionService;
 
     /* (non-Javadoc)
      * @see fr.irit.smac.amasfactory.service.logging.ILoggingService#getAgentLogger(java.lang.String)
@@ -42,7 +43,7 @@ public class AgentLogLoggingService<M> extends AbstractInfraService<IAgent<M>, M
             .logFolderName("target/log")
             .initialize();
 
-        this.getInfrastructure().getExecutionService().addPreStepHook(new Runnable() {
+        this.executionService.addPreStepHook(new Runnable() {
             private int stepNum = 0;
 
             @Override
@@ -59,5 +60,10 @@ public class AgentLogLoggingService<M> extends AbstractInfraService<IAgent<M>, M
     public void shutdown() {
         // NOTHING to do
 
+    }
+
+    @Override
+    public void setExecutionService(IExecutionService<A> executionService) {
+        this.executionService = executionService;
     }
 }

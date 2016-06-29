@@ -10,10 +10,10 @@ import java.util.logging.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
+import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.impl.ShutdownRuntimeException;
+import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
-import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.TwoStepsSystemStrategy;
 import fr.irit.smac.libs.tooling.scheduling.impl.system.SynchronizedSystemStrategy;
@@ -27,8 +27,7 @@ import fr.irit.smac.libs.tooling.scheduling.impl.system.SynchronizedSystemStrate
  * @param <M>
  *            the generic type
  */
-public class TwoStepAgExecutionService<A extends ITwoStepsAgent & IInfrastructureAgent<M>, M>
-    extends AbstractInfraService<A, M>implements IExecutionService<A, M> {
+public class TwoStepAgExecutionService<A extends IAgent & ITwoStepsAgent> implements IExecutionService<A>{
 
     private TwoStepsSystemStrategy systemStrategy;
 
@@ -37,6 +36,8 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent & IInfrastructur
     @JsonProperty
     private int nbThreads;
 
+    private IAgentHandlerService<A> agentHandlerService;
+
     /**
      * Instantiates a new two step ag execution service.
      */
@@ -44,6 +45,11 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent & IInfrastructur
         super();
         this.systemStrategy = null;
         this.nbThreads = Integer.MIN_VALUE;
+    }
+    
+    @Override
+    public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService) {
+        this.agentHandlerService = agentHandlerService;
     }
 
     /*
@@ -61,7 +67,7 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent & IInfrastructur
         this.systemStrategy = new TwoStepsSystemStrategy(Collections.emptyList(),
             Executors.newFixedThreadPool(this.nbThreads));
 
-        this.getInfrastructure().getAgentHandler().addAgentEventListener(this);
+        this.agentHandlerService.addAgentEventListener(this);
     }
 
     /*

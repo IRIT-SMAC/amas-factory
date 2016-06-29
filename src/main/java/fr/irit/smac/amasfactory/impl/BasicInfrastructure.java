@@ -5,10 +5,11 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.agent.IAgent;
+import fr.irit.smac.amasfactory.message.IMessage;
+import fr.irit.smac.amasfactory.service.IInfraService;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.amasfactory.service.datasharing.IDataSharingService;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
-import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
 import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
 
@@ -17,27 +18,27 @@ import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
  *
  * @param <A>
  *            the generic type
- * @param <M>
- *            the generic type
+ * @param the
+ *            generic type
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
-public class BasicInfrastructure<A extends IAgent<M>, M> extends AbstractInfraService<A, M>
-    implements IInfrastructure<A, M> {
+public class BasicInfrastructure<A extends IAgent>
+    implements IInfrastructure<A> {
 
     @JsonProperty
-    private IAgentHandlerService<A, M> agentHandlerService;
+    private IAgentHandlerService<A> agentHandlerService;
 
     @JsonProperty
-    private IMessagingService<M> messagingService;
+    private IMessagingService<IMessage> messagingService;
 
     @JsonProperty
-    private IExecutionService<A, M> executionService;
+    private IExecutionService<A> executionService;
 
     @JsonProperty
-    private ILoggingService<M> loggingService;
+    private ILoggingService<A> loggingService;
 
     @JsonProperty
-    private IDataSharingService<A, M> hazelcastService;
+    private IDataSharingService<A> hazelcastService;
 
     /**
      * Instantiates a new basic infrastructure.
@@ -54,25 +55,18 @@ public class BasicInfrastructure<A extends IAgent<M>, M> extends AbstractInfraSe
      *            the hazelcast service
      */
     public BasicInfrastructure(
-        @JsonProperty(value = "messagingService", required = true) IMessagingService<M> messagingService,
-        @JsonProperty(value = "agentHandlerService", required = true) IAgentHandlerService<A, M> agentHandlerService,
-        @JsonProperty(value = "executionService", required = true) IExecutionService<A, M> executionService,
-        @JsonProperty(value = "loggingService", required = true) ILoggingService<M> loggingService,
-        @JsonProperty(value = "hazelcastService", required = true) IDataSharingService<A, M> hazelcastService) {
+        @JsonProperty(value = "messagingService", required = true) IMessagingService<IMessage> messagingService,
+        @JsonProperty(value = "agentHandlerService", required = true) IAgentHandlerService<A> agentHandlerService,
+        @JsonProperty(value = "executionService", required = true) IExecutionService<A> executionService,
+        @JsonProperty(value = "loggingService", required = true) ILoggingService<A> loggingService,
+        @JsonProperty(value = "hazelcastService", required = true) IDataSharingService<A> hazelcastService) {
         super();
 
-        // not working because type is Interface
         this.messagingService = messagingService;
         this.agentHandlerService = agentHandlerService;
         this.executionService = executionService;
         this.loggingService = loggingService;
         this.hazelcastService = hazelcastService;
-
-        messagingService.setInfrastructure((BasicInfrastructure<IAgent<M>, M>) this);
-        agentHandlerService.setInfrastructure(this);
-        executionService.setInfrastructure(this);
-        loggingService.setInfrastructure((BasicInfrastructure<IAgent<M>, M>) this);
-        hazelcastService.setInfrastructure(this);
 
         this.start();
     }
@@ -88,7 +82,7 @@ public class BasicInfrastructure<A extends IAgent<M>, M> extends AbstractInfraSe
      * fr.irit.smac.amasfactory.IAgentSideInfrastructure#getMessagingService()
      */
     @Override
-    public IMessagingService<M> getMessagingService() {
+    public IMessagingService<IMessage> getMessagingService() {
         return this.messagingService;
     }
 
@@ -98,7 +92,7 @@ public class BasicInfrastructure<A extends IAgent<M>, M> extends AbstractInfraSe
      * @see fr.irit.smac.amasfactory.IInfrastructure#getAgentHandler()
      */
     @Override
-    public IAgentHandlerService<A, M> getAgentHandler() {
+    public IAgentHandlerService<A> getAgentHandler() {
         return this.agentHandlerService;
     }
 
@@ -108,7 +102,7 @@ public class BasicInfrastructure<A extends IAgent<M>, M> extends AbstractInfraSe
      * @see fr.irit.smac.amasfactory.IInfrastructure#getExecutionService()
      */
     @Override
-    public IExecutionService<A, M> getExecutionService() {
+    public IExecutionService<A> getExecutionService() {
         return this.executionService;
     }
 
@@ -118,7 +112,7 @@ public class BasicInfrastructure<A extends IAgent<M>, M> extends AbstractInfraSe
      * @see fr.irit.smac.amasfactory.IInfrastructure#getDataSharingService()
      */
     @Override
-    public IDataSharingService<A, M> getDataSharingService() {
+    public IDataSharingService<A> getDataSharingService() {
         return this.hazelcastService;
     }
 
@@ -129,50 +123,27 @@ public class BasicInfrastructure<A extends IAgent<M>, M> extends AbstractInfraSe
      * fr.irit.smac.amasfactory.IAgentSideInfrastructure#getLoggingService()
      */
     @Override
-    public ILoggingService<M> getLoggingService() {
+    public ILoggingService<A> getLoggingService() {
         return this.loggingService;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see fr.irit.smac.amasfactory.service.impl.AbstractInfraService#
-     * setInfrastructure(fr.irit.smac.amasfactory.impl.BasicInfrastructure)
-     */
-    @Override
-    public void setInfrastructure(BasicInfrastructure<A, M> basicInfrastructure) {
-        // BasicInfrastructure should not have a nested attribute
-        // "infrastructure"
-    }
-
-    /*
-     * (non-Javadoc)
-     * 
-     * @see fr.irit.smac.amasfactory.service.IInfraService#start()
-     */
     @Override
     public void start() {
         // starts each service sequencially
-        
-        messagingService.setInfrastructure((BasicInfrastructure<IAgent<M>, M>) this);
-        agentHandlerService.setInfrastructure(this);
-        executionService.setInfrastructure(this);
-        loggingService.setInfrastructure((BasicInfrastructure<IAgent<M>, M>) this);
 
-        
+        executionService.setAgentHandlerService(this.agentHandlerService);
+        loggingService.setExecutionService(this.executionService);
+        hazelcastService.setAgentHandlerService(this.agentHandlerService);
+        hazelcastService.setExecutionService(this.executionService);
+
         this.agentHandlerService.start();
         this.executionService.start();
         this.messagingService.start();
         this.loggingService.start();
-        this.agentHandlerService.setInfrastructureAgent(this);
+        this.agentHandlerService.initAgents(this.messagingService, this.loggingService);
         this.hazelcastService.start();
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see fr.irit.smac.amasfactory.service.IInfraService#shutdown()
-     */
     @Override
     public void shutdown() throws ShutdownRuntimeException {
         // shutdown each service sequencially
@@ -182,6 +153,5 @@ public class BasicInfrastructure<A extends IAgent<M>, M> extends AbstractInfraSe
         this.loggingService.shutdown();
         this.hazelcastService.shutdown();
     }
-    
 
 }

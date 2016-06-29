@@ -6,6 +6,7 @@ import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.impl.ShutdownRuntimeException;
 import fr.irit.smac.amasfactory.service.IInfraService;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
+import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.libs.tooling.scheduling.IHookHandler;
 
 /**
@@ -17,8 +18,8 @@ import fr.irit.smac.libs.tooling.scheduling.IHookHandler;
  * @param <M>
  *            the generic type
  */
-public interface IExecutionService<A extends IAgent<M>, M>
-    extends IAgentEventListener<A>, IInfraService<A, M>, IHookHandler {
+public interface IExecutionService<A extends IAgent>
+    extends IAgentEventListener<A>, IInfraService, IHookHandler {
     /**
      * Launches the continuous execution of the system. The system will execute
      * according to the implemented strategy, until the {@link #pause} method is
@@ -70,4 +71,7 @@ public interface IExecutionService<A extends IAgent<M>, M>
      */
     @Override
     public void shutdown() throws ShutdownRuntimeException;
+    
+    public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService);
+
 }

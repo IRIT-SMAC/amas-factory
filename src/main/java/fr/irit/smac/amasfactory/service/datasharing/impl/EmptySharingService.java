@@ -1,8 +1,9 @@
 package fr.irit.smac.amasfactory.service.datasharing.impl;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
+import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.amasfactory.service.datasharing.IDataSharingService;
-import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
+import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 
 /**
  * An empty implementation, for sharingless projects.
@@ -12,8 +13,8 @@ import fr.irit.smac.amasfactory.service.impl.AbstractInfraService;
  * @param <A>
  * @param <M>
  */
-public class EmptySharingService<A extends IAgent<M>, M> extends AbstractInfraService<A, M>
-    implements IDataSharingService<A, M> {
+public class EmptySharingService<A extends IAgent>
+    implements IDataSharingService<A> {
 
     @Override
     public void agentAdded(A agent) {
@@ -33,6 +34,18 @@ public class EmptySharingService<A extends IAgent<M>, M> extends AbstractInfraSe
     @Override
     public void shutdown() {
         // empty
+    }
+
+    @Override
+    public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void setExecutionService(IExecutionService executionService) {
+        // TODO Auto-generated method stub
+
     }
 
 }

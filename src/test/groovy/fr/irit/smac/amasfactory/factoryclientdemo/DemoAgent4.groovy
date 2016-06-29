@@ -7,10 +7,10 @@ import fr.irit.smac.amasfactory.message.PortOfTargetMessage
 import fr.irit.smac.amasfactory.message.ValuePortMessage
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 
-class DemoAgent4 extends AgentSocial<DemoMessage>implements ITwoStepsAgent{
+class DemoAgent4 extends AgentSocial implements ITwoStepsAgent{
 
     private boolean send = false
-    
+
     public DemoAgent4() {
         super()
     }

@@ -9,7 +9,7 @@ import fr.irit.smac.amasfactory.agent.IAgent;
  * The interface IAmasFactory exposes methods to create an infrastructure.
  */
 @FunctionalInterface
-public interface IAmasFactory {
+public interface IAmasFactory<A extends IAgent> {
 
     /**
      * Creates a new IAmas object.
@@ -24,6 +24,6 @@ public interface IAmasFactory {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public <A extends IAgent<M>, M> IInfrastructure<A, M> createInfrastructure(InputStream configuration)
+    public IInfrastructure<A> createInfrastructure(InputStream configuration)
         throws IOException;
 }

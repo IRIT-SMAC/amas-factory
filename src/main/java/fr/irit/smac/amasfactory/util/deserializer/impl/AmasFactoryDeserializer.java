@@ -6,13 +6,11 @@ import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import fr.irit.smac.amasfactory.IInfrastructure;
-import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.impl.BasicInfrastructure;
 import fr.irit.smac.amasfactory.util.deserializer.IAmasFactoryDeserializer;
 import fr.irit.smac.libs.tooling.scheduling.impl.system.SynchronizedSystemStrategy;
@@ -50,13 +48,12 @@ public class AmasFactoryDeserializer implements IAmasFactoryDeserializer {
      * parseInfrastructure(java.io.InputStream)
      */
     @Override
-    @SuppressWarnings({ "unchecked" })
-    public <A extends IAgent<M>, M> IInfrastructure<A, M> deserializeInfrastructure(
+    public IInfrastructure deserializeInfrastructure(
         InputStream configuration)
             throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
-        IInfrastructure<A, M> infrastructure = null;
+        IInfrastructure infrastructure = null;
         try {
 
             JsonElement configurationJson = new JsonParser().parse(new InputStreamReader(configuration));

@@ -7,19 +7,17 @@
 				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent",
 				"id":"ag1",
 				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.agent.social.impl.KnowledgeSocial",
+					"className":"fr.irit.smac.amasfactory.factoryclientdemo.KnowledgeCustom",
 					"id":"ag1"
-				},
-				"message":"Hello agents"
+				}
 			},
 			"ag2":{
 				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent",
 				"id":"ag2",
 				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.agent.social.impl.KnowledgeSocial",
+					"className":"fr.irit.smac.amasfactory.factoryclientdemo.KnowledgeCustom",
 					"id":"ag2"
-				},
-				"message":"Hello infratrouctour"
+				}
 			}
 			
 		}

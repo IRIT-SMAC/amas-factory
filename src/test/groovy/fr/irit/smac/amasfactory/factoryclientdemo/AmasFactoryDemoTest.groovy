@@ -21,7 +21,7 @@ class AmasFactoryDemoTest extends Specification{
 
 
         when:
-        IInfrastructure<DemoAgent, DemoMessage> infra =
+        IInfrastructure infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/demo_config.json"))
 
         then:
@@ -38,7 +38,7 @@ class AmasFactoryDemoTest extends Specification{
         given:
         BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
 
-        IInfrastructure<DemoAgent, DemoMessage> infra =
+        IInfrastructure infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/demo_config.json"))
 
         when:
@@ -53,9 +53,7 @@ class AmasFactoryDemoTest extends Specification{
             System.out.println(entry.getKey() + "/" + entry.getValue())
             DemoAgent agent = entry.getValue()
 
-            List<DemoMessage> messages = agent.msgBox.msgs
-
-            assert messages.size() == 2
+            assert agent.getKnowledge().getCount() == 20
         }
         infra.shutdown()
     }
@@ -65,7 +63,7 @@ class AmasFactoryDemoTest extends Specification{
         when:
         BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
 
-        IInfrastructure<DemoAgent, DemoMessage> infra =
+        IInfrastructure infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/exceptions/missing_service.json"))
 
         then:
@@ -77,7 +75,7 @@ class AmasFactoryDemoTest extends Specification{
         when:
         BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
 
-        IInfrastructure<DemoAgent, DemoMessage> infra =
+        IInfrastructure infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/exceptions/missing_attribute_messaging_service.json"))
 
         then:
@@ -89,7 +87,7 @@ class AmasFactoryDemoTest extends Specification{
         when:
         BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
 
-        IInfrastructure<DemoAgent, DemoMessage> infra =
+        IInfrastructure infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/exceptions/error_syntax.json"))
 
         then:

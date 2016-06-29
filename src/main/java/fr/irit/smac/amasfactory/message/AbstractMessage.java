@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class AbstractMessage implements IMessage, Serializable{
 
-	final EMessageType messageType;
+    private static final long serialVersionUID = 1902330088251578329L;
+    final EMessageType messageType;
 	
 	public EMessageType getMessageType(){
 		return this.messageType;
