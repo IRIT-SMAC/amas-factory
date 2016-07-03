@@ -2,7 +2,6 @@ package fr.irit.smac.amasfactory.service.logging.impl;
 
 import org.slf4j.Logger;
 
-import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
 import fr.irit.smac.libs.tooling.logging.AgentLog;
@@ -12,9 +11,9 @@ import fr.irit.smac.libs.tooling.logging.AgentLog;
  *
  * @param <M> the generic type
  */
-public class AgentLogLoggingService<A extends IAgent> implements ILoggingService<A> {
+public class AgentLogLoggingService implements ILoggingService {
 
-    private IExecutionService<A> executionService;
+    private IExecutionService executionService;
 
     /* (non-Javadoc)
      * @see fr.irit.smac.amasfactory.service.logging.ILoggingService#getAgentLogger(java.lang.String)
@@ -63,7 +62,7 @@ public class AgentLogLoggingService<A extends IAgent> implements ILoggingService
     }
 
     @Override
-    public void setExecutionService(IExecutionService<A> executionService) {
+    public void setExecutionService(IExecutionService executionService) {
         this.executionService = executionService;
     }
 }

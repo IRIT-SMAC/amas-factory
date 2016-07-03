@@ -27,7 +27,7 @@ import fr.irit.smac.libs.tooling.scheduling.impl.system.SynchronizedSystemStrate
  * @param <M>
  *            the generic type
  */
-public class TwoStepAgExecutionService<A extends IAgent & ITwoStepsAgent> implements IExecutionService<A>{
+public class TwoStepAgExecutionService implements IExecutionService{
 
     private TwoStepsSystemStrategy systemStrategy;
 
@@ -36,7 +36,7 @@ public class TwoStepAgExecutionService<A extends IAgent & ITwoStepsAgent> implem
     @JsonProperty
     private int nbThreads;
 
-    private IAgentHandlerService<A> agentHandlerService;
+    private IAgentHandlerService agentHandlerService;
 
     /**
      * Instantiates a new two step ag execution service.
@@ -48,7 +48,7 @@ public class TwoStepAgExecutionService<A extends IAgent & ITwoStepsAgent> implem
     }
     
     @Override
-    public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService) {
+    public void setAgentHandlerService(IAgentHandlerService agentHandlerService) {
         this.agentHandlerService = agentHandlerService;
     }
 
@@ -124,8 +124,8 @@ public class TwoStepAgExecutionService<A extends IAgent & ITwoStepsAgent> implem
      * agentAdded(java.lang.Object)
      */
     @Override
-    public void agentAdded(A agent) {
-        this.systemStrategy.addAgent(agent);
+    public void agentAdded(IAgent agent) {
+        this.systemStrategy.addAgent((ITwoStepsAgent) agent);
     }
 
     /*
@@ -135,8 +135,8 @@ public class TwoStepAgExecutionService<A extends IAgent & ITwoStepsAgent> implem
      * agentRemoved(java.lang.Object)
      */
     @Override
-    public void agentRemoved(A agent) {
-        this.systemStrategy.removeAgent(agent);
+    public void agentRemoved(IAgent agent) {
+        this.systemStrategy.removeAgent((ITwoStepsAgent) agent);
     }
 
     /*

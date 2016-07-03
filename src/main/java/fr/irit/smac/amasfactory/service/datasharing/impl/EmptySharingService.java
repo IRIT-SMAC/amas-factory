@@ -13,16 +13,16 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
  * @param <A>
  * @param <M>
  */
-public class EmptySharingService<A extends IAgent>
-    implements IDataSharingService<A> {
+public class EmptySharingService
+    implements IDataSharingService {
 
     @Override
-    public void agentAdded(A agent) {
+    public void agentAdded(IAgent agent) {
         // empty
     }
 
     @Override
-    public void agentRemoved(A agent) {
+    public void agentRemoved(IAgent agent) {
         // empty
     }
 
@@ -37,7 +37,7 @@ public class EmptySharingService<A extends IAgent>
     }
 
     @Override
-    public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService) {
+    public void setAgentHandlerService(IAgentHandlerService agentHandlerService) {
         // TODO Auto-generated method stub
 
     }

@@ -1,14 +1,14 @@
 package fr.irit.smac.amasfactory.factoryclientdemo
 
-import fr.irit.smac.amasfactory.agent.social.IKnowledgeSocial
+import fr.irit.smac.amasfactory.agent.social.IExtraKnowledgeSocial
 import fr.irit.smac.amasfactory.agent.social.IPort
-import fr.irit.smac.amasfactory.agent.social.impl.AgentSocial
+import fr.irit.smac.amasfactory.agent.social.impl.ExtraSkillSocial
 import fr.irit.smac.amasfactory.message.AbstractMessage
 import fr.irit.smac.amasfactory.message.PortOfTargetMessage
 import fr.irit.smac.amasfactory.message.ValuePortMessage
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 
-class DemoAgent2 extends AgentSocial implements ITwoStepsAgent{
+class DemoAgent2 extends ExtraSkillSocial implements ITwoStepsAgent{
 
     private boolean send = false
 
@@ -19,7 +19,7 @@ class DemoAgent2 extends AgentSocial implements ITwoStepsAgent{
     @Override
     public void perceive() {
 
-        IKnowledgeSocial knowledge = this.getKnowledge()
+        IExtraKnowledgeSocial knowledge = this.getKnowledge()
         for (AbstractMessage demoMessage : msgBox.getMsgs()) {
 
             if (demoMessage instanceof ValuePortMessage) {

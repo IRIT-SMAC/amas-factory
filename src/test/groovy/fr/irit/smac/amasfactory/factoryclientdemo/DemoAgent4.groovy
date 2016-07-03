@@ -1,13 +1,13 @@
 package fr.irit.smac.amasfactory.factoryclientdemo
 
 import fr.irit.smac.amasfactory.agent.IKnowledge
-import fr.irit.smac.amasfactory.agent.social.impl.AgentSocial
+import fr.irit.smac.amasfactory.agent.social.impl.ExtraSkillSocial
 import fr.irit.smac.amasfactory.message.AbstractMessage
 import fr.irit.smac.amasfactory.message.PortOfTargetMessage
 import fr.irit.smac.amasfactory.message.ValuePortMessage
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 
-class DemoAgent4 extends AgentSocial implements ITwoStepsAgent{
+class DemoAgent4 extends ExtraSkillSocial implements ITwoStepsAgent{
 
     private boolean send = false
 

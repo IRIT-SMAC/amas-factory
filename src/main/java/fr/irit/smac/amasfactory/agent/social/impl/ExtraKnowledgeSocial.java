@@ -1,5 +1,6 @@
 package fr.irit.smac.amasfactory.agent.social.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -8,16 +9,15 @@ import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import fr.irit.smac.amasfactory.agent.impl.Knowledge;
-import fr.irit.smac.amasfactory.agent.social.IKnowledgeSocial;
+import fr.irit.smac.amasfactory.agent.social.IExtraKnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.social.IPort;
 import fr.irit.smac.amasfactory.agent.social.ITarget;
 import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
 
-public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
+public class ExtraKnowledgeSocial implements IExtraKnowledgeSocial, Serializable {
 
-    private static final long serialVersionUID = -7333853813940842410L;
+    private static final long serialVersionUID = 3570860143864194648L;
 
     @JsonProperty
     private Set<ITarget> targetSet;
@@ -38,21 +38,11 @@ public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
     /**
      * Instantiates the knowledge of an agent.
      */
-    public KnowledgeSocial() {
+    public ExtraKnowledgeSocial() {
 
         this.targetSet = new HashSet<>();
         this.sendToTargetMessageCollection = new ArrayList<>();
         this.sendPortToTargetMessageCollection = new ArrayList<>();
-    }
-
-    /**
-     * Instantiates a new simple knowledge.
-     *
-     * @param id
-     *            the id
-     */
-    public KnowledgeSocial(String id) {
-        super(id);
     }
 
     @Override
@@ -94,4 +84,5 @@ public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
     public Collection<PortOfTargetMessage> getPortOfTargetMessageCollection() {
         return sendPortToTargetMessageCollection;
     }
+
 }

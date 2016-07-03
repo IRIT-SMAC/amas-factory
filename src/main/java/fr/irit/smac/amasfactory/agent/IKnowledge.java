@@ -1,5 +1,7 @@
 package fr.irit.smac.amasfactory.agent;
 
+import java.util.Map;
+
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
@@ -18,4 +20,5 @@ public interface IKnowledge {
      */
     public String getId();
 
+    public Map<String, IExtraKnowledge> getExtraKnowledge();
 }

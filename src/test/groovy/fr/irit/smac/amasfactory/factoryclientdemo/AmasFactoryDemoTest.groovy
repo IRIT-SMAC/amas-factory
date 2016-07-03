@@ -6,6 +6,8 @@ import spock.lang.Specification
 import com.fasterxml.jackson.databind.JsonMappingException
 
 import fr.irit.smac.amasfactory.IInfrastructure
+import fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.DemoAgent;
+import fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.ExtraKnowledgeCustom;
 import fr.irit.smac.amasfactory.impl.BasicAmasFactory
 import fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler
 import fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService
@@ -53,7 +55,7 @@ class AmasFactoryDemoTest extends Specification{
             System.out.println(entry.getKey() + "/" + entry.getValue())
             DemoAgent agent = entry.getValue()
 
-            assert agent.getKnowledge().getCount() == 20
+            assert agent.getKnowledge().getExtraKnowledge().get("custom").getCount() == 20
         }
         infra.shutdown()
     }

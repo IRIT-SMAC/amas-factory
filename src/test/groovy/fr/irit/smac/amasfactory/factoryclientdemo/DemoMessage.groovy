@@ -1,5 +1,7 @@
 package fr.irit.smac.amasfactory.factoryclientdemo
 
+import fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.DemoAgent;;
+
 class DemoMessage {
 
     public final DemoAgent sender

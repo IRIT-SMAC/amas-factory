@@ -12,11 +12,11 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
  * 
  * @author SVI
  */
-public interface IDataSharingService<A extends IAgent>
-    extends IAgentEventListener<A>, IInfraService {
+public interface IDataSharingService
+    extends IAgentEventListener, IInfraService {
 
-    void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService);
+    void setAgentHandlerService(IAgentHandlerService agentHandlerService);
 
-    void setExecutionService(IExecutionService<A> executionService);
+    void setExecutionService(IExecutionService executionService);
 
 }

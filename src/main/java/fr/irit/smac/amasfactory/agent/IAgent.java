@@ -28,6 +28,8 @@ public interface IAgent {
      * @return the knowledge
      */
     public IKnowledge getKnowledge();
+    
+    public ISkill getSkill();
 
     public void setId(String id);
 

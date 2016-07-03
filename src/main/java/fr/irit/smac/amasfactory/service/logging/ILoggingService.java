@@ -2,7 +2,6 @@ package fr.irit.smac.amasfactory.service.logging;
 
 import org.slf4j.Logger;
 
-import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.service.IInfraService;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 
@@ -11,7 +10,7 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
  *
  * @param <M> the generic type
  */
-public interface ILoggingService<A extends IAgent> extends IInfraService {
+public interface ILoggingService extends IInfraService {
     
     /**
      * Gets the standard logger.
@@ -30,6 +29,6 @@ public interface ILoggingService<A extends IAgent> extends IInfraService {
     public Logger getAgentLogger(String loggerName);
 
 
-    public void setExecutionService(IExecutionService<A> executionService);
+    public void setExecutionService(IExecutionService executionService);
 
 }

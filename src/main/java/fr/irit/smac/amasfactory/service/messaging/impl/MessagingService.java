@@ -17,7 +17,7 @@ import fr.irit.smac.libs.tooling.messaging.impl.Ref;
  *            the generic type
  */
 public class MessagingService<IMessage>
-    implements IMessagingService<IMessage>, IMsgService<IMessage> {
+    implements IMessagingService<IMessage>, IMsgService<IMessage> { 
 
     private IMsgService<IMessage> delegatedMsgService;
 

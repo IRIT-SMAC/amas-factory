@@ -4,11 +4,11 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-import fr.irit.smac.amasfactory.agent.IKnowledge;
+import fr.irit.smac.amasfactory.agent.IExtraKnowledge;
 import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
 
-public interface IKnowledgeSocial extends IKnowledge {
+public interface IExtraKnowledgeSocial extends IExtraKnowledge{
 
     /**
      * @return a map containing the ports of an agent

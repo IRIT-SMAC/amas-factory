@@ -7,8 +7,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import fr.irit.smac.amasfactory.agent.EExtraKnowledgeSkill;
 import fr.irit.smac.amasfactory.agent.IAgent;
-import fr.irit.smac.amasfactory.agent.social.impl.AgentSocial;
+import fr.irit.smac.amasfactory.agent.social.IExtraSkillSocial;
 import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.service.IInfraService;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
@@ -24,12 +25,12 @@ import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
  * @param <M>
  *            the generic type
  */
-public class BasicAgentHandler<A extends IAgent>
-    implements IAgentHandlerService<A>, IInfraService {
+public class BasicAgentHandler
+    implements IAgentHandlerService, IInfraService {
 
-    private Map<String, A> agentMap = new HashMap<>();
+    private Map<String, IAgent> agentMap = new HashMap<>();
 
-    private Set<IAgentEventListener<A>> listenerSet;
+    private Set<IAgentEventListener> listenerSet;
 
     /**
      * Instantiates a new basic agent handler.
@@ -46,7 +47,7 @@ public class BasicAgentHandler<A extends IAgent>
      * @param agentMap
      *            the agent map
      */
-    public void setAgentMap(Map<String, A> agentMap) {
+    public void setAgentMap(Map<String, IAgent> agentMap) {
         this.agentMap = agentMap;
 
     }
@@ -58,7 +59,7 @@ public class BasicAgentHandler<A extends IAgent>
      */
     @Override
     public void start() {
-        this.listenerSet = Collections.synchronizedSet(new HashSet<IAgentEventListener<A>>());
+        this.listenerSet = Collections.synchronizedSet(new HashSet<IAgentEventListener>());
     }
 
     /*
@@ -78,7 +79,7 @@ public class BasicAgentHandler<A extends IAgent>
      * getAgents()
      */
     @Override
-    public Collection<A> getAgents() {
+    public Collection getAgents() {
         return this.agentMap.values();
     }
 
@@ -89,8 +90,8 @@ public class BasicAgentHandler<A extends IAgent>
      * addAgent(fr.irit.smac.amasfactory.agent.IInfrastructureAgent)
      */
     @Override
-    public void addAgent(A agent) {
-        this.agentMap.put(((IAgent) agent).getId(), agent);
+    public void addAgent(IAgent agent) {
+        this.agentMap.put(agent.getId(), agent);
         this.notifyAgentAdded(agent);
     }
 
@@ -101,7 +102,7 @@ public class BasicAgentHandler<A extends IAgent>
      * removeAgent(fr.irit.smac.amasfactory.agent.IInfrastructureAgent)
      */
     @Override
-    public void removeAgent(A agent) {
+    public void removeAgent(IAgent agent) {
         this.agentMap.remove(agent);
         this.notifyAgentRemoved(agent);
     }
@@ -112,8 +113,8 @@ public class BasicAgentHandler<A extends IAgent>
      * @param agent
      *            the agent
      */
-    private void notifyAgentAdded(A agent) {
-        for (IAgentEventListener<A> listener : this.listenerSet) {
+    private void notifyAgentAdded(IAgent agent) {
+        for (IAgentEventListener listener : this.listenerSet) {
             listener.agentAdded(agent);
         }
     }
@@ -124,8 +125,8 @@ public class BasicAgentHandler<A extends IAgent>
      * @param agent
      *            the agent
      */
-    private void notifyAgentRemoved(A agent) {
-        for (IAgentEventListener<A> listener : this.listenerSet) {
+    private void notifyAgentRemoved(IAgent agent) {
+        for (IAgentEventListener listener : this.listenerSet) {
             listener.agentRemoved(agent);
         }
     }
@@ -137,8 +138,8 @@ public class BasicAgentHandler<A extends IAgent>
      * addAgents(java.util.Collection)
      */
     @Override
-    public void addAgents(Collection<A> agents) {
-        for (A a : agents) {
+    public void addAgents(Collection<IAgent> agents) {
+        for (IAgent a : agents) {
             this.addAgent(a);
         }
     }
@@ -150,8 +151,8 @@ public class BasicAgentHandler<A extends IAgent>
      * removeAgents(java.util.Collection)
      */
     @Override
-    public void removeAgents(Collection<A> agents) {
-        for (A a : agents) {
+    public void removeAgents(Collection<IAgent> agents) {
+        for (IAgent a : agents) {
             this.removeAgent(a);
         }
 
@@ -165,7 +166,7 @@ public class BasicAgentHandler<A extends IAgent>
      * IAgentEventListener)
      */
     @Override
-    public void addAgentEventListener(IAgentEventListener<A> listener) {
+    public void addAgentEventListener(IAgentEventListener listener) {
         this.listenerSet.add(listener);
     }
 
@@ -177,7 +178,7 @@ public class BasicAgentHandler<A extends IAgent>
      * IAgentEventListener)
      */
     @Override
-    public void removeAgentEventListener(IAgentEventListener<A> listener) {
+    public void removeAgentEventListener(IAgentEventListener listener) {
         this.listenerSet.add(listener);
     }
 
@@ -188,7 +189,7 @@ public class BasicAgentHandler<A extends IAgent>
      * getAgentMap()
      */
     @Override
-    public Map<String, A> getAgentMap() {
+    public Map<String, IAgent> getAgentMap() {
         return Collections.unmodifiableMap(this.agentMap);
     }
 
@@ -199,19 +200,21 @@ public class BasicAgentHandler<A extends IAgent>
      * getAgent(java.lang.String)
      */
     @Override
-    public A getAgent(String id) {
+    public IAgent getAgent(String id) {
         return this.agentMap.get(id);
     }
 
     @Override
-    public void initAgents(IMessagingService<IMessage> messagingService, ILoggingService<A> loggingService) {
+    public void initAgents(IMessagingService<IMessage> messagingService, ILoggingService loggingService) {
 
+        
         this.getAgentMap().forEach((k, v) -> {
-            if (v instanceof AgentSocial) {
-                ((AgentSocial) v).setMsgBox(messagingService.getMsgBox(k));
-            }
+
+            ((IExtraSkillSocial) v.getSkill().getExtraSkill().get(EExtraKnowledgeSkill.SOCIAL.getName())).setMsgBox(messagingService.getMsgBox(k));
+            v.getSkill().setKnowledge(v.getKnowledge());
             v.setId(k);
             v.setLogger(loggingService.getAgentLogger(k));
+            
             this.notifyAgentAdded(v);
         });
     }

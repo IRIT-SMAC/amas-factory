@@ -1,9 +1,11 @@
 package fr.irit.smac.amasfactory.agent.impl;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import fr.irit.smac.amasfactory.agent.IExtraKnowledge;
 import fr.irit.smac.amasfactory.agent.IKnowledge;
 
 /**
@@ -20,6 +22,9 @@ public class Knowledge implements IKnowledge, Serializable {
     @JsonProperty
     private String id;
 
+    @JsonProperty
+    protected Map<String,IExtraKnowledge> extraKnowledge;
+
     public Knowledge() {
         
     }
@@ -33,7 +38,7 @@ public class Knowledge implements IKnowledge, Serializable {
     public Knowledge(String id) {
         this.id = id;
     }
-
+    
     @Override
     public String getId() {
         return this.id;
@@ -47,5 +52,9 @@ public class Knowledge implements IKnowledge, Serializable {
      */
     public void setId(String id) {
         this.id = id;
+    }
+    
+    public Map<String, IExtraKnowledge> getExtraKnowledge() {
+        return extraKnowledge;
     }
 }

@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.message.IMessage;
-import fr.irit.smac.amasfactory.service.IInfraService;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.amasfactory.service.datasharing.IDataSharingService;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
@@ -22,23 +21,23 @@ import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
  *            generic type
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
-public class BasicInfrastructure<A extends IAgent>
-    implements IInfrastructure<A> {
+public class BasicInfrastructure
+    implements IInfrastructure {
 
     @JsonProperty
-    private IAgentHandlerService<A> agentHandlerService;
+    private IAgentHandlerService agentHandlerService;
 
     @JsonProperty
     private IMessagingService<IMessage> messagingService;
 
     @JsonProperty
-    private IExecutionService<A> executionService;
+    private IExecutionService executionService;
 
     @JsonProperty
-    private ILoggingService<A> loggingService;
+    private ILoggingService loggingService;
 
     @JsonProperty
-    private IDataSharingService<A> hazelcastService;
+    private IDataSharingService hazelcastService;
 
     /**
      * Instantiates a new basic infrastructure.
@@ -56,10 +55,10 @@ public class BasicInfrastructure<A extends IAgent>
      */
     public BasicInfrastructure(
         @JsonProperty(value = "messagingService", required = true) IMessagingService<IMessage> messagingService,
-        @JsonProperty(value = "agentHandlerService", required = true) IAgentHandlerService<A> agentHandlerService,
-        @JsonProperty(value = "executionService", required = true) IExecutionService<A> executionService,
-        @JsonProperty(value = "loggingService", required = true) ILoggingService<A> loggingService,
-        @JsonProperty(value = "hazelcastService", required = true) IDataSharingService<A> hazelcastService) {
+        @JsonProperty(value = "agentHandlerService", required = true) IAgentHandlerService agentHandlerService,
+        @JsonProperty(value = "executionService", required = true) IExecutionService executionService,
+        @JsonProperty(value = "loggingService", required = true) ILoggingService loggingService,
+        @JsonProperty(value = "hazelcastService", required = true) IDataSharingService hazelcastService) {
         super();
 
         this.messagingService = messagingService;
@@ -92,7 +91,7 @@ public class BasicInfrastructure<A extends IAgent>
      * @see fr.irit.smac.amasfactory.IInfrastructure#getAgentHandler()
      */
     @Override
-    public IAgentHandlerService<A> getAgentHandler() {
+    public IAgentHandlerService getAgentHandler() {
         return this.agentHandlerService;
     }
 
@@ -102,7 +101,7 @@ public class BasicInfrastructure<A extends IAgent>
      * @see fr.irit.smac.amasfactory.IInfrastructure#getExecutionService()
      */
     @Override
-    public IExecutionService<A> getExecutionService() {
+    public IExecutionService getExecutionService() {
         return this.executionService;
     }
 
@@ -112,7 +111,7 @@ public class BasicInfrastructure<A extends IAgent>
      * @see fr.irit.smac.amasfactory.IInfrastructure#getDataSharingService()
      */
     @Override
-    public IDataSharingService<A> getDataSharingService() {
+    public IDataSharingService getDataSharingService() {
         return this.hazelcastService;
     }
 
@@ -123,7 +122,7 @@ public class BasicInfrastructure<A extends IAgent>
      * fr.irit.smac.amasfactory.IAgentSideInfrastructure#getLoggingService()
      */
     @Override
-    public ILoggingService<A> getLoggingService() {
+    public ILoggingService getLoggingService() {
         return this.loggingService;
     }
 

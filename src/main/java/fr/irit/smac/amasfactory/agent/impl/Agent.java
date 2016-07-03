@@ -6,8 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.agent.IKnowledge;
-import fr.irit.smac.amasfactory.message.IMessage;
-import fr.irit.smac.libs.tooling.messaging.IMsgBox;
+import fr.irit.smac.amasfactory.agent.ISkill;
 
 /**
  * Abstract class used by subclasses implementing an agent
@@ -15,13 +14,16 @@ import fr.irit.smac.libs.tooling.messaging.IMsgBox;
  * @param <M>
  *            the generic type
  */
-public abstract class Agent implements IAgent {
+public class Agent implements IAgent {
 
     @JsonProperty
     protected String id;
 
     @JsonProperty
     protected IKnowledge knowledge;
+
+    @JsonProperty
+    protected ISkill skill;
 
     protected Logger logger;
 
@@ -43,6 +45,11 @@ public abstract class Agent implements IAgent {
     @Override
     public void setLogger(Logger logger) {
         this.logger = logger;
+    }
+
+    @Override
+    public ISkill getSkill() {
+        return this.skill;
     }
 
 }

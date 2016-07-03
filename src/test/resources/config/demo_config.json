@@ -4,20 +4,71 @@
 		"className":"fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler",
 		"agentMap":{
 			"ag1":{
-				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent",
+				"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.DemoAgent",
 				"id":"ag1",
 				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.factoryclientdemo.KnowledgeCustom",
-					"id":"ag1"
+					"className":"fr.irit.smac.amasfactory.agent.impl.Knowledge",
+					"id":"ag1",
+					"extraKnowledge":{
+						"custom":{
+							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.ExtraKnowledgeCustom"
+						},
+						"social":{
+							"className":"fr.irit.smac.amasfactory.agent.social.impl.ExtraKnowledgeSocial"
+						}
+						
+					}
+					
+				},
+				"skill":{
+					"className":"fr.irit.smac.amasfactory.agent.impl.Skill",
+					"extraSkill":{
+						"custom":{
+							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.ExtraSkillCustom"
+						}
+						,
+						"social":{
+							"className":"fr.irit.smac.amasfactory.agent.social.impl.ExtraSkillSocial"
+						}
+						
+					}
+					
 				}
+				
 			},
 			"ag2":{
-				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent",
+				"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.DemoAgent",
 				"id":"ag2",
 				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.factoryclientdemo.KnowledgeCustom",
-					"id":"ag2"
+					"className":"fr.irit.smac.amasfactory.agent.impl.Knowledge",
+					"id":"ag2",
+					"extraKnowledge":{
+						"custom":{
+							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.ExtraKnowledgeCustom"
+						}
+						,
+						"social":{
+							"className":"fr.irit.smac.amasfactory.agent.social.impl.ExtraKnowledgeSocial"
+						}
+						
+					}
+					
+				},
+				"skill":{
+					"className":"fr.irit.smac.amasfactory.agent.impl.Skill",
+					"extraSkill":{
+						"custom":{
+							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.ExtraSkillCustom"
+						}
+						,
+						"social":{
+							"className":"fr.irit.smac.amasfactory.agent.social.impl.ExtraSkillSocial"
+						}
+						
+					}
+					
 				}
+				
 			}
 			
 		}
@@ -37,4 +88,5 @@
 	"hazelcastService":{
 		"className":"fr.irit.smac.amasfactory.service.datasharing.impl.HazelcastSharingService"
 	}
+	
 }

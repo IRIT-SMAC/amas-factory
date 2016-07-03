@@ -1,6 +1,9 @@
 package fr.irit.smac.amasfactory.agent.social;
 
-public interface IAgentSocial {
+import fr.irit.smac.amasfactory.message.IMessage;
+import fr.irit.smac.libs.tooling.messaging.IMsgBox;
+
+public interface IExtraSkillSocial {
 
     /**
      * Sends the output value of an agent to its targets
@@ -21,5 +24,9 @@ public interface IAgentSocial {
      * Updates the port if a value for this port is received
      */
     public void updatePortFromMessage();
+    
+    public IMsgBox<IMessage> getMsgBox();
+    
+    public void setMsgBox(IMsgBox<IMessage> msgBox);
 
 }
