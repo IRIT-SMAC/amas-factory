@@ -2,7 +2,6 @@ package fr.irit.smac.amasfactory.service.datasharing.impl;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.agent.IKnowledge;
-import fr.irit.smac.amasfactory.agent.ISkill;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.amasfactory.service.datasharing.IDataSharingService;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;

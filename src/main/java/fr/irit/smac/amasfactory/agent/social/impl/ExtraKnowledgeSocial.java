@@ -1,6 +1,5 @@
 package fr.irit.smac.amasfactory.agent.social.impl;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;

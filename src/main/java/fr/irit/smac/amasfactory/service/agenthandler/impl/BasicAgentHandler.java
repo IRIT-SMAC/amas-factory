@@ -79,7 +79,7 @@ public class BasicAgentHandler
      * getAgents()
      */
     @Override
-    public Collection getAgents() {
+    public Collection<IAgent> getAgents() {
         return this.agentMap.values();
     }
 

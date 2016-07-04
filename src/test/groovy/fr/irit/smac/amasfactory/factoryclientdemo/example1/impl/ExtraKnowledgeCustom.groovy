@@ -1,9 +1,10 @@
 package fr.irit.smac.amasfactory.factoryclientdemo.example1.impl
 
+import fr.irit.smac.amasfactory.agent.impl.ExtraKnowledge;
 import fr.irit.smac.amasfactory.agent.impl.Knowledge
 import fr.irit.smac.amasfactory.factoryclientdemo.example1.IExtraKnowledgeCustom
 
-class ExtraKnowledgeCustom implements IExtraKnowledgeCustom, Serializable{
+class ExtraKnowledgeCustom extends ExtraKnowledge implements IExtraKnowledgeCustom, Serializable{
 
     private int count
 

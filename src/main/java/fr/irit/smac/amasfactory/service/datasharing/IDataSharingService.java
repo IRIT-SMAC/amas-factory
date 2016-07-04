@@ -1,6 +1,5 @@
 package fr.irit.smac.amasfactory.service.datasharing;
 
-import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.service.IInfraService;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
