@@ -17,24 +17,24 @@ class DemoAgent2 extends Agent implements ITwoStepsAgent{
     @Override
     public void perceive() {
 
-        IExtraSkillCustom e = this.skill.getExtraSkill().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
+        IExtraSkillCustom e = this.skill.getExtraSkills().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
         e.processMessages()
     }
 
     @Override
     public void decideAndAct() {
 
-        IExtraSkillSocial eSocial = this.skill.getExtraSkill().get(EExtraKnowledgeSkill.SOCIAL.getName())
+        IExtraSkillSocial eSocial = this.skill.getExtraSkills().get(EExtraKnowledgeSkill.SOCIAL.getName())
         eSocial.updatePortFromMessage()
 
-        IExtraSkillCustom eSCustom = this.skill.getExtraSkill().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
+        IExtraSkillCustom eSCustom = this.skill.getExtraSkills().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
         boolean ok = eSCustom.checkPortMapFull()
 
-        IExtraKnowledgeCustom eKCustom = this.knowledge.getExtraKnowledge().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
+        IExtraKnowledgeCustom eKCustom = this.knowledge.getExtraKnowledges().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
         
         if (ok && !eKCustom.getSend()) {
             eSCustom.getOutputValue()
-            IExtraSkillSocial eSkillCustom = this.skill.getExtraSkill().get(EExtraKnowledgeSkill.SOCIAL.getName())
+            IExtraSkillSocial eSkillCustom = this.skill.getExtraSkills().get(EExtraKnowledgeSkill.SOCIAL.getName())
             eSkillCustom.sendOutputValue()
             eKCustom.setSend(true)
         }

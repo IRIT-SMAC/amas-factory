@@ -16,7 +16,7 @@ class ExtraSkillCustom extends ExtraSkill implements IExtraSkillCustom{
 
     public void processMessages() {
 
-        IExtraKnowledgeSocial e = this.knowledge.getExtraKnowledge().get(EExtraKnowledgeSkill.SOCIAL.getName())
+        IExtraKnowledgeSocial e = this.knowledge.getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName())
         IMsgBox<IMessage> msgBox = e.getMsgBox()
         for (AbstractMessage demoMessage : msgBox.getMsgs()) {
 
@@ -31,7 +31,7 @@ class ExtraSkillCustom extends ExtraSkill implements IExtraSkillCustom{
     @Override
     public boolean checkPortMapFull() {
 
-        IExtraKnowledgeSocial e = this.knowledge.getExtraKnowledge().get(EExtraKnowledgeSkill.SOCIAL.getName())
+        IExtraKnowledgeSocial e = this.knowledge.getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName())
 
         boolean ok = true
         for (p in e.getPortMap()) {
@@ -46,7 +46,7 @@ class ExtraSkillCustom extends ExtraSkill implements IExtraSkillCustom{
     @Override
     public void getOutputValue() {
 
-        IExtraKnowledgeSocial e = this.knowledge.getExtraKnowledge().get(EExtraKnowledgeSkill.SOCIAL.getName())
+        IExtraKnowledgeSocial e = this.knowledge.getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName())
 
         if (e.getOutputValue() == null) {
             String val = ""

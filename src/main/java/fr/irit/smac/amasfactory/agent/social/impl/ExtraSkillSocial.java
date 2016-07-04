@@ -25,7 +25,7 @@ public class ExtraSkillSocial extends ExtraSkill implements IExtraSkillSocial {
     @Override
     public void sendOutputValue() {
 
-        IExtraKnowledgeSocial e = (IExtraKnowledgeSocial) this.knowledge.getExtraKnowledge().get(EExtraKnowledgeSkill.SOCIAL.getName());
+        IExtraKnowledgeSocial e = (IExtraKnowledgeSocial) this.knowledge.getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName());
         Object value = e.getOutputValue();
 
         for (ITarget target : e.getTargetSet()) {
@@ -42,7 +42,7 @@ public class ExtraSkillSocial extends ExtraSkill implements IExtraSkillSocial {
     @Override
     public void sendPort() {
 
-        IExtraKnowledgeSocial e = (IExtraKnowledgeSocial) this.knowledge.getExtraKnowledge().get(EExtraKnowledgeSkill.SOCIAL.getName());
+        IExtraKnowledgeSocial e = (IExtraKnowledgeSocial) this.knowledge.getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName());
 
         Set<ITarget> targets = e.getTargetSet();
 
@@ -58,7 +58,7 @@ public class ExtraSkillSocial extends ExtraSkill implements IExtraSkillSocial {
     @Override
     public void addTargetFromMessage() {
 
-        IExtraKnowledgeSocial e = (IExtraKnowledgeSocial) this.knowledge.getExtraKnowledge().get(EExtraKnowledgeSkill.SOCIAL.getName());
+        IExtraKnowledgeSocial e = (IExtraKnowledgeSocial) this.knowledge.getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName());
 
         Collection<PortOfTargetMessage> portOfTargetsMessageCollection = e.getPortOfTargetMessageCollection();
 
@@ -74,7 +74,7 @@ public class ExtraSkillSocial extends ExtraSkill implements IExtraSkillSocial {
     @Override
     public void updatePortFromMessage() {
 
-        IExtraKnowledgeSocial e = (IExtraKnowledgeSocial) this.knowledge.getExtraKnowledge().get(EExtraKnowledgeSkill.SOCIAL.getName());
+        IExtraKnowledgeSocial e = (IExtraKnowledgeSocial) this.knowledge.getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName());
 
         Collection<ValuePortMessage> valuePortMessageCollection = e.getValuePortMessageCollection();
 

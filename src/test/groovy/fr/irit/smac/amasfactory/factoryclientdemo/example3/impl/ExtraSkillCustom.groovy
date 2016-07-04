@@ -15,7 +15,7 @@ public class ExtraSkillCustom extends ExtraSkill implements IExtraSkillCustom {
     @Override
     public void processMessages() {
 
-        IExtraKnowledgeSocial e = this.knowledge.getExtraKnowledge().get(EExtraKnowledgeSkill.SOCIAL.getName())
+        IExtraKnowledgeSocial e = this.knowledge.getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName())
         IMsgBox<IMessage> msgBox = e.getMsgBox()
         for (AbstractMessage demoMessage : msgBox.getMsgs()) {
 

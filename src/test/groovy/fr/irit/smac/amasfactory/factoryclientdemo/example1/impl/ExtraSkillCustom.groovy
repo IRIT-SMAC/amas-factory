@@ -10,7 +10,7 @@ class ExtraSkillCustom extends ExtraSkill implements IExtraSkillCustom{
 
     public void increment() {
         
-        IExtraKnowledgeCustom e = this.knowledge.getExtraKnowledge().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
+        IExtraKnowledgeCustom e = this.knowledge.getExtraKnowledges().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
         e.setCount(e.count +1)
     }
 }

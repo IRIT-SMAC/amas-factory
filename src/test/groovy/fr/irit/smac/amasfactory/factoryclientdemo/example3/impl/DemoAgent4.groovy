@@ -18,14 +18,14 @@ class DemoAgent4 extends Agent implements ITwoStepsAgent{
     @Override
     public void perceive() {
 
-        IExtraSkillCustom e = this.skill.getExtraSkill().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
+        IExtraSkillCustom e = this.skill.getExtraSkills().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
         e.processMessages()
     }
 
     @Override
     public void decideAndAct() {
 
-        IExtraSkillSocial e = this.skill.getExtraSkill().get(EExtraKnowledgeSkill.SOCIAL.getName())
+        IExtraSkillSocial e = this.skill.getExtraSkills().get(EExtraKnowledgeSkill.SOCIAL.getName())
         e.addTargetFromMessage()
         e.sendOutputValue()
     }

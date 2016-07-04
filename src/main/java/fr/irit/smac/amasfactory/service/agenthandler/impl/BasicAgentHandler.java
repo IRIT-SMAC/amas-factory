@@ -210,7 +210,7 @@ public class BasicAgentHandler
         
         this.getAgentMap().forEach((k, v) -> {
 
-            ((IExtraKnowledgeSocial) v.getKnowledge().getExtraKnowledge().get(EExtraKnowledgeSkill.SOCIAL.getName())).setMsgBox(messagingService.getMsgBox(k));
+            ((IExtraKnowledgeSocial) v.getKnowledge().getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName())).setMsgBox(messagingService.getMsgBox(k));
             v.getSkill().setKnowledge(v.getKnowledge());
             v.setId(k);
             v.setLogger(loggingService.getAgentLogger(k));

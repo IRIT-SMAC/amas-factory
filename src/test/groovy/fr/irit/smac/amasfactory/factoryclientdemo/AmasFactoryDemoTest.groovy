@@ -55,7 +55,7 @@ class AmasFactoryDemoTest extends Specification{
             System.out.println(entry.getKey() + "/" + entry.getValue())
             DemoAgent agent = entry.getValue()
 
-            assert agent.getKnowledge().getExtraKnowledge().get("custom").getCount() == 20
+            assert agent.getKnowledge().getExtraKnowledges().get("custom").getCount() == 20
         }
         infra.shutdown()
     }

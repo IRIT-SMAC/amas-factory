@@ -17,17 +17,17 @@ class DemoAgent3 extends Agent implements ITwoStepsAgent{
     @Override
     public void perceive() {
 
-        IExtraSkillCustom e = this.skill.getExtraSkill().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
+        IExtraSkillCustom e = this.skill.getExtraSkills().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
         e.processMessages()
     }
 
     @Override
     public void decideAndAct() {
 
-        IExtraSkillSocial eSSocial = this.skill.getExtraSkill().get(EExtraKnowledgeSkill.SOCIAL.getName())
+        IExtraSkillSocial eSSocial = this.skill.getExtraSkills().get(EExtraKnowledgeSkill.SOCIAL.getName())
         eSSocial.updatePortFromMessage()
 
-        IExtraKnowledgeCustom eKCustom = this.knowledge.getExtraKnowledge().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
+        IExtraKnowledgeCustom eKCustom = this.knowledge.getExtraKnowledges().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
         
         if (!eKCustom.getSend()) {
             eSSocial.sendPort()

@@ -20,13 +20,13 @@ class DemoAgent extends Agent implements ITwoStepsAgent{
     @Override
     public void perceive() {
         println "perceive"
-        ((IExtraSkillCustom)this.skill.getExtraSkill().get(EMyExtraKnowledgeSkill.CUSTOM.getName())).increment()
+        ((IExtraSkillCustom)this.skill.getExtraSkills().get(EMyExtraKnowledgeSkill.CUSTOM.getName())).increment()
 //        this.skill.getExtraSkill().get(EExtraKnowledgeSkill.SOCIAL).getMsgBox().broadcast("hello")
     }
 
     @Override
     public void decideAndAct() {
         println "decideAndAct"
-        ((IExtraSkillCustom)this.skill.getExtraSkill().get(EMyExtraKnowledgeSkill.CUSTOM.getName())).increment()
+        ((IExtraSkillCustom)this.skill.getExtraSkills().get(EMyExtraKnowledgeSkill.CUSTOM.getName())).increment()
     }
 }

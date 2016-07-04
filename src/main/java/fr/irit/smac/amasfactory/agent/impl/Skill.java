@@ -13,7 +13,7 @@ public class Skill implements ISkill {
     private IKnowledge knowledge;
 
     @JsonProperty
-    protected Map<String,IExtraSkill> extraSkill;
+    protected Map<String,IExtraSkill> extraSkills;
 
     public Skill() {
 
@@ -22,10 +22,10 @@ public class Skill implements ISkill {
     @Override
     public void setKnowledge(IKnowledge knowledge) {
         this.knowledge = knowledge;
-        this.extraSkill.forEach((s, e) -> e.setKnowledge(this.knowledge));
+        this.extraSkills.forEach((s, e) -> e.setKnowledge(this.knowledge));
     }
     
-    public Map<String, IExtraSkill> getExtraSkill() {
-        return extraSkill;
+    public Map<String, IExtraSkill> getExtraSkills() {
+        return extraSkills;
     }
 }

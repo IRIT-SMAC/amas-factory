@@ -9,7 +9,7 @@
 				"knowledge":{
 					"className":"fr.irit.smac.amasfactory.agent.impl.Knowledge",
 					"id":"ag1",
-					"extraKnowledge":{
+					"extraKnowledges":{
 						"social":{
 							"className":"fr.irit.smac.amasfactory.agent.social.impl.ExtraKnowledgeSocial",
 							"outputType":"java.lang.String",
@@ -29,7 +29,7 @@
 				},
 				"skill":{
 					"className":"fr.irit.smac.amasfactory.agent.impl.Skill",
-					"extraSkill":{
+					"extraSkills":{
 						"custom":{
 							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example3.impl.ExtraSkillCustom"
 						}
@@ -49,7 +49,7 @@
 				"knowledge":{
 					"className":"fr.irit.smac.amasfactory.agent.impl.Knowledge",
 					"id":"ag2",
-					"extraKnowledge":{
+					"extraKnowledges":{
 						"social":{
 							"className":"fr.irit.smac.amasfactory.agent.social.impl.ExtraKnowledgeSocial",
 							"outputType":"java.lang.String",
@@ -69,7 +69,7 @@
 				},
 				"skill":{
 					"className":"fr.irit.smac.amasfactory.agent.impl.Skill",
-					"extraSkill":{
+					"extraSkills":{
 						"custom":{
 							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example3.impl.ExtraSkillCustom"
 						}
@@ -89,7 +89,7 @@
 				"knowledge":{
 					"className":"fr.irit.smac.amasfactory.agent.impl.Knowledge",
 					"id":"ag3",
-					"extraKnowledge":{
+					"extraKnowledges":{
 						"custom":{
 							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example3.impl.ExtraKnowledgeCustom"
 						},
@@ -132,7 +132,7 @@
 				},
 				"skill":{
 					"className":"fr.irit.smac.amasfactory.agent.impl.Skill",
-					"extraSkill":{
+					"extraSkills":{
 						"custom":{
 							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example3.impl.ExtraSkillCustom"
 						}

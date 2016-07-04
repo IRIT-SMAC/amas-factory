@@ -23,7 +23,7 @@ public class Knowledge implements IKnowledge, Serializable {
     private String id;
 
     @JsonProperty
-    protected Map<String,IExtraKnowledge> extraKnowledge;
+    protected Map<String,IExtraKnowledge> extraKnowledges;
 
     public Knowledge() {
         
@@ -54,7 +54,7 @@ public class Knowledge implements IKnowledge, Serializable {
         this.id = id;
     }
     
-    public Map<String, IExtraKnowledge> getExtraKnowledge() {
-        return extraKnowledge;
+    public Map<String, IExtraKnowledge> getExtraKnowledges() {
+        return extraKnowledges;
     }
 }

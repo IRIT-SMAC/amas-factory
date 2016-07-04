@@ -20,5 +20,5 @@ public interface IKnowledge {
      */
     public String getId();
 
-    public Map<String, IExtraKnowledge> getExtraKnowledge();
+    public Map<String, IExtraKnowledge> getExtraKnowledges();
 }
