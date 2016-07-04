@@ -10,8 +10,6 @@ import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 
 class DemoAgent2 extends Agent implements ITwoStepsAgent{
 
-    private boolean send = false
-
     public DemoAgent2() {
         super()
     }

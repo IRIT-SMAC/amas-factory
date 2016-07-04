@@ -7,6 +7,10 @@ class ExtraKnowledgeCustom extends ExtraKnowledge implements IExtraKnowledgeCust
 
     private boolean send
 
+    public ExtraKnowledgeCustom() {
+        this.send = false
+    }
+    
     @Override
     public boolean getSend() {
         return this.send

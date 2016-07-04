@@ -51,8 +51,8 @@ class KnowledgeConnectionsTest extends Specification {
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/knowledge_connections2.json"))
         Map<String,IAgent> agents = infra.getAgentHandler().getAgentMap()
 
-        agents.get("ag1").getKnowledge().setOutputValue("hello")
-        agents.get("ag2").getKnowledge().setOutputValue("hallo")
+        ((ExtraKnowledgeSocial)agents.get("ag1").getKnowledge().getExtraKnowledge().get(EExtraKnowledgeSkill.SOCIAL.getName())).setOutputValue("hello")
+        ((ExtraKnowledgeSocial)agents.get("ag2").getKnowledge().getExtraKnowledge().get(EExtraKnowledgeSkill.SOCIAL.getName())).setOutputValue("hallo")
 
         when:
         for (int i = 0 ; i < 4; i++) {
@@ -65,7 +65,7 @@ class KnowledgeConnectionsTest extends Specification {
         List outputs = ["hello", "hallo"]
 
         Agent agent = agents.get("ag3")
-        HashMap<IPort> portMap = agent.getKnowledge().getPortMap()
+        HashMap<IPort> portMap = agent.getKnowledge().getExtraKnowledge().get(EExtraKnowledgeSkill.SOCIAL.getName()).getPortMap()
         for (p in portMap) {
             IPort port = p.value
             assert port.getValue() == outputs[j]
