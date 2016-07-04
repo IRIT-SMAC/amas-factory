@@ -8,7 +8,7 @@ import fr.irit.smac.amasfactory.agent.IExtraSkill;
 import fr.irit.smac.amasfactory.agent.IKnowledge;
 import fr.irit.smac.amasfactory.agent.ISkill;
 
-public class Skill<K extends IKnowledge> implements ISkill {
+public class Skill implements ISkill {
 
     private IKnowledge knowledge;
 
