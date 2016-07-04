@@ -82,7 +82,7 @@ public class HazelcastSharingService<K, S>
             @Override
             public void run() {
                 for (IAgent agent : agentHandler.getAgents()) {
-                    hazelcastKnowledgeAccessor.registerKnowledge((IKnowledgeBasic) agent.getFeatures().get(EFeature.BASIC.getName()));
+                    hazelcastKnowledgeAccessor.registerKnowledge((IKnowledgeBasic) agent.getFeatures().get(EFeature.BASIC.getName()).getKnowledge());
                     // System.out.println("registering " + agent.getId() );
                 }
             }

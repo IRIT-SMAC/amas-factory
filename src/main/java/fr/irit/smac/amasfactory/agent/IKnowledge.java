@@ -1,5 +1,7 @@
 package fr.irit.smac.amasfactory.agent;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
@@ -9,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  * @author SVI
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
-public interface IKnowledge {
+public interface IKnowledge extends Serializable {
 
 
 }
