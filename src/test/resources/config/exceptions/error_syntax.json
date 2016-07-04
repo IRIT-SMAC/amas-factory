@@ -3,24 +3,6 @@
 	"agentHandlerService":{
 		"className":"fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler",
 		"agentMap":{
-			"ag1":{
-				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent",
-				"id":"ag1",
-				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.Knowledge",
-					"id":"ag1"
-				},
-				"message":"Hello agents"
-			},
-			"ag2":{
-				"className":"fr.irit.smac.amasfactory.factoryclientdemo.DemoAgent",
-				"id":"ag2",
-				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.Knowledge",
-					"id":"ag2"
-				},
-				"message":"Hello infratrouctour"
-			}
 			
 		}
 		
