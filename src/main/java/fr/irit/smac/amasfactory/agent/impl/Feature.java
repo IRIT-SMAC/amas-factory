@@ -7,37 +7,30 @@ import fr.irit.smac.amasfactory.agent.IFeature;
 import fr.irit.smac.amasfactory.agent.IKnowledge;
 import fr.irit.smac.amasfactory.agent.ISkill;
 
-public class Feature implements IFeature{
+public class Feature<K extends IKnowledge,S extends ISkill<K>> implements IFeature<K,S>{
 
     @JsonProperty
-    protected IKnowledge knowledge;
+    protected K knowledge;
 
     @JsonProperty
-    protected ISkill skill;
-    
-    protected String id;
+    protected S skill;
     
     public Feature() {
         
     }
     
     @Override
-    public IKnowledge getKnowledge() {
+    public K getKnowledge() {
         return this.knowledge;
     }
 
     @Override
-    public ISkill getSkill() {
+    public S getSkill() {
         return this.skill;
     }
     
-    @Override
-    public String getId() {
-        return this.id;
-    }
-    
     @JsonSetter("skill")
-    public void setSkill(ISkill skill){
+    public void setSkill(S skill){
         this.skill = skill;
         this.skill.setKnowledge(this.knowledge);
     }

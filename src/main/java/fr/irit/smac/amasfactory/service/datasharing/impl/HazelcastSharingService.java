@@ -1,9 +1,6 @@
 package fr.irit.smac.amasfactory.service.datasharing.impl;
 
-import fr.irit.smac.amasfactory.agent.EFeature;
 import fr.irit.smac.amasfactory.agent.IAgent;
-import fr.irit.smac.amasfactory.agent.IKnowledge;
-import fr.irit.smac.amasfactory.agent.features.basic.IKnowledgeBasic;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.amasfactory.service.datasharing.IDataSharingService;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
@@ -41,7 +38,7 @@ public class HazelcastSharingService<K, S>
 
     @Override
     public void agentAdded(IAgent agent) {
-        this.hazelcastKnowledgeAccessor.registerKnowledge((IKnowledgeBasic) agent.getFeatures().get(EFeature.BASIC.getName()));
+//        this.hazelcastKnowledgeAccessor.registerKnowledge((IKnowledgeBasic) agent.getFeatures().get(EFeature.BASIC.getName()));
     }
 
     @Override
@@ -81,10 +78,10 @@ public class HazelcastSharingService<K, S>
         return new Runnable() {
             @Override
             public void run() {
-                for (IAgent agent : agentHandler.getAgents()) {
-                    hazelcastKnowledgeAccessor.registerKnowledge((IKnowledgeBasic) agent.getFeatures().get(EFeature.BASIC.getName()).getKnowledge());
+//                for (IAgent agent : agentHandler.getAgents()) {
+//                    hazelcastKnowledgeAccessor.registerKnowledge(agent.getFeatures().getFeatureBasic().getKnowledge());
                     // System.out.println("registering " + agent.getId() );
-                }
+//                }
             }
         };
     }

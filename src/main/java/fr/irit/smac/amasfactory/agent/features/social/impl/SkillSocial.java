@@ -12,9 +12,7 @@ import fr.irit.smac.amasfactory.agent.impl.Skill;
 import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
 
-public class SkillSocial extends Skill implements ISkillSocial {
-
-    private static final long serialVersionUID = -1923766227894976095L;
+public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K> implements ISkillSocial {
 
     public SkillSocial() {
 
@@ -23,7 +21,7 @@ public class SkillSocial extends Skill implements ISkillSocial {
     @Override
     public void sendOutputValue() {
 
-        IKnowledgeSocial e = (IKnowledgeSocial) this.knowledge;
+        IKnowledgeSocial e = this.knowledge;
         Object value = e.getOutputValue();
 
         for (ITarget target : e.getTargetSet()) {
@@ -40,7 +38,7 @@ public class SkillSocial extends Skill implements ISkillSocial {
     @Override
     public void sendPort(String id) {
 
-        IKnowledgeSocial e = (IKnowledgeSocial) this.knowledge;
+        IKnowledgeSocial e = this.knowledge;
 
         Set<ITarget> targets = e.getTargetSet();
 
@@ -56,7 +54,7 @@ public class SkillSocial extends Skill implements ISkillSocial {
     @Override
     public void addTargetFromMessage() {
 
-        IKnowledgeSocial e = (IKnowledgeSocial) this.knowledge;
+        IKnowledgeSocial e = this.knowledge;
 
         Collection<PortOfTargetMessage> portOfTargetsMessageCollection = e.getPortOfTargetMessageCollection();
 
@@ -72,7 +70,7 @@ public class SkillSocial extends Skill implements ISkillSocial {
     @Override
     public void updatePortFromMessage() {
 
-        IKnowledgeSocial e = (IKnowledgeSocial) this.knowledge;
+        IKnowledgeSocial e = this.knowledge;
 
         Collection<ValuePortMessage> valuePortMessageCollection = e.getValuePortMessageCollection();
 
@@ -81,7 +79,5 @@ public class SkillSocial extends Skill implements ISkillSocial {
             p.setValue(message.getValue());
         }
     }
-
-
 
 }

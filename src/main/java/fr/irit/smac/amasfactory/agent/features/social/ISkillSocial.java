@@ -1,7 +1,5 @@
 package fr.irit.smac.amasfactory.agent.features.social;
 
-import fr.irit.smac.amasfactory.agent.ISkill;
-
 public interface ISkillSocial {
 
     /**

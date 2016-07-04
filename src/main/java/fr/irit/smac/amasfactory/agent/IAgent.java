@@ -1,10 +1,10 @@
 package fr.irit.smac.amasfactory.agent;
 
-import java.util.Map;
-
 import org.slf4j.Logger;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import fr.irit.smac.amasfactory.agent.features.IFeatures;
 
 /**
  * Interface that defines the interaction capabilities of an agent with the
@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
  *            the generic type
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
-public interface IAgent {
+public interface IAgent<F extends IFeatures> {
 
     /**
      * Gets the id.
@@ -28,5 +28,5 @@ public interface IAgent {
 
     public void setLogger(Logger logger);
     
-    public Map<String,IFeature> getFeatures();
+    public F getFeatures();
 }

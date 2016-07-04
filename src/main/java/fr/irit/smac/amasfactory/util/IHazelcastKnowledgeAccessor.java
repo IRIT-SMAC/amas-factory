@@ -3,7 +3,6 @@ package fr.irit.smac.amasfactory.util;
 import java.util.Map;
 import java.util.Set;
 
-import fr.irit.smac.amasfactory.agent.IKnowledge;
 import fr.irit.smac.amasfactory.agent.features.basic.IKnowledgeBasic;
 
 public interface IHazelcastKnowledgeAccessor {

@@ -5,7 +5,6 @@ import java.io.InputStream;
 
 import fr.irit.smac.amasfactory.IAmasFactory;
 import fr.irit.smac.amasfactory.IInfrastructure;
-import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.util.deserializer.impl.AmasFactoryDeserializer;
 
 /**
@@ -15,7 +14,7 @@ import fr.irit.smac.amasfactory.util.deserializer.impl.AmasFactoryDeserializer;
  * @param <M>
  * @param <A>
  */
-public class BasicAmasFactory<A extends IAgent> implements IAmasFactory {
+public class BasicAmasFactory implements IAmasFactory {
 
     protected Class<IInfrastructure> infrastructureClass;
 

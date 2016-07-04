@@ -1,13 +1,11 @@
 package fr.irit.smac.amasfactory.agent.impl;
 
-import java.util.Map;
-
 import org.slf4j.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
-import fr.irit.smac.amasfactory.agent.IFeature;
+import fr.irit.smac.amasfactory.agent.features.IFeatures;
 
 /**
  * Abstract class used by subclasses implementing an agent
@@ -15,13 +13,13 @@ import fr.irit.smac.amasfactory.agent.IFeature;
  * @param <M>
  *            the generic type
  */
-public class Agent implements IAgent {
+public class Agent<F extends IFeatures> implements IAgent<IFeatures> {
 
     @JsonProperty
     protected String id;
 
     @JsonProperty
-    protected Map<String, IFeature> features;
+    protected F features;
 
     protected Logger logger;
 
@@ -41,7 +39,7 @@ public class Agent implements IAgent {
     }
 
     @Override
-    public Map<String, IFeature> getFeatures() {
+    public F getFeatures() {
         return this.features;
     }
 }

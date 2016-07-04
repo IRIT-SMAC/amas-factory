@@ -2,6 +2,7 @@ package fr.irit.smac.amasfactory;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import fr.irit.smac.amasfactory.agent.features.IFeatures;
 import fr.irit.smac.amasfactory.impl.ShutdownRuntimeException;
 import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;

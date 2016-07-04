@@ -3,11 +3,10 @@ package fr.irit.smac.amasfactory.agent;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
-public interface IFeature {
+public interface IFeature<K,S> {
 
-    public IKnowledge getKnowledge();
+    public K getKnowledge();
 
-    public ISkill getSkill();
+    public S getSkill();
 
-    public String getId();
 }
