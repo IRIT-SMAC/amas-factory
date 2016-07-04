@@ -1,31 +1,29 @@
-package fr.irit.smac.amasfactory.agent.social.impl;
+package fr.irit.smac.amasfactory.agent.features.social.impl;
 
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import fr.irit.smac.amasfactory.agent.EExtraKnowledgeSkill;
-import fr.irit.smac.amasfactory.agent.impl.ExtraSkill;
-import fr.irit.smac.amasfactory.agent.social.IExtraKnowledgeSocial;
-import fr.irit.smac.amasfactory.agent.social.IExtraSkillSocial;
-import fr.irit.smac.amasfactory.agent.social.IPort;
-import fr.irit.smac.amasfactory.agent.social.ITarget;
+import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
+import fr.irit.smac.amasfactory.agent.features.social.IPort;
+import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
+import fr.irit.smac.amasfactory.agent.features.social.ITarget;
+import fr.irit.smac.amasfactory.agent.impl.Skill;
 import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
 
-public class ExtraSkillSocial extends ExtraSkill implements IExtraSkillSocial {
-
+public class SkillSocial extends Skill implements ISkillSocial {
 
     private static final long serialVersionUID = -1923766227894976095L;
 
-    public ExtraSkillSocial() {
+    public SkillSocial() {
 
     }
 
     @Override
     public void sendOutputValue() {
 
-        IExtraKnowledgeSocial e = (IExtraKnowledgeSocial) this.knowledge.getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName());
+        IKnowledgeSocial e = (IKnowledgeSocial) this.knowledge;
         Object value = e.getOutputValue();
 
         for (ITarget target : e.getTargetSet()) {
@@ -40,9 +38,9 @@ public class ExtraSkillSocial extends ExtraSkill implements IExtraSkillSocial {
     }
 
     @Override
-    public void sendPort() {
+    public void sendPort(String id) {
 
-        IExtraKnowledgeSocial e = (IExtraKnowledgeSocial) this.knowledge.getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName());
+        IKnowledgeSocial e = (IKnowledgeSocial) this.knowledge;
 
         Set<ITarget> targets = e.getTargetSet();
 
@@ -50,7 +48,7 @@ public class ExtraSkillSocial extends ExtraSkill implements IExtraSkillSocial {
             String agentId = target.getAgentId();
             String portTarget = target.getPortTarget();
             String portSource = target.getPortSource();
-            e.getMsgBox().send(new PortOfTargetMessage(portTarget, portSource, this.knowledge.getId()),
+            e.getMsgBox().send(new PortOfTargetMessage(portTarget, portSource, id),
                 agentId);
         }
     }
@@ -58,7 +56,7 @@ public class ExtraSkillSocial extends ExtraSkill implements IExtraSkillSocial {
     @Override
     public void addTargetFromMessage() {
 
-        IExtraKnowledgeSocial e = (IExtraKnowledgeSocial) this.knowledge.getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName());
+        IKnowledgeSocial e = (IKnowledgeSocial) this.knowledge;
 
         Collection<PortOfTargetMessage> portOfTargetsMessageCollection = e.getPortOfTargetMessageCollection();
 
@@ -74,7 +72,7 @@ public class ExtraSkillSocial extends ExtraSkill implements IExtraSkillSocial {
     @Override
     public void updatePortFromMessage() {
 
-        IExtraKnowledgeSocial e = (IExtraKnowledgeSocial) this.knowledge.getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName());
+        IKnowledgeSocial e = (IKnowledgeSocial) this.knowledge;
 
         Collection<ValuePortMessage> valuePortMessageCollection = e.getValuePortMessageCollection();
 

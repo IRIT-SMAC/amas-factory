@@ -1,8 +1,8 @@
 package fr.irit.smac.amasfactory.factoryclientdemo.example3.impl
 
-import fr.irit.smac.amasfactory.agent.EExtraKnowledgeSkill
+import fr.irit.smac.amasfactory.agent.EFeature
+import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
 import fr.irit.smac.amasfactory.agent.impl.Agent
-import fr.irit.smac.amasfactory.agent.social.IExtraSkillSocial
 import fr.irit.smac.amasfactory.factoryclientdemo.example3.EMyExtraKnowledgeSkill
 import fr.irit.smac.amasfactory.factoryclientdemo.example3.IExtraKnowledgeCustom
 import fr.irit.smac.amasfactory.factoryclientdemo.example3.IExtraSkillCustom
@@ -24,13 +24,13 @@ class DemoAgent3 extends Agent implements ITwoStepsAgent{
     @Override
     public void decideAndAct() {
 
-        IExtraSkillSocial eSSocial = this.skill.getExtraSkills().get(EExtraKnowledgeSkill.SOCIAL.getName())
+        ISkillSocial eSSocial = this.skill.getExtraSkills().get(EFeature.SOCIAL.getName())
         eSSocial.updatePortFromMessage()
 
         IExtraKnowledgeCustom eKCustom = this.knowledge.getExtraKnowledges().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
         
         if (!eKCustom.getSend()) {
-            eSSocial.sendPort()
+            eSSocial.sendPort(this.knowledge.getId())
             eKCustom.setSend(true)
         }
     }

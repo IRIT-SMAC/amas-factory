@@ -1,8 +1,8 @@
 package fr.irit.smac.amasfactory.factoryclientdemo.example3.impl
 
-import fr.irit.smac.amasfactory.agent.EExtraKnowledgeSkill
+import fr.irit.smac.amasfactory.agent.EFeature
+import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
 import fr.irit.smac.amasfactory.agent.impl.Agent
-import fr.irit.smac.amasfactory.agent.social.IExtraSkillSocial
 import fr.irit.smac.amasfactory.factoryclientdemo.example3.EMyExtraKnowledgeSkill
 import fr.irit.smac.amasfactory.factoryclientdemo.example3.IExtraSkillCustom
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
@@ -25,7 +25,7 @@ class DemoAgent4 extends Agent implements ITwoStepsAgent{
     @Override
     public void decideAndAct() {
 
-        IExtraSkillSocial e = this.skill.getExtraSkills().get(EExtraKnowledgeSkill.SOCIAL.getName())
+        ISkillSocial e = this.skill.getExtraSkills().get(EFeature.SOCIAL.getName())
         e.addTargetFromMessage()
         e.sendOutputValue()
     }

@@ -1,12 +1,13 @@
 package fr.irit.smac.amasfactory.agent.impl;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
-import fr.irit.smac.amasfactory.agent.IKnowledge;
-import fr.irit.smac.amasfactory.agent.ISkill;
+import fr.irit.smac.amasfactory.agent.IFeature;
 
 /**
  * Abstract class used by subclasses implementing an agent
@@ -20,21 +21,13 @@ public class Agent implements IAgent {
     protected String id;
 
     @JsonProperty
-    protected IKnowledge knowledge;
-
-    @JsonProperty
-    protected ISkill skill;
+    protected Map<String, IFeature> features;
 
     protected Logger logger;
 
     @Override
     public String getId() {
         return this.id;
-    }
-
-    @Override
-    public IKnowledge getKnowledge() {
-        return this.knowledge;
     }
 
     @Override
@@ -48,8 +41,7 @@ public class Agent implements IAgent {
     }
 
     @Override
-    public ISkill getSkill() {
-        return this.skill;
+    public Map<String, IFeature> getFeatures() {
+        return this.features;
     }
-
 }

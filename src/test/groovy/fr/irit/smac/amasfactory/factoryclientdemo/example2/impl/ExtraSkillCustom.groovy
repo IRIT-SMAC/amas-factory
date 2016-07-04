@@ -1,10 +1,10 @@
 package fr.irit.smac.amasfactory.factoryclientdemo.example2.impl
 
-import fr.irit.smac.amasfactory.agent.EExtraKnowledgeSkill
+import fr.irit.smac.amasfactory.agent.EFeature
+import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
+import fr.irit.smac.amasfactory.agent.features.social.IPort;
+import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
 import fr.irit.smac.amasfactory.agent.impl.ExtraSkill
-import fr.irit.smac.amasfactory.agent.social.IExtraKnowledgeSocial
-import fr.irit.smac.amasfactory.agent.social.IExtraSkillSocial
-import fr.irit.smac.amasfactory.agent.social.IPort
 import fr.irit.smac.amasfactory.factoryclientdemo.example2.IExtraSkillCustom
 import fr.irit.smac.amasfactory.message.AbstractMessage
 import fr.irit.smac.amasfactory.message.IMessage
@@ -16,7 +16,7 @@ class ExtraSkillCustom extends ExtraSkill implements IExtraSkillCustom{
 
     public void processMessages() {
 
-        IExtraKnowledgeSocial e = this.knowledge.getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName())
+        IKnowledgeSocial e = this.knowledge.getExtraKnowledges().get(EFeature.SOCIAL.getName())
         IMsgBox<IMessage> msgBox = e.getMsgBox()
         for (AbstractMessage demoMessage : msgBox.getMsgs()) {
 
@@ -31,7 +31,7 @@ class ExtraSkillCustom extends ExtraSkill implements IExtraSkillCustom{
     @Override
     public boolean checkPortMapFull() {
 
-        IExtraKnowledgeSocial e = this.knowledge.getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName())
+        IKnowledgeSocial e = this.knowledge.getExtraKnowledges().get(EFeature.SOCIAL.getName())
 
         boolean ok = true
         for (p in e.getPortMap()) {
@@ -46,7 +46,7 @@ class ExtraSkillCustom extends ExtraSkill implements IExtraSkillCustom{
     @Override
     public void getOutputValue() {
 
-        IExtraKnowledgeSocial e = this.knowledge.getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName())
+        IKnowledgeSocial e = this.knowledge.getExtraKnowledges().get(EFeature.SOCIAL.getName())
 
         if (e.getOutputValue() == null) {
             String val = ""

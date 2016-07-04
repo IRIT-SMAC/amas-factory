@@ -4,18 +4,19 @@ import java.util.Map;
 import java.util.Set;
 
 import fr.irit.smac.amasfactory.agent.IKnowledge;
+import fr.irit.smac.amasfactory.agent.features.basic.IKnowledgeBasic;
 
 public interface IHazelcastKnowledgeAccessor {
 
-    void registerKnowledge(IKnowledge knowledge);
+    void registerKnowledge(IKnowledgeBasic knowledge);
 
     void removeKnowledge(String knowledgeId);
 
-    IKnowledge getKnowledge(String knowledgeId);
+    IKnowledgeBasic getKnowledge(String knowledgeId);
 
     Set<String> getKnowledgeIdSet();
 
-    Map<String, IKnowledge> getKnowledgeMap();
+    Map<String, IKnowledgeBasic> getKnowledgeMap();
 
     void shutdownInstance();
 

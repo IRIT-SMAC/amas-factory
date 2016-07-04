@@ -8,6 +8,7 @@ import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 
 import fr.irit.smac.amasfactory.agent.IKnowledge;
+import fr.irit.smac.amasfactory.agent.features.basic.IKnowledgeBasic;
 import fr.irit.smac.amasfactory.util.IHazelcastKnowledgeAccessor;
 
 /**
@@ -19,7 +20,7 @@ import fr.irit.smac.amasfactory.util.IHazelcastKnowledgeAccessor;
  */
 public class HazelcastKnowledgeAccessor implements IHazelcastKnowledgeAccessor {
 
-    Map<String, IKnowledge> mapKnowledge;
+    Map<String, IKnowledgeBasic> mapKnowledge;
 
     HazelcastInstance instance;
 
@@ -37,7 +38,7 @@ public class HazelcastKnowledgeAccessor implements IHazelcastKnowledgeAccessor {
      * registerKnowledge(fr.irit.smac.amasfactory.agent.IKnowledge)
      */
     @Override
-    public void registerKnowledge(IKnowledge knowledge) {
+    public void registerKnowledge(IKnowledgeBasic knowledge) {
         this.mapKnowledge.put(knowledge.getId(), knowledge);
     }
 
@@ -59,7 +60,7 @@ public class HazelcastKnowledgeAccessor implements IHazelcastKnowledgeAccessor {
      * getKnowledge(java.lang.String)
      */
     @Override
-    public IKnowledge getKnowledge(String knowledgeId) {
+    public IKnowledgeBasic getKnowledge(String knowledgeId) {
         return mapKnowledge.get(knowledgeId);
     }
 
@@ -75,7 +76,7 @@ public class HazelcastKnowledgeAccessor implements IHazelcastKnowledgeAccessor {
     }
 
     @Override
-    public Map<String, IKnowledge> getKnowledgeMap() {
+    public Map<String, IKnowledgeBasic> getKnowledgeMap() {
         return mapKnowledge;
     }
 

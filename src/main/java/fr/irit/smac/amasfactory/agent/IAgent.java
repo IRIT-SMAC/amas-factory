@@ -1,5 +1,7 @@
 package fr.irit.smac.amasfactory.agent;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -22,16 +24,9 @@ public interface IAgent {
      */
     public String getId();
 
-    /**
-     * Gets the knowledge.
-     *
-     * @return the knowledge
-     */
-    public IKnowledge getKnowledge();
-    
-    public ISkill getSkill();
-
     public void setId(String id);
 
     public void setLogger(Logger logger);
+    
+    public Map<String,IFeature> getFeatures();
 }

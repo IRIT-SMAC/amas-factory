@@ -6,8 +6,11 @@ import spock.lang.Specification
 import com.fasterxml.jackson.databind.JsonMappingException
 
 import fr.irit.smac.amasfactory.IInfrastructure
-import fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.DemoAgent;
-import fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.ExtraKnowledgeCustom;
+import fr.irit.smac.amasfactory.agent.EFeature
+import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial
+import fr.irit.smac.amasfactory.factoryclientdemo.example1.EMyFeature
+import fr.irit.smac.amasfactory.factoryclientdemo.example1.IKnowledgeCustom
+import fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.DemoAgent
 import fr.irit.smac.amasfactory.impl.BasicAmasFactory
 import fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler
 import fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService
@@ -55,7 +58,8 @@ class AmasFactoryDemoTest extends Specification{
             System.out.println(entry.getKey() + "/" + entry.getValue())
             DemoAgent agent = entry.getValue()
 
-            assert agent.getKnowledge().getExtraKnowledges().get("custom").getCount() == 20
+            assert ((IKnowledgeCustom)agent.features.get(EMyFeature.CUSTOM.getName()).getKnowledge()).getCount() == 20
+            assert ((IKnowledgeSocial)agent.features.get(EFeature.SOCIAL.getName()).getKnowledge()).getMsgBox().getMsgs().size() == 20
         }
         infra.shutdown()
     }

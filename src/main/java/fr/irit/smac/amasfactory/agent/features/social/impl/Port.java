@@ -1,10 +1,10 @@
-package fr.irit.smac.amasfactory.agent.social.impl;
+package fr.irit.smac.amasfactory.agent.features.social.impl;
 
 import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import fr.irit.smac.amasfactory.agent.social.IPort;
+import fr.irit.smac.amasfactory.agent.features.social.IPort;
 
 public class Port implements IPort, Serializable {
 

@@ -1,4 +1,4 @@
-package fr.irit.smac.amasfactory.agent.social;
+package fr.irit.smac.amasfactory.agent.features.social;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 

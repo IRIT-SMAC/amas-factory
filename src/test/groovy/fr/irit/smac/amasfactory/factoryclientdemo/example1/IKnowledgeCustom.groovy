@@ -1,9 +1,8 @@
 package fr.irit.smac.amasfactory.factoryclientdemo.example1
 
-import fr.irit.smac.amasfactory.agent.IExtraKnowledge
 
 
-interface IExtraKnowledgeCustom extends IExtraKnowledge{
+interface IKnowledgeCustom {
 
     public int getCount()
     

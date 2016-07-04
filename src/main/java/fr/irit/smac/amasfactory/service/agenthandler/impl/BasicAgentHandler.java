@@ -7,9 +7,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import fr.irit.smac.amasfactory.agent.EExtraKnowledgeSkill;
+import fr.irit.smac.amasfactory.agent.EFeature;
 import fr.irit.smac.amasfactory.agent.IAgent;
-import fr.irit.smac.amasfactory.agent.social.IExtraKnowledgeSocial;
+import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
 import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.service.IInfraService;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
@@ -210,8 +210,7 @@ public class BasicAgentHandler
         
         this.getAgentMap().forEach((k, v) -> {
 
-            ((IExtraKnowledgeSocial) v.getKnowledge().getExtraKnowledges().get(EExtraKnowledgeSkill.SOCIAL.getName())).setMsgBox(messagingService.getMsgBox(k));
-            v.getSkill().setKnowledge(v.getKnowledge());
+            ((IKnowledgeSocial) v.getFeatures().get(EFeature.SOCIAL.getName()).getKnowledge()).setMsgBox(messagingService.getMsgBox(k));
             v.setId(k);
             v.setLogger(loggingService.getAgentLogger(k));
             
