@@ -2,6 +2,7 @@ package fr.irit.smac.amasfactory.agent.social.impl;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -12,8 +13,10 @@ import fr.irit.smac.amasfactory.agent.impl.ExtraKnowledge;
 import fr.irit.smac.amasfactory.agent.social.IExtraKnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.social.IPort;
 import fr.irit.smac.amasfactory.agent.social.ITarget;
+import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
+import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 
 public class ExtraKnowledgeSocial extends ExtraKnowledge implements IExtraKnowledgeSocial {
 
@@ -35,12 +38,15 @@ public class ExtraKnowledgeSocial extends ExtraKnowledge implements IExtraKnowle
 
     private Collection<PortOfTargetMessage> sendPortToTargetMessageCollection;
 
+    protected IMsgBox<IMessage> msgBox;
+
     /**
      * Instantiates the knowledge of an agent.
      */
     public ExtraKnowledgeSocial() {
 
         this.targetSet = new HashSet<>();
+        this.portMap = new HashMap<>();
         this.sendToTargetMessageCollection = new ArrayList<>();
         this.sendPortToTargetMessageCollection = new ArrayList<>();
     }
@@ -85,4 +91,11 @@ public class ExtraKnowledgeSocial extends ExtraKnowledge implements IExtraKnowle
         return sendPortToTargetMessageCollection;
     }
 
+    public void setMsgBox(IMsgBox<IMessage> msgBox) {
+        this.msgBox = msgBox;
+    }
+
+    public IMsgBox<IMessage> getMsgBox() {
+        return this.msgBox;
+    }
 }

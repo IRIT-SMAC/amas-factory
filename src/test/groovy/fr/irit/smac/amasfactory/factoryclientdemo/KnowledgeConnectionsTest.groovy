@@ -3,9 +3,12 @@ package fr.irit.smac.amasfactory.factoryclientdemo
 import static org.junit.Assert.*
 import spock.lang.Specification
 import fr.irit.smac.amasfactory.IInfrastructure
+import fr.irit.smac.amasfactory.agent.EExtraKnowledgeSkill
 import fr.irit.smac.amasfactory.agent.IAgent
 import fr.irit.smac.amasfactory.agent.impl.Agent
 import fr.irit.smac.amasfactory.agent.social.IPort
+import fr.irit.smac.amasfactory.agent.social.impl.ExtraKnowledgeSocial
+import fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2
 import fr.irit.smac.amasfactory.impl.BasicAmasFactory
 
 class KnowledgeConnectionsTest extends Specification {
@@ -19,8 +22,8 @@ class KnowledgeConnectionsTest extends Specification {
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/knowledge_connections.json"))
         Map<String,IAgent> agents = infra.getAgentHandler().getAgentMap()
 
-        agents.get("ag1").getKnowledge().setOutputValue("hello")
-        agents.get("ag5").getKnowledge().setOutputValue("hallo")
+        ((ExtraKnowledgeSocial)agents.get("ag1").getKnowledge().getExtraKnowledge().get(EExtraKnowledgeSkill.SOCIAL.getName())).setOutputValue("hello")
+        ((ExtraKnowledgeSocial)agents.get("ag5").getKnowledge().getExtraKnowledge().get(EExtraKnowledgeSkill.SOCIAL.getName())).setOutputValue("hallo")
 
         when:
         for (int i = 0 ; i < 4; i++) {
@@ -33,7 +36,7 @@ class KnowledgeConnectionsTest extends Specification {
         int j = 0
         for (e in agents) {
             DemoAgent2 agent = e.value
-            assert agent.getKnowledge().getOutputValue() == outputs[j]
+            assert agent.getKnowledge().getExtraKnowledge().get(EExtraKnowledgeSkill.SOCIAL.getName()).getOutputValue() == outputs[j]
             j++
         }
         infra.shutdown()

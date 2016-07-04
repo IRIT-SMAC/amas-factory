@@ -10,14 +10,13 @@ import fr.irit.smac.amasfactory.agent.social.IExtraKnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.social.IExtraSkillSocial;
 import fr.irit.smac.amasfactory.agent.social.IPort;
 import fr.irit.smac.amasfactory.agent.social.ITarget;
-import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
-import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 
 public class ExtraSkillSocial extends ExtraSkill implements IExtraSkillSocial {
 
-    protected IMsgBox<IMessage> msgBox;
+
+    private static final long serialVersionUID = -1923766227894976095L;
 
     public ExtraSkillSocial() {
 
@@ -34,7 +33,7 @@ public class ExtraSkillSocial extends ExtraSkill implements IExtraSkillSocial {
             String port = target.getPortTarget();
             // logger.info("send to target " + target.getAgentId() + "
             // message= " + value);
-            this.msgBox.send(
+            e.getMsgBox().send(
                 new ValuePortMessage(port, value),
                 agentId);
         }
@@ -51,7 +50,7 @@ public class ExtraSkillSocial extends ExtraSkill implements IExtraSkillSocial {
             String agentId = target.getAgentId();
             String portTarget = target.getPortTarget();
             String portSource = target.getPortSource();
-            this.msgBox.send(new PortOfTargetMessage(portTarget, portSource, this.knowledge.getId()),
+            e.getMsgBox().send(new PortOfTargetMessage(portTarget, portSource, this.knowledge.getId()),
                 agentId);
         }
     }
@@ -85,12 +84,6 @@ public class ExtraSkillSocial extends ExtraSkill implements IExtraSkillSocial {
         }
     }
 
-    public void setMsgBox(IMsgBox<IMessage> msgBox) {
-        this.msgBox = msgBox;
-    }
 
-    public IMsgBox<IMessage> getMsgBox() {
-        return this.msgBox;
-    }
 
 }
