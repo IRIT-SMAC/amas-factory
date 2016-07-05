@@ -2,7 +2,6 @@ package fr.irit.smac.amasfactory.agent.features;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import fr.irit.smac.amasfactory.agent.IFeature;
 import fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic;
 import fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic;
 import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial;

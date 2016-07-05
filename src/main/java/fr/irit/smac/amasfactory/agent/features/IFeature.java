@@ -1,4 +1,4 @@
-package fr.irit.smac.amasfactory.agent;
+package fr.irit.smac.amasfactory.agent.features;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 

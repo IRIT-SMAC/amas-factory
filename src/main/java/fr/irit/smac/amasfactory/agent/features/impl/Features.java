@@ -1,8 +1,8 @@
-package fr.irit.smac.amasfactory.agent.impl;
+package fr.irit.smac.amasfactory.agent.features.impl;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import fr.irit.smac.amasfactory.agent.IFeature;
+import fr.irit.smac.amasfactory.agent.features.IFeature;
 import fr.irit.smac.amasfactory.agent.features.IFeatures;
 import fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic;
 import fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic;

@@ -9,7 +9,7 @@
 				"features":{
 					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.MyFeatures",
 					"featureBasic":{
-						"className":"fr.irit.smac.amasfactory.agent.impl.Feature",
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
 							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
 							"id":"ag1"
@@ -17,7 +17,7 @@
 						
 					},
 					"featureSocial":{
-						"className":"fr.irit.smac.amasfactory.agent.impl.Feature",
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
 							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial"
 						},
@@ -27,7 +27,7 @@
 						
 					},
 					"featureCustom":{
-						"className":"fr.irit.smac.amasfactory.agent.impl.Feature",
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
 							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.KnowledgeCustom"
 						},
@@ -46,7 +46,7 @@
 				"features":{
 					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.MyFeatures",
 					"featureBasic":{
-						"className":"fr.irit.smac.amasfactory.agent.impl.Feature",
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
 							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
 							"id":"ag2"
@@ -54,7 +54,7 @@
 						
 					},
 					"featureSocial":{
-						"className":"fr.irit.smac.amasfactory.agent.impl.Feature",
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
 							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial"
 						},
@@ -64,7 +64,7 @@
 						
 					},
 					"featureCustom":{
-						"className":"fr.irit.smac.amasfactory.agent.impl.Feature",
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
 							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.KnowledgeCustom"
 						},
