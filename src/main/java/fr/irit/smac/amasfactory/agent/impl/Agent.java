@@ -42,6 +42,9 @@ public class Agent<F extends IFeatures, K extends IKnowledge, S extends ISkill<K
     @Override
     public void setLogger(Logger logger) {
         this.logger = logger;
+        this.primaryFeature.getSkill().setLogger(logger);
+        this.commonFeatures.getFeatureBasic().getSkill().setLogger(logger);
+        this.commonFeatures.getFeatureSocial().getSkill().setLogger(logger);
     }
 
     @Override

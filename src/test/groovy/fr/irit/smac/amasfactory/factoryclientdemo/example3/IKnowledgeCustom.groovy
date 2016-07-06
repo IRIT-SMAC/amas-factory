@@ -1,8 +1,10 @@
-package fr.irit.smac.amasfactory.factoryclientdemo.example3;
+package fr.irit.smac.amasfactory.factoryclientdemo.example3
 
-public interface IKnowledgeCustom {
+import fr.irit.smac.amasfactory.agent.IKnowledge
+
+public interface IKnowledgeCustom extends IKnowledge {
 
     public boolean getSend()
-    
+
     public void setSend(boolean send)
 }

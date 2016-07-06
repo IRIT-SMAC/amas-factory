@@ -14,7 +14,7 @@ import fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService
 import fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService
 import fr.irit.smac.amasfactory.service.messaging.impl.MessagingService
 
-class AmasFactoryDemoTest<F extends IFeatures> extends Specification{
+class AmasFactoryDemoTest extends Specification{
 
     def 'check if the system is correctly instantiated'() {
 
@@ -23,7 +23,7 @@ class AmasFactoryDemoTest<F extends IFeatures> extends Specification{
 
 
         when:
-        IInfrastructure<F> infra =
+        IInfrastructure infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/demo_config.json"))
 
         then:
@@ -40,7 +40,7 @@ class AmasFactoryDemoTest<F extends IFeatures> extends Specification{
         given:
         BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
 
-        IInfrastructure<F> infra =
+        IInfrastructure infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/demo_config.json"))
 
         when:

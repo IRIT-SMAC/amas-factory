@@ -23,6 +23,9 @@
 						"knowledge":{
 							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
 							"id":"ag1"
+						},
+						"skill":{
+							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
 						}
 						
 					},
@@ -75,6 +78,9 @@
 						"knowledge":{
 							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
 							"id":"ag2"
+						},
+						"skill":{
+							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
 						}
 						
 					},
@@ -140,6 +146,9 @@
 						"knowledge":{
 							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
 							"id":"ag3"
+						},
+						"skill":{
+							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
 						}
 						
 					},
@@ -187,6 +196,9 @@
 						"knowledge":{
 							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
 							"id":"ag4"
+						},
+						"skill":{
+							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
 						}
 						
 					},
@@ -242,6 +254,9 @@
 						"knowledge":{
 							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
 							"id":"ag5"
+						},
+						"skill":{
+							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
 						}
 						
 					},

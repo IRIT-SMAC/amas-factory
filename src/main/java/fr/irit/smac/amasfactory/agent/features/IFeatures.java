@@ -2,16 +2,16 @@ package fr.irit.smac.amasfactory.agent.features;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic;
-import fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic;
-import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial;
-import fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial;
+import fr.irit.smac.amasfactory.agent.features.basic.IKnowledgeBasic;
+import fr.irit.smac.amasfactory.agent.features.basic.ISkillBasic;
+import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
+import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
 public interface IFeatures {
 
-    IFeature<KnowledgeSocial, SkillSocial<KnowledgeSocial>> getFeatureSocial();
+    IFeature<IKnowledgeSocial, ISkillSocial<IKnowledgeSocial>> getFeatureSocial();
 
-    IFeature<KnowledgeBasic, SkillBasic<KnowledgeBasic>> getFeatureBasic();
+    IFeature<IKnowledgeBasic, ISkillBasic<IKnowledgeBasic>> getFeatureBasic();
 
 }

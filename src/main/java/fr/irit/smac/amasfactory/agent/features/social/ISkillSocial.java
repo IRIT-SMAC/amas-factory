@@ -1,6 +1,8 @@
 package fr.irit.smac.amasfactory.agent.features.social;
 
-public interface ISkillSocial {
+import fr.irit.smac.amasfactory.agent.ISkill;
+
+public interface ISkillSocial<K extends IKnowledgeSocial> extends ISkill<K>{
 
     /**
      * Sends the output value of an agent to its targets

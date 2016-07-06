@@ -1,6 +1,8 @@
 package fr.irit.smac.amasfactory.agent.features.basic;
 
-public interface IKnowledgeBasic {
+import fr.irit.smac.amasfactory.agent.IKnowledge;
+
+public interface IKnowledgeBasic extends IKnowledge {
 
     public String getId();
 }

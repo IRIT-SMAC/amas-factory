@@ -12,7 +12,7 @@ import fr.irit.smac.amasfactory.agent.impl.Skill;
 import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
 
-public class SkillSocial<K extends KnowledgeSocial> extends Skill<K> implements ISkillSocial {
+public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K> implements ISkillSocial<K> {
 
     public SkillSocial() {
 
@@ -74,10 +74,8 @@ public class SkillSocial<K extends KnowledgeSocial> extends Skill<K> implements 
 
         Collection<ValuePortMessage> valuePortMessageCollection = e.getValuePortMessageCollection();
 
-        System.out.println(valuePortMessageCollection);
         for (ValuePortMessage message : valuePortMessageCollection) {
             
-            System.out.println(message.getPort());
             IPort p = e.getPortMap().get(message.getPort());
             p.setValue(message.getValue());
         }
