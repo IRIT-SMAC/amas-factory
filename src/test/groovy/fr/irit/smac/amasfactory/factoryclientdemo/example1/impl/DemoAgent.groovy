@@ -1,29 +1,28 @@
-package fr.irit.smac.amasfactory.factoryclientdemo.example1.impl
+package fr.irit.smac.amasfactory.factoryclientdemo.example1.impl;
 
-import com.fasterxml.jackson.annotation.JsonProperty
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import fr.irit.smac.amasfactory.agent.impl.Agent
-import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
+import fr.irit.smac.amasfactory.agent.features.IFeatures;
+import fr.irit.smac.amasfactory.agent.features.impl.Feature;
+import fr.irit.smac.amasfactory.agent.impl.Agent;
+import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 
-class DemoAgent<F extends MyFeatures> extends Agent<F> implements ITwoStepsAgent{
-
-    @JsonProperty
-    private String               message
+class DemoAgent<F extends IFeatures, K extends KnowledgeCustom, S extends SkillCustom<K>, P extends Feature<K, S>>
+    extends Agent<F, K, S, P>implements ITwoStepsAgent {
 
     public DemoAgent() {
-        super()
+        super();
     }
 
     @Override
     public void perceive() {
         println "perceive"
-        this.features.getFeatureCustom().getSkill().increment()
-        this.features.getFeatureSocial().getKnowledge().getMsgBox().broadcast("hello")
+        this.primaryFeature.getSkill().increment();
     }
 
     @Override
     public void decideAndAct() {
         println "decideAndAct"
-        this.features.getFeatureCustom().getSkill().increment()
+        this.primaryFeature.getSkill().increment();
     }
 }

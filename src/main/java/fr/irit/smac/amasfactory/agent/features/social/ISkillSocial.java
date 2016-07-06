@@ -5,7 +5,7 @@ public interface ISkillSocial {
     /**
      * Sends the output value of an agent to its targets
      */
-    public void sendOutputValue();
+    public void sendOutputValue(String id);
 
     /**
      * Send the name of its port to the target

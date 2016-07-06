@@ -1,13 +1,13 @@
 package fr.irit.smac.amasfactory.factoryclientdemo.example2.impl
 
-import fr.irit.smac.amasfactory.agent.impl.ExtraKnowledge
-import fr.irit.smac.amasfactory.factoryclientdemo.example2.IExtraKnowledgeCustom
+import fr.irit.smac.amasfactory.agent.impl.Knowledge
+import fr.irit.smac.amasfactory.factoryclientdemo.example2.IKnowledgeCustom
 
-class ExtraKnowledgeCustom extends ExtraKnowledge implements IExtraKnowledgeCustom{
+class KnowledgeCustom extends Knowledge implements IKnowledgeCustom{
 
     private boolean send
 
-    public ExtraKnowledgeCustom() {
+    public KnowledgeCustom() {
         this.send = false
     }
     

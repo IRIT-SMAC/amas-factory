@@ -205,7 +205,6 @@ public class BasicAgentHandler
     @Override
     public void initAgents(IMessagingService<IMessage> messagingService, ILoggingService loggingService) {
 
-        
         this.getAgentMap().forEach((k, v) -> {
 
             v.getFeatures().getFeatureSocial().getKnowledge().setMsgBox(messagingService.getMsgBox(k));

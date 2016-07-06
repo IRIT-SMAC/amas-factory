@@ -1,15 +1,15 @@
 package fr.irit.smac.amasfactory.message;
 
-public class PortOfTargetMessage extends AbstractMessage {
+public class PortOfTargetMessage extends Message {
 
     private static final long serialVersionUID = 8147537029195756237L;
     private final Object value;
     private String portSource;
     private final String portTarget;
     
-    public PortOfTargetMessage(String portTarget, String portSource, Object value){
+    public PortOfTargetMessage(String portTarget, String portSource, Object value, String sender){
     
-        super(EMessageType.SEND_PORT_TO_TARGET_MESSAGE);
+        super(EMessageType.SEND_PORT_TO_TARGET_MESSAGE, sender);
         
         this.portTarget = portTarget;
         this.portSource = portSource;

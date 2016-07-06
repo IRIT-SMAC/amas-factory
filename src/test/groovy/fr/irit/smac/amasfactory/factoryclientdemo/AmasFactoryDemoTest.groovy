@@ -55,8 +55,7 @@ class AmasFactoryDemoTest<F extends IFeatures> extends Specification{
             System.out.println(entry.getKey() + "/" + entry.getValue())
             DemoAgent agent = entry.getValue()
 
-            assert agent.getFeatures().getFeatureCustom().getKnowledge().getCount() == 20
-            assert agent.getFeatures().getFeatureSocial().getKnowledge().getMsgBox().getMsgs().size() == 20
+            assert agent.getPrimaryFeature().getKnowledge().getCount() == 20
         }
         infra.shutdown()
     }

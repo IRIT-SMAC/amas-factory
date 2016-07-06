@@ -6,8 +6,18 @@
 			"ag1":{
 				"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.DemoAgent",
 				"id":"ag1",
-				"features":{
-					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.MyFeatures",
+				"primaryFeature":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+					"knowledge":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.KnowledgeCustom"
+					},
+					"skill":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.SkillCustom"
+					}
+					
+				},
+				"commonFeatures":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Features",
 					"featureBasic":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
@@ -25,16 +35,6 @@
 							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
 						}
 						
-					},
-					"featureCustom":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.KnowledgeCustom"
-						},
-						"skill":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.SkillCustom"
-						}
-						
 					}
 					
 				}
@@ -43,8 +43,18 @@
 			"ag2":{
 				"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.DemoAgent",
 				"id":"ag2",
-				"features":{
-					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.MyFeatures",
+				"primaryFeature":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+					"knowledge":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.KnowledgeCustom"
+					},
+					"skill":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.SkillCustom"
+					}
+					
+				},
+				"commonFeatures":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Features",
 					"featureBasic":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
@@ -60,16 +70,6 @@
 						},
 						"skill":{
 							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
-						}
-						
-					},
-					"featureCustom":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.KnowledgeCustom"
-						},
-						"skill":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.SkillCustom"
 						}
 						
 					}

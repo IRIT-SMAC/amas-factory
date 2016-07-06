@@ -5,6 +5,9 @@ import org.slf4j.Logger;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
+import fr.irit.smac.amasfactory.agent.IKnowledge;
+import fr.irit.smac.amasfactory.agent.ISkill;
+import fr.irit.smac.amasfactory.agent.features.IFeature;
 import fr.irit.smac.amasfactory.agent.features.IFeatures;
 
 /**
@@ -13,14 +16,17 @@ import fr.irit.smac.amasfactory.agent.features.IFeatures;
  * @param <M>
  *            the generic type
  */
-public class Agent<F extends IFeatures> implements IAgent<IFeatures> {
+public class Agent<F extends IFeatures, K extends IKnowledge, S extends ISkill<K>, P extends IFeature<K, S>> implements IAgent<F, K, S, P> {
 
     @JsonProperty
     protected String id;
 
     @JsonProperty
-    protected F features;
-
+    protected F commonFeatures;
+    
+    @JsonProperty
+    protected P primaryFeature;
+    
     protected Logger logger;
 
     @Override
@@ -40,6 +46,12 @@ public class Agent<F extends IFeatures> implements IAgent<IFeatures> {
 
     @Override
     public F getFeatures() {
-        return this.features;
+        return this.commonFeatures;
     }
+
+    @Override
+    public P getPrimaryFeature() {
+        return this.primaryFeature;
+    }
+
 }

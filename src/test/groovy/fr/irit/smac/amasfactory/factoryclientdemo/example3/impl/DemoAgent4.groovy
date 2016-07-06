@@ -1,13 +1,15 @@
 package fr.irit.smac.amasfactory.factoryclientdemo.example3.impl
 
-import fr.irit.smac.amasfactory.agent.EFeature
-import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
+import fr.irit.smac.amasfactory.agent.features.IFeatures;
+import fr.irit.smac.amasfactory.agent.features.impl.Feature;
+import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial
 import fr.irit.smac.amasfactory.agent.impl.Agent
-import fr.irit.smac.amasfactory.factoryclientdemo.example3.EMyExtraKnowledgeSkill
-import fr.irit.smac.amasfactory.factoryclientdemo.example3.IExtraSkillCustom
+import fr.irit.smac.amasfactory.factoryclientdemo.example3.impl.KnowledgeCustom;
+import fr.irit.smac.amasfactory.factoryclientdemo.example3.impl.SkillCustom;
+import fr.irit.smac.amasfactory.factoryclientdemo.example3.ISkillCustom
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 
-class DemoAgent4 extends Agent implements ITwoStepsAgent{
+class DemoAgent4<F extends IFeatures, K extends KnowledgeCustom, S extends SkillCustom<K>, P extends Feature<K, S>> extends Agent<F,K,S,P> implements ITwoStepsAgent{
 
     private boolean send = false
 
@@ -18,15 +20,14 @@ class DemoAgent4 extends Agent implements ITwoStepsAgent{
     @Override
     public void perceive() {
 
-        IExtraSkillCustom e = this.skill.getExtraSkills().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
-        e.processMessages()
+        this.primaryFeature.getSkill().processMessages(this.commonFeatures.getFeatureSocial().getKnowledge())
     }
 
     @Override
     public void decideAndAct() {
 
-        ISkillSocial e = this.skill.getExtraSkills().get(EFeature.SOCIAL.getName())
-        e.addTargetFromMessage()
-        e.sendOutputValue()
+        ISkillSocial skillSocial = this.commonFeatures.getFeatureSocial().getSkill()
+        skillSocial.addTargetFromMessage()
+        skillSocial.sendOutputValue()
     }
 }

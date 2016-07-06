@@ -1,14 +1,11 @@
 package fr.irit.smac.amasfactory.factoryclientdemo.example2.impl
 
-import fr.irit.smac.amasfactory.agent.EFeature
-import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
+import fr.irit.smac.amasfactory.agent.features.IFeatures
+import fr.irit.smac.amasfactory.agent.features.impl.Feature
 import fr.irit.smac.amasfactory.agent.impl.Agent
-import fr.irit.smac.amasfactory.factoryclientdemo.example2.EMyExtraKnowledgeSkill
-import fr.irit.smac.amasfactory.factoryclientdemo.example2.IExtraKnowledgeCustom
-import fr.irit.smac.amasfactory.factoryclientdemo.example2.IExtraSkillCustom
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 
-class DemoAgent2 extends Agent implements ITwoStepsAgent{
+class DemoAgent2<F extends IFeatures, K extends KnowledgeCustom, S extends SkillCustom<K>, P extends Feature<K, S>> extends Agent<F,K,S,P> implements ITwoStepsAgent{
 
     public DemoAgent2() {
         super()
@@ -17,26 +14,20 @@ class DemoAgent2 extends Agent implements ITwoStepsAgent{
     @Override
     public void perceive() {
 
-        IExtraSkillCustom e = this.skill.getExtraSkills().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
-        e.processMessages()
+        this.primaryFeature.getSkill().processMessages(this.commonFeatures.getFeatureSocial().getKnowledge())
     }
 
     @Override
     public void decideAndAct() {
 
-        ISkillSocial eSocial = this.skill.getExtraSkills().get(EFeature.SOCIAL.getName())
-        eSocial.updatePortFromMessage()
+        this.commonFeatures.getFeatureSocial().getSkill().updatePortFromMessage()
 
-        IExtraSkillCustom eSCustom = this.skill.getExtraSkills().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
-        boolean ok = eSCustom.checkPortMapFull()
+        boolean ok = this.primaryFeature.getSkill().checkPortMapFull(this.commonFeatures.getFeatureSocial().getKnowledge())
 
-        IExtraKnowledgeCustom eKCustom = this.knowledge.getExtraKnowledges().get(EMyExtraKnowledgeSkill.CUSTOM.getName())
-        
-        if (ok && !eKCustom.getSend()) {
-            eSCustom.getOutputValue()
-            ISkillSocial eSkillCustom = this.skill.getExtraSkills().get(EFeature.SOCIAL.getName())
-            eSkillCustom.sendOutputValue()
-            eKCustom.setSend(true)
+        if (ok && !this.primaryFeature.getKnowledge().getSend()) {
+            this.primaryFeature.getSkill().getOutputValue(this.commonFeatures.getFeatureSocial().getKnowledge())
+            this.commonFeatures.getFeatureSocial().getSkill().sendOutputValue()
+            this.primaryFeature.getKnowledge().setSend(true)
         }
     }
 }

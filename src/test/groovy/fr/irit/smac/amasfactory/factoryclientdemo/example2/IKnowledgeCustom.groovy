@@ -1,6 +1,6 @@
 package fr.irit.smac.amasfactory.factoryclientdemo.example2
 
-interface IExtraKnowledgeCustom {
+interface IKnowledgeCustom {
 
     public boolean getSend()
     

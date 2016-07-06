@@ -3,10 +3,9 @@ package fr.irit.smac.amasfactory.factoryclientdemo
 import static org.junit.Assert.*
 import spock.lang.Specification
 import fr.irit.smac.amasfactory.IInfrastructure
-import fr.irit.smac.amasfactory.agent.EFeature
 import fr.irit.smac.amasfactory.agent.IAgent
 import fr.irit.smac.amasfactory.agent.features.social.IPort
-import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial;
+import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial
 import fr.irit.smac.amasfactory.agent.impl.Agent
 import fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2
 import fr.irit.smac.amasfactory.impl.BasicAmasFactory
@@ -22,8 +21,8 @@ class KnowledgeConnectionsTest extends Specification {
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/knowledge_connections.json"))
         Map<String,IAgent> agents = infra.getAgentHandler().getAgentMap()
 
-        ((KnowledgeSocial)agents.get("ag1").getKnowledge().getExtraKnowledges().get(EFeature.SOCIAL.getName())).setOutputValue("hello")
-        ((KnowledgeSocial)agents.get("ag5").getKnowledge().getExtraKnowledges().get(EFeature.SOCIAL.getName())).setOutputValue("hallo")
+        agents.get("ag1").getFeatures().getFeatureSocial().getKnowledge().setOutputValue("hello")
+        agents.get("ag5").getFeatures().getFeatureSocial().getKnowledge().setOutputValue("hallo")
 
         when:
         for (int i = 0 ; i < 4; i++) {
@@ -36,7 +35,7 @@ class KnowledgeConnectionsTest extends Specification {
         int j = 0
         for (e in agents) {
             DemoAgent2 agent = e.value
-            assert agent.getKnowledge().getExtraKnowledges().get(EFeature.SOCIAL.getName()).getOutputValue() == outputs[j]
+            assert agent.getFeatures().getFeatureSocial().getKnowledge().getOutputValue() == outputs[j]
             j++
         }
         infra.shutdown()
@@ -51,8 +50,8 @@ class KnowledgeConnectionsTest extends Specification {
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/knowledge_connections2.json"))
         Map<String,IAgent> agents = infra.getAgentHandler().getAgentMap()
 
-        ((KnowledgeSocial)agents.get("ag1").getKnowledge().getExtraKnowledges().get(EFeature.SOCIAL.getName())).setOutputValue("hello")
-        ((KnowledgeSocial)agents.get("ag2").getKnowledge().getExtraKnowledges().get(EFeature.SOCIAL.getName())).setOutputValue("hallo")
+        agents.get("ag1").getFeatures().getFeatureSocial().getKnowledge().setOutputValue("hello")
+        agents.get("ag2").getFeatures().getFeatureSocial().getKnowledge().setOutputValue("hallo")
 
         when:
         for (int i = 0 ; i < 4; i++) {
@@ -65,7 +64,7 @@ class KnowledgeConnectionsTest extends Specification {
         List outputs = ["hello", "hallo"]
 
         Agent agent = agents.get("ag3")
-        HashMap<IPort> portMap = agent.getKnowledge().getExtraKnowledges().get(EFeature.SOCIAL.getName()).getPortMap()
+        HashMap<IPort> portMap = agent.getFeatures().getFeatureSocial().getKnowledge().getPortMap()
         for (p in portMap) {
             IPort port = p.value
             assert port.getValue() == outputs[j]

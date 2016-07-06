@@ -140,6 +140,7 @@ public class BasicInfrastructure
         this.loggingService.start();
         this.agentHandlerService.initAgents(this.messagingService, this.loggingService);
         this.hazelcastService.start();
+        
     }
 
     @Override

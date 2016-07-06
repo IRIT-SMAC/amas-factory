@@ -12,14 +12,14 @@ import fr.irit.smac.amasfactory.agent.impl.Skill;
 import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
 
-public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K> implements ISkillSocial {
+public class SkillSocial<K extends KnowledgeSocial> extends Skill<K> implements ISkillSocial {
 
     public SkillSocial() {
 
     }
 
     @Override
-    public void sendOutputValue() {
+    public void sendOutputValue(String id) {
 
         IKnowledgeSocial e = this.knowledge;
         Object value = e.getOutputValue();
@@ -30,7 +30,7 @@ public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K> implements
             // logger.info("send to target " + target.getAgentId() + "
             // message= " + value);
             e.getMsgBox().send(
-                new ValuePortMessage(port, value),
+                new ValuePortMessage(port, value, id),
                 agentId);
         }
     }
@@ -46,7 +46,7 @@ public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K> implements
             String agentId = target.getAgentId();
             String portTarget = target.getPortTarget();
             String portSource = target.getPortSource();
-            e.getMsgBox().send(new PortOfTargetMessage(portTarget, portSource, id),
+            e.getMsgBox().send(new PortOfTargetMessage(portTarget, portSource, id, id),
                 agentId);
         }
     }
@@ -74,7 +74,10 @@ public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K> implements
 
         Collection<ValuePortMessage> valuePortMessageCollection = e.getValuePortMessageCollection();
 
+        System.out.println(valuePortMessageCollection);
         for (ValuePortMessage message : valuePortMessageCollection) {
+            
+            System.out.println(message.getPort());
             IPort p = e.getPortMap().get(message.getPort());
             p.setValue(message.getValue());
         }

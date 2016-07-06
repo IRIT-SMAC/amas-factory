@@ -1,5 +1,7 @@
 package fr.irit.smac.amasfactory.service.execution.impl;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Collections;
 import java.util.Set;
 import java.util.concurrent.ExecutionException;
@@ -8,14 +10,18 @@ import java.util.concurrent.Future;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.JFrame;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.impl.ShutdownRuntimeException;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
+import fr.irit.smac.libs.tooling.scheduling.contrib.gui.SystemControllerPanel;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.TwoStepsSystemStrategy;
+import fr.irit.smac.libs.tooling.scheduling.example.AllInOneSystem;
 import fr.irit.smac.libs.tooling.scheduling.impl.system.SynchronizedSystemStrategy;
 
 /**
@@ -66,7 +72,21 @@ public class TwoStepAgExecutionService implements IExecutionService{
 
         this.systemStrategy = new TwoStepsSystemStrategy(Collections.emptyList(),
             Executors.newFixedThreadPool(this.nbThreads));
-
+        
+        JFrame frame = new JFrame() {
+            {
+                this.add(new SystemControllerPanel(systemStrategy, 500));
+                this.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        systemStrategy.shutdown();
+                    }
+                });
+                this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            }
+        };
+        frame.pack();
+        frame.setVisible(true);
         this.agentHandlerService.addAgentEventListener(this);
     }
 

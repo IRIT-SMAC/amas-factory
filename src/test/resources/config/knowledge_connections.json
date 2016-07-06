@@ -6,44 +6,48 @@
 			"ag1":{
 				"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
 				"id":"ag1",
-				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.Knowledge",
-					"id":"ag1",
-					"extraKnowledges":{
-						"custom":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.ExtraKnowledgeCustom"
-						},
-						"social":{
-							"className":"fr.irit.smac.amasfactory.agent.social.impl.ExtraKnowledgeSocial",
+				"primaryFeature":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+					"knowledge":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
+					},
+					"skill":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
+					}
+					
+				},
+				"commonFeatures":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Features",
+					"featureBasic":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+							"id":"ag1"
+						}
+						
+					},
+					"featureSocial":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
 							"outputType":"java.lang.String",
 							"targetSet":[
 								{
 									"agentTarget":"ag2",
 									"portTarget":"port1",
-									"className":"fr.irit.smac.amasfactory.agent.social.impl.Target"
+									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 								},
 								{
 									"agentTarget":"ag2",
 									"portTarget":"port3",
-									"className":"fr.irit.smac.amasfactory.agent.social.impl.Target"
+									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 								}
 								
 							]
 							
-						}
-						
-					}
-					
-				},
-				"skill":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.Skill",
-					"extraSkills":{
-						"custom":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.ExtraSkillCustom"
-						}
-						,
-						"social":{
-							"className":"fr.irit.smac.amasfactory.agent.social.impl.ExtraSkillSocial"
+						},
+						"skill":{
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
 						}
 						
 					}
@@ -54,31 +58,46 @@
 			"ag2":{
 				"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
 				"id":"ag2",
-				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.Knowledge",
-					"id":"ag2",
-					"extraKnowledges":{
-						"custom":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.ExtraKnowledgeCustom"
-						},
-						"social":{
-							"className":"fr.irit.smac.amasfactory.agent.social.impl.ExtraKnowledgeSocial",
+				"primaryFeature":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+					"knowledge":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
+					},
+					"skill":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
+					}
+					
+				},
+				"commonFeatures":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Features",
+					"featureBasic":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+							"id":"ag2"
+						}
+						
+					},
+					"featureSocial":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
 							"outputType":"java.lang.String",
 							"portMap":{
 								"port1":{
 									"id":"port1",
 									"type":"java.lang.String",
-									"className":"fr.irit.smac.amasfactory.agent.social.impl.Port"
+									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
 								},
 								"port2":{
 									"id":"port2",
 									"type":"java.lang.String",
-									"className":"fr.irit.smac.amasfactory.agent.social.impl.Port"
+									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
 								},
 								"port3":{
 									"id":"port3",
 									"type":"java.lang.String",
-									"className":"fr.irit.smac.amasfactory.agent.social.impl.Port"
+									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
 								}
 								
 							},
@@ -86,25 +105,14 @@
 								{
 									"agentTarget":"ag3",
 									"portTarget":"port1",
-									"className":"fr.irit.smac.amasfactory.agent.social.impl.Target"
+									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 								}
 								
 							]
 							
-						}
-						
-					}
-					
-				},
-				"skill":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.Skill",
-					"extraSkills":{
-						"custom":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.ExtraSkillCustom"
-						}
-						,
-						"social":{
-							"className":"fr.irit.smac.amasfactory.agent.social.impl.ExtraSkillSocial"
+						},
+						"skill":{
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
 						}
 						
 					}
@@ -115,39 +123,43 @@
 			"ag3":{
 				"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
 				"id":"ag3",
-				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.Knowledge",
-					"id":"ag3",
-					"extraKnowledges":{
-						"custom":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.ExtraKnowledgeCustom"
-						},
-						"social":{
-							"className":"fr.irit.smac.amasfactory.agent.social.impl.ExtraKnowledgeSocial",
+				"primaryFeature":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+					"knowledge":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
+					},
+					"skill":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
+					}
+					
+				},
+				"commonFeatures":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Features",
+					"featureBasic":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+							"id":"ag3"
+						}
+						
+					},
+					"featureSocial":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
 							"outputType":"java.lang.String",
 							"portMap":{
 								"port1":{
 									"id":"port1",
 									"type":"java.lang.String",
-									"className":"fr.irit.smac.amasfactory.agent.social.impl.Port"
+									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
 								}
 								
 							}
 							
-						}
-						
-					}
-					
-				},
-				"skill":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.Skill",
-					"extraSkills":{
-						"custom":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.ExtraSkillCustom"
-						}
-						,
-						"social":{
-							"className":"fr.irit.smac.amasfactory.agent.social.impl.ExtraSkillSocial"
+						},
+						"skill":{
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
 						}
 						
 					}
@@ -158,21 +170,36 @@
 			"ag4":{
 				"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
 				"id":"ag4",
-				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.Knowledge",
-					"id":"ag4",
-					"extraKnowledges":{
-						"custom":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.ExtraKnowledgeCustom"
-						},
-						"social":{
-							"className":"fr.irit.smac.amasfactory.agent.social.impl.ExtraKnowledgeSocial",
+				"primaryFeature":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+					"knowledge":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
+					},
+					"skill":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
+					}
+					
+				},
+				"commonFeatures":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Features",
+					"featureBasic":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+							"id":"ag4"
+						}
+						
+					},
+					"featureSocial":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
 							"outputType":"java.lang.String",
 							"portMap":{
 								"port1":{
 									"id":"port1",
 									"type":"java.lang.String",
-									"className":"fr.irit.smac.amasfactory.agent.social.impl.Port"
+									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port"
 								}
 								
 							},
@@ -180,25 +207,14 @@
 								{
 									"agentTarget":"ag2",
 									"portTarget":"port2",
-									"className":"fr.irit.smac.amasfactory.agent.social.impl.Target"
+									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 								}
 								
 							]
 							
-						}
-						
-					}
-					
-				},
-				"skill":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.Skill",
-					"extraSkills":{
-						"custom":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.ExtraSkillCustom"
-						}
-						,
-						"social":{
-							"className":"fr.irit.smac.amasfactory.agent.social.impl.ExtraSkillSocial"
+						},
+						"skill":{
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
 						}
 						
 					}
@@ -209,39 +225,43 @@
 			"ag5":{
 				"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
 				"id":"ag4",
-				"knowledge":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.Knowledge",
-					"id":"ag4",
-					"extraKnowledges":{
-						"custom":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.ExtraKnowledgeCustom"
-						},
-						"social":{
-							"className":"fr.irit.smac.amasfactory.agent.social.impl.ExtraKnowledgeSocial",
+				"primaryFeature":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+					"knowledge":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
+					},
+					"skill":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
+					}
+					
+				},
+				"commonFeatures":{
+					"className":"fr.irit.smac.amasfactory.agent.features.impl.Features",
+					"featureBasic":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+							"id":"ag5"
+						}
+						
+					},
+					"featureSocial":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+						"knowledge":{
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
 							"outputType":"java.lang.String",
 							"targetSet":[
 								{
 									"agentTarget":"ag4",
 									"portTarget":"port1",
-									"className":"fr.irit.smac.amasfactory.agent.social.impl.Target"
+									"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 								}
 								
 							]
 							
-						}
-						
-					}
-					
-				},
-				"skill":{
-					"className":"fr.irit.smac.amasfactory.agent.impl.Skill",
-					"extraSkills":{
-						"custom":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.ExtraSkillCustom"
-						}
-						,
-						"social":{
-							"className":"fr.irit.smac.amasfactory.agent.social.impl.ExtraSkillSocial"
+						},
+						"skill":{
+							"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
 						}
 						
 					}
@@ -255,7 +275,7 @@
 	},
 	"messagingService":{
 		"className":"fr.irit.smac.amasfactory.service.messaging.impl.MessagingService",
-		"messageClass":"fr.irit.smac.amasfactory.message.AbstractMessage"
+		"messageClass":"fr.irit.smac.amasfactory.message.Message"
 	},
 	"executionService":{
 		"className":"fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService",
