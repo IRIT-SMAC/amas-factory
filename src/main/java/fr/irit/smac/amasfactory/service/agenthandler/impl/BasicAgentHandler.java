@@ -203,14 +203,10 @@ public class BasicAgentHandler
     }
 
     @Override
-    public void initAgents(IMessagingService<IMessage> messagingService, ILoggingService loggingService) {
+    public void initAgents() {
 
         this.getAgentMap().forEach((k, v) -> {
 
-            v.getFeatures().getFeatureSocial().getKnowledge().setMsgBox(messagingService.getMsgBox(k));
-            v.setId(k);
-            v.setLogger(loggingService.getAgentLogger(k));
-            
             this.notifyAgentAdded(v);
         });
     }

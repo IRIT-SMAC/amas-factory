@@ -4,10 +4,7 @@ import java.util.Collection;
 import java.util.Map;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
-import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.service.IInfraService;
-import fr.irit.smac.amasfactory.service.logging.ILoggingService;
-import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
 
 /**
  * The Interface IAgentHandlerService exposes methods to handle the agents.
@@ -91,5 +88,5 @@ public interface IAgentHandlerService extends IInfraService {
      */
     public void removeAgentEventListener(IAgentEventListener listener);
 
-    public void initAgents(IMessagingService<IMessage> messagingService, ILoggingService loggingService);
+    public void initAgents();
 }

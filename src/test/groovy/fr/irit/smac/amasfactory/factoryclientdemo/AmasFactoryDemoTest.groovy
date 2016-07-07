@@ -27,11 +27,11 @@ class AmasFactoryDemoTest extends Specification{
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/demo_config.json"))
 
         then:
-        infra.getAgentHandler().getAgentMap().size() == 2
-        infra.getExecutionService() instanceof TwoStepAgExecutionService<A, M>
-        infra.getAgentHandler() instanceof BasicAgentHandler<IInfrastructureAgent<M>, M>
-        infra.getLoggingService() instanceof AgentLogLoggingService<M>
-        infra.getMessagingService() instanceof MessagingService<M>
+        infra.getServices().getAgentHandlerService().getAgentMap().size() == 2
+        infra.getServices().getExecutionService() instanceof TwoStepAgExecutionService<A, M>
+        infra.getServices().getAgentHandlerService() instanceof BasicAgentHandler<IInfrastructureAgent<M>, M>
+        infra.getServices().getLoggingService() instanceof AgentLogLoggingService<M>
+        infra.getServices().getMessagingService() instanceof MessagingService<M>
         infra.shutdown()
     }
 
@@ -46,11 +46,11 @@ class AmasFactoryDemoTest extends Specification{
         when:
         for (int i = 0 ; i < 10; i++) {
             System.out.println("\n=== step "+i+" ===")
-            infra.getExecutionService().step().get()
+            infra.getServices().getExecutionService().step().get()
         }
 
         then:
-        Map<String,DemoAgent> agents = infra.getAgentHandler().getAgentMap()
+        Map<String,DemoAgent> agents = infra.getServices().getAgentHandlerService().getAgentMap()
         for (Map.Entry<String, String> entry : agents.entrySet()) {
             System.out.println(entry.getKey() + "/" + entry.getValue())
             DemoAgent agent = entry.getValue()

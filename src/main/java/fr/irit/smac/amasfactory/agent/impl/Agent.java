@@ -16,17 +16,18 @@ import fr.irit.smac.amasfactory.agent.features.IFeatures;
  * @param <M>
  *            the generic type
  */
-public class Agent<F extends IFeatures, K extends IKnowledge, S extends ISkill<K>, P extends IFeature<K, S>> implements IAgent<F, K, S, P> {
+public class Agent<F extends IFeatures, K extends IKnowledge, S extends ISkill<K>, P extends IFeature<K, S>>
+    implements IAgent<F, K, S, P> {
 
     @JsonProperty
     protected String id;
 
     @JsonProperty
     protected F commonFeatures;
-    
+
     @JsonProperty
     protected P primaryFeature;
-    
+
     protected Logger logger;
 
     @Override

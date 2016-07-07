@@ -19,7 +19,7 @@ class KnowledgeConnectionsTest extends Specification {
 
         IInfrastructure infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/knowledge_connections.json"))
-        Map<String,IAgent> agents = infra.getAgentHandler().getAgentMap()
+        Map<String,IAgent> agents = infra.getServices().getAgentHandlerService().getAgentMap()
 
         agents.get("ag1").getFeatures().getFeatureSocial().getKnowledge().setOutputValue("hello")
         agents.get("ag5").getFeatures().getFeatureSocial().getKnowledge().setOutputValue("hallo")
@@ -27,7 +27,7 @@ class KnowledgeConnectionsTest extends Specification {
         when:
         for (int i = 0 ; i < 4; i++) {
             System.out.println("\n=== step "+i+" ===")
-            infra.getExecutionService().step().get()
+            infra.getServices().getExecutionService().step().get()
         }
 
         then:
@@ -48,7 +48,7 @@ class KnowledgeConnectionsTest extends Specification {
 
         IInfrastructure infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/knowledge_connections2.json"))
-        Map<String,IAgent> agents = infra.getAgentHandler().getAgentMap()
+        Map<String,IAgent> agents = infra.getServices().getAgentHandlerService().getAgentMap()
 
         agents.get("ag1").getFeatures().getFeatureSocial().getKnowledge().setOutputValue("hello")
         agents.get("ag2").getFeatures().getFeatureSocial().getKnowledge().setOutputValue("hallo")
@@ -56,7 +56,7 @@ class KnowledgeConnectionsTest extends Specification {
         when:
         for (int i = 0 ; i < 4; i++) {
             System.out.println("\n=== step "+i+" ===")
-            infra.getExecutionService().step().get()
+            infra.getServices().getExecutionService().step().get()
         }
 
         then:
