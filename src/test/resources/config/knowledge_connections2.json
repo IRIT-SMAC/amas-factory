@@ -149,21 +149,21 @@
 									}
 									
 								},
-								"targetSet":[
-									{
+								"targetMap":{
+									"ag1port":{
 										"agentTarget":"ag1",
 										"portTarget":"port",
 										"portSource":"port1",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									},
-									{
+									"ag2port":{
 										"agentTarget":"ag2",
 										"portTarget":"port",
 										"portSource":"port2",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									}
 									
-								]
+								}
 								
 							},
 							"skill":{

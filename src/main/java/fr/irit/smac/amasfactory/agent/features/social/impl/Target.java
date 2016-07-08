@@ -9,32 +9,34 @@ import fr.irit.smac.amasfactory.agent.features.social.ITarget;
 public class Target implements ITarget, Serializable {
 
     private static final long serialVersionUID = -5644591395489274789L;
-   
+
     @JsonProperty
-	private String agentTarget;
-	@JsonProperty
-	private String portTarget;
-	@JsonProperty
-	private String portSource;
-	
-	public Target() {
-		
-	}
-	
-	public Target(String agentTarget, String portTarget, String portSource){
-		this.agentTarget = agentTarget;
-		this.portTarget = portTarget;
-		this.portSource = portSource;
-	}
-	
-	@Override
-	public String getAgentId() {
-		return this.agentTarget;
-	}
+    private String agentTarget;
+    @JsonProperty
+    private String portTarget;
+    @JsonProperty
+    private String portSource;
+
+    private Object value;
+
+    public Target() {
+
+    }
+
+    public Target(String agentTarget, String portTarget, String portSource) {
+        this.agentTarget = agentTarget;
+        this.portTarget = portTarget;
+        this.portSource = portSource;
+    }
+
+    @Override
+    public String getAgentId() {
+        return this.agentTarget;
+    }
 
     @Override
     public String toString() {
-        return  agentTarget + "." + portTarget + "." + portSource;
+        return agentTarget + "." + portTarget + "." + portSource;
     }
 
     @Override
@@ -45,5 +47,15 @@ public class Target implements ITarget, Serializable {
     @Override
     public String getPortSource() {
         return this.portSource;
+    }
+
+    @Override
+    public Object getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(Object value) {
+        this.value = value;
     }
 }

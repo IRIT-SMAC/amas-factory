@@ -1,7 +1,7 @@
 package fr.irit.smac.amasfactory.agent.features.social.impl;
 
 import java.util.Collection;
-import java.util.Set;
+import java.util.Map;
 
 import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.features.social.IPort;
@@ -20,34 +20,31 @@ public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K>implements 
     @Override
     public void sendOutputValue(String id) {
 
-        IKnowledgeSocial e = this.knowledge;
-        Object value = e.getOutputValue();
+        Object value = this.knowledge.getOutputValue();
 
-        for (ITarget target : e.getTargetSet()) {
-            String agentId = target.getAgentId();
-            String port = target.getPortTarget();
+        this.knowledge.getTargetMap().forEach((k, v) -> {
+            String agentId = v.getAgentId();
+            String port = v.getPortTarget();
             // logger.info("send to target " + target.getAgentId() + "
             // message= " + value);
-            e.getMsgBox().send(
+            this.knowledge.getMsgBox().send(
                 new ValuePortMessage(port, value, id),
                 agentId);
-        }
+        });
+
     }
 
     @Override
     public void sendPort(String id) {
 
-        IKnowledgeSocial e = this.knowledge;
+        this.knowledge.getTargetMap().forEach((k, v) -> {
 
-        Set<ITarget> targets = e.getTargetSet();
-
-        for (ITarget target : targets) {
-            String agentId = target.getAgentId();
-            String portTarget = target.getPortTarget();
-            String portSource = target.getPortSource();
-            e.getMsgBox().send(new PortOfTargetMessage(portTarget, portSource, id, id),
+            String agentId = v.getAgentId();
+            String portTarget = v.getPortTarget();
+            String portSource = v.getPortSource();
+            this.knowledge.getMsgBox().send(new PortOfTargetMessage(portTarget, portSource, id, id),
                 agentId);
-        }
+        });
     }
 
     @Override
@@ -55,12 +52,12 @@ public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K>implements 
 
         Collection<PortOfTargetMessage> portOfTargetsMessageCollection = this.knowledge
             .getPortOfTargetMessageCollection();
-        Set<ITarget> targetSet = this.knowledge.getTargetSet();
+        Map<String, ITarget> targetMap = this.knowledge.getTargetMap();
 
         for (PortOfTargetMessage message : portOfTargetsMessageCollection) {
             ITarget target = new Target(message.getValue().toString(), message.getPortSource(),
                 message.getPortTarget());
-            targetSet.add(target);
+            targetMap.put(message.getValue().toString().concat(message.getPortSource()), target);
         }
     }
 
@@ -76,6 +73,14 @@ public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K>implements 
             IPort p = e.getPortMap().get(message.getPort());
             p.setValue(message.getValue());
         }
+    }
+
+    @Override
+    public void sendValueToTargets(String id) {
+
+        this.knowledge.getTargetMap().forEach((k, v) -> {
+            this.knowledge.getMsgBox().send(new ValuePortMessage(v.getPortTarget(), v.getValue(), id), v.getAgentId());
+        });
     }
 
 }

@@ -24,4 +24,8 @@ public interface ITarget {
      *         agent
      */
     public String getPortSource();
+
+    public Object getValue();
+
+    public void setValue(Object value);
 }

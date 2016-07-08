@@ -23,4 +23,6 @@ public interface ISkillSocial<K extends IKnowledgeSocial> extends ISkill<K>{
      * Updates the port if a value for this port is received
      */
     public void updatePortFromMessage();
+
+    public void sendValueToTargets(String id);
 }

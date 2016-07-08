@@ -36,19 +36,19 @@
 							"knowledge":{
 								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
 								"outputType":"java.lang.String",
-								"targetSet":[
-									{
+								"targetMap":{
+									"ag2port1":{
 										"agentTarget":"ag2",
 										"portTarget":"port1",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									},
-									{
+									"ag2port3":{
 										"agentTarget":"ag2",
 										"portTarget":"port3",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									}
 									
-								]
+								}
 								
 							},
 							"skill":{
@@ -109,14 +109,14 @@
 									}
 									
 								},
-								"targetSet":[
-									{
+								"targetMap":{
+									"ag3port1":{
 										"agentTarget":"ag3",
 										"portTarget":"port1",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									}
 									
-								]
+								}
 								
 							},
 							"skill":{
@@ -217,14 +217,14 @@
 									}
 									
 								},
-								"targetSet":[
-									{
+								"targetMap":{
+									"ag2port2":{
 										"agentTarget":"ag2",
 										"portTarget":"port2",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									}
 									
-								]
+								}
 								
 							},
 							"skill":{
@@ -267,14 +267,14 @@
 							"knowledge":{
 								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
 								"outputType":"java.lang.String",
-								"targetSet":[
-									{
+								"targetMap":{
+									"ag4port1":{
 										"agentTarget":"ag4",
 										"portTarget":"port1",
 										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target"
 									}
 									
-								]
+								}
 								
 							},
 							"skill":{

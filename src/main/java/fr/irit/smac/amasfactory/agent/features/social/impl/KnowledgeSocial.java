@@ -23,7 +23,7 @@ public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
     private static final long serialVersionUID = -141560700307854360L;
 
     @JsonProperty
-    private Set<ITarget> targetSet;
+    private Map<String,ITarget> targetMap;
 
     @JsonProperty
     protected Map<String, IPort> portMap;
@@ -45,20 +45,20 @@ public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
      */
     public KnowledgeSocial() {
 
-        this.targetSet = new HashSet<>();
+        this.targetMap = new HashMap<>();
         this.portMap = new HashMap<>();
         this.sendToTargetMessageCollection = new ArrayList<>();
         this.sendPortToTargetMessageCollection = new ArrayList<>();
     }
 
     @Override
-    public void setTargetSet(Set<ITarget> targetSet) {
-        this.targetSet = targetSet;
+    public void setTargetSet(Map<String,ITarget> targetMap) {
+        this.targetMap = targetMap;
     }
 
     @Override
-    public Set<ITarget> getTargetSet() {
-        return targetSet;
+    public Map<String,ITarget> getTargetMap() {
+        return this.targetMap;
     }
 
     @Override

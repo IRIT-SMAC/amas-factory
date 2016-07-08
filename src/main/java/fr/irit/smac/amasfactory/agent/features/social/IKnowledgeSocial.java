@@ -17,12 +17,12 @@ public interface IKnowledgeSocial extends IKnowledge {
      */
     public Map<String, IPort> getPortMap();
 
-    public void setTargetSet(Set<ITarget> targetSet);
+    public void setTargetSet(Map<String,ITarget> targetSet);
 
     /**
      * @return a map containing the targets of an agent
      */
-    public Set<ITarget> getTargetSet();
+    public Map<String, ITarget> getTargetMap();
 
     public Class<?> getOutputType();
 
