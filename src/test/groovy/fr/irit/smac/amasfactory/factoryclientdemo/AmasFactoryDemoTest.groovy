@@ -7,10 +7,6 @@ import com.fasterxml.jackson.databind.JsonMappingException
 
 import fr.irit.smac.amasfactory.IInfrastructure
 import fr.irit.smac.amasfactory.agent.IAgent
-import fr.irit.smac.amasfactory.agent.features.IFeature
-import fr.irit.smac.amasfactory.agent.features.IFeatures
-import fr.irit.smac.amasfactory.factoryclientdemo.example1.IKnowledgeCustom
-import fr.irit.smac.amasfactory.factoryclientdemo.example1.ISkillCustom
 import fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.DemoAgent
 import fr.irit.smac.amasfactory.impl.BasicAmasFactory
 import fr.irit.smac.amasfactory.service.IServices
@@ -28,7 +24,7 @@ class AmasFactoryDemoTest extends Specification{
 
 
         when:
-        IInfrastructure infra =
+        IInfrastructure<IServices,IAgent> infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/demo_config.json"))
 
         then:
@@ -45,7 +41,7 @@ class AmasFactoryDemoTest extends Specification{
         given:
         BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
 
-        IInfrastructure infra =
+        IInfrastructure<IServices,IAgent> infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/demo_config.json"))
 
         when:
@@ -59,8 +55,7 @@ class AmasFactoryDemoTest extends Specification{
         for (Map.Entry<String, String> entry : agents.entrySet()) {
             System.out.println(entry.getKey() + "/" + entry.getValue())
             DemoAgent agent = entry.getValue()
-
-            assert agent.getPrimaryFeature().getKnowledge().getCount() == 20
+            assert agent.primaryFeature.getKnowledge().getCount() == 20
         }
         infra.shutdown()
     }
