@@ -5,6 +5,7 @@ import java.io.InputStream;
 
 import fr.irit.smac.amasfactory.IAmasFactory;
 import fr.irit.smac.amasfactory.IInfrastructure;
+import fr.irit.smac.amasfactory.service.IServices;
 import fr.irit.smac.amasfactory.util.deserializer.impl.AmasFactoryDeserializer;
 
 /**
@@ -16,8 +17,6 @@ import fr.irit.smac.amasfactory.util.deserializer.impl.AmasFactoryDeserializer;
  */
 public class BasicAmasFactory implements IAmasFactory {
 
-    protected Class<IInfrastructure> infrastructureClass;
-
     /*
      * (non-Javadoc)
      * 
@@ -25,7 +24,7 @@ public class BasicAmasFactory implements IAmasFactory {
      * InputStream)
      */
     @Override
-    public IInfrastructure createInfrastructure(
+    public <T extends IServices<A>, A> IInfrastructure<T,A> createInfrastructure(
         InputStream configuration) throws IOException {
 
         AmasFactoryDeserializer parser = AmasFactoryDeserializer.getInstance();

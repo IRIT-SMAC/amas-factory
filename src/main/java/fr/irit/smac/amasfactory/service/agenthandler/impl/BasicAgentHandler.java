@@ -8,12 +8,9 @@ import java.util.Map;
 import java.util.Set;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
-import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.service.IInfraService;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
-import fr.irit.smac.amasfactory.service.logging.ILoggingService;
-import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
 
 /**
  * BasicAgentHandler is a service which handles the agents.
@@ -23,12 +20,13 @@ import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
  * @param <M>
  *            the generic type
  */
-public class BasicAgentHandler
-    implements IAgentHandlerService, IInfraService {
+@SuppressWarnings("rawtypes")
+public class BasicAgentHandler<A extends IAgent>
+    implements IAgentHandlerService<A>, IInfraService {
 
-    private Map<String, IAgent> agentMap = new HashMap<>();
+    private Map<String, A> agentMap = new HashMap<>();
 
-    private Set<IAgentEventListener> listenerSet;
+    private Set<IAgentEventListener<A>> listenerSet;
 
     /**
      * Instantiates a new basic agent handler.
@@ -45,7 +43,7 @@ public class BasicAgentHandler
      * @param agentMap
      *            the agent map
      */
-    public void setAgentMap(Map<String, IAgent> agentMap) {
+    public void setAgentMap(Map<String, A> agentMap) {
         this.agentMap = agentMap;
 
     }
@@ -57,7 +55,7 @@ public class BasicAgentHandler
      */
     @Override
     public void start() {
-        this.listenerSet = Collections.synchronizedSet(new HashSet<IAgentEventListener>());
+        this.listenerSet = Collections.synchronizedSet(new HashSet<IAgentEventListener<A>>());
     }
 
     /*
@@ -77,7 +75,7 @@ public class BasicAgentHandler
      * getAgents()
      */
     @Override
-    public Collection<IAgent> getAgents() {
+    public Collection<A> getAgents() {
         return this.agentMap.values();
     }
 
@@ -88,7 +86,7 @@ public class BasicAgentHandler
      * addAgent(fr.irit.smac.amasfactory.agent.IInfrastructureAgent)
      */
     @Override
-    public void addAgent(IAgent agent) {
+    public void addAgent(A agent) {
         this.agentMap.put(agent.getId(), agent);
         this.notifyAgentAdded(agent);
     }
@@ -100,7 +98,7 @@ public class BasicAgentHandler
      * removeAgent(fr.irit.smac.amasfactory.agent.IInfrastructureAgent)
      */
     @Override
-    public void removeAgent(IAgent agent) {
+    public void removeAgent(A agent) {
         this.agentMap.remove(agent);
         this.notifyAgentRemoved(agent);
     }
@@ -111,8 +109,8 @@ public class BasicAgentHandler
      * @param agent
      *            the agent
      */
-    private void notifyAgentAdded(IAgent agent) {
-        for (IAgentEventListener listener : this.listenerSet) {
+    private void notifyAgentAdded(A agent) {
+        for (IAgentEventListener<A> listener : this.listenerSet) {
             listener.agentAdded(agent);
         }
     }
@@ -123,8 +121,8 @@ public class BasicAgentHandler
      * @param agent
      *            the agent
      */
-    private void notifyAgentRemoved(IAgent agent) {
-        for (IAgentEventListener listener : this.listenerSet) {
+    private void notifyAgentRemoved(A agent) {
+        for (IAgentEventListener<A> listener : this.listenerSet) {
             listener.agentRemoved(agent);
         }
     }
@@ -136,8 +134,8 @@ public class BasicAgentHandler
      * addAgents(java.util.Collection)
      */
     @Override
-    public void addAgents(Collection<IAgent> agents) {
-        for (IAgent a : agents) {
+    public void addAgents(Collection<A> agents) {
+        for (A a : agents) {
             this.addAgent(a);
         }
     }
@@ -149,8 +147,8 @@ public class BasicAgentHandler
      * removeAgents(java.util.Collection)
      */
     @Override
-    public void removeAgents(Collection<IAgent> agents) {
-        for (IAgent a : agents) {
+    public void removeAgents(Collection<A> agents) {
+        for (A a : agents) {
             this.removeAgent(a);
         }
 
@@ -164,7 +162,7 @@ public class BasicAgentHandler
      * IAgentEventListener)
      */
     @Override
-    public void addAgentEventListener(IAgentEventListener listener) {
+    public void addAgentEventListener(IAgentEventListener<A> listener) {
         this.listenerSet.add(listener);
     }
 
@@ -176,7 +174,7 @@ public class BasicAgentHandler
      * IAgentEventListener)
      */
     @Override
-    public void removeAgentEventListener(IAgentEventListener listener) {
+    public void removeAgentEventListener(IAgentEventListener<A> listener) {
         this.listenerSet.add(listener);
     }
 
@@ -187,7 +185,7 @@ public class BasicAgentHandler
      * getAgentMap()
      */
     @Override
-    public Map<String, IAgent> getAgentMap() {
+    public Map<String, A> getAgentMap() {
         return Collections.unmodifiableMap(this.agentMap);
     }
 
@@ -198,7 +196,7 @@ public class BasicAgentHandler
      * getAgent(java.lang.String)
      */
     @Override
-    public IAgent getAgent(String id) {
+    public A getAgent(String id) {
         return this.agentMap.get(id);
     }
 

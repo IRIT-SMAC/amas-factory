@@ -1,7 +1,5 @@
 package fr.irit.smac.amasfactory.service.agenthandler;
 
-import fr.irit.smac.amasfactory.agent.IAgent;
-
 /**
  * The Interface IAgentEventListener exposes methods to be notified when events
  * about agents occurred
@@ -10,7 +8,7 @@ import fr.irit.smac.amasfactory.agent.IAgent;
  *            the generic type
  * @see IAgentEventEvent
  */
-public interface IAgentEventListener {
+public interface IAgentEventListener<A> {
 
     /**
      * When an agent is added.
@@ -18,7 +16,7 @@ public interface IAgentEventListener {
      * @param agent
      *            the agent
      */
-    public void agentAdded(IAgent agent);
+    public void agentAdded(A agent);
 
     /**
      * When an agent is removed.
@@ -26,6 +24,6 @@ public interface IAgentEventListener {
      * @param agent
      *            the agent
      */
-    public void agentRemoved(IAgent agent);
+    public void agentRemoved(A agent);
 
 }

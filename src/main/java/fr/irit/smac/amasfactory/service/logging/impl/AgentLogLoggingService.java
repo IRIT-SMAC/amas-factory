@@ -11,9 +11,9 @@ import fr.irit.smac.libs.tooling.logging.AgentLog;
  *
  * @param <M> the generic type
  */
-public class AgentLogLoggingService implements ILoggingService {
+public class AgentLogLoggingService<A> implements ILoggingService<A> {
 
-    private IExecutionService executionService;
+    private IExecutionService<A> executionService;
 
     /* (non-Javadoc)
      * @see fr.irit.smac.amasfactory.service.logging.ILoggingService#getAgentLogger(java.lang.String)
@@ -62,7 +62,7 @@ public class AgentLogLoggingService implements ILoggingService {
     }
 
     @Override
-    public void setExecutionService(IExecutionService executionService) {
+    public void setExecutionService(IExecutionService<A> executionService) {
         this.executionService = executionService;
     }
 }

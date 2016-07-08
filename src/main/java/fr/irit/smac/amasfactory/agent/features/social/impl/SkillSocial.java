@@ -1,7 +1,6 @@
 package fr.irit.smac.amasfactory.agent.features.social.impl;
 
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.Set;
 
 import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;

@@ -3,7 +3,6 @@ package fr.irit.smac.amasfactory.service.agenthandler;
 import java.util.Collection;
 import java.util.Map;
 
-import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.service.IInfraService;
 
 /**
@@ -14,7 +13,7 @@ import fr.irit.smac.amasfactory.service.IInfraService;
  * @param <M>
  *            the generic type
  */
-public interface IAgentHandlerService extends IInfraService {
+public interface IAgentHandlerService<A> extends IInfraService {
 
     /**
      * Gets the agents.
@@ -22,14 +21,14 @@ public interface IAgentHandlerService extends IInfraService {
      * @return a collection containing the agents currently handled by the
      *         system
      */
-    public Collection<IAgent> getAgents();
+    public Collection<A> getAgents();
 
     /**
      * Gets the agent map.
      *
      * @return the agent map
      */
-    public Map<String, IAgent> getAgentMap();
+    public Map<String, A> getAgentMap();
 
     /**
      * Gets the agent.
@@ -38,7 +37,7 @@ public interface IAgentHandlerService extends IInfraService {
      *            the id
      * @return the agent
      */
-    public IAgent getAgent(String id);
+    public A getAgent(String id);
 
     /**
      * Add an agent to the system.
@@ -46,7 +45,7 @@ public interface IAgentHandlerService extends IInfraService {
      * @param agent
      *            the agent to be added to the system
      */
-    public void addAgent(IAgent agent);
+    public void addAgent(A agent);
 
     /**
      * Remove an agent from the system.
@@ -54,7 +53,7 @@ public interface IAgentHandlerService extends IInfraService {
      * @param agent
      *            the agent to be removed from the system
      */
-    public void removeAgent(IAgent agent);
+    public void removeAgent(A agent);
 
     /**
      * Add a collection of agents to the system.
@@ -62,7 +61,7 @@ public interface IAgentHandlerService extends IInfraService {
      * @param agents
      *            the agents to be added to the system
      */
-    public void addAgents(Collection<IAgent> agents);
+    public void addAgents(Collection<A> agents);
 
     /**
      * Remove a collection of agents from the system.
@@ -70,7 +69,7 @@ public interface IAgentHandlerService extends IInfraService {
      * @param agents
      *            the agents to be removed
      */
-    public void removeAgents(Collection<IAgent> agents);
+    public void removeAgents(Collection<A> agents);
 
     /**
      * Add a agentEventListener to be notified when an agent is added.
@@ -78,7 +77,7 @@ public interface IAgentHandlerService extends IInfraService {
      * @param listener
      *            the listener to be added
      */
-    public void addAgentEventListener(IAgentEventListener listener);
+    public void addAgentEventListener(IAgentEventListener<A> listener);
 
     /**
      * Removes a agentEventListener.
@@ -86,7 +85,7 @@ public interface IAgentHandlerService extends IInfraService {
      * @param listener
      *            the listener to be removed
      */
-    public void removeAgentEventListener(IAgentEventListener listener);
+    public void removeAgentEventListener(IAgentEventListener<A> listener);
 
     public void initAgents();
 }

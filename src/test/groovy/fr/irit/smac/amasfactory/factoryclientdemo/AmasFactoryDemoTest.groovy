@@ -6,9 +6,14 @@ import spock.lang.Specification
 import com.fasterxml.jackson.databind.JsonMappingException
 
 import fr.irit.smac.amasfactory.IInfrastructure
+import fr.irit.smac.amasfactory.agent.IAgent
+import fr.irit.smac.amasfactory.agent.features.IFeature
 import fr.irit.smac.amasfactory.agent.features.IFeatures
+import fr.irit.smac.amasfactory.factoryclientdemo.example1.IKnowledgeCustom
+import fr.irit.smac.amasfactory.factoryclientdemo.example1.ISkillCustom
 import fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.DemoAgent
 import fr.irit.smac.amasfactory.impl.BasicAmasFactory
+import fr.irit.smac.amasfactory.service.IServices
 import fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler
 import fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService
 import fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService

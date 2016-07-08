@@ -1,6 +1,5 @@
 package fr.irit.smac.amasfactory.service.datasharing.impl;
 
-import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.amasfactory.service.datasharing.IDataSharingService;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
@@ -13,16 +12,16 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
  * @param <A>
  * @param <M>
  */
-public class EmptySharingService
-    implements IDataSharingService {
+public class EmptySharingService<A>
+    implements IDataSharingService<A> {
 
     @Override
-    public void agentAdded(IAgent agent) {
+    public void agentAdded(A agent) {
         // empty
     }
 
     @Override
-    public void agentRemoved(IAgent agent) {
+    public void agentRemoved(A agent) {
         // empty
     }
 
@@ -37,13 +36,13 @@ public class EmptySharingService
     }
 
     @Override
-    public void setAgentHandlerService(IAgentHandlerService agentHandlerService) {
+    public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService) {
         // TODO Auto-generated method stub
 
     }
 
     @Override
-    public void setExecutionService(IExecutionService executionService) {
+    public void setExecutionService(IExecutionService<A> executionService) {
         // TODO Auto-generated method stub
 
     }

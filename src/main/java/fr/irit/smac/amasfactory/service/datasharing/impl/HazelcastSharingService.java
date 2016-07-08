@@ -1,6 +1,7 @@
 package fr.irit.smac.amasfactory.service.datasharing.impl;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
+import fr.irit.smac.amasfactory.agent.features.basic.IKnowledgeBasic;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.amasfactory.service.datasharing.IDataSharingService;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
@@ -18,8 +19,9 @@ import fr.irit.smac.amasfactory.util.hazelcast.impl.HazelcastKnowledgeAccessor;
  * @param <A>
  * @param <M>
  */
-public class HazelcastSharingService<K, S>
-    implements IDataSharingService {
+@SuppressWarnings("rawtypes")
+public class HazelcastSharingService<A extends IAgent>
+    implements IDataSharingService<A> {
 
     IHazelcastKnowledgeAccessor hazelcastKnowledgeAccessor;
 
@@ -28,21 +30,21 @@ public class HazelcastSharingService<K, S>
 
     private Runnable persistencePolicy;
 
-    private IAgentHandlerService agentHandlerService;
+    private IAgentHandlerService<A> agentHandlerService;
 
-    private IExecutionService executionService;
+    private IExecutionService<A> executionService;
 
     public HazelcastSharingService() {
         this.hazelcastKnowledgeAccessor = new HazelcastKnowledgeAccessor();
     }
 
     @Override
-    public void agentAdded(IAgent agent) {
-//        this.hazelcastKnowledgeAccessor.registerKnowledge((IKnowledgeBasic) agent.getFeatures().get(EFeature.BASIC.getName()));
+    public void agentAdded(A agent) {
+        this.hazelcastKnowledgeAccessor.registerKnowledge((IKnowledgeBasic) agent.getFeatures().getFeatureBasic());
     }
 
     @Override
-    public void agentRemoved(IAgent agent) {
+    public void agentRemoved(A agent) {
         this.hazelcastKnowledgeAccessor.removeKnowledge(agent.getId());
     }
 
@@ -74,14 +76,14 @@ public class HazelcastSharingService<K, S>
      * @param infrastructure
      * @return
      */
-    private Runnable generatePersistenceUpdatePolicy(IAgentHandlerService agentHandler) {
+    private Runnable generatePersistenceUpdatePolicy(IAgentHandlerService<A> agentHandler) {
         return new Runnable() {
             @Override
             public void run() {
-//                for (IAgent agent : agentHandler.getAgents()) {
-//                    hazelcastKnowledgeAccessor.registerKnowledge(agent.getFeatures().getFeatureBasic().getKnowledge());
+                for (IAgent agent : agentHandler.getAgents()) {
+                    hazelcastKnowledgeAccessor.registerKnowledge(agent.getFeatures().getFeatureBasic().getKnowledge());
                     // System.out.println("registering " + agent.getId() );
-//                }
+                }
             }
         };
     }
@@ -105,12 +107,12 @@ public class HazelcastSharingService<K, S>
     }
 
     @Override
-    public void setAgentHandlerService(IAgentHandlerService agentHandlerService) {
+    public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService) {
         this.agentHandlerService = agentHandlerService;
     }
 
     @Override
-    public void setExecutionService(IExecutionService executionService) {
+    public void setExecutionService(IExecutionService<A> executionService) {
         this.executionService = executionService;
     }
 

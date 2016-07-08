@@ -15,8 +15,8 @@ import fr.irit.smac.amasfactory.service.IServices;
  *            generic type
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
-public class BasicInfrastructure<T extends IServices>
-    implements IInfrastructure<T> {
+public class BasicInfrastructure<T extends IServices<A>, A>
+    implements IInfrastructure<T,A> {
 
     protected T services;
 

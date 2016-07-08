@@ -12,6 +12,7 @@ import com.google.gson.JsonParser;
 
 import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.impl.BasicInfrastructure;
+import fr.irit.smac.amasfactory.service.IServices;
 import fr.irit.smac.amasfactory.util.deserializer.IAmasFactoryDeserializer;
 import fr.irit.smac.libs.tooling.scheduling.impl.system.SynchronizedSystemStrategy;
 
@@ -47,13 +48,14 @@ public class AmasFactoryDeserializer implements IAmasFactoryDeserializer {
      * @see fr.irit.smac.amasfactory.util.parser.IAmasFactoryParser#
      * parseInfrastructure(java.io.InputStream)
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public IInfrastructure deserializeInfrastructure(
+    public <T extends IServices<A>,A> IInfrastructure<T,A> deserializeInfrastructure(
         InputStream configuration)
             throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
-        IInfrastructure infrastructure = null;
+        IInfrastructure<T,A> infrastructure = null;
         try {
 
             JsonElement configurationJson = new JsonParser().parse(new InputStreamReader(configuration));

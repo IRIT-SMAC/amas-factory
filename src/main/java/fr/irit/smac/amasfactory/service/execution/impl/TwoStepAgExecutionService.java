@@ -14,14 +14,12 @@ import javax.swing.JFrame;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.impl.ShutdownRuntimeException;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 import fr.irit.smac.libs.tooling.scheduling.contrib.gui.SystemControllerPanel;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent;
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.TwoStepsSystemStrategy;
-import fr.irit.smac.libs.tooling.scheduling.example.AllInOneSystem;
 import fr.irit.smac.libs.tooling.scheduling.impl.system.SynchronizedSystemStrategy;
 
 /**
@@ -33,7 +31,7 @@ import fr.irit.smac.libs.tooling.scheduling.impl.system.SynchronizedSystemStrate
  * @param <M>
  *            the generic type
  */
-public class TwoStepAgExecutionService implements IExecutionService{
+public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExecutionService<A>{
 
     private TwoStepsSystemStrategy systemStrategy;
 
@@ -42,7 +40,7 @@ public class TwoStepAgExecutionService implements IExecutionService{
     @JsonProperty
     private int nbThreads;
 
-    private IAgentHandlerService agentHandlerService;
+    private IAgentHandlerService<A> agentHandlerService;
 
     /**
      * Instantiates a new two step ag execution service.
@@ -54,7 +52,7 @@ public class TwoStepAgExecutionService implements IExecutionService{
     }
     
     @Override
-    public void setAgentHandlerService(IAgentHandlerService agentHandlerService) {
+    public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService) {
         this.agentHandlerService = agentHandlerService;
     }
 
@@ -144,8 +142,8 @@ public class TwoStepAgExecutionService implements IExecutionService{
      * agentAdded(java.lang.Object)
      */
     @Override
-    public void agentAdded(IAgent agent) {
-        this.systemStrategy.addAgent((ITwoStepsAgent) agent);
+    public void agentAdded(A agent) {
+        this.systemStrategy.addAgent(agent);
     }
 
     /*
@@ -155,8 +153,8 @@ public class TwoStepAgExecutionService implements IExecutionService{
      * agentRemoved(java.lang.Object)
      */
     @Override
-    public void agentRemoved(IAgent agent) {
-        this.systemStrategy.removeAgent((ITwoStepsAgent) agent);
+    public void agentRemoved(A agent) {
+        this.systemStrategy.removeAgent(agent);
     }
 
     /*

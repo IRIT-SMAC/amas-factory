@@ -10,7 +10,7 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
  *
  * @param <M> the generic type
  */
-public interface ILoggingService extends IInfraService {
+public interface ILoggingService<A> extends IInfraService {
     
     /**
      * Gets the standard logger.
@@ -29,6 +29,6 @@ public interface ILoggingService extends IInfraService {
     public Logger getAgentLogger(String loggerName);
 
 
-    public void setExecutionService(IExecutionService executionService);
+    public void setExecutionService(IExecutionService<A> executionService);
 
 }

@@ -17,8 +17,8 @@ import fr.irit.smac.libs.tooling.scheduling.IHookHandler;
  * @param <M>
  *            the generic type
  */
-public interface IExecutionService
-    extends IAgentEventListener, IInfraService, IHookHandler {
+public interface IExecutionService<A>
+    extends IAgentEventListener<A>, IInfraService, IHookHandler {
     /**
      * Launches the continuous execution of the system. The system will execute
      * according to the implemented strategy, until the {@link #pause} method is
@@ -71,6 +71,6 @@ public interface IExecutionService
     @Override
     public void shutdown() throws ShutdownRuntimeException;
     
-    public void setAgentHandlerService(IAgentHandlerService agentHandlerService);
+    public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService);
 
 }

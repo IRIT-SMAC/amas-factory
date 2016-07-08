@@ -11,20 +11,20 @@ import fr.irit.smac.amasfactory.service.logging.ILoggingService;
 import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
-public interface IServices {
+public interface IServices<A> {
 
     public void start();
 
     public void stop() throws ShutdownRuntimeException;
 
-    public IAgentHandlerService getAgentHandlerService();
+    public IAgentHandlerService<A> getAgentHandlerService();
 
     public IMessagingService<IMessage> getMessagingService();
 
-    public IExecutionService getExecutionService();
+    public IExecutionService<A> getExecutionService();
 
-    public ILoggingService getLoggingService();
+    public ILoggingService<A> getLoggingService();
 
-    public IDataSharingService getHazelcastService();
+    public IDataSharingService<A> getHazelcastService();
 
 }

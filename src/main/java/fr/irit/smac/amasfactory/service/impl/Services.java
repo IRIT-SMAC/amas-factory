@@ -2,6 +2,7 @@ package fr.irit.smac.amasfactory.service.impl;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.impl.ShutdownRuntimeException;
 import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.service.IServices;
@@ -11,29 +12,30 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
 import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
 
-public class Services implements IServices {
+@SuppressWarnings("rawtypes")
+public class Services<A extends IAgent> implements IServices<A> {
 
     @JsonProperty
-    private IAgentHandlerService agentHandlerService;
+    private IAgentHandlerService<A> agentHandlerService;
 
     @JsonProperty
     private IMessagingService<IMessage> messagingService;
 
     @JsonProperty
-    private IExecutionService executionService;
+    private IExecutionService<A> executionService;
 
     @JsonProperty
-    private ILoggingService loggingService;
+    private ILoggingService<A> loggingService;
 
     @JsonProperty
-    private IDataSharingService hazelcastService;
+    private IDataSharingService<A> hazelcastService;
 
     public Services(
         @JsonProperty(value = "messagingService", required = true) IMessagingService<IMessage> messagingService,
-        @JsonProperty(value = "agentHandlerService", required = true) IAgentHandlerService agentHandlerService,
-        @JsonProperty(value = "executionService", required = true) IExecutionService executionService,
-        @JsonProperty(value = "loggingService", required = true) ILoggingService loggingService,
-        @JsonProperty(value = "hazelcastService", required = true) IDataSharingService hazelcastService) {
+        @JsonProperty(value = "agentHandlerService", required = true) IAgentHandlerService<A> agentHandlerService,
+        @JsonProperty(value = "executionService", required = true) IExecutionService<A> executionService,
+        @JsonProperty(value = "loggingService", required = true) ILoggingService<A> loggingService,
+        @JsonProperty(value = "hazelcastService", required = true) IDataSharingService<A> hazelcastService) {
         super();
 
         this.messagingService = messagingService;
@@ -44,7 +46,7 @@ public class Services implements IServices {
     }
 
     @Override
-    public IAgentHandlerService getAgentHandlerService() {
+    public IAgentHandlerService<A> getAgentHandlerService() {
         return agentHandlerService;
     }
 
@@ -54,17 +56,17 @@ public class Services implements IServices {
     }
 
     @Override
-    public IExecutionService getExecutionService() {
+    public IExecutionService<A> getExecutionService() {
         return executionService;
     }
 
     @Override
-    public ILoggingService getLoggingService() {
+    public ILoggingService<A> getLoggingService() {
         return loggingService;
     }
 
     @Override
-    public IDataSharingService getHazelcastService() {
+    public IDataSharingService<A> getHazelcastService() {
         return hazelcastService;
     }
 
