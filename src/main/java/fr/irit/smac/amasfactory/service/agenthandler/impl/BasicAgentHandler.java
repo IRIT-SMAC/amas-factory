@@ -108,7 +108,7 @@ public class BasicAgentHandler<A extends IAgent>
      */
     @Override
     public void addAgent(A agent) {
-        this.agentMap.put(agent.getId(), agent);
+        this.agentMap.put(agent.getFeatures().getFeatureBasic().getKnowledge().getId(), agent);
         this.notifyAgentAdded(agent);
     }
 

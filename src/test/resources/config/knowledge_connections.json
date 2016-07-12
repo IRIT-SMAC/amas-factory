@@ -7,7 +7,6 @@
 			"agentMap":{
 				"ag1":{
 					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
-					"id":"ag1",
 					"primaryFeature":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
@@ -62,7 +61,6 @@
 				},
 				"ag2":{
 					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
-					"id":"ag2",
 					"primaryFeature":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
@@ -130,7 +128,6 @@
 				},
 				"ag3":{
 					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
-					"id":"ag3",
 					"primaryFeature":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
@@ -180,7 +177,6 @@
 				},
 				"ag4":{
 					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
-					"id":"ag4",
 					"primaryFeature":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
@@ -238,7 +234,6 @@
 				},
 				"ag5":{
 					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
-					"id":"ag5",
 					"primaryFeature":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{

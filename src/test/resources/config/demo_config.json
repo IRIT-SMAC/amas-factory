@@ -7,7 +7,6 @@
 			"agentMap":{
 				"ag1":{
 					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.DemoAgent",
-					"id":"ag1",
 					"primaryFeature":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{
@@ -47,7 +46,6 @@
 				},
 				"ag2":{
 					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.DemoAgent",
-					"id":"ag2",
 					"primaryFeature":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 						"knowledge":{

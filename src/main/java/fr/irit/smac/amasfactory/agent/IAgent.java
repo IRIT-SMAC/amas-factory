@@ -39,15 +39,6 @@ import fr.irit.smac.amasfactory.agent.features.IFeatures;
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
 public interface IAgent<F extends IFeatures, K extends IKnowledge, S extends ISkill<K>, P extends IFeature<K, S>> {
 
-    /**
-     * Gets the id.
-     *
-     * @return the id
-     */
-    public String getId();
-
-    public void setId(String id);
-
     public void setLogger(Logger logger);
 
     public F getFeatures();

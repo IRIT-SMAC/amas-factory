@@ -41,25 +41,12 @@ public class Agent<F extends IFeatures, K extends IKnowledge, S extends ISkill<K
     implements IAgent<F, K, S, P> {
 
     @JsonProperty
-    protected String id;
-
-    @JsonProperty
     protected F commonFeatures;
 
     @JsonProperty
     protected P primaryFeature;
 
     protected Logger logger;
-
-    @Override
-    public String getId() {
-        return this.id;
-    }
-
-    @Override
-    public void setId(String id) {
-        this.id = id;
-    }
 
     @Override
     public void setLogger(Logger logger) {

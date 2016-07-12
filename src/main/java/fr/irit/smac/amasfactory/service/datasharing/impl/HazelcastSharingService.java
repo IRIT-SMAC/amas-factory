@@ -66,7 +66,7 @@ public class HazelcastSharingService<A extends IAgent>
 
     @Override
     public void agentRemoved(A agent) {
-        this.hazelcastKnowledgeAccessor.removeKnowledge(agent.getId());
+        this.hazelcastKnowledgeAccessor.removeKnowledge(agent.getFeatures().getFeatureBasic().getKnowledge().getId());
     }
 
     @Override
