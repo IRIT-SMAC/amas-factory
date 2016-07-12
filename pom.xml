@@ -5,6 +5,11 @@
 	<artifactId>amas-factory</artifactId>
 	<version>0.2-SNAPSHOT</version>
 	<name>amas-factory</name>
+	<organization>
+		<name>IRIT - SMAC Team and Brennus Analytics</name>
+		<url>http://irit.fr/-SMAC-team-</url>
+	</organization>
+	<inceptionYear>2015</inceptionYear>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -19,6 +24,7 @@
 		<jacoco-maven-plugin-version>0.7.6.201602180812</jacoco-maven-plugin-version>
 		<gmavenplus-plugin-version>1.5</gmavenplus-plugin-version>
 		<coveralls-maven-plugin-version>4.1.0</coveralls-maven-plugin-version>
+		<license-maven-plugin-version>1.7</license-maven-plugin-version>
 	</properties>
 
 	<repositories>
@@ -150,6 +156,37 @@
 						</testSource>
 					</testSources>
 				</configuration>
+
+			</plugin>
+			<!-- Handle license files -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>license-maven-plugin</artifactId>
+				<version>${license-maven-plugin-version}</version>
+				<configuration>
+					<licenseName>lgpl_v3</licenseName>
+					<roots>
+						<root>src/main/java</root>
+					</roots>
+					<!-- Break some files otherwise -->
+					<addJavaLicenseAfterPackage>false</addJavaLicenseAfterPackage>
+				</configuration>
+				<executions>
+					<execution>
+						<id>first</id>
+						<goals>
+							<goal>update-file-header</goal>
+						</goals>
+						<phase>process-sources</phase>
+					</execution>
+					<execution>
+						<id>update-license</id>
+						<goals>
+							<goal>update-project-license</goal>
+						</goals>
+						<phase>generate-resources</phase>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 		<pluginManagement>
@@ -174,6 +211,30 @@
 									</pluginExecutionFilter>
 									<action>
 										<ignore />
+									</action>
+								</pluginExecution>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>
+											org.codehaus.mojo
+										</groupId>
+										<artifactId>
+											license-maven-plugin
+										</artifactId>
+										<versionRange>
+											[${license-maven-plugin-version},)
+										</versionRange>
+										<goals>
+											<goal>
+												update-file-header
+											</goal>
+											<goal>
+												update-project-license
+											</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<ignore></ignore>
 									</action>
 								</pluginExecution>
 							</pluginExecutions>
