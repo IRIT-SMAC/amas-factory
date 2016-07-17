@@ -21,7 +21,6 @@
  */
 package fr.irit.smac.amasfactory.impl;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import fr.irit.smac.amasfactory.IInfrastructure;

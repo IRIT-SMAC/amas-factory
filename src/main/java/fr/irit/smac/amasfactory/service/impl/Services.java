@@ -82,38 +82,133 @@ public class Services<A extends IAgent> implements IServices<A> {
     @Override
     public void start() {
 
-        executionService.setAgentHandlerService(agentHandlerService);
-        loggingService.setExecutionService(executionService);
+        initExecutionService();
+        initLoggingService();
+        initHazelcastService();
+        startAgentHandlerService();
+        startExecutionService();
+        startMessagingService();
+        startLoggingService();
+        initAgentHandlerService();
+        startHazelcastService();
+    }
 
-        if (hazelcastService != null) {
+    private void initLoggingService() {
+
+        if (executionService != null && loggingService != null) {
+            loggingService.setExecutionService(executionService);
+        }
+    }
+
+    private void initExecutionService() {
+
+        if (agentHandlerService != null && executionService != null) {
+            executionService.setAgentHandlerService(agentHandlerService);
+        }
+    }
+
+    private void initHazelcastService() {
+
+        if (hazelcastService != null && agentHandlerService != null && executionService != null) {
             hazelcastService.setAgentHandlerService(agentHandlerService);
             hazelcastService.setExecutionService(executionService);
         }
-        agentHandlerService.start();
-        executionService.start();
-        messagingService.start();
-        loggingService.start();
-        agentHandlerService.initAgents();
-        agentHandlerService.getAgentMap().forEach((k, v) -> {
-            v.getFeatures().getFeatureSocial().getKnowledge().setMsgBox(messagingService.getMsgBox(k));
-            v.setLogger(loggingService.getAgentLogger(k));
-        });
+    }
+
+    private void initAgentHandlerService() {
+
+        if (agentHandlerService != null) {
+            agentHandlerService.initAgents();
+            agentHandlerService.getAgentMap().forEach((k, v) -> {
+
+                if (messagingService != null) {
+                    v.getFeatures().getFeatureSocial().getKnowledge().setMsgBox(messagingService.getMsgBox(k));
+                }
+
+                if (loggingService != null) {
+                    v.setLogger(loggingService.getAgentLogger(k));
+                }
+            });
+        }
+    }
+
+    private void startHazelcastService() {
 
         if (hazelcastService != null) {
             hazelcastService.start();
         }
     }
 
+    private void startLoggingService() {
+
+        if (loggingService != null) {
+            loggingService.start();
+        }
+    }
+
+    private void startMessagingService() {
+
+        if (messagingService != null) {
+            messagingService.start();
+        }
+    }
+
+    private void startExecutionService() {
+
+        if (executionService != null) {
+            executionService.start();
+        }
+    }
+
+    private void startAgentHandlerService() {
+
+        if (agentHandlerService != null) {
+            agentHandlerService.start();
+        }
+    }
+
     @Override
     public void stop() throws ShutdownRuntimeException {
 
-        agentHandlerService.shutdown();
-        executionService.shutdown();
-        messagingService.shutdown();
-        loggingService.shutdown();
+        shutdownHazelcastService();
+        shutdownLoggingService();
+        shutdownMessagingService();
+        shutdownExecutionService();
+        shutdownAgentHandlerService();
+    }
+    
+    private void shutdownHazelcastService() throws ShutdownRuntimeException {
 
         if (hazelcastService != null) {
             hazelcastService.shutdown();
+        }
+    }
+
+    private void shutdownLoggingService() throws ShutdownRuntimeException {
+
+        if (loggingService != null) {
+            loggingService.shutdown();
+        }
+    }
+
+    private void shutdownMessagingService() throws ShutdownRuntimeException {
+
+        if (messagingService != null) {
+            messagingService.shutdown();
+        }
+    }
+
+    private void shutdownExecutionService() throws ShutdownRuntimeException {
+
+        if (executionService != null) {
+            executionService.shutdown();
+        }
+    }
+
+    private void shutdownAgentHandlerService() throws ShutdownRuntimeException {
+
+        if (agentHandlerService != null) {
+            agentHandlerService.shutdown();
         }
     }
 

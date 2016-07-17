@@ -28,7 +28,6 @@ public class Message implements IMessage, Serializable{
     private static final long serialVersionUID = 1902330088251578329L;
     final IMessageType messageType;
     protected String sender;
-
     
 	public Message(IMessageType messageType, String sender){
 		this.messageType = messageType;

@@ -1,24 +1,27 @@
 {
 	className":"fr.irit.smac.amasfactory.impl.BasicInfrastructure",
-	"agentHandlerService":{
-		"className":"fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler",
-		"agentMap":{
+	"services":{
+		"className":"fr.irit.smac.amasfactory.service.impl.Services",
+		"agentHandlerService":{
+			"className":"fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler",
+			"agentMap":{
+				
+			}
 			
+		},
+		"messagingService":{
+			"className":"fr.irit.smac.amasfactory.service.messaging.impl.MessagingService"
+		},
+		"executionService":{
+			"className":"fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService",
+			"nbThreads":8
+		},
+		"loggingService":{
+			"className":"fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService"
+		},
+		"hazelcastService":{
+			"className":"fr.irit.smac.amasfactory.service.datasharing.impl.HazelcastSharingService"
 		}
 		
-	},
-	"messagingService":{
-		"className":"fr.irit.smac.amasfactory.service.messaging.impl.MessagingService",
-		"messageClass":"fr.irit.smac.amasfactory.factoryclientdemo.DemoMessage"
-	},
-	"executionService":{
-		"className":"fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService",
-		"nbThreads":8
-	},
-	"loggingService":{
-		"className":"fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService"
-	},
-	"hazelcastService":{
-		"className":"fr.irit.smac.amasfactory.service.datasharing.impl.HazelcastSharingService"
 	}
 }

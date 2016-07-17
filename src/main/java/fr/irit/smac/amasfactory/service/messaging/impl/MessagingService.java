@@ -21,9 +21,6 @@
  */
 package fr.irit.smac.amasfactory.service.messaging.impl;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
 import fr.irit.smac.libs.tooling.messaging.AgentMessaging;
 import fr.irit.smac.libs.tooling.messaging.IDirectory;
@@ -50,10 +47,17 @@ public class MessagingService<IMessage>
      * @param messageClass
      *            the message class
      */
-    @JsonCreator
-    public MessagingService(@JsonProperty(value = "messageClass", required = true) Class<IMessage> messageClass) {
+    @SuppressWarnings("unchecked")
+    public MessagingService() {
         super();
-        this.messageClass = messageClass;
+        try {
+            messageClass = (Class<IMessage>) Class.forName("fr.irit.smac.amasfactory.message.Message");
+        }
+        catch (ClassNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
         delegatedMsgService = null;
     }
 

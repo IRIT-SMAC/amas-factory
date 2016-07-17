@@ -49,7 +49,9 @@ public class BasicAmasFactory implements IAmasFactory {
         InputStream configuration) throws IOException {
 
         AmasFactoryDeserializer parser = AmasFactoryDeserializer.getInstance();
-
-        return parser.deserializeInfrastructure(configuration);
+        IInfrastructure<T,A> infrastructure = parser.deserializeInfrastructure(configuration);
+        infrastructure.start();
+        
+        return infrastructure;
     }
 }

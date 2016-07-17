@@ -15,9 +15,6 @@
 		"executionService":{
 			"className":"fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService",
 			"nbThreads":8
-		},
-		"loggingService":{
-			"className":"fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService"
 		}
 		
 	}

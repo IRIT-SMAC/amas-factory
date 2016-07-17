@@ -88,8 +88,7 @@
 			
 		},
 		"messagingService":{
-			"className":"fr.irit.smac.amasfactory.service.messaging.impl.MessagingService",
-			"messageClass":"fr.irit.smac.amasfactory.factoryclientdemo.DemoMessage"
+			"className":"fr.irit.smac.amasfactory.service.messaging.impl.MessagingService"
 		},
 		"executionService":{
 			"className":"fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService",

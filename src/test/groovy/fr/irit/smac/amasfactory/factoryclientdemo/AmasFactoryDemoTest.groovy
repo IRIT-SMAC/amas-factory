@@ -7,7 +7,17 @@ import com.fasterxml.jackson.databind.JsonMappingException
 
 import fr.irit.smac.amasfactory.IInfrastructure
 import fr.irit.smac.amasfactory.agent.IAgent
+import fr.irit.smac.amasfactory.agent.features.IFeature
+import fr.irit.smac.amasfactory.agent.features.IFeatures
+import fr.irit.smac.amasfactory.agent.features.basic.IKnowledgeBasic
+import fr.irit.smac.amasfactory.agent.features.basic.ISkillBasic
+import fr.irit.smac.amasfactory.agent.features.impl.Feature
+import fr.irit.smac.amasfactory.agent.features.impl.Features
+import fr.irit.smac.amasfactory.factoryclientdemo.example1.IKnowledgeCustom
+import fr.irit.smac.amasfactory.factoryclientdemo.example1.ISkillCustom
 import fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.DemoAgent
+import fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.KnowledgeCustom
+import fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.SkillCustom
 import fr.irit.smac.amasfactory.impl.BasicAmasFactory
 import fr.irit.smac.amasfactory.service.IServices
 import fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler
@@ -36,6 +46,23 @@ class AmasFactoryDemoTest extends Specification{
         infra.shutdown()
     }
 
+    def 'check if the system is correctly instantiated with 3 services'() {
+
+        given:
+        BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
+
+
+        when:
+        IInfrastructure<IServices,IAgent> infra =
+                        basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/demo_config3.json"))
+
+        then:
+        infra.getServices().getExecutionService() instanceof TwoStepAgExecutionService<A, M>
+        infra.getServices().getAgentHandlerService() instanceof BasicAgentHandler<IInfrastructureAgent<M>, M>
+        infra.getServices().getMessagingService() instanceof MessagingService<M>
+        infra.shutdown()
+    }
+
     def 'check if the system is working correctly'() {
 
         given:
@@ -43,7 +70,8 @@ class AmasFactoryDemoTest extends Specification{
 
         IInfrastructure<IServices,IAgent> infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/demo_config.json"))
-
+                        
+                        
         when:
         for (int i = 0 ; i < 10; i++) {
             System.out.println("\n=== step "+i+" ===")
@@ -58,30 +86,6 @@ class AmasFactoryDemoTest extends Specification{
             assert agent.primaryFeature.getKnowledge().getCount() == 20
         }
         infra.shutdown()
-    }
-
-    def 'check if an exception is thrown when a service is missing'() {
-
-        when:
-        BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
-
-        IInfrastructure infra =
-                        basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/exceptions/missing_service.json"))
-
-        then:
-        thrown JsonMappingException
-    }
-
-    def 'check if an exception is thrown when the messageClass of the messagingService is missing'() {
-
-        when:
-        BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
-
-        IInfrastructure infra =
-                        basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/exceptions/missing_attribute_messaging_service.json"))
-
-        then:
-        thrown JsonMappingException
     }
 
     def 'check if an exception is thrown when the configuration file has an error of syntax'() {

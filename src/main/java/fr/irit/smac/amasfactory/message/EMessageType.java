@@ -22,7 +22,7 @@
 package fr.irit.smac.amasfactory.message;
 
 public enum EMessageType implements IMessageType {
-    SEND_TO_TARGET_MESSAGE("sendToTargetMessage"), SEND_PORT_TO_TARGET_MESSAGE("sendPortToTargetMessage"), SIMPLE("simple");
+    SEND_TO_TARGET_MESSAGE("sendToTargetMessage"), SEND_PORT_TO_TARGET_MESSAGE("sendPortToTargetMessage");
 
     private String name;
 

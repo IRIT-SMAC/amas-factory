@@ -23,7 +23,6 @@ package fr.irit.smac.amasfactory.agent.features.social;
 
 import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 
 import fr.irit.smac.amasfactory.agent.IKnowledge;
 import fr.irit.smac.amasfactory.message.IMessage;
