@@ -60,7 +60,7 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
 
     @JsonProperty
     private int nbThreads;
-
+    
     private IAgentHandlerService<A> agentHandlerService;
 
     /**
@@ -92,6 +92,12 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
         systemStrategy = new TwoStepsSystemStrategy(Collections.emptyList(),
             Executors.newFixedThreadPool(nbThreads));
         
+        agentHandlerService.addAgentEventListener(this);
+    }
+
+    @Override
+    public void displaySimpleGui() {
+        
         JFrame frame = new JFrame() {
             {
                 add(new SystemControllerPanel(systemStrategy, 500));
@@ -106,9 +112,8 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
         };
         frame.pack();
         frame.setVisible(true);
-        agentHandlerService.addAgentEventListener(this);
     }
-
+    
     /*
      * (non-Javadoc)
      * 

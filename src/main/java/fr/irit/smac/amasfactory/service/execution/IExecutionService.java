@@ -94,4 +94,6 @@ public interface IExecutionService<A>
     
     public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService);
 
+    public void displaySimpleGui();
+
 }
