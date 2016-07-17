@@ -21,14 +21,16 @@
  */
 package fr.irit.smac.amasfactory.agent.features.basic.impl;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.features.basic.IKnowledgeBasic;
 import fr.irit.smac.amasfactory.agent.impl.Knowledge;
 
-public class KnowledgeBasic extends Knowledge implements IKnowledgeBasic{
+public class KnowledgeBasic extends Knowledge implements IKnowledgeBasic, Serializable{
 
-    private static final long serialVersionUID = -6074066404770071197L;
+    private static final long serialVersionUID = -5532785685384930215L;
     
     @JsonProperty
     private String id;

@@ -35,8 +35,8 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 public interface IDataSharingService<A>
     extends IAgentEventListener<A>, IInfraService {
 
-    void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService);
+    public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService);
 
-    void setExecutionService(IExecutionService<A> executionService);
+    public void setExecutionService(IExecutionService<A> executionService);
 
 }

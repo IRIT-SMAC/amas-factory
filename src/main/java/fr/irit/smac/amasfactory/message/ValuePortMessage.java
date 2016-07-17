@@ -23,7 +23,6 @@ package fr.irit.smac.amasfactory.message;
 
 public class ValuePortMessage extends Message {
 
-    private static final long serialVersionUID = 4427304128676404559L;
     private final Object value;
     private final String port;
 

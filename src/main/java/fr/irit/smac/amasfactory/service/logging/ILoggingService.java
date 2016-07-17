@@ -49,7 +49,6 @@ public interface ILoggingService<A> extends IInfraService {
      */
     public Logger getAgentLogger(String loggerName);
 
-
     public void setExecutionService(IExecutionService<A> executionService);
 
 }

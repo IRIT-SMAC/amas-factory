@@ -21,15 +21,11 @@
  */
 package fr.irit.smac.amasfactory.agent.features.social.impl;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.features.social.IPort;
 
-public class Port implements IPort, Serializable {
-
-    private static final long serialVersionUID = 1L;
+public class Port implements IPort {
 
     @JsonProperty
     protected String   id;

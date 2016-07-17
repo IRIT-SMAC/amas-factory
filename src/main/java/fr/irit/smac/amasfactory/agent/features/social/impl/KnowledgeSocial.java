@@ -39,8 +39,6 @@ import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 
 public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
 
-    private static final long serialVersionUID = -141560700307854360L;
-
     @JsonProperty
     private Map<String,ITarget> targetMap;
 

@@ -23,7 +23,6 @@ package fr.irit.smac.amasfactory.message;
 
 public class PortOfTargetMessage extends Message {
 
-    private static final long serialVersionUID = 8147537029195756237L;
     private final Object value;
     private String portSource;
     private final String portTarget;

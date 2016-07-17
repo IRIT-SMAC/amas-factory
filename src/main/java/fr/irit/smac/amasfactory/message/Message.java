@@ -21,11 +21,8 @@
  */
 package fr.irit.smac.amasfactory.message;
 
-import java.io.Serializable;
+public class Message implements IMessage {
 
-public class Message implements IMessage, Serializable{
-
-    private static final long serialVersionUID = 1902330088251578329L;
     final IMessageType messageType;
     protected String sender;
     

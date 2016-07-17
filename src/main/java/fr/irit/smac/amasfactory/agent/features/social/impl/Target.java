@@ -21,15 +21,11 @@
  */
 package fr.irit.smac.amasfactory.agent.features.social.impl;
 
-import java.io.Serializable;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.features.social.ITarget;
 
-public class Target implements ITarget, Serializable {
-
-    private static final long serialVersionUID = -5644591395489274789L;
+public class Target implements ITarget {
 
     @JsonProperty
     private String agentTarget;
