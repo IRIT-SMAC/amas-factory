@@ -63,7 +63,7 @@ public class AgentLogLoggingService<A> implements ILoggingService<A> {
             .logFolderName("target/log")
             .initialize();
 
-        this.executionService.addPreStepHook(new Runnable() {
+        executionService.addPreStepHook(new Runnable() {
             private int stepNum = 0;
 
             @Override

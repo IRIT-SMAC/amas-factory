@@ -68,8 +68,8 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
      */
     public TwoStepAgExecutionService() {
         super();
-        this.systemStrategy = null;
-        this.nbThreads = Integer.MIN_VALUE;
+        systemStrategy = null;
+        nbThreads = Integer.MIN_VALUE;
     }
     
     @Override
@@ -89,24 +89,24 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
         // agentRemoved
         // will not be called while this.systemStrategy = null)
 
-        this.systemStrategy = new TwoStepsSystemStrategy(Collections.emptyList(),
-            Executors.newFixedThreadPool(this.nbThreads));
+        systemStrategy = new TwoStepsSystemStrategy(Collections.emptyList(),
+            Executors.newFixedThreadPool(nbThreads));
         
         JFrame frame = new JFrame() {
             {
-                this.add(new SystemControllerPanel(systemStrategy, 500));
-                this.addWindowListener(new WindowAdapter() {
+                add(new SystemControllerPanel(systemStrategy, 500));
+                addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosing(WindowEvent e) {
                         systemStrategy.shutdown();
                     }
                 });
-                this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             }
         };
         frame.pack();
         frame.setVisible(true);
-        this.agentHandlerService.addAgentEventListener(this);
+        agentHandlerService.addAgentEventListener(this);
     }
 
     /*
@@ -117,7 +117,7 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
      */
     @Override
     public void run(long milis) {
-        this.systemStrategy.run(milis);
+        systemStrategy.run(milis);
     }
 
     /*
@@ -127,7 +127,7 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
      */
     @Override
     public Future<?> step() {
-        return this.systemStrategy.step();
+        return systemStrategy.step();
     }
 
     /*
@@ -137,7 +137,7 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
      */
     @Override
     public Future<?> pause() {
-        return this.systemStrategy.step();
+        return systemStrategy.step();
     }
 
     /*
@@ -148,7 +148,7 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
     @Override
     public void shutdown() throws ShutdownRuntimeException {
         try {
-            this.systemStrategy.shutdown().get();
+            systemStrategy.shutdown().get();
         }
         catch (InterruptedException | ExecutionException e) {
             LOGGER.log(Level.INFO, e.getMessage(), e);
@@ -164,7 +164,7 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
      */
     @Override
     public void agentAdded(A agent) {
-        this.systemStrategy.addAgent(agent);
+        systemStrategy.addAgent(agent);
     }
 
     /*
@@ -175,7 +175,7 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
      */
     @Override
     public void agentRemoved(A agent) {
-        this.systemStrategy.removeAgent(agent);
+        systemStrategy.removeAgent(agent);
     }
 
     /*
@@ -187,7 +187,7 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
      */
     @Override
     public void addPreStepHook(Runnable task) {
-        this.systemStrategy.addPreStepHook(task);
+        systemStrategy.addPreStepHook(task);
     }
 
     /*
@@ -199,7 +199,7 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
      */
     @Override
     public void addPostStepHook(Runnable task) {
-        this.systemStrategy.addPostStepHook(task);
+        systemStrategy.addPostStepHook(task);
     }
 
     /*
@@ -211,7 +211,7 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
      */
     @Override
     public void removePreStepHook(Runnable task) {
-        this.systemStrategy.removePreStepHook(task);
+        systemStrategy.removePreStepHook(task);
     }
 
     /*
@@ -223,7 +223,7 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
      */
     @Override
     public void removePostStepHook(Runnable task) {
-        this.systemStrategy.removePostStepHook(task);
+        systemStrategy.removePostStepHook(task);
     }
 
     /*
@@ -233,7 +233,7 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
      */
     @Override
     public Set<Runnable> getPreStepHooks() {
-        return this.getPreStepHooks();
+        return getPreStepHooks();
     }
 
     /*
@@ -243,6 +243,6 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
      */
     @Override
     public Set<Runnable> getPostStepHooks() {
-        return this.getPostStepHooks();
+        return getPostStepHooks();
     }
 }

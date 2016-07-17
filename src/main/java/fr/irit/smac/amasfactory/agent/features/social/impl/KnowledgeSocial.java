@@ -24,9 +24,7 @@ package fr.irit.smac.amasfactory.agent.features.social.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -66,10 +64,10 @@ public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
      */
     public KnowledgeSocial() {
 
-        this.targetMap = new HashMap<>();
-        this.portMap = new HashMap<>();
-        this.sendToTargetMessageCollection = new ArrayList<>();
-        this.sendPortToTargetMessageCollection = new ArrayList<>();
+        targetMap = new HashMap<>();
+        portMap = new HashMap<>();
+        sendToTargetMessageCollection = new ArrayList<>();
+        sendPortToTargetMessageCollection = new ArrayList<>();
     }
 
     @Override
@@ -79,12 +77,12 @@ public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
 
     @Override
     public Map<String,ITarget> getTargetMap() {
-        return this.targetMap;
+        return targetMap;
     }
 
     @Override
     public Map<String, IPort> getPortMap() {
-        return this.portMap;
+        return portMap;
     }
 
     @Override
@@ -94,7 +92,7 @@ public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
 
     @Override
     public Object getOutputValue() {
-        return this.outputValue;
+        return outputValue;
     }
 
     @Override
@@ -117,6 +115,6 @@ public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
     }
 
     public IMsgBox<IMessage> getMsgBox() {
-        return this.msgBox;
+        return msgBox;
     }
 }

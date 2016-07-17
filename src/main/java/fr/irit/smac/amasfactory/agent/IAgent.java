@@ -45,4 +45,8 @@ public interface IAgent<F extends IFeatures, K extends IKnowledge, S extends ISk
 
     public P getPrimaryFeature();
 
+    public void setCommonFeatures(F commonFeatures);
+
+    public void setPrimaryFeature(P primaryFeature);
+
 }

@@ -54,8 +54,8 @@ public class BasicAgentHandler<A extends IAgent>
      */
     public BasicAgentHandler() {
         super();
-        this.agentMap = null;
-        this.listenerSet = null;
+        agentMap = null;
+        listenerSet = null;
     }
 
     /**
@@ -76,7 +76,7 @@ public class BasicAgentHandler<A extends IAgent>
      */
     @Override
     public void start() {
-        this.listenerSet = Collections.synchronizedSet(new HashSet<IAgentEventListener<A>>());
+        listenerSet = Collections.synchronizedSet(new HashSet<IAgentEventListener<A>>());
     }
 
     /*
@@ -86,7 +86,7 @@ public class BasicAgentHandler<A extends IAgent>
      */
     @Override
     public void shutdown() {
-        this.agentMap = null;
+        agentMap = null;
     }
 
     /*
@@ -97,7 +97,7 @@ public class BasicAgentHandler<A extends IAgent>
      */
     @Override
     public Collection<A> getAgents() {
-        return this.agentMap.values();
+        return agentMap.values();
     }
 
     /*
@@ -108,8 +108,8 @@ public class BasicAgentHandler<A extends IAgent>
      */
     @Override
     public void addAgent(A agent) {
-        this.agentMap.put(agent.getFeatures().getFeatureBasic().getKnowledge().getId(), agent);
-        this.notifyAgentAdded(agent);
+        agentMap.put(agent.getFeatures().getFeatureBasic().getKnowledge().getId(), agent);
+        notifyAgentAdded(agent);
     }
 
     /*
@@ -120,8 +120,8 @@ public class BasicAgentHandler<A extends IAgent>
      */
     @Override
     public void removeAgent(A agent) {
-        this.agentMap.remove(agent);
-        this.notifyAgentRemoved(agent);
+        agentMap.remove(agent);
+        notifyAgentRemoved(agent);
     }
 
     /**
@@ -131,7 +131,7 @@ public class BasicAgentHandler<A extends IAgent>
      *            the agent
      */
     private void notifyAgentAdded(A agent) {
-        for (IAgentEventListener<A> listener : this.listenerSet) {
+        for (IAgentEventListener<A> listener : listenerSet) {
             listener.agentAdded(agent);
         }
     }
@@ -143,7 +143,7 @@ public class BasicAgentHandler<A extends IAgent>
      *            the agent
      */
     private void notifyAgentRemoved(A agent) {
-        for (IAgentEventListener<A> listener : this.listenerSet) {
+        for (IAgentEventListener<A> listener : listenerSet) {
             listener.agentRemoved(agent);
         }
     }
@@ -157,7 +157,7 @@ public class BasicAgentHandler<A extends IAgent>
     @Override
     public void addAgents(Collection<A> agents) {
         for (A a : agents) {
-            this.addAgent(a);
+            addAgent(a);
         }
     }
 
@@ -170,7 +170,7 @@ public class BasicAgentHandler<A extends IAgent>
     @Override
     public void removeAgents(Collection<A> agents) {
         for (A a : agents) {
-            this.removeAgent(a);
+            removeAgent(a);
         }
 
     }
@@ -184,7 +184,7 @@ public class BasicAgentHandler<A extends IAgent>
      */
     @Override
     public void addAgentEventListener(IAgentEventListener<A> listener) {
-        this.listenerSet.add(listener);
+        listenerSet.add(listener);
     }
 
     /*
@@ -196,7 +196,7 @@ public class BasicAgentHandler<A extends IAgent>
      */
     @Override
     public void removeAgentEventListener(IAgentEventListener<A> listener) {
-        this.listenerSet.add(listener);
+        listenerSet.add(listener);
     }
 
     /*
@@ -207,7 +207,7 @@ public class BasicAgentHandler<A extends IAgent>
      */
     @Override
     public Map<String, A> getAgentMap() {
-        return Collections.unmodifiableMap(this.agentMap);
+        return Collections.unmodifiableMap(agentMap);
     }
 
     /*
@@ -218,15 +218,15 @@ public class BasicAgentHandler<A extends IAgent>
      */
     @Override
     public A getAgent(String id) {
-        return this.agentMap.get(id);
+        return agentMap.get(id);
     }
 
     @Override
     public void initAgents() {
 
-        this.getAgentMap().forEach((k, v) -> {
+        getAgentMap().forEach((k, v) -> {
 
-            this.notifyAgentAdded(v);
+            notifyAgentAdded(v);
         });
     }
 

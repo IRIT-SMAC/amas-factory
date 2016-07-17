@@ -37,9 +37,17 @@ public class KnowledgeBasic extends Knowledge implements IKnowledgeBasic{
         
     }
     
-    @Override
-    public String getId() {
-        return this.id;
+    public KnowledgeBasic(String id) {
+        this.id = id;
     }
     
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id = id;
+    }
 }

@@ -82,6 +82,7 @@ public class AmasFactoryDeserializer implements IAmasFactoryDeserializer {
             JsonElement configurationJson = new JsonParser().parse(new InputStreamReader(configuration));
             infrastructure = mapper.readValue(configurationJson.getAsJsonObject().toString(),
                 BasicInfrastructure.class);
+            infrastructure.start();
 
         }
         catch (IOException e) {

@@ -59,7 +59,7 @@ public class HazelcastKnowledgeAccessor implements IHazelcastKnowledgeAccessor {
      */
     @Override
     public void registerKnowledge(IKnowledgeBasic knowledge) {
-        this.mapKnowledge.put(knowledge.getId(), knowledge);
+        mapKnowledge.put(knowledge.getId(), knowledge);
     }
 
     /*
@@ -70,7 +70,7 @@ public class HazelcastKnowledgeAccessor implements IHazelcastKnowledgeAccessor {
      */
     @Override
     public void removeKnowledge(String knowledgeId) {
-        this.mapKnowledge.remove(knowledgeId);
+        mapKnowledge.remove(knowledgeId);
     }
 
     /*
@@ -102,6 +102,6 @@ public class HazelcastKnowledgeAccessor implements IHazelcastKnowledgeAccessor {
 
     @Override
     public void shutdownInstance() {
-        this.instance.shutdown();
+        instance.shutdown();
     }
 }

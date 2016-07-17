@@ -51,19 +51,7 @@ public class Services<A extends IAgent> implements IServices<A> {
     @JsonProperty
     private IDataSharingService<A> hazelcastService;
 
-    public Services(
-        @JsonProperty(value = "messagingService", required = true) IMessagingService<IMessage> messagingService,
-        @JsonProperty(value = "agentHandlerService", required = true) IAgentHandlerService<A> agentHandlerService,
-        @JsonProperty(value = "executionService", required = true) IExecutionService<A> executionService,
-        @JsonProperty(value = "loggingService", required = true) ILoggingService<A> loggingService,
-        @JsonProperty(value = "hazelcastService", required = true) IDataSharingService<A> hazelcastService) {
-        super();
-
-        this.messagingService = messagingService;
-        this.agentHandlerService = agentHandlerService;
-        this.executionService = executionService;
-        this.loggingService = loggingService;
-        this.hazelcastService = hazelcastService;
+    public Services() {
     }
 
     @Override
@@ -94,31 +82,39 @@ public class Services<A extends IAgent> implements IServices<A> {
     @Override
     public void start() {
 
-        executionService.setAgentHandlerService(this.agentHandlerService);
-        loggingService.setExecutionService(this.executionService);
-        hazelcastService.setAgentHandlerService(this.agentHandlerService);
-        hazelcastService.setExecutionService(this.executionService);
+        executionService.setAgentHandlerService(agentHandlerService);
+        loggingService.setExecutionService(executionService);
 
-        this.agentHandlerService.start();
-        this.executionService.start();
-        this.messagingService.start();
-        this.loggingService.start();
-        this.agentHandlerService.initAgents();
-        this.agentHandlerService.getAgentMap().forEach((k, v) -> {
+        if (hazelcastService != null) {
+            hazelcastService.setAgentHandlerService(agentHandlerService);
+            hazelcastService.setExecutionService(executionService);
+        }
+        agentHandlerService.start();
+        executionService.start();
+        messagingService.start();
+        loggingService.start();
+        agentHandlerService.initAgents();
+        agentHandlerService.getAgentMap().forEach((k, v) -> {
             v.getFeatures().getFeatureSocial().getKnowledge().setMsgBox(messagingService.getMsgBox(k));
             v.setLogger(loggingService.getAgentLogger(k));
         });
-        this.hazelcastService.start();
+
+        if (hazelcastService != null) {
+            hazelcastService.start();
+        }
     }
 
     @Override
     public void stop() throws ShutdownRuntimeException {
 
-        this.agentHandlerService.shutdown();
-        this.executionService.shutdown();
-        this.messagingService.shutdown();
-        this.loggingService.shutdown();
-        this.hazelcastService.shutdown();
+        agentHandlerService.shutdown();
+        executionService.shutdown();
+        messagingService.shutdown();
+        loggingService.shutdown();
+
+        if (hazelcastService != null) {
+            hazelcastService.shutdown();
+        }
     }
 
 }

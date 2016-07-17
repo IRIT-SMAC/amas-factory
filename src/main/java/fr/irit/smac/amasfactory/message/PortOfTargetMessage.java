@@ -39,22 +39,22 @@ public class PortOfTargetMessage extends Message {
     
     public Object getValue() {
         
-        return this.value;
+        return value;
     }
     
     public String getPortSource() {
         
-        return this.portSource;
+        return portSource;
     }
     
     public String getPortTarget() {
         
-        return this.portTarget;
+        return portTarget;
     }
 
     @Override
     public String toString() {
-        return "SendToTargetMessage [v=" + value + ", target=" + this.portTarget + ", source=" + this.portSource + "]";
+        return "SendToTargetMessage [v=" + value + ", target=" + portTarget + ", source=" + portSource + "]";
     }
 
 }

@@ -13,6 +13,10 @@ class DemoAgent<F extends IFeatures, K extends IKnowledgeCustom, S extends ISkil
     public DemoAgent() {
         super()
     }
+    
+    public DemoAgent(String id) {
+        super(id)
+    }
 
     @Override
     public void perceive() {

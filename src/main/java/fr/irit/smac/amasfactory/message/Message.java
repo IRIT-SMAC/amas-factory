@@ -41,7 +41,7 @@ public class Message implements IMessage, Serializable{
     }
     
     public IMessageType getMessageType(){
-        return this.messageType;
+        return messageType;
     }
     
     @Override

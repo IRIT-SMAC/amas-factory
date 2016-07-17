@@ -45,12 +45,24 @@ public class Features implements IFeatures {
     @Override
     public IFeature<IKnowledgeSocial, ISkillSocial<IKnowledgeSocial>> getFeatureSocial() {
 
-        return this.featureSocial;
+        return featureSocial;
     }
 
     @Override
     public IFeature<IKnowledgeBasic, ISkillBasic<IKnowledgeBasic>> getFeatureBasic() {
 
-        return this.featureBasic;
+        return featureBasic;
     }
+
+    @Override
+    public void setFeatureSocial(IFeature<IKnowledgeSocial, ISkillSocial<IKnowledgeSocial>> featureSocial) {
+        this.featureSocial = featureSocial;
+    }
+
+    @Override
+    public void setFeatureBasic(IFeature<IKnowledgeBasic, ISkillBasic<IKnowledgeBasic>> featureBasic) {
+        this.featureBasic = featureBasic;
+    }
+    
+    
 }

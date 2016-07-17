@@ -47,7 +47,7 @@ public class Agent<F extends IFeatures, K extends IKnowledge, S extends ISkill<K
     protected P primaryFeature;
 
     protected Logger logger;
-
+    
     @Override
     public void setLogger(Logger logger) {
         this.logger = logger;
@@ -58,12 +58,21 @@ public class Agent<F extends IFeatures, K extends IKnowledge, S extends ISkill<K
 
     @Override
     public F getFeatures() {
-        return this.commonFeatures;
+        return commonFeatures;
     }
 
     @Override
     public P getPrimaryFeature() {
-        return this.primaryFeature;
+        return primaryFeature;
     }
 
+    @Override
+    public void setCommonFeatures(F commonFeatures) {
+        this.commonFeatures = commonFeatures;
+    }
+
+    @Override
+    public void setPrimaryFeature(P primaryFeature) {
+        this.primaryFeature = primaryFeature;
+    }
 }

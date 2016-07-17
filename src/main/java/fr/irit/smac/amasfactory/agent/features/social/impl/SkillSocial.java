@@ -41,14 +41,14 @@ public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K>implements 
     @Override
     public void sendOutputValue(String id) {
 
-        Object value = this.knowledge.getOutputValue();
+        Object value = knowledge.getOutputValue();
 
-        this.knowledge.getTargetMap().forEach((k, v) -> {
+        knowledge.getTargetMap().forEach((k, v) -> {
             String agentId = v.getAgentId();
             String port = v.getPortTarget();
             // logger.info("send to target " + target.getAgentId() + "
             // message= " + value);
-            this.knowledge.getMsgBox().send(
+            knowledge.getMsgBox().send(
                 new ValuePortMessage(port, value, id),
                 agentId);
         });
@@ -58,12 +58,12 @@ public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K>implements 
     @Override
     public void sendPort(String id) {
 
-        this.knowledge.getTargetMap().forEach((k, v) -> {
+        knowledge.getTargetMap().forEach((k, v) -> {
 
             String agentId = v.getAgentId();
             String portTarget = v.getPortTarget();
             String portSource = v.getPortSource();
-            this.knowledge.getMsgBox().send(new PortOfTargetMessage(portTarget, portSource, id, id),
+            knowledge.getMsgBox().send(new PortOfTargetMessage(portTarget, portSource, id, id),
                 agentId);
         });
     }
@@ -71,9 +71,9 @@ public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K>implements 
     @Override
     public void addTargetFromMessage() {
 
-        Collection<PortOfTargetMessage> portOfTargetsMessageCollection = this.knowledge
+        Collection<PortOfTargetMessage> portOfTargetsMessageCollection = knowledge
             .getPortOfTargetMessageCollection();
-        Map<String, ITarget> targetMap = this.knowledge.getTargetMap();
+        Map<String, ITarget> targetMap = knowledge.getTargetMap();
 
         for (PortOfTargetMessage message : portOfTargetsMessageCollection) {
             ITarget target = new Target(message.getValue().toString(), message.getPortSource(),
@@ -85,7 +85,7 @@ public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K>implements 
     @Override
     public void updatePortFromMessage() {
 
-        IKnowledgeSocial e = this.knowledge;
+        IKnowledgeSocial e = knowledge;
 
         Collection<ValuePortMessage> valuePortMessageCollection = e.getValuePortMessageCollection();
 
@@ -99,8 +99,8 @@ public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K>implements 
     @Override
     public void sendValueToTargets(String id) {
 
-        this.knowledge.getTargetMap().forEach((k, v) -> {
-            this.knowledge.getMsgBox().send(new ValuePortMessage(v.getPortTarget(), v.getValue(), id), v.getAgentId());
+        knowledge.getTargetMap().forEach((k, v) -> {
+            knowledge.getMsgBox().send(new ValuePortMessage(v.getPortTarget(), v.getValue(), id), v.getAgentId());
         });
     }
 

@@ -54,7 +54,7 @@ public class MessagingService<IMessage>
     public MessagingService(@JsonProperty(value = "messageClass", required = true) Class<IMessage> messageClass) {
         super();
         this.messageClass = messageClass;
-        this.delegatedMsgService = null;
+        delegatedMsgService = null;
     }
 
     /*
@@ -66,7 +66,7 @@ public class MessagingService<IMessage>
     public void start() {
 
         // not consistent
-        this.delegatedMsgService = AgentMessaging.getMsgService(messageClass);
+        delegatedMsgService = AgentMessaging.getMsgService(messageClass);
     }
 
     /*
@@ -76,9 +76,9 @@ public class MessagingService<IMessage>
      */
     @Override
     public void shutdown() {
-        AgentMessaging.shutdownMsgService(this.messageClass);
-        this.delegatedMsgService = null;
-        this.messageClass = null;
+        AgentMessaging.shutdownMsgService(messageClass);
+        delegatedMsgService = null;
+        messageClass = null;
     }
 
     /*
@@ -88,7 +88,7 @@ public class MessagingService<IMessage>
      */
     @Override
     public IDirectory<IMessage> getDirectory() {
-        return this.delegatedMsgService.getDirectory();
+        return delegatedMsgService.getDirectory();
     }
 
     /*
@@ -99,7 +99,7 @@ public class MessagingService<IMessage>
      */
     @Override
     public boolean send(IMessage msg, String receiverId) {
-        return this.delegatedMsgService.send(msg, receiverId);
+        return delegatedMsgService.send(msg, receiverId);
     }
 
     /*
@@ -110,7 +110,7 @@ public class MessagingService<IMessage>
      */
     @Override
     public boolean send(IMessage msg, Ref<IMessage> receiverRef) {
-        return this.delegatedMsgService.send(msg, receiverRef);
+        return delegatedMsgService.send(msg, receiverRef);
     }
 
     /*
@@ -122,7 +122,7 @@ public class MessagingService<IMessage>
      */
     @Override
     public boolean sendToGroup(IMessage msg, String groupId) {
-        return this.delegatedMsgService.sendToGroup(msg, groupId);
+        return delegatedMsgService.sendToGroup(msg, groupId);
     }
 
     /*
@@ -134,7 +134,7 @@ public class MessagingService<IMessage>
      */
     @Override
     public boolean sendToGroup(IMessage msg, Ref<IMessage> groupRef) {
-        return this.delegatedMsgService.sendToGroup(msg, groupRef);
+        return delegatedMsgService.sendToGroup(msg, groupRef);
     }
 
     /*
@@ -145,7 +145,7 @@ public class MessagingService<IMessage>
      */
     @Override
     public boolean broadcast(IMessage msg) {
-        return this.delegatedMsgService.broadcast(msg);
+        return delegatedMsgService.broadcast(msg);
     }
 
     /*
@@ -156,7 +156,7 @@ public class MessagingService<IMessage>
      */
     @Override
     public IMsgBox<IMessage> getMsgBox(String agentId) {
-        return this.delegatedMsgService.getMsgBox(agentId);
+        return delegatedMsgService.getMsgBox(agentId);
     }
 
 }

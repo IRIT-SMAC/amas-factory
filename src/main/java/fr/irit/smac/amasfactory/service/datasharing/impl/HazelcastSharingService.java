@@ -56,34 +56,34 @@ public class HazelcastSharingService<A extends IAgent>
     private IExecutionService<A> executionService;
 
     public HazelcastSharingService() {
-        this.hazelcastKnowledgeAccessor = new HazelcastKnowledgeAccessor();
+        hazelcastKnowledgeAccessor = new HazelcastKnowledgeAccessor();
     }
 
     @Override
     public void agentAdded(A agent) {
-        this.hazelcastKnowledgeAccessor.registerKnowledge((IKnowledgeBasic) agent.getFeatures().getFeatureBasic());
+        hazelcastKnowledgeAccessor.registerKnowledge((IKnowledgeBasic) agent.getFeatures().getFeatureBasic());
     }
 
     @Override
     public void agentRemoved(A agent) {
-        this.hazelcastKnowledgeAccessor.removeKnowledge(agent.getFeatures().getFeatureBasic().getKnowledge().getId());
+        hazelcastKnowledgeAccessor.removeKnowledge(agent.getFeatures().getFeatureBasic().getKnowledge().getId());
     }
 
     @Override
     public void start() {
 
         // Register to react to agents creation, deletion.
-        this.agentHandlerService.addAgentEventListener(this);
+        agentHandlerService.addAgentEventListener(this);
 
-        this.persistencePolicy = generatePersistenceUpdatePolicy(this.agentHandlerService);
+        persistencePolicy = generatePersistenceUpdatePolicy(agentHandlerService);
 
         // Register to share the agent knowledge at the end of each step.
         switch (PERSISTENCE_UPDATE_POLICY) {
             case "AFTER_ITERATION":
-                this.executionService.addPostStepHook(this.persistencePolicy);
+                executionService.addPostStepHook(persistencePolicy);
                 break;
             case "BEFORE_ITERATION":
-                this.executionService.addPreStepHook(this.persistencePolicy);
+                executionService.addPreStepHook(persistencePolicy);
                 break;
             default:
                 break;
@@ -112,14 +112,14 @@ public class HazelcastSharingService<A extends IAgent>
     @Override
     public void shutdown() {
 
-        this.agentHandlerService.removeAgentEventListener(this);
+        agentHandlerService.removeAgentEventListener(this);
 
         switch (PERSISTENCE_UPDATE_POLICY) {
             case "AFTER_ITERATION":
-                this.executionService.removePostStepHook(this.persistencePolicy);
+                executionService.removePostStepHook(persistencePolicy);
                 break;
             case "BEFORE_ITERATION":
-                this.executionService.removePreStepHook(this.persistencePolicy);
+                executionService.removePreStepHook(persistencePolicy);
                 break;
             default:
                 break;

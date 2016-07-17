@@ -37,17 +37,17 @@ public class ValuePortMessage extends Message {
 
     public Object getValue() {
 
-        return this.value;
+        return value;
     }
 
     public String getPort() {
 
-        return this.port;
+        return port;
     }
 
     @Override
     public String toString() {
-        return "SendToTargetMessage [v=" + value + ", target=" + this.port + "]";
+        return "SendToTargetMessage [v=" + value + ", target=" + port + "]";
     }
 
 }

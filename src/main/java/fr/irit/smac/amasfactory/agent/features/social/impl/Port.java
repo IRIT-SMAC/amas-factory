@@ -53,19 +53,19 @@ public class Port implements IPort, Serializable {
     @Override
     public String getId() {
 
-        return this.id;
+        return id;
     }
 
     @Override
     public Class<?> getType() {
 
-        return this.type;
+        return type;
     }
     
     @Override 
     public Object getValue() {
         
-        return this.value;
+        return value;
     }
     
     @Override

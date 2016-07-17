@@ -42,17 +42,17 @@ public class Feature<K extends IKnowledge,S extends ISkill<K>> implements IFeatu
     
     @Override
     public K getKnowledge() {
-        return this.knowledge;
+        return knowledge;
     }
 
     @Override
     public S getSkill() {
-        return this.skill;
+        return skill;
     }
     
     @JsonSetter("skill")
     public void setSkill(S skill){
         this.skill = skill;
-        this.skill.setKnowledge(this.knowledge);
+        skill.setKnowledge(knowledge);
     }
 }

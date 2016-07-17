@@ -52,7 +52,7 @@ public class Target implements ITarget, Serializable {
 
     @Override
     public String getAgentId() {
-        return this.agentTarget;
+        return agentTarget;
     }
 
     @Override
@@ -62,12 +62,12 @@ public class Target implements ITarget, Serializable {
 
     @Override
     public String getPortTarget() {
-        return this.portTarget;
+        return portTarget;
     }
 
     @Override
     public String getPortSource() {
-        return this.portSource;
+        return portSource;
     }
 
     @Override

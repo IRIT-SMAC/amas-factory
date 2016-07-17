@@ -26,4 +26,6 @@ import fr.irit.smac.amasfactory.agent.IKnowledge;
 public interface IKnowledgeBasic extends IKnowledge {
 
     public String getId();
+
+    public void setId(String id);
 }
