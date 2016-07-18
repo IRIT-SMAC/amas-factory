@@ -109,4 +109,6 @@ public interface IAgentHandlerService<A> extends IService {
     public void removeAgentEventListener(IAgentEventListener<A> listener);
 
     public void initAgents();
+
+    public void setAgentMap(Map<String, A> agentMap);
 }

@@ -1,13 +1,12 @@
 package fr.irit.smac.amasfactory.factoryclientdemo.example2.impl
 
 import fr.irit.smac.amasfactory.agent.features.ICommonFeatures
-import fr.irit.smac.amasfactory.agent.features.impl.Feature
 import fr.irit.smac.amasfactory.agent.impl.Agent
 import fr.irit.smac.amasfactory.factoryclientdemo.example2.IKnowledgeCustom
 import fr.irit.smac.amasfactory.factoryclientdemo.example2.ISkillCustom
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 
-class DemoAgent2<F extends ICommonFeatures, K extends IKnowledgeCustom, S extends ISkillCustom, P extends Feature<K, S>> extends Agent<F,K,S,P> implements ITwoStepsAgent{
+class DemoAgent2<F extends ICommonFeatures, K extends IKnowledgeCustom, S extends ISkillCustom> extends Agent<F,K,S> implements ITwoStepsAgent{
 
     public DemoAgent2() {
         super()
@@ -16,7 +15,7 @@ class DemoAgent2<F extends ICommonFeatures, K extends IKnowledgeCustom, S extend
     @Override
     public void perceive() {
 
-        this.primaryFeature.getSkill().processMessages(this.commonFeatures.getFeatureSocial().getKnowledge())
+        this.getSkill().processMessages(this.commonFeatures.getFeatureSocial().getKnowledge())
     }
 
     @Override
@@ -24,12 +23,12 @@ class DemoAgent2<F extends ICommonFeatures, K extends IKnowledgeCustom, S extend
 
         this.commonFeatures.getFeatureSocial().getSkill().updatePortFromMessage()
 
-        boolean ok = this.primaryFeature.getSkill().checkPortMapFull(this.commonFeatures.getFeatureSocial().getKnowledge())
+        boolean ok = this.getSkill().checkPortMapFull(this.commonFeatures.getFeatureSocial().getKnowledge())
 
-        if (ok && !this.primaryFeature.getKnowledge().getSend()) {
-            this.primaryFeature.getSkill().getOutputValue(this.commonFeatures.getFeatureSocial().getKnowledge())
+        if (ok && !this.knowledge.getSend()) {
+            this.skill.getOutputValue(this.commonFeatures.getFeatureSocial().getKnowledge())
             this.commonFeatures.getFeatureSocial().getSkill().sendOutputValue()
-            this.primaryFeature.getKnowledge().setSend(true)
+            this.knowledge.setSend(true)
         }
     }
 }

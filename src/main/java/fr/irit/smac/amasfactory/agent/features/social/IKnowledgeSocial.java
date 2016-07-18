@@ -37,8 +37,6 @@ public interface IKnowledgeSocial extends IKnowledge {
      */
     public Map<String, IPort> getPortMap();
 
-    public void setTargetSet(Map<String,ITarget> targetSet);
-
     /**
      * @return a map containing the targets of an agent
      */
@@ -59,11 +57,17 @@ public interface IKnowledgeSocial extends IKnowledge {
      */
     public void setOutputValue(Object outputValue);
 
-    public Collection<ValuePortMessage> getValuePortMessageCollection();
+    public Collection<ValuePortMessage> getSendToTargetMessageCollection();
 
-    public Collection<PortOfTargetMessage> getPortOfTargetMessageCollection();
+    public Collection<PortOfTargetMessage> getSendPortToTargetMessageCollection();
 
     public IMsgBox<IMessage> getMsgBox();
 
     public void setMsgBox(IMsgBox<IMessage> msgBox);
+
+    public void setTargetMap(Map<String, ITarget> targetMap);
+
+    public void setPortMap(Map<String, IPort> portMap);
+
+    public void setOutputType(Class<?> outputType);
 }

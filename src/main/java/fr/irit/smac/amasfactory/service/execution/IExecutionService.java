@@ -96,4 +96,6 @@ public interface IExecutionService<A>
 
     public void displaySimpleGui();
 
+    public void setNbThreads(int nbThreads);
+
 }

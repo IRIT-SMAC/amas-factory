@@ -23,12 +23,16 @@ package fr.irit.smac.amasfactory.agent.features.impl;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import fr.irit.smac.amasfactory.agent.features.IFeature;
 import fr.irit.smac.amasfactory.agent.features.ICommonFeatures;
+import fr.irit.smac.amasfactory.agent.features.IFeature;
 import fr.irit.smac.amasfactory.agent.features.basic.IKnowledgeBasic;
 import fr.irit.smac.amasfactory.agent.features.basic.ISkillBasic;
+import fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic;
+import fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic;
 import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
+import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial;
+import fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial;
 
 public class CommonFeatures implements ICommonFeatures {
 
@@ -44,13 +48,11 @@ public class CommonFeatures implements ICommonFeatures {
 
     @Override
     public IFeature<IKnowledgeSocial, ISkillSocial<IKnowledgeSocial>> getFeatureSocial() {
-
         return featureSocial;
     }
 
     @Override
     public IFeature<IKnowledgeBasic, ISkillBasic<IKnowledgeBasic>> getFeatureBasic() {
-
         return featureBasic;
     }
 
@@ -62,6 +64,23 @@ public class CommonFeatures implements ICommonFeatures {
     @Override
     public void setFeatureBasic(IFeature<IKnowledgeBasic, ISkillBasic<IKnowledgeBasic>> featureBasic) {
         this.featureBasic = featureBasic;
+    }
+
+    @Override
+    public void initFeatureSocial() {
+
+        setFeatureSocial(new Feature<IKnowledgeSocial, ISkillSocial<IKnowledgeSocial>>());
+        featureSocial.setKnowledge(new KnowledgeSocial());
+        featureSocial.setSkill(new SkillSocial<IKnowledgeSocial>());
+    }
+
+    @Override
+    public void initFeatureBasic(String id) {
+
+        setFeatureBasic(new Feature<IKnowledgeBasic, ISkillBasic<IKnowledgeBasic>>());
+        featureBasic.setKnowledge(new KnowledgeBasic());
+        featureBasic.setSkill(new SkillBasic<IKnowledgeBasic>());
+        featureBasic.getKnowledge().setId(id);
     }
 
 }

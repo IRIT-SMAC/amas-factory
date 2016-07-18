@@ -39,10 +39,6 @@ public class KnowledgeBasic extends Knowledge implements IKnowledgeBasic, Serial
         // Needed by Jackson
     }
 
-    public KnowledgeBasic(String id) {
-        this.id = id;
-    }
-
     @Override
     public String getId() {
         return id;

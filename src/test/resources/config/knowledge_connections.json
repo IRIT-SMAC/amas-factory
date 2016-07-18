@@ -7,15 +7,11 @@
 			"agentMap":{
 				"ag1":{
 					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
-					"primaryFeature":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
-						},
-						"skill":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
-						}
-						
+					"knowledge":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
+					},
+					"skill":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
 					},
 					"commonFeatures":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.CommonFeatures",
@@ -61,15 +57,11 @@
 				},
 				"ag2":{
 					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
-					"primaryFeature":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
-						},
-						"skill":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
-						}
-						
+					"knowledge":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
+					},
+					"skill":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
 					},
 					"commonFeatures":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.CommonFeatures",
@@ -128,15 +120,11 @@
 				},
 				"ag3":{
 					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
-					"primaryFeature":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
-						},
-						"skill":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
-						}
-						
+					"knowledge":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
+					},
+					"skill":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
 					},
 					"commonFeatures":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.CommonFeatures",
@@ -177,15 +165,11 @@
 				},
 				"ag4":{
 					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
-					"primaryFeature":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
-						},
-						"skill":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
-						}
-						
+					"knowledge":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
+					},
+					"skill":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
 					},
 					"commonFeatures":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.CommonFeatures",
@@ -234,15 +218,11 @@
 				},
 				"ag5":{
 					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
-					"primaryFeature":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
-						"knowledge":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
-						},
-						"skill":{
-							"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
-						}
-						
+					"knowledge":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
+					},
+					"skill":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
 					},
 					"commonFeatures":{
 						"className":"fr.irit.smac.amasfactory.agent.features.impl.CommonFeatures",

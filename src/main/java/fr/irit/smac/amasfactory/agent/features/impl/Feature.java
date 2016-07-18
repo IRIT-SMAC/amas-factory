@@ -50,7 +50,13 @@ public class Feature<K extends IKnowledge, S extends ISkill<K>> implements IFeat
         return skill;
     }
 
+    @Override
+    public void setKnowledge(K knowledge) {
+        this.knowledge = knowledge;
+    }
+
     @JsonSetter("skill")
+    @Override
     public void setSkill(S skill) {
         this.skill = skill;
         skill.setKnowledge(knowledge);

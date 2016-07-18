@@ -16,9 +16,9 @@ class SkillCustom<K extends KnowledgeCustom> extends Skill<K> implements ISkillC
         for (Message demoMessage : knowledgeSocial.getMsgBox().getMsgs()) {
 
             if (demoMessage instanceof ValuePortMessage) {
-                knowledgeSocial.getValuePortMessageCollection().add(demoMessage)
+                knowledgeSocial.getSendToTargetMessageCollection().add(demoMessage)
             } else if (demoMessage instanceof PortOfTargetMessage) {
-                knowledgeSocial.getPortOfTargetMessageCollection().add(demoMessage)
+                knowledgeSocial.getSendPortToTargetMessageCollection().add(demoMessage)
             }
         }
     }

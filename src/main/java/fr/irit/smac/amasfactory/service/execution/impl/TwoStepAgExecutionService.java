@@ -73,6 +73,11 @@ public class TwoStepAgExecutionService<A extends ITwoStepsAgent> implements IExe
     }
     
     @Override
+    public void setNbThreads(int nbThreads) {
+        this.nbThreads = nbThreads;
+    }
+
+    @Override
     public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService) {
         this.agentHandlerService = agentHandlerService;
     }

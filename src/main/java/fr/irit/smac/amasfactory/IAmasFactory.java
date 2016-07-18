@@ -24,13 +24,10 @@ package fr.irit.smac.amasfactory;
 import java.io.IOException;
 import java.io.InputStream;
 
-import fr.irit.smac.amasfactory.service.IServices;
-
 /**
  * The interface IAmasFactory exposes methods to create an infrastructure.
  */
-@FunctionalInterface
-public interface IAmasFactory {
+public interface IAmasFactory<T> {
 
     /**
      * Creates a new IAmas object.
@@ -45,6 +42,8 @@ public interface IAmasFactory {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public <T extends IServices<A>, A> IInfrastructure<T> createInfrastructure(InputStream configuration)
+    public IInfrastructure<T> createInfrastructure(InputStream configuration)
         throws IOException;
+    
+    public IInfrastructure<T> createInfrastructure(); 
 }

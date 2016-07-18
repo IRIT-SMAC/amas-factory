@@ -39,4 +39,8 @@ public interface ICommonFeatures {
 
     public void setFeatureBasic(IFeature<IKnowledgeBasic, ISkillBasic<IKnowledgeBasic>> featureBasic);
 
+    public void initFeatureBasic(String id);
+
+    public void initFeatureSocial();
+
 }

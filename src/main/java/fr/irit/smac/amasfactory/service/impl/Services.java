@@ -81,6 +81,31 @@ public class Services<A extends IAgent> implements IServices<A> {
     }
 
     @Override
+    public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService) {
+        this.agentHandlerService = agentHandlerService;
+    }
+
+    @Override
+    public void setMessagingService(IMessagingService<IMessage> messagingService) {
+        this.messagingService = messagingService;
+    }
+
+    @Override
+    public void setExecutionService(IExecutionService<A> executionService) {
+        this.executionService = executionService;
+    }
+
+    @Override
+    public void setLoggingService(ILoggingService<A> loggingService) {
+        this.loggingService = loggingService;
+    }
+
+    @Override
+    public void setHazelcastService(IDataSharingService<A> hazelcastService) {
+        this.hazelcastService = hazelcastService;
+    }
+
+    @Override
     public void start() {
 
         initExecutionService();
@@ -123,7 +148,9 @@ public class Services<A extends IAgent> implements IServices<A> {
             agentHandlerService.getAgentMap().forEach((k, v) -> {
 
                 if (messagingService != null) {
-                    v.getFeatures().getFeatureSocial().getKnowledge().setMsgBox(messagingService.getMsgBox(k));
+                    if (v.getFeatures().getFeatureSocial() != null) {
+                        v.getFeatures().getFeatureSocial().getKnowledge().setMsgBox(messagingService.getMsgBox(k));
+                    }
                 }
 
                 if (loggingService != null) {

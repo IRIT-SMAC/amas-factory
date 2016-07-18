@@ -69,11 +69,6 @@ public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
     }
 
     @Override
-    public void setTargetSet(Map<String,ITarget> targetMap) {
-        this.targetMap = targetMap;
-    }
-
-    @Override
     public Map<String,ITarget> getTargetMap() {
         return targetMap;
     }
@@ -99,12 +94,12 @@ public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
     }
 
     @Override
-    public Collection<ValuePortMessage> getValuePortMessageCollection() {
+    public Collection<ValuePortMessage> getSendToTargetMessageCollection() {
         return sendToTargetMessageCollection;
     }
 
     @Override
-    public Collection<PortOfTargetMessage> getPortOfTargetMessageCollection() {
+    public Collection<PortOfTargetMessage> getSendPortToTargetMessageCollection() {
         return sendPortToTargetMessageCollection;
     }
 
@@ -117,4 +112,22 @@ public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
     public IMsgBox<IMessage> getMsgBox() {
         return msgBox;
     }
+
+    @Override
+    public void setTargetMap(Map<String, ITarget> targetMap) {
+        this.targetMap = targetMap;
+    }
+
+    @Override
+    public void setPortMap(Map<String, IPort> portMap) {
+        this.portMap = portMap;
+    }
+
+    @Override
+    public void setOutputType(Class<?> outputType) {
+        this.outputType = outputType;
+    }
+    
+    
+    
 }

@@ -72,7 +72,7 @@ public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K>implements 
     public void addTargetFromMessage() {
 
         Collection<PortOfTargetMessage> portOfTargetsMessageCollection = knowledge
-            .getPortOfTargetMessageCollection();
+            .getSendPortToTargetMessageCollection();
         Map<String, ITarget> targetMap = knowledge.getTargetMap();
 
         for (PortOfTargetMessage message : portOfTargetsMessageCollection) {
@@ -87,7 +87,7 @@ public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K>implements 
 
         IKnowledgeSocial e = knowledge;
 
-        Collection<ValuePortMessage> valuePortMessageCollection = e.getValuePortMessageCollection();
+        Collection<ValuePortMessage> valuePortMessageCollection = e.getSendToTargetMessageCollection();
 
         for (ValuePortMessage message : valuePortMessageCollection) {
 

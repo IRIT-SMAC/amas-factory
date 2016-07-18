@@ -51,4 +51,6 @@ public interface IInfrastructure<T> {
 
     public T getServices();
 
+    public void setServices(T services);
+
 }

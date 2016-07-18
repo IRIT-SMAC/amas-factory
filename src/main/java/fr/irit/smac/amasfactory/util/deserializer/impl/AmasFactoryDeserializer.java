@@ -33,7 +33,6 @@ import com.google.gson.JsonParser;
 
 import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.impl.Infrastructure;
-import fr.irit.smac.amasfactory.service.IServices;
 import fr.irit.smac.amasfactory.util.deserializer.IAmasFactoryDeserializer;
 import fr.irit.smac.libs.tooling.scheduling.impl.system.SynchronizedSystemStrategy;
 
@@ -71,7 +70,7 @@ public class AmasFactoryDeserializer implements IAmasFactoryDeserializer {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends IServices<A>,A> IInfrastructure<T> deserializeInfrastructure(
+    public <T> IInfrastructure<T> deserializeInfrastructure(
         InputStream configuration)
             throws IOException {
 

@@ -30,4 +30,8 @@ public interface IFeature<K,S> {
 
     public S getSkill();
 
+    public void setKnowledge(K knowledge);
+
+    public void setSkill(S skill);
+
 }

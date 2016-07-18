@@ -64,6 +64,7 @@ public class BasicAgentHandler<A extends IAgent>
      * @param agentMap
      *            the agent map
      */
+    @Override
     public void setAgentMap(Map<String, A> agentMap) {
         this.agentMap = agentMap;
 

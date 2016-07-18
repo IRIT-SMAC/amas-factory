@@ -24,11 +24,11 @@ package fr.irit.smac.amasfactory.agent.impl;
 import org.slf4j.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonSetter;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.agent.IKnowledge;
 import fr.irit.smac.amasfactory.agent.ISkill;
-import fr.irit.smac.amasfactory.agent.features.IFeature;
 import fr.irit.smac.amasfactory.agent.features.ICommonFeatures;
 
 /**
@@ -37,21 +37,24 @@ import fr.irit.smac.amasfactory.agent.features.ICommonFeatures;
  * @param <M>
  *            the generic type
  */
-public class Agent<F extends ICommonFeatures, K extends IKnowledge, S extends ISkill<K>, P extends IFeature<K, S>>
-    implements IAgent<F, K, S, P> {
+public abstract class Agent<F extends ICommonFeatures, K extends IKnowledge, S extends ISkill<K>>
+    implements IAgent<F, K, S> {
 
     @JsonProperty
     protected F commonFeatures;
 
     @JsonProperty
-    protected P primaryFeature;
+    protected K knowledge;
+    
+    @JsonProperty
+    protected S skill;
 
     protected Logger logger;
     
     @Override
     public void setLogger(Logger logger) {
         this.logger = logger;
-        this.primaryFeature.getSkill().setLogger(logger);
+        this.skill.setLogger(logger);
         this.commonFeatures.getFeatureBasic().getSkill().setLogger(logger);
         this.commonFeatures.getFeatureSocial().getSkill().setLogger(logger);
     }
@@ -62,17 +65,26 @@ public class Agent<F extends ICommonFeatures, K extends IKnowledge, S extends IS
     }
 
     @Override
-    public P getPrimaryFeature() {
-        return primaryFeature;
-    }
-
-    @Override
     public void setCommonFeatures(F commonFeatures) {
         this.commonFeatures = commonFeatures;
     }
 
-    @Override
-    public void setPrimaryFeature(P primaryFeature) {
-        this.primaryFeature = primaryFeature;
+    public K getKnowledge() {
+        return knowledge;
     }
+
+    public void setKnowledge(K knowledge) {
+        this.knowledge = knowledge;
+    }
+
+    public S getSkill() {
+        return skill;
+    }
+
+    @JsonSetter("skill")
+    public void setSkill(S skill) {
+        this.skill = skill;
+        this.skill.setKnowledge(knowledge);
+    }
+
 }

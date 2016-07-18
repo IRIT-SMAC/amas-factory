@@ -48,4 +48,14 @@ public interface IServices<A> {
 
     public IDataSharingService<A> getHazelcastService();
 
+    public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService);
+
+    public void setMessagingService(IMessagingService<IMessage> messagingService);
+
+    public void setExecutionService(IExecutionService<A> executionService);
+
+    public void setLoggingService(ILoggingService<A> loggingService);
+
+    public void setHazelcastService(IDataSharingService<A> hazelcastService);
+
 }
