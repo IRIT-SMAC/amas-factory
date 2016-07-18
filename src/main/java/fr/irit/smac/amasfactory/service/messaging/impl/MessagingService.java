@@ -21,6 +21,9 @@
  */
 package fr.irit.smac.amasfactory.service.messaging.impl;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
 import fr.irit.smac.libs.tooling.messaging.AgentMessaging;
 import fr.irit.smac.libs.tooling.messaging.IDirectory;
@@ -35,11 +38,13 @@ import fr.irit.smac.libs.tooling.messaging.impl.Ref;
  *            the generic type
  */
 public class MessagingService<IMessage>
-    implements IMessagingService<IMessage>, IMsgService<IMessage> { 
+    implements IMessagingService<IMessage>, IMsgService<IMessage> {
 
     private IMsgService<IMessage> delegatedMsgService;
 
     private Class<IMessage> messageClass;
+
+    private static final Logger LOGGER = Logger.getLogger(MessagingService.class.getName());
 
     /**
      * Instantiates a new messaging service.
@@ -54,10 +59,9 @@ public class MessagingService<IMessage>
             messageClass = (Class<IMessage>) Class.forName("fr.irit.smac.amasfactory.message.Message");
         }
         catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "An error occured during the initialisation of the messagingService", e);
         }
-        
+
         delegatedMsgService = null;
     }
 

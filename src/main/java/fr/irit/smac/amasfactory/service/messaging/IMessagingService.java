@@ -22,7 +22,7 @@
 package fr.irit.smac.amasfactory.service.messaging;
 
 import fr.irit.smac.amasfactory.message.IMessage;
-import fr.irit.smac.amasfactory.service.IInfraService;
+import fr.irit.smac.amasfactory.service.IService;
 import fr.irit.smac.libs.tooling.messaging.IMsgService;
 
 /**
@@ -31,6 +31,6 @@ import fr.irit.smac.libs.tooling.messaging.IMsgService;
  * @param <M> the generic type
  */
 @SuppressWarnings("hiding")
-public interface IMessagingService<IMessage> extends IInfraService, IMsgService<IMessage> {
+public interface IMessagingService<IMessage> extends IService, IMsgService<IMessage> {
 
 }

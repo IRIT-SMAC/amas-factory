@@ -29,7 +29,7 @@ import java.util.Map;
 import java.util.Set;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
-import fr.irit.smac.amasfactory.service.IInfraService;
+import fr.irit.smac.amasfactory.service.IService;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 
@@ -43,7 +43,7 @@ import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
  */
 @SuppressWarnings("rawtypes")
 public class BasicAgentHandler<A extends IAgent>
-    implements IAgentHandlerService<A>, IInfraService {
+    implements IAgentHandlerService<A>, IService {
 
     private Map<String, A> agentMap = new HashMap<>();
 
@@ -224,10 +224,7 @@ public class BasicAgentHandler<A extends IAgent>
     @Override
     public void initAgents() {
 
-        getAgentMap().forEach((k, v) -> {
-
-            notifyAgentAdded(v);
-        });
+        getAgentMap().forEach((k, v) -> notifyAgentAdded(v));
     }
 
 }

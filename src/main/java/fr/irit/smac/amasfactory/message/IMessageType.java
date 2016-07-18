@@ -21,6 +21,7 @@
  */
 package fr.irit.smac.amasfactory.message;
 
+@FunctionalInterface
 public interface IMessageType {
 
     public String getName();

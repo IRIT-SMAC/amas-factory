@@ -28,6 +28,6 @@ import fr.irit.smac.amasfactory.agent.impl.Skill;
 public class SkillBasic<K extends IKnowledgeBasic> extends Skill<K>implements ISkillBasic<K> {
 
     public SkillBasic() {
-
+        // Needed by Jackson
     }
 }

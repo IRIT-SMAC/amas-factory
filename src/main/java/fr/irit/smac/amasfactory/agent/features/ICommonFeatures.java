@@ -19,37 +19,24 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package fr.irit.smac.amasfactory.agent.features.basic.impl;
+package fr.irit.smac.amasfactory.agent.features;
 
-import java.io.Serializable;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import fr.irit.smac.amasfactory.agent.features.basic.IKnowledgeBasic;
-import fr.irit.smac.amasfactory.agent.impl.Knowledge;
+import fr.irit.smac.amasfactory.agent.features.basic.ISkillBasic;
+import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
+import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
 
-public class KnowledgeBasic extends Knowledge implements IKnowledgeBasic, Serializable {
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
+public interface ICommonFeatures {
 
-    private static final long serialVersionUID = -5532785685384930215L;
+    public IFeature<IKnowledgeSocial, ISkillSocial<IKnowledgeSocial>> getFeatureSocial();
 
-    @JsonProperty
-    private String id;
+    public IFeature<IKnowledgeBasic, ISkillBasic<IKnowledgeBasic>> getFeatureBasic();
 
-    public KnowledgeBasic() {
-        // Needed by Jackson
-    }
+    public void setFeatureSocial(IFeature<IKnowledgeSocial, ISkillSocial<IKnowledgeSocial>> featureSocial);
 
-    public KnowledgeBasic(String id) {
-        this.id = id;
-    }
+    public void setFeatureBasic(IFeature<IKnowledgeBasic, ISkillBasic<IKnowledgeBasic>> featureBasic);
 
-    @Override
-    public String getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(String id) {
-        this.id = id;
-    }
 }

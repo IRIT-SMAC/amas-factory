@@ -21,7 +21,7 @@
  */
 package fr.irit.smac.amasfactory.service.datasharing;
 
-import fr.irit.smac.amasfactory.service.IInfraService;
+import fr.irit.smac.amasfactory.service.IService;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
@@ -33,7 +33,7 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
  * @author SVI
  */
 public interface IDataSharingService<A>
-    extends IAgentEventListener<A>, IInfraService {
+    extends IAgentEventListener<A>, IService {
 
     public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService);
 

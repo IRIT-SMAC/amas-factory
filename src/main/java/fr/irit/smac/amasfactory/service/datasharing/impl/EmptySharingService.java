@@ -58,14 +58,12 @@ public class EmptySharingService<A>
 
     @Override
     public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService) {
-        // TODO Auto-generated method stub
-
+        // empty
     }
 
     @Override
     public void setExecutionService(IExecutionService<A> executionService) {
-        // TODO Auto-generated method stub
-
+        // empty
     }
 
 }

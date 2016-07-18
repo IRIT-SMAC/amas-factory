@@ -37,7 +37,7 @@ public class Target implements ITarget {
     private Object value;
 
     public Target() {
-
+        // Needed by Jackson
     }
 
     public Target(String agentTarget, String portTarget, String portSource) {

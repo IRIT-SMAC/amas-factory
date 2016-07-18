@@ -52,6 +52,7 @@ public class Services<A extends IAgent> implements IServices<A> {
     private IDataSharingService<A> hazelcastService;
 
     public Services() {
+        // Needed by Jackson
     }
 
     @Override
@@ -176,7 +177,7 @@ public class Services<A extends IAgent> implements IServices<A> {
         shutdownExecutionService();
         shutdownAgentHandlerService();
     }
-    
+
     private void shutdownHazelcastService() throws ShutdownRuntimeException {
 
         if (hazelcastService != null) {

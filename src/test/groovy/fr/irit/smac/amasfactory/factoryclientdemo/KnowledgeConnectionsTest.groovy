@@ -8,14 +8,14 @@ import fr.irit.smac.amasfactory.agent.features.social.IPort
 import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial
 import fr.irit.smac.amasfactory.agent.impl.Agent
 import fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2
-import fr.irit.smac.amasfactory.impl.BasicAmasFactory
+import fr.irit.smac.amasfactory.impl.AmasFactory
 
 class KnowledgeConnectionsTest extends Specification {
 
     def 'check if the system is working correctly with knowledge connections'() {
 
         given:
-        BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
+        AmasFactory basicAmasFactory = new AmasFactory()
 
         IInfrastructure infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/knowledge_connections.json"))
@@ -44,7 +44,7 @@ class KnowledgeConnectionsTest extends Specification {
     def 'check if the system is working correctly with knowledge connections2'() {
 
         given:
-        BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
+        AmasFactory basicAmasFactory = new AmasFactory()
 
         IInfrastructure infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/knowledge_connections2.json"))

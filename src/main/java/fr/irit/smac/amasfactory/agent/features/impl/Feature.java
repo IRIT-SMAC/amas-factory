@@ -28,18 +28,18 @@ import fr.irit.smac.amasfactory.agent.IKnowledge;
 import fr.irit.smac.amasfactory.agent.ISkill;
 import fr.irit.smac.amasfactory.agent.features.IFeature;
 
-public class Feature<K extends IKnowledge,S extends ISkill<K>> implements IFeature<K,S>{
+public class Feature<K extends IKnowledge, S extends ISkill<K>> implements IFeature<K, S> {
 
     @JsonProperty
     protected K knowledge;
 
     @JsonProperty
     protected S skill;
-    
+
     public Feature() {
-        
+        // Needed by Jackson
     }
-    
+
     @Override
     public K getKnowledge() {
         return knowledge;
@@ -49,9 +49,9 @@ public class Feature<K extends IKnowledge,S extends ISkill<K>> implements IFeatu
     public S getSkill() {
         return skill;
     }
-    
+
     @JsonSetter("skill")
-    public void setSkill(S skill){
+    public void setSkill(S skill) {
         this.skill = skill;
         skill.setKnowledge(knowledge);
     }

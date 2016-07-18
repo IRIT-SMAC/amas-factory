@@ -24,7 +24,7 @@ package fr.irit.smac.amasfactory.service.agenthandler;
 import java.util.Collection;
 import java.util.Map;
 
-import fr.irit.smac.amasfactory.service.IInfraService;
+import fr.irit.smac.amasfactory.service.IService;
 
 /**
  * The Interface IAgentHandlerService exposes methods to handle the agents.
@@ -34,7 +34,7 @@ import fr.irit.smac.amasfactory.service.IInfraService;
  * @param <M>
  *            the generic type
  */
-public interface IAgentHandlerService<A> extends IInfraService {
+public interface IAgentHandlerService<A> extends IService {
 
     /**
      * Gets the agents.

@@ -32,7 +32,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import fr.irit.smac.amasfactory.IInfrastructure;
-import fr.irit.smac.amasfactory.impl.BasicInfrastructure;
+import fr.irit.smac.amasfactory.impl.Infrastructure;
 import fr.irit.smac.amasfactory.service.IServices;
 import fr.irit.smac.amasfactory.util.deserializer.IAmasFactoryDeserializer;
 import fr.irit.smac.libs.tooling.scheduling.impl.system.SynchronizedSystemStrategy;
@@ -71,17 +71,17 @@ public class AmasFactoryDeserializer implements IAmasFactoryDeserializer {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public <T extends IServices<A>,A> IInfrastructure<T,A> deserializeInfrastructure(
+    public <T extends IServices<A>,A> IInfrastructure<T> deserializeInfrastructure(
         InputStream configuration)
             throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
-        IInfrastructure<T,A> infrastructure = null;
+        IInfrastructure<T> infrastructure = null;
         try {
 
             JsonElement configurationJson = new JsonParser().parse(new InputStreamReader(configuration));
             infrastructure = mapper.readValue(configurationJson.getAsJsonObject().toString(),
-                BasicInfrastructure.class);
+                Infrastructure.class);
 
         }
         catch (IOException e) {

@@ -29,7 +29,7 @@ import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.agent.IKnowledge;
 import fr.irit.smac.amasfactory.agent.ISkill;
 import fr.irit.smac.amasfactory.agent.features.IFeature;
-import fr.irit.smac.amasfactory.agent.features.IFeatures;
+import fr.irit.smac.amasfactory.agent.features.ICommonFeatures;
 
 /**
  * Abstract class used by subclasses implementing an agent
@@ -37,7 +37,7 @@ import fr.irit.smac.amasfactory.agent.features.IFeatures;
  * @param <M>
  *            the generic type
  */
-public class Agent<F extends IFeatures, K extends IKnowledge, S extends ISkill<K>, P extends IFeature<K, S>>
+public class Agent<F extends ICommonFeatures, K extends IKnowledge, S extends ISkill<K>, P extends IFeature<K, S>>
     implements IAgent<F, K, S, P> {
 
     @JsonProperty

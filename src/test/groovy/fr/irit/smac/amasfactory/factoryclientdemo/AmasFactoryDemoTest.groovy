@@ -8,17 +8,17 @@ import com.fasterxml.jackson.databind.JsonMappingException
 import fr.irit.smac.amasfactory.IInfrastructure
 import fr.irit.smac.amasfactory.agent.IAgent
 import fr.irit.smac.amasfactory.agent.features.IFeature
-import fr.irit.smac.amasfactory.agent.features.IFeatures
+import fr.irit.smac.amasfactory.agent.features.ICommonFeatures
 import fr.irit.smac.amasfactory.agent.features.basic.IKnowledgeBasic
 import fr.irit.smac.amasfactory.agent.features.basic.ISkillBasic
 import fr.irit.smac.amasfactory.agent.features.impl.Feature
-import fr.irit.smac.amasfactory.agent.features.impl.Features
+import fr.irit.smac.amasfactory.agent.features.impl.CommonFeatures
 import fr.irit.smac.amasfactory.factoryclientdemo.example1.IKnowledgeCustom
 import fr.irit.smac.amasfactory.factoryclientdemo.example1.ISkillCustom
 import fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.DemoAgent
 import fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.KnowledgeCustom
 import fr.irit.smac.amasfactory.factoryclientdemo.example1.impl.SkillCustom
-import fr.irit.smac.amasfactory.impl.BasicAmasFactory
+import fr.irit.smac.amasfactory.impl.AmasFactory
 import fr.irit.smac.amasfactory.service.IServices
 import fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler
 import fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService
@@ -30,7 +30,7 @@ class AmasFactoryDemoTest extends Specification{
     def 'check if the system is correctly instantiated'() {
 
         given:
-        BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
+        AmasFactory basicAmasFactory = new AmasFactory()
 
 
         when:
@@ -49,7 +49,7 @@ class AmasFactoryDemoTest extends Specification{
     def 'check if the system is correctly instantiated with 3 services'() {
 
         given:
-        BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
+        AmasFactory basicAmasFactory = new AmasFactory()
 
 
         when:
@@ -66,7 +66,7 @@ class AmasFactoryDemoTest extends Specification{
     def 'check if the system is working correctly'() {
 
         given:
-        BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
+        AmasFactory basicAmasFactory = new AmasFactory()
 
         IInfrastructure<IServices,IAgent> infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/demo_config.json"))
@@ -91,7 +91,7 @@ class AmasFactoryDemoTest extends Specification{
     def 'check if an exception is thrown when the configuration file has an error of syntax'() {
 
         when:
-        BasicAmasFactory basicAmasFactory = new BasicAmasFactory()
+        AmasFactory basicAmasFactory = new AmasFactory()
 
         IInfrastructure infra =
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/exceptions/error_syntax.json"))

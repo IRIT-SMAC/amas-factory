@@ -19,34 +19,39 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package fr.irit.smac.amasfactory.util.deserializer;
+package fr.irit.smac.amasfactory.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+import fr.irit.smac.amasfactory.IAmasFactory;
 import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.service.IServices;
+import fr.irit.smac.amasfactory.util.deserializer.impl.AmasFactoryDeserializer;
 
 /**
- * The Interface IAmasFactoryDeserializer exposes a method to create a multi-agent
- * system from a configuration file.
+ * A factory for creating a BasicAmas.
+ *
+ * @author lemouzy
+ * @param <M>
+ * @param <A>
  */
-@FunctionalInterface
-public interface IAmasFactoryDeserializer {
+public class AmasFactory implements IAmasFactory {
 
-    /**
-     * Deserialize the infrastructure.
-     *
-     * @param <A>
-     *            the generic type
-     * @param <M>
-     *            the generic type
-     * @param configuration
-     *            the configuration
-     * @return the i infrastructure
-     * @throws IOException
-     *             Signals that an I/O exception has occurred.
+    /*
+     * (non-Javadoc)
+     * 
+     * @see fr.irit.smac.amasfactory.IAmasFactory#createInfrastructure(java.io.
+     * InputStream)
      */
-    public <T extends IServices<A>,A> IInfrastructure<T> deserializeInfrastructure(InputStream configuration)
-        throws IOException;
+    @Override
+    public <T extends IServices<A>, A> IInfrastructure<T> createInfrastructure(
+        InputStream configuration) throws IOException {
+
+        AmasFactoryDeserializer parser = AmasFactoryDeserializer.getInstance();
+        IInfrastructure<T> infrastructure = parser.deserializeInfrastructure(configuration);
+        infrastructure.start();
+        
+        return infrastructure;
+    }
 }

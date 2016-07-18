@@ -19,37 +19,48 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package fr.irit.smac.amasfactory.agent.features.basic.impl;
+package fr.irit.smac.amasfactory.impl;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import fr.irit.smac.amasfactory.IInfrastructure;
+import fr.irit.smac.amasfactory.service.IServices;
 
-import fr.irit.smac.amasfactory.agent.features.basic.IKnowledgeBasic;
-import fr.irit.smac.amasfactory.agent.impl.Knowledge;
+/**
+ * A BasicInfrastructure controls the services of the system
+ *
+ * @param <A>
+ *            the generic type
+ * @param the
+ *            generic type
+ */
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
+public class Infrastructure<T extends IServices<A>, A>
+    implements IInfrastructure<T> {
 
-public class KnowledgeBasic extends Knowledge implements IKnowledgeBasic, Serializable {
+    protected T services;
 
-    private static final long serialVersionUID = -5532785685384930215L;
-
-    @JsonProperty
-    private String id;
-
-    public KnowledgeBasic() {
+    public Infrastructure() {
         // Needed by Jackson
     }
 
-    public KnowledgeBasic(String id) {
-        this.id = id;
+    @Override
+    public T getServices() {
+
+        return this.services;
     }
 
     @Override
-    public String getId() {
-        return id;
+    public void start() {
+
+        this.services.start();
+
     }
 
     @Override
-    public void setId(String id) {
-        this.id = id;
+    public void shutdown() throws ShutdownRuntimeException {
+
+        this.services.stop();
     }
+
 }

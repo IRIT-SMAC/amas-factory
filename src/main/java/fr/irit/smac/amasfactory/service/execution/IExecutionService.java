@@ -24,7 +24,7 @@ package fr.irit.smac.amasfactory.service.execution;
 import java.util.concurrent.Future;
 
 import fr.irit.smac.amasfactory.impl.ShutdownRuntimeException;
-import fr.irit.smac.amasfactory.service.IInfraService;
+import fr.irit.smac.amasfactory.service.IService;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentEventListener;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.libs.tooling.scheduling.IHookHandler;
@@ -39,7 +39,7 @@ import fr.irit.smac.libs.tooling.scheduling.IHookHandler;
  *            the generic type
  */
 public interface IExecutionService<A>
-    extends IAgentEventListener<A>, IInfraService, IHookHandler {
+    extends IAgentEventListener<A>, IService, IHookHandler {
     /**
      * Launches the continuous execution of the system. The system will execute
      * according to the implemented strategy, until the {@link #pause} method is

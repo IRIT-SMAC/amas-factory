@@ -1,5 +1,5 @@
 {
-	"className":"fr.irit.smac.amasfactory.impl.BasicInfrastructure",
+	"className":"fr.irit.smac.amasfactory.impl.Infrastructure",
 	"services":{
 		"className":"fr.irit.smac.amasfactory.service.impl.Services",
 		"agentHandlerService":{
@@ -18,7 +18,7 @@
 						
 					},
 					"commonFeatures":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Features",
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.CommonFeatures",
 						"featureBasic":{
 							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 							"knowledge":{
@@ -72,7 +72,7 @@
 						
 					},
 					"commonFeatures":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Features",
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.CommonFeatures",
 						"featureBasic":{
 							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 							"knowledge":{
@@ -139,7 +139,7 @@
 						
 					},
 					"commonFeatures":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Features",
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.CommonFeatures",
 						"featureBasic":{
 							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 							"knowledge":{
@@ -188,7 +188,7 @@
 						
 					},
 					"commonFeatures":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Features",
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.CommonFeatures",
 						"featureBasic":{
 							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 							"knowledge":{
@@ -245,7 +245,7 @@
 						
 					},
 					"commonFeatures":{
-						"className":"fr.irit.smac.amasfactory.agent.features.impl.Features",
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.CommonFeatures",
 						"featureBasic":{
 							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
 							"knowledge":{

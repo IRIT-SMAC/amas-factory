@@ -35,7 +35,7 @@ import fr.irit.smac.amasfactory.message.ValuePortMessage;
 public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K>implements ISkillSocial<K> {
 
     public SkillSocial() {
-
+        // Needed by Jackson
     }
 
     @Override
@@ -99,9 +99,8 @@ public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K>implements 
     @Override
     public void sendValueToTargets(String id) {
 
-        knowledge.getTargetMap().forEach((k, v) -> {
-            knowledge.getMsgBox().send(new ValuePortMessage(v.getPortTarget(), v.getValue(), id), v.getAgentId());
-        });
+        knowledge.getTargetMap().forEach((k, v) -> knowledge.getMsgBox()
+            .send(new ValuePortMessage(v.getPortTarget(), v.getValue(), id), v.getAgentId()));
     }
 
 }

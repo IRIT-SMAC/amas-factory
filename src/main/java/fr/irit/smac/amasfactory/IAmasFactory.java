@@ -45,6 +45,6 @@ public interface IAmasFactory {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public <T extends IServices<A>, A> IInfrastructure<T, A> createInfrastructure(InputStream configuration)
+    public <T extends IServices<A>, A> IInfrastructure<T> createInfrastructure(InputStream configuration)
         throws IOException;
 }

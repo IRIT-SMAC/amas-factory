@@ -19,12 +19,34 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package fr.irit.smac.amasfactory.message;
+package fr.irit.smac.amasfactory.service;
 
-public interface IMessage {
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-    public IMessageType getMessageType();
+import fr.irit.smac.amasfactory.impl.ShutdownRuntimeException;
 
-    public String getSender();
+/**
+ * The Interface IInfraService exposes methods to control a service.
+ *
+ * @param <A>
+ *            the generic type
+ * @param <M>
+ *            the generic type
+ */
+@JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
+public interface IService {
+
+    /**
+     * Start the service.
+     */
+    public void start();
+
+    /**
+     * Shutdown the service.
+     *
+     * @throws ShutdownRuntimeException
+     *             the shutdown runtime exception
+     */
+    public void shutdown() throws ShutdownRuntimeException;
 
 }

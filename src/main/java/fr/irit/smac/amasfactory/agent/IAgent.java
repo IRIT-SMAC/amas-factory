@@ -26,7 +26,7 @@ import org.slf4j.Logger;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import fr.irit.smac.amasfactory.agent.features.IFeature;
-import fr.irit.smac.amasfactory.agent.features.IFeatures;
+import fr.irit.smac.amasfactory.agent.features.ICommonFeatures;
 
 /**
  * Interface that defines the interaction capabilities of an agent with the
@@ -37,7 +37,7 @@ import fr.irit.smac.amasfactory.agent.features.IFeatures;
  *            the generic type
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
-public interface IAgent<F extends IFeatures, K extends IKnowledge, S extends ISkill<K>, P extends IFeature<K, S>> {
+public interface IAgent<F extends ICommonFeatures, K extends IKnowledge, S extends ISkill<K>, P extends IFeature<K, S>> {
 
     public void setLogger(Logger logger);
 

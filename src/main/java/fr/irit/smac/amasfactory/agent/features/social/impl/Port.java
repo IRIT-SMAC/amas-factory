@@ -28,18 +28,18 @@ import fr.irit.smac.amasfactory.agent.features.social.IPort;
 public class Port implements IPort {
 
     @JsonProperty
-    protected String   id;
-    
+    protected String id;
+
     @JsonProperty
     protected Class<?> type;
-    
+
     @JsonProperty
     protected Object value;
 
     public Port() {
-    	
+        // Needed by Jackson
     }
-    
+
     public Port(String id, Class<?> type) {
 
         this.id = id;
@@ -57,21 +57,21 @@ public class Port implements IPort {
 
         return type;
     }
-    
-    @Override 
+
+    @Override
     public Object getValue() {
-        
+
         return value;
     }
-    
+
     @Override
     public void setValue(Object value) {
-        
+
         this.value = value;
     }
 
     @Override
     public String toString() {
-        return  "["+id + ": " + type + " " + value + "]";
+        return "[" + id + ": " + type + " " + value + "]";
     }
 }

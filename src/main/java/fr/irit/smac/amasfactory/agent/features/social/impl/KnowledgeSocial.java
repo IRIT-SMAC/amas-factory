@@ -108,10 +108,12 @@ public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
         return sendPortToTargetMessageCollection;
     }
 
+    @Override
     public void setMsgBox(IMsgBox<IMessage> msgBox) {
         this.msgBox = msgBox;
     }
 
+    @Override
     public IMsgBox<IMessage> getMsgBox() {
         return msgBox;
     }
