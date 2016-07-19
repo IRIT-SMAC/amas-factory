@@ -23,6 +23,9 @@ package fr.irit.smac.amasfactory.agent.impl;
 
 import fr.irit.smac.amasfactory.agent.IKnowledge;
 
-public abstract class Knowledge implements IKnowledge{
+/**
+ * The implementation of the main knowledge of an agent
+ */
+public abstract class Knowledge implements IKnowledge {
 
 }

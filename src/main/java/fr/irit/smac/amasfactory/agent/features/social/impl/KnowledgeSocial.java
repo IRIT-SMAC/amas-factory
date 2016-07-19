@@ -21,8 +21,6 @@
  */
 package fr.irit.smac.amasfactory.agent.features.social.impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,27 +31,19 @@ import fr.irit.smac.amasfactory.agent.features.social.IPort;
 import fr.irit.smac.amasfactory.agent.features.social.ITarget;
 import fr.irit.smac.amasfactory.agent.impl.Knowledge;
 import fr.irit.smac.amasfactory.message.IMessage;
-import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
-import fr.irit.smac.amasfactory.message.ValuePortMessage;
 import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 
+/**
+ * The implementation of the social knowledge
+ *
+ */
 public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
 
     @JsonProperty
-    private Map<String,ITarget> targetMap;
+    private Map<String, ITarget> targetMap;
 
     @JsonProperty
     protected Map<String, IPort> portMap;
-
-    @JsonProperty
-    private Class<?> outputType;
-
-    @JsonProperty
-    private Object outputValue;
-
-    protected Collection<ValuePortMessage> sendToTargetMessageCollection;
-
-    private Collection<PortOfTargetMessage> sendPortToTargetMessageCollection;
 
     protected IMsgBox<IMessage> msgBox;
 
@@ -64,43 +54,16 @@ public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
 
         targetMap = new HashMap<>();
         portMap = new HashMap<>();
-        sendToTargetMessageCollection = new ArrayList<>();
-        sendPortToTargetMessageCollection = new ArrayList<>();
     }
 
     @Override
-    public Map<String,ITarget> getTargetMap() {
+    public Map<String, ITarget> getTargetMap() {
         return targetMap;
     }
 
     @Override
     public Map<String, IPort> getPortMap() {
         return portMap;
-    }
-
-    @Override
-    public Class<?> getOutputType() {
-        return outputType;
-    }
-
-    @Override
-    public Object getOutputValue() {
-        return outputValue;
-    }
-
-    @Override
-    public void setOutputValue(Object outputValue) {
-        this.outputValue = outputValue;
-    }
-
-    @Override
-    public Collection<ValuePortMessage> getSendToTargetMessageCollection() {
-        return sendToTargetMessageCollection;
-    }
-
-    @Override
-    public Collection<PortOfTargetMessage> getSendPortToTargetMessageCollection() {
-        return sendPortToTargetMessageCollection;
     }
 
     @Override
@@ -123,11 +86,4 @@ public class KnowledgeSocial extends Knowledge implements IKnowledgeSocial {
         this.portMap = portMap;
     }
 
-    @Override
-    public void setOutputType(Class<?> outputType) {
-        this.outputType = outputType;
-    }
-    
-    
-    
 }

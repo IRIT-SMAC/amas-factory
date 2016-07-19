@@ -25,6 +25,12 @@ import org.slf4j.Logger;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+/**
+ * The main skill of an agent
+ *
+ * @param <K>
+ *            the main knowledge
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
 public interface ISkill<K> {
 

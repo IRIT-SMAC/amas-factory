@@ -24,6 +24,9 @@ package fr.irit.smac.amasfactory.service.impl;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
+import fr.irit.smac.amasfactory.agent.IKnowledge;
+import fr.irit.smac.amasfactory.agent.ISkill;
+import fr.irit.smac.amasfactory.agent.features.ICommonFeatures;
 import fr.irit.smac.amasfactory.impl.ShutdownRuntimeException;
 import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.service.IServices;
@@ -33,8 +36,7 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
 import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
 
-@SuppressWarnings("rawtypes")
-public class Services<A extends IAgent> implements IServices<A> {
+public class Services<A extends IAgent<F,IKnowledge,ISkill<IKnowledge>>, F extends ICommonFeatures> implements IServices<A> {
 
     @JsonProperty
     private IAgentHandlerService<A> agentHandlerService;

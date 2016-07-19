@@ -25,6 +25,12 @@ import fr.irit.smac.amasfactory.agent.features.basic.IKnowledgeBasic;
 import fr.irit.smac.amasfactory.agent.features.basic.ISkillBasic;
 import fr.irit.smac.amasfactory.agent.impl.Skill;
 
+/**
+ * The implementation of the basic skill
+ * 
+ * @param <K>
+ *            the knowledge used by the skill
+ */
 public class SkillBasic<K extends IKnowledgeBasic> extends Skill<K>implements ISkillBasic<K> {
 
     public SkillBasic() {

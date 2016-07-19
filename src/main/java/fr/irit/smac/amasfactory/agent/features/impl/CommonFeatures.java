@@ -34,6 +34,9 @@ import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
 import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial;
 
+/**
+ * The implementation of the common features
+ */
 public class CommonFeatures implements ICommonFeatures {
 
     @JsonProperty

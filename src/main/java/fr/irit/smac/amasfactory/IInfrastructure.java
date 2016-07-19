@@ -34,7 +34,7 @@ import fr.irit.smac.amasfactory.impl.ShutdownRuntimeException;
  *            the generic type
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
-public interface IInfrastructure<T> {
+public interface IInfrastructure<T, A> {
 
     /**
      * Starts the services.

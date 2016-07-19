@@ -23,6 +23,9 @@ package fr.irit.smac.amasfactory.agent.features.basic;
 
 import fr.irit.smac.amasfactory.agent.IKnowledge;
 
+/**
+ * The basic knowledge. It contains the id of the agent
+ */
 public interface IKnowledgeBasic extends IKnowledge {
 
     public String getId();

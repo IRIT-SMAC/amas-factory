@@ -28,6 +28,9 @@ import fr.irit.smac.amasfactory.agent.features.basic.ISkillBasic;
 import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
 import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
 
+/**
+ * Interface of the common features. Allows the access to the features.
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
 public interface ICommonFeatures {
 

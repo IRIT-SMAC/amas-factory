@@ -21,57 +21,54 @@
  */
 package fr.irit.smac.amasfactory.agent.features.social.impl;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.features.social.IPort;
 
+/**
+ * The implementation of a port
+ */
 public class Port implements IPort {
 
     @JsonProperty
     protected String id;
 
-    @JsonProperty
-    protected Class<?> type;
-
-    @JsonProperty
-    protected Object value;
+    protected Set<Object> value = new HashSet<>();
 
     public Port() {
         // Needed by Jackson
     }
 
-    public Port(String id, Class<?> type) {
+    public Port(String id) {
 
         this.id = id;
-        this.type = type;
     }
 
     @Override
     public String getId() {
-
         return id;
     }
 
     @Override
-    public Class<?> getType() {
-
-        return type;
-    }
-
-    @Override
-    public Object getValue() {
-
+    public Set<Object> getValue() {
         return value;
     }
 
     @Override
-    public void setValue(Object value) {
+    public void addValue(Object value) {
+        this.value.add(value);
+    }
 
+    @Override
+    public void setValue(Set<Object> value) {
         this.value = value;
     }
 
     @Override
     public String toString() {
-        return "[" + id + ": " + type + " " + value + "]";
+        return "[" + id + ": " + id + "]";
     }
 }

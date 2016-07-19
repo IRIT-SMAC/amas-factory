@@ -21,15 +21,18 @@
  */
 package fr.irit.smac.amasfactory.agent.features.social;
 
-import java.util.Collection;
 import java.util.Map;
 
 import fr.irit.smac.amasfactory.agent.IKnowledge;
 import fr.irit.smac.amasfactory.message.IMessage;
-import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
-import fr.irit.smac.amasfactory.message.ValuePortMessage;
 import fr.irit.smac.libs.tooling.messaging.IMsgBox;
 
+/**
+ * The social knowledge. The feature linked to this knowledge allows to the
+ * agent to communicate via ports. An agent can send values directly to the port
+ * of an agent. A port interprets a data in the same way. It makes easier the
+ * communication between the agents. This feature uses the messaging service.
+ */
 public interface IKnowledgeSocial extends IKnowledge {
 
     /**
@@ -42,24 +45,12 @@ public interface IKnowledgeSocial extends IKnowledge {
      */
     public Map<String, ITarget> getTargetMap();
 
-    public Class<?> getOutputType();
-
-    /**
-     * @return the output value of the agent
-     */
-    public Object getOutputValue();
-
     /**
      * Sets the output value of the agent
      * 
      * @param outputValue
      *            the output value
      */
-    public void setOutputValue(Object outputValue);
-
-    public Collection<ValuePortMessage> getSendToTargetMessageCollection();
-
-    public Collection<PortOfTargetMessage> getSendPortToTargetMessageCollection();
 
     public IMsgBox<IMessage> getMsgBox();
 
@@ -68,6 +59,4 @@ public interface IKnowledgeSocial extends IKnowledge {
     public void setTargetMap(Map<String, ITarget> targetMap);
 
     public void setPortMap(Map<String, IPort> portMap);
-
-    public void setOutputType(Class<?> outputType);
 }

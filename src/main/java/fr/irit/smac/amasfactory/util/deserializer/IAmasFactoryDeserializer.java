@@ -27,8 +27,8 @@ import java.io.InputStream;
 import fr.irit.smac.amasfactory.IInfrastructure;
 
 /**
- * The Interface IAmasFactoryDeserializer exposes a method to create a multi-agent
- * system from a configuration file.
+ * The Interface IAmasFactoryDeserializer exposes a method to create a
+ * multi-agent system from a configuration file.
  */
 @FunctionalInterface
 public interface IAmasFactoryDeserializer {
@@ -46,6 +46,6 @@ public interface IAmasFactoryDeserializer {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public <T> IInfrastructure<T> deserializeInfrastructure(InputStream configuration)
+    public <T, A> IInfrastructure<T, A> deserializeInfrastructure(InputStream configuration)
         throws IOException;
 }

@@ -1,11 +1,14 @@
 package fr.irit.smac.amasfactory.factoryclientdemo.example3.impl
 
 import fr.irit.smac.amasfactory.agent.features.ICommonFeatures
+import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial
 import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial
 import fr.irit.smac.amasfactory.agent.impl.Agent
+import fr.irit.smac.amasfactory.factoryclientdemo.example3.IKnowledgeCustom
+import fr.irit.smac.amasfactory.factoryclientdemo.example3.ISkillCustom
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 
-class DemoAgent4<F extends ICommonFeatures, K extends KnowledgeCustom, S extends SkillCustom<K>> extends Agent<F,K,S> implements ITwoStepsAgent{
+class DemoAgent4 extends Agent<ICommonFeatures, IKnowledgeCustom, ISkillCustom<IKnowledgeCustom>> implements ITwoStepsAgent{
 
     private boolean send = false
 
@@ -16,14 +19,17 @@ class DemoAgent4<F extends ICommonFeatures, K extends KnowledgeCustom, S extends
     @Override
     public void perceive() {
 
-        this.skill.processMessages(this.commonFeatures.getFeatureSocial().getKnowledge())
+        ISkillSocial<IKnowledgeSocial> skillSocial = commonFeatures.getFeatureSocial().getSkill()
+        IKnowledgeSocial knowledgeSocial = commonFeatures.getFeatureSocial().getKnowledge()
+        knowledgeSocial.getMsgBox().getMsgs().each {m -> skill.processMsg(skillSocial, m)}
     }
 
     @Override
     public void decideAndAct() {
 
-        ISkillSocial skillSocial = this.commonFeatures.getFeatureSocial().getSkill()
-        skillSocial.addTargetFromMessage()
-        skillSocial.sendOutputValue()
+        String id = commonFeatures.getFeatureBasic().getKnowledge().getId()
+        commonFeatures.getFeatureSocial().getKnowledge().getTargetMap().each { k,v ->
+            commonFeatures.getFeatureSocial().getSkill().sendDataToTarget(v.getAgentId().concat(v.getPortTarget()), knowledge.getValue(), id)
+        }
     }
 }

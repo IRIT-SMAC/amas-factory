@@ -21,12 +21,12 @@
  */
 package fr.irit.smac.amasfactory.agent.features.social;
 
+import java.util.Set;
+
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
- * Minimal interface of an input agent port
- * 
- * @author lemouzy
+ * A port interprets received data in the same way.
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
 public interface IPort {
@@ -37,21 +37,22 @@ public interface IPort {
     public String getId();
 
     /**
-     * @return the class that represent the type of the values that can be set
-     *         to that port
-     */
-    public Class<?> getType();
-
-    /**
      * @return the value of the port
      */
-    public Object getValue();
+    public Set<Object> getValue();
 
     /**
-     * Sets the value of the port
+     * Adds a new value to the port
      * 
      * @param value
-     *            the new value of the port
      */
-    public void setValue(Object value);
+    void addValue(Object value);
+
+    /**
+     * Sets the values of the port
+     * 
+     * @param values
+     *            the values of the port
+     */
+    void setValue(Set<Object> value);
 }

@@ -25,6 +25,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import fr.irit.smac.amasfactory.agent.features.social.ITarget;
 
+/**
+ * The implementation of the target
+ */
 public class Target implements ITarget {
 
     @JsonProperty

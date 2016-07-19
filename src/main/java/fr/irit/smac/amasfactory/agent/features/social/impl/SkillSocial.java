@@ -21,17 +21,21 @@
  */
 package fr.irit.smac.amasfactory.agent.features.social.impl;
 
-import java.util.Collection;
-import java.util.Map;
-
 import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial;
-import fr.irit.smac.amasfactory.agent.features.social.IPort;
 import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial;
 import fr.irit.smac.amasfactory.agent.features.social.ITarget;
 import fr.irit.smac.amasfactory.agent.impl.Skill;
+import fr.irit.smac.amasfactory.message.EMessageType;
+import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
 import fr.irit.smac.amasfactory.message.ValuePortMessage;
 
+/**
+ * The implementation of the social skill
+ *
+ * @param <K>
+ *            the knowledge used by the feature
+ */
 public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K>implements ISkillSocial<K> {
 
     public SkillSocial() {
@@ -39,68 +43,55 @@ public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K>implements 
     }
 
     @Override
-    public void sendOutputValue(String id) {
+    public void addTargetFromMessage(PortOfTargetMessage message) {
 
-        Object value = knowledge.getOutputValue();
-
-        knowledge.getTargetMap().forEach((k, v) -> {
-            String agentId = v.getAgentId();
-            String port = v.getPortTarget();
-            // logger.info("send to target " + target.getAgentId() + "
-            // message= " + value);
-            knowledge.getMsgBox().send(
-                new ValuePortMessage(port, value, id),
-                agentId);
-        });
-
+        ITarget target = new Target(message.getSender(), message.getPortSource(),
+            message.getPortTarget());
+        knowledge.getTargetMap().put(message.getSender().concat(message.getPortSource()), target);
     }
 
     @Override
-    public void sendPort(String id) {
+    public void processMsg(IMessage message) {
 
-        knowledge.getTargetMap().forEach((k, v) -> {
-
-            String agentId = v.getAgentId();
-            String portTarget = v.getPortTarget();
-            String portSource = v.getPortSource();
-            knowledge.getMsgBox().send(new PortOfTargetMessage(portTarget, portSource, id, id),
-                agentId);
-        });
-    }
-
-    @Override
-    public void addTargetFromMessage() {
-
-        Collection<PortOfTargetMessage> portOfTargetsMessageCollection = knowledge
-            .getSendPortToTargetMessageCollection();
-        Map<String, ITarget> targetMap = knowledge.getTargetMap();
-
-        for (PortOfTargetMessage message : portOfTargetsMessageCollection) {
-            ITarget target = new Target(message.getValue().toString(), message.getPortSource(),
-                message.getPortTarget());
-            targetMap.put(message.getValue().toString().concat(message.getPortSource()), target);
+        if (message != null) {
+            if (message.getMessageType().getName().equals(EMessageType.SEND_TO_TARGET_MESSAGE.getName())) {
+                ValuePortMessage m = (ValuePortMessage) message;
+                knowledge.getPortMap().get(m.getPort()).addValue(m.getValue());
+            }
+            else if (message.getMessageType().getName()
+                .equals(EMessageType.SEND_PORT_TO_TARGET_MESSAGE.getName())) {
+                PortOfTargetMessage m = (PortOfTargetMessage) message;
+                knowledge.getPortMap().get(m.getPortTarget()).addValue(m.getValue());
+                addTargetFromMessage(m);
+            }
         }
     }
 
     @Override
-    public void updatePortFromMessage() {
+    public void clearPortMap() {
 
-        IKnowledgeSocial e = knowledge;
-
-        Collection<ValuePortMessage> valuePortMessageCollection = e.getSendToTargetMessageCollection();
-
-        for (ValuePortMessage message : valuePortMessageCollection) {
-
-            IPort p = e.getPortMap().get(message.getPort());
-            p.setValue(message.getValue());
-        }
+        knowledge.getPortMap().forEach((k, v) -> v.getValue().clear());
     }
 
     @Override
-    public void sendValueToTargets(String id) {
+    public void sendPortToTarget(String nameTarget, String id) {
 
-        knowledge.getTargetMap().forEach((k, v) -> knowledge.getMsgBox()
-            .send(new ValuePortMessage(v.getPortTarget(), v.getValue(), id), v.getAgentId()));
+        ITarget target = knowledge.getTargetMap().get(nameTarget);
+        String agentId = target.getAgentId();
+        String portTarget = target.getPortTarget();
+        String portSource = target.getPortSource();
+
+        knowledge.getMsgBox().send(new PortOfTargetMessage(portTarget, portSource, null, id),
+            agentId);
+    }
+
+    @Override
+    public void sendDataToTarget(String nameTarget, Object data, String senderId) {
+
+        ITarget target = knowledge.getTargetMap().get(nameTarget);
+        String agentId = target.getAgentId();
+        String portTarget = target.getPortTarget();
+        knowledge.getMsgBox().send(new ValuePortMessage(portTarget, data, senderId), agentId);
     }
 
 }

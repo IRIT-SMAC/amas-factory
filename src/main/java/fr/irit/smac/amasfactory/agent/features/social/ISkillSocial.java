@@ -22,28 +22,31 @@
 package fr.irit.smac.amasfactory.agent.features.social;
 
 import fr.irit.smac.amasfactory.agent.ISkill;
+import fr.irit.smac.amasfactory.message.IMessage;
+import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
 
-public interface ISkillSocial<K extends IKnowledgeSocial> extends ISkill<K>{
+/**
+ * The social skill. The feature linked to this knowledge allows to the agent to
+ * communicate via ports. An agent can send values directly to the port of an
+ * agent. A port interprets a data in the same way. It makes easier the
+ * communication between the agents. This feature uses the messaging service.
+ *
+ * @param <K>
+ *            the knowledge used by the skill
+ */
+public interface ISkillSocial<K extends IKnowledgeSocial> extends ISkill<K> {
 
-    /**
-     * Sends the output value of an agent to its targets
-     */
-    public void sendOutputValue(String id);
-
-    /**
-     * Send the name of its port to the target
-     */
-    public void sendPort(String id);
 
     /**
      * Add the targets according if the name of the port of an agent is received
      */
-    public void addTargetFromMessage();
+    public void addTargetFromMessage(PortOfTargetMessage message);
 
-    /**
-     * Updates the port if a value for this port is received
-     */
-    public void updatePortFromMessage();
+    public void processMsg(IMessage message);
 
-    public void sendValueToTargets(String id);
+    public void clearPortMap();
+
+    public void sendPortToTarget(String nameTarget, String id);
+
+    public void sendDataToTarget(String nameTarget, Object data, String senderId);
 }

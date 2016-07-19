@@ -23,6 +23,12 @@ package fr.irit.smac.amasfactory.agent.features.basic;
 
 import fr.irit.smac.amasfactory.agent.ISkill;
 
-public interface ISkillBasic<K extends IKnowledgeBasic> extends ISkill<K>{
+/**
+ * The basic skill of an agent
+ *
+ * @param <K>
+ *            the knowledge used by the skill
+ */
+public interface ISkillBasic<K extends IKnowledgeBasic> extends ISkill<K> {
 
 }

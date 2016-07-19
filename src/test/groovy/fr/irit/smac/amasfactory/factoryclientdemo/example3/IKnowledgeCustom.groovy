@@ -7,4 +7,8 @@ public interface IKnowledgeCustom extends IKnowledge {
     public boolean getSend()
 
     public void setSend(boolean send)
+    
+    public String getValue()
+    
+    public void setValue(String value)
 }

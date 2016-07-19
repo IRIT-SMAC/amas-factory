@@ -27,7 +27,7 @@ import java.io.InputStream;
 /**
  * The interface IAmasFactory exposes methods to create an infrastructure.
  */
-public interface IAmasFactory<T> {
+public interface IAmasFactory<T, A> {
 
     /**
      * Creates a new IAmas object.
@@ -42,8 +42,8 @@ public interface IAmasFactory<T> {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public IInfrastructure<T> createInfrastructure(InputStream configuration)
+    public IInfrastructure<T, A> createInfrastructure(InputStream configuration)
         throws IOException;
-    
-    public IInfrastructure<T> createInfrastructure(); 
+
+    public IInfrastructure<T, A> createInfrastructure();
 }

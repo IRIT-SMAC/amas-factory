@@ -2,51 +2,16 @@ package fr.irit.smac.amasfactory.factoryclientdemo.example2.impl
 
 import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial
 import fr.irit.smac.amasfactory.agent.features.social.IPort
+import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial
 import fr.irit.smac.amasfactory.agent.impl.Skill
 import fr.irit.smac.amasfactory.factoryclientdemo.example2.ISkillCustom
-import fr.irit.smac.amasfactory.message.Message
-import fr.irit.smac.amasfactory.message.PortOfTargetMessage
-import fr.irit.smac.amasfactory.message.ValuePortMessage
+import fr.irit.smac.amasfactory.message.IMessage
 
 class SkillCustom<K extends KnowledgeCustom> extends Skill<K> implements ISkillCustom<K>{
 
     @Override
-    public void processMessages(IKnowledgeSocial knowledgeSocial) {
+    public void processMsg(ISkillSocial<IKnowledgeSocial> skillSocial, IMessage message) {
 
-        for (Message demoMessage : knowledgeSocial.getMsgBox().getMsgs()) {
-
-            if (demoMessage instanceof ValuePortMessage) {
-                knowledgeSocial.getSendToTargetMessageCollection().add(demoMessage)
-            } else if (demoMessage instanceof PortOfTargetMessage) {
-                knowledgeSocial.getSendPortToTargetMessageCollection().add(demoMessage)
-            }
-        }
-    }
-
-    @Override
-    public boolean checkPortMapFull(IKnowledgeSocial knowledgeSocial) {
-
-        boolean ok = true
-        for (p in knowledgeSocial.getPortMap()) {
-            IPort port = p.value
-            if (port.getValue() == null) {
-                ok = false
-            }
-        }
-        return ok
-    }
-
-    @Override
-    public void getOutputValue(IKnowledgeSocial knowledgeSocial) {
-
-        if (knowledgeSocial.getOutputValue() == null) {
-            String val = ""
-            for (p in knowledgeSocial.getPortMap()) {
-                IPort port = p.value
-                val += port.getValue()
-            }
-
-            knowledgeSocial.setOutputValue(val)
-        }
+        skillSocial.processMsg(message);
     }
 }

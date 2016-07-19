@@ -22,12 +22,22 @@
 package fr.irit.smac.amasfactory.agent.features.impl;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import fr.irit.smac.amasfactory.agent.IKnowledge;
 import fr.irit.smac.amasfactory.agent.ISkill;
 import fr.irit.smac.amasfactory.agent.features.IFeature;
 
+/**
+ * The implementation of a feature
+ * 
+ * @param <K>
+ *            the knowledge of the feature
+ * @param <S>
+ *            the skill of the feature
+ */
+@JsonPropertyOrder(alphabetic = true)
 public class Feature<K extends IKnowledge, S extends ISkill<K>> implements IFeature<K, S> {
 
     @JsonProperty
@@ -50,15 +60,21 @@ public class Feature<K extends IKnowledge, S extends ISkill<K>> implements IFeat
         return skill;
     }
 
+    @JsonSetter("knowledge")
     @Override
     public void setKnowledge(K knowledge) {
         this.knowledge = knowledge;
+        if (skill != null) {
+            skill.setKnowledge(knowledge);
+        }
     }
 
     @JsonSetter("skill")
     @Override
     public void setSkill(S skill) {
         this.skill = skill;
-        skill.setKnowledge(knowledge);
+        if (knowledge != null) {
+            skill.setKnowledge(knowledge);
+        }
     }
 }

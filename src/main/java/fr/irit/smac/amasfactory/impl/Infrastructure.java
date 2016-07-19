@@ -34,10 +34,9 @@ import fr.irit.smac.amasfactory.service.IServices;
  * @param the
  *            generic type
  */
-@SuppressWarnings("rawtypes")
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
-public class Infrastructure<T extends IServices>
-    implements IInfrastructure<T> {
+public class Infrastructure<T extends IServices<A>, A>
+    implements IInfrastructure<T, A> {
 
     protected T services;
 
@@ -50,7 +49,7 @@ public class Infrastructure<T extends IServices>
 
         return this.services;
     }
-    
+
     @Override
     public void setServices(T services) {
         this.services = services;

@@ -24,6 +24,7 @@ package fr.irit.smac.amasfactory.agent.impl;
 import org.slf4j.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
@@ -32,11 +33,16 @@ import fr.irit.smac.amasfactory.agent.ISkill;
 import fr.irit.smac.amasfactory.agent.features.ICommonFeatures;
 
 /**
- * Abstract class used by subclasses implementing an agent
+ * The implementation of an agent
  *
- * @param <M>
- *            the generic type
+ * @param <F>
+ *            the common features
+ * @param <K>
+ *            the knowledge
+ * @param <S>
+ *            the skill
  */
+@JsonPropertyOrder(alphabetic = true)
 public abstract class Agent<F extends ICommonFeatures, K extends IKnowledge, S extends ISkill<K>>
     implements IAgent<F, K, S> {
 
@@ -45,12 +51,12 @@ public abstract class Agent<F extends ICommonFeatures, K extends IKnowledge, S e
 
     @JsonProperty
     protected K knowledge;
-    
+
     @JsonProperty
     protected S skill;
 
     protected Logger logger;
-    
+
     @Override
     public void setLogger(Logger logger) {
         this.logger = logger;
@@ -73,8 +79,12 @@ public abstract class Agent<F extends ICommonFeatures, K extends IKnowledge, S e
         return knowledge;
     }
 
+    @JsonSetter("knowledge")
     public void setKnowledge(K knowledge) {
         this.knowledge = knowledge;
+        if (skill != null) {
+            skill.setKnowledge(knowledge);
+        }
     }
 
     public S getSkill() {
@@ -84,7 +94,9 @@ public abstract class Agent<F extends ICommonFeatures, K extends IKnowledge, S e
     @JsonSetter("skill")
     public void setSkill(S skill) {
         this.skill = skill;
-        this.skill.setKnowledge(knowledge);
+        if (knowledge != null) {
+            this.skill.setKnowledge(knowledge);
+        }
     }
 
 }

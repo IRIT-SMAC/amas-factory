@@ -36,8 +36,7 @@ import fr.irit.smac.amasfactory.util.deserializer.impl.AmasFactoryDeserializer;
  * @param <M>
  * @param <A>
  */
-@SuppressWarnings("rawtypes")
-public class AmasFactory<T extends IServices> implements IAmasFactory<T> {
+public class AmasFactory<T extends IServices<A>, A> implements IAmasFactory<T, A> {
 
     /*
      * (non-Javadoc)
@@ -46,18 +45,18 @@ public class AmasFactory<T extends IServices> implements IAmasFactory<T> {
      * InputStream)
      */
     @Override
-    public IInfrastructure<T> createInfrastructure(
+    public IInfrastructure<T, A> createInfrastructure(
         InputStream configuration) throws IOException {
 
         AmasFactoryDeserializer parser = AmasFactoryDeserializer.getInstance();
-        IInfrastructure<T> infrastructure = parser.deserializeInfrastructure(configuration);
+        IInfrastructure<T, A> infrastructure = parser.deserializeInfrastructure(configuration);
         infrastructure.start();
-        
+
         return infrastructure;
     }
 
     @Override
-    public IInfrastructure<T> createInfrastructure() {
+    public IInfrastructure<T, A> createInfrastructure() {
         return new Infrastructure<>();
     }
 }

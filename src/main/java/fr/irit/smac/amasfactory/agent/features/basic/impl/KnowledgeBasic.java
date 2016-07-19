@@ -28,6 +28,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import fr.irit.smac.amasfactory.agent.features.basic.IKnowledgeBasic;
 import fr.irit.smac.amasfactory.agent.impl.Knowledge;
 
+/**
+ * The implementation of the basic knowledge
+ */
 public class KnowledgeBasic extends Knowledge implements IKnowledgeBasic, Serializable {
 
     private static final long serialVersionUID = -5532785685384930215L;

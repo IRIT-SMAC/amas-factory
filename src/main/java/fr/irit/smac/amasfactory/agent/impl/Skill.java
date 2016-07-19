@@ -26,6 +26,12 @@ import org.slf4j.Logger;
 import fr.irit.smac.amasfactory.agent.IKnowledge;
 import fr.irit.smac.amasfactory.agent.ISkill;
 
+/**
+ * The implementation of the main skill of an agent
+ * 
+ * @param <K>
+ *            the main knowledge
+ */
 public abstract class Skill<K extends IKnowledge> implements ISkill<K> {
 
     protected K knowledge;

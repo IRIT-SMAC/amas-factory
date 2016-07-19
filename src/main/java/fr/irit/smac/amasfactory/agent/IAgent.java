@@ -28,28 +28,32 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import fr.irit.smac.amasfactory.agent.features.ICommonFeatures;
 
 /**
- * Interface that defines the interaction capabilities of an agent with the
- * infrastructure.
- *
- * @author lemouzy
- * @param <M>
- *            the generic type
+ * An agent owns a knowledge and a skill. It has access to a list of common
+ * features which is the same for the others agents and which adds knowledges
+ * and skills to the agent
+ * 
+ * @param <F>
+ *            the list of the common features
+ * @param <K>
+ *            the knowledge
+ * @param <S>
+ *            the skill
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
-public interface IAgent<F extends ICommonFeatures,K,S> {
+public interface IAgent<F extends ICommonFeatures, K, S> {
 
     public void setLogger(Logger logger);
 
     public F getFeatures();
 
     public K getKnowledge();
-    
+
     public S getSkill();
 
     public void setCommonFeatures(F commonFeatures);
 
     public void setKnowledge(K knowledge);
-    
+
     public void setSkill(S skill);
 
 }

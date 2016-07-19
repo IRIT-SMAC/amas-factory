@@ -24,10 +24,7 @@ package fr.irit.smac.amasfactory.agent;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
- * Minimal interface of the agent Knowledge uses to store all the data of the
- * agent. Contains an ID.
- * 
- * @author SVI
+ * The main knowledge of an agent
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
 public interface IKnowledge {

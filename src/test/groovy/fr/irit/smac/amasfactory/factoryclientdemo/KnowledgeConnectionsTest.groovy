@@ -20,9 +20,8 @@ class KnowledgeConnectionsTest extends Specification {
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/knowledge_connections.json"))
         Map<String,IAgent> agents = infra.getServices().getAgentHandlerService().getAgentMap()
 
-        agents.get("ag1").getFeatures().getFeatureSocial().getKnowledge().setOutputValue("hello")
-        agents.get("ag5").getFeatures().getFeatureSocial().getKnowledge().setOutputValue("hallo")
-
+        agents.get("ag1").getKnowledge().setValue("hello")
+        
         when:
         for (int i = 0 ; i < 4; i++) {
             System.out.println("\n=== step "+i+" ===")
@@ -30,11 +29,10 @@ class KnowledgeConnectionsTest extends Specification {
         }
 
         then:
-        List outputs = ["hello", "hellohallohello", "hellohallohello", "hallo", "hallo"]
         int j = 0
         for (e in agents) {
             DemoAgent2 agent = e.value
-            assert agent.getFeatures().getFeatureSocial().getKnowledge().getOutputValue() == outputs[j]
+            assert agent.getKnowledge().getValue() == "hello"
             j++
         }
         infra.shutdown()
@@ -49,8 +47,9 @@ class KnowledgeConnectionsTest extends Specification {
                         basicAmasFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("./config/knowledge_connections2.json"))
         Map<String,IAgent> agents = infra.getServices().getAgentHandlerService().getAgentMap()
 
-        agents.get("ag1").getFeatures().getFeatureSocial().getKnowledge().setOutputValue("hello")
-        agents.get("ag2").getFeatures().getFeatureSocial().getKnowledge().setOutputValue("hallo")
+        agents.get("ag1").getKnowledge().setValue("hello")
+        agents.get("ag2").getKnowledge().setValue("hallo")
+        
 
         when:
         for (int i = 0 ; i < 4; i++) {
@@ -63,10 +62,9 @@ class KnowledgeConnectionsTest extends Specification {
         List outputs = ["hello", "hallo"]
 
         Agent agent = agents.get("ag3")
-        HashMap<IPort> portMap = agent.getFeatures().getFeatureSocial().getKnowledge().getPortMap()
-        for (p in portMap) {
-            IPort port = p.value
-            assert port.getValue() == outputs[j]
+        agent.getFeatures().getFeatureSocial().getKnowledge().getPortMap().each { k,v ->
+            Set<Object> val = v.getValue()
+            assert val.getAt(0) == outputs[j]
             j++
         }
 

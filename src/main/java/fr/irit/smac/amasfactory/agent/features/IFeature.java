@@ -23,8 +23,17 @@ package fr.irit.smac.amasfactory.agent.features;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+/**
+ * A feature contains a knowledge and a skill. It can be added to the list of
+ * features of an agent. It allows to add behaviour to the agents
+ * 
+ * @param <K>
+ *            the knowledge of the feature
+ * @param <S>
+ *            the skill of the feature
+ */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
-public interface IFeature<K,S> {
+public interface IFeature<K, S> {
 
     public K getKnowledge();
 

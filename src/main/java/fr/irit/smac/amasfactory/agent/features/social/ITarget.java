@@ -24,9 +24,13 @@ package fr.irit.smac.amasfactory.agent.features.social;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 /**
- * Minimal interface of a target, i.e. a specific port of a given agent
- * 
- * @author lemouzy
+ * An agent owning a target knows the agentTarget of this entity. It can send
+ * messages to this agentTarget. A portTarget can be defined. The portTarget is
+ * a port of the receiver agent. It means that the sender agent can send values
+ * directly of this port. Furthermore, a portSource can be defined. The
+ * portSource is a port of the sender agent. It means that the receiver agent
+ * will be able to send values to the sender agent on this port. The value is
+ * the data the agent can send.
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
 public interface ITarget {

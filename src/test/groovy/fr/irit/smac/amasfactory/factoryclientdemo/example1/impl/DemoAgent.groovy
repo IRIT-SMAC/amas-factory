@@ -6,8 +6,7 @@ import fr.irit.smac.amasfactory.factoryclientdemo.example1.IKnowledgeCustom
 import fr.irit.smac.amasfactory.factoryclientdemo.example1.ISkillCustom
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 
-class DemoAgent<F extends ICommonFeatures, K extends IKnowledgeCustom, S extends ISkillCustom>
-    extends Agent<F, K, S>implements ITwoStepsAgent {
+class DemoAgent extends Agent<ICommonFeatures, IKnowledgeCustom, ISkillCustom<IKnowledgeCustom>> implements ITwoStepsAgent {
 
     public DemoAgent() {
         super()

@@ -27,6 +27,7 @@ import java.io.InputStreamReader;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.fasterxml.jackson.databind.DeserializationConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -70,12 +71,12 @@ public class AmasFactoryDeserializer implements IAmasFactoryDeserializer {
      */
     @SuppressWarnings("unchecked")
     @Override
-    public <T> IInfrastructure<T> deserializeInfrastructure(
+    public <T, A> IInfrastructure<T, A> deserializeInfrastructure(
         InputStream configuration)
             throws IOException {
 
         ObjectMapper mapper = new ObjectMapper();
-        IInfrastructure<T> infrastructure = null;
+        IInfrastructure<T, A> infrastructure = null;
         try {
 
             JsonElement configurationJson = new JsonParser().parse(new InputStreamReader(configuration));

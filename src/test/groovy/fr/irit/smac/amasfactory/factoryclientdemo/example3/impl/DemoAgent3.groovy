@@ -1,6 +1,8 @@
 package fr.irit.smac.amasfactory.factoryclientdemo.example3.impl
 
 import fr.irit.smac.amasfactory.agent.features.ICommonFeatures
+import fr.irit.smac.amasfactory.agent.features.social.IKnowledgeSocial
+import fr.irit.smac.amasfactory.agent.features.social.ISkillSocial
 import fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial
 import fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial
 import fr.irit.smac.amasfactory.agent.impl.Agent
@@ -8,7 +10,7 @@ import fr.irit.smac.amasfactory.factoryclientdemo.example3.IKnowledgeCustom
 import fr.irit.smac.amasfactory.factoryclientdemo.example3.ISkillCustom
 import fr.irit.smac.libs.tooling.scheduling.contrib.twosteps.ITwoStepsAgent
 
-class DemoAgent3<F extends ICommonFeatures, K extends IKnowledgeCustom, S extends ISkillCustom> extends Agent<F,K,S> implements ITwoStepsAgent{
+class DemoAgent3 extends Agent<ICommonFeatures, IKnowledgeCustom, ISkillCustom<IKnowledgeCustom>> implements ITwoStepsAgent{
 
     public DemoAgent3() {
         super()
@@ -17,18 +19,21 @@ class DemoAgent3<F extends ICommonFeatures, K extends IKnowledgeCustom, S extend
     @Override
     public void perceive() {
 
-        this.skill.processMessages(this.commonFeatures.getFeatureSocial().getKnowledge())
+        ISkillSocial<IKnowledgeSocial> skillSocial = commonFeatures.getFeatureSocial().getSkill()
+        IKnowledgeSocial knowledgeSocial = commonFeatures.getFeatureSocial().getKnowledge()
+        knowledgeSocial.getMsgBox().getMsgs().each {m -> skill.processMsg(skillSocial, m)}
     }
 
     @Override
     public void decideAndAct() {
 
-        SkillSocial<KnowledgeSocial> skillSocial = this.commonFeatures.getFeatureSocial().getSkill()
-        skillSocial.updatePortFromMessage()
+        SkillSocial<KnowledgeSocial> skillSocial = commonFeatures.getFeatureSocial().getSkill()
 
-        if (!this.knowledge.getSend()) {
-            skillSocial.sendPort(this.commonFeatures.getFeatureBasic().getKnowledge().getId())
-            this.knowledge.setSend(true)
+        if (!knowledge.getSend()) {
+            String id = commonFeatures.getFeatureBasic().getKnowledge().getId()
+            commonFeatures.getFeatureSocial().getSkill().sendPortToTarget("ag1port", id)
+            commonFeatures.getFeatureSocial().getSkill().sendPortToTarget("ag2port", id)
+            knowledge.setSend(true)
         }
     }
 }
