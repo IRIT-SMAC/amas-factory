@@ -29,8 +29,9 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 /**
  * Interface to share the data of the agents with others. eg.Hazelcast
  * implementation
- * 
- * @author SVI
+ *
+ * @param <A>
+ *            the type of agent
  */
 public interface IDataSharingService<A>
     extends IAgentEventListener<A>, IService {

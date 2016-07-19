@@ -29,7 +29,7 @@ class DemoAgent4 extends Agent<ICommonFeatures, IKnowledgeCustom, ISkillCustom<I
 
         String id = commonFeatures.getFeatureBasic().getKnowledge().getId()
         commonFeatures.getFeatureSocial().getKnowledge().getTargetMap().each { k,v ->
-            commonFeatures.getFeatureSocial().getSkill().sendDataToTarget(v.getAgentId().concat(v.getPortTarget()), knowledge.getValue(), id)
+            commonFeatures.getFeatureSocial().getSkill().sendDataToPortTarget(v.getAgentId().concat(v.getPortTarget()), knowledge.getValue(), id)
         }
     }
 }

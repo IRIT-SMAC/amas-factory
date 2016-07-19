@@ -46,6 +46,6 @@ public interface IAmasFactoryDeserializer {
      * @throws IOException
      *             Signals that an I/O exception has occurred.
      */
-    public <T, A> IInfrastructure<T, A> deserializeInfrastructure(InputStream configuration)
+    public <T> IInfrastructure<T> deserializeInfrastructure(InputStream configuration)
         throws IOException;
 }

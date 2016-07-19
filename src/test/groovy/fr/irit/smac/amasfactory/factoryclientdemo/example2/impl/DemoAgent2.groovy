@@ -36,7 +36,7 @@ class DemoAgent2 extends Agent<ICommonFeatures, IKnowledgeCustom, ISkillCustom<I
         else if (!knowledge.getSend()) {
             String id = commonFeatures.getFeatureBasic().getKnowledge().getId()
             knowledgeSocial.getTargetMap().each { k,v ->
-                commonFeatures.getFeatureSocial().getSkill().sendDataToTarget(v.getAgentId().concat(v.getPortTarget()), knowledge.getValue(), id)
+                commonFeatures.getFeatureSocial().getSkill().sendDataToPortTarget(v.getAgentId().concat(v.getPortTarget()), knowledge.getValue(), id)
             }
             knowledge.setSend(true)
         }

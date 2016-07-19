@@ -98,10 +98,9 @@ public class HazelcastSharingService<A extends IAgent>
      * @return
      */
     private Runnable generatePersistenceUpdatePolicy(IAgentHandlerService<A> agentHandler) {
-        return () -> {
-            agentHandler.getAgents().forEach(agent -> hazelcastKnowledgeAccessor
-                .registerKnowledge(agent.getFeatures().getFeatureBasic().getKnowledge()));
-        };
+        return () -> agentHandler.getAgents().forEach(agent -> hazelcastKnowledgeAccessor
+            .registerKnowledge(agent.getFeatures().getFeatureBasic().getKnowledge()));
+
     }
 
     @Override

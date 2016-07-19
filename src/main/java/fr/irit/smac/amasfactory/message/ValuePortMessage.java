@@ -21,6 +21,9 @@
  */
 package fr.irit.smac.amasfactory.message;
 
+/**
+ * A message allowing to the sender to send a value to the port of the receiver
+ */
 public class ValuePortMessage extends Message {
 
     private final Object value;

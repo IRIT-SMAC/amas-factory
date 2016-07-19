@@ -36,17 +36,41 @@ import fr.irit.smac.amasfactory.message.PortOfTargetMessage;
  */
 public interface ISkillSocial<K extends IKnowledgeSocial> extends ISkill<K> {
 
-
     /**
      * Add the targets according if the name of the port of an agent is received
      */
     public void addTargetFromMessage(PortOfTargetMessage message);
 
+    /**
+     * Handles the received messages
+     * 
+     * @param message
+     */
     public void processMsg(IMessage message);
 
+    /**
+     * Clears the values received of the port map
+     */
     public void clearPortMap();
 
+    /**
+     * Sends the port of the sender to the receiver. It allows to the receiver
+     * to send messages to this port
+     * 
+     * @param nameTarget
+     * @param id
+     */
     public void sendPortToTarget(String nameTarget, String id);
 
-    public void sendDataToTarget(String nameTarget, Object data, String senderId);
+    /**
+     * Sends data to the port of a target
+     * 
+     * @param idTarget
+     *            the id of target
+     * @param data
+     *            the data to send
+     * @param senderId
+     *            the id of the sender
+     */
+    public void sendDataToPortTarget(String idTarget, Object data, String senderId);
 }

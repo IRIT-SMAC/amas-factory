@@ -37,12 +37,12 @@ public interface IPort {
     public String getId();
 
     /**
-     * @return the value of the port
+     * @return the received values
      */
     public Set<Object> getValue();
 
     /**
-     * Adds a new value to the port
+     * Sends a value to the port
      * 
      * @param value
      */

@@ -30,9 +30,7 @@ import fr.irit.smac.amasfactory.service.IService;
  * The Interface IAgentHandlerService exposes methods to handle the agents.
  *
  * @param <A>
- *            the generic type
- * @param <M>
- *            the generic type
+ *            the type of agent
  */
 public interface IAgentHandlerService<A> extends IService {
 

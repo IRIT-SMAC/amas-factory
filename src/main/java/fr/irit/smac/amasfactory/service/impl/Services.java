@@ -36,7 +36,8 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
 import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
 
-public class Services<A extends IAgent<F,IKnowledge,ISkill<IKnowledge>>, F extends ICommonFeatures> implements IServices<A> {
+public class Services<A extends IAgent<F, IKnowledge, ISkill<IKnowledge>>, F extends ICommonFeatures>
+    implements IServices<A> {
 
     @JsonProperty
     private IAgentHandlerService<A> agentHandlerService;
@@ -149,10 +150,8 @@ public class Services<A extends IAgent<F,IKnowledge,ISkill<IKnowledge>>, F exten
             agentHandlerService.initAgents();
             agentHandlerService.getAgentMap().forEach((k, v) -> {
 
-                if (messagingService != null) {
-                    if (v.getFeatures().getFeatureSocial() != null) {
-                        v.getFeatures().getFeatureSocial().getKnowledge().setMsgBox(messagingService.getMsgBox(k));
-                    }
+                if (messagingService != null && v.getFeatures().getFeatureSocial() != null) {
+                    v.getFeatures().getFeatureSocial().getKnowledge().setMsgBox(messagingService.getMsgBox(k));
                 }
 
                 if (loggingService != null) {

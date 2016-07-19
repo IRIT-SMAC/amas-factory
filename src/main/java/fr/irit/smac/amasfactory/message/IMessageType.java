@@ -21,6 +21,10 @@
  */
 package fr.irit.smac.amasfactory.message;
 
+/**
+ * This interface is used to be extended by the enumerations about the type of
+ * the messages
+ */
 @FunctionalInterface
 public interface IMessageType {
 

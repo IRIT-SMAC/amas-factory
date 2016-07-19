@@ -26,8 +26,7 @@ package fr.irit.smac.amasfactory.service.agenthandler;
  * about agents occurred
  *
  * @param <A>
- *            the generic type
- * @see IAgentEventEvent
+ *            the type of agent
  */
 public interface IAgentEventListener<A> {
 

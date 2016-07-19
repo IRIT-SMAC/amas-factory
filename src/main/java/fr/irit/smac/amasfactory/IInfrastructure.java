@@ -28,13 +28,11 @@ import fr.irit.smac.amasfactory.impl.ShutdownRuntimeException;
 /**
  * The Interface IInfrastructure exposes methods to get some services.
  *
- * @param <A>
- *            the generic type
- * @param <M>
- *            the generic type
+ * @param <T>
+ *            the services
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
-public interface IInfrastructure<T, A> {
+public interface IInfrastructure<T> {
 
     /**
      * Starts the services.

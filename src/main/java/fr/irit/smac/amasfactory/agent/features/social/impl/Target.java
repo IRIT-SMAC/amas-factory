@@ -37,8 +37,6 @@ public class Target implements ITarget {
     @JsonProperty
     private String portSource;
 
-    private Object value;
-
     public Target() {
         // Needed by Jackson
     }
@@ -69,13 +67,4 @@ public class Target implements ITarget {
         return portSource;
     }
 
-    @Override
-    public Object getValue() {
-        return value;
-    }
-
-    @Override
-    public void setValue(Object value) {
-        this.value = value;
-    }
 }

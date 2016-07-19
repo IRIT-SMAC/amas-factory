@@ -86,7 +86,7 @@ public class SkillSocial<K extends IKnowledgeSocial> extends Skill<K>implements 
     }
 
     @Override
-    public void sendDataToTarget(String nameTarget, Object data, String senderId) {
+    public void sendDataToPortTarget(String nameTarget, Object data, String senderId) {
 
         ITarget target = knowledge.getTargetMap().get(nameTarget);
         String agentId = target.getAgentId();

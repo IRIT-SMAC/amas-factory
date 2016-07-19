@@ -21,6 +21,10 @@
  */
 package fr.irit.smac.amasfactory.message;
 
+/**
+ * A standard message. Can be extends by other messages to add new
+ * functionnalities
+ */
 public class Message implements IMessage {
 
     final IMessageType messageType;

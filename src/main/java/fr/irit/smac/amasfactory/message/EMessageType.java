@@ -21,6 +21,10 @@
  */
 package fr.irit.smac.amasfactory.message;
 
+/**
+ * The different type of messages. To "extends" this enumeration, a new
+ * enumeration implements the interface IMessageType can be created
+ */
 public enum EMessageType implements IMessageType {
     SEND_TO_TARGET_MESSAGE("sendToTargetMessage"), SEND_PORT_TO_TARGET_MESSAGE("sendPortToTargetMessage");
 
@@ -29,7 +33,7 @@ public enum EMessageType implements IMessageType {
     private EMessageType(final String name) {
         this.name = name;
     }
-    
+
     @Override
     public String getName() {
         return this.name;

@@ -21,6 +21,10 @@
  */
 package fr.irit.smac.amasfactory.message;
 
+/**
+ * The interface of a standard message
+ *
+ */
 public interface IMessage {
 
     public IMessageType getMessageType();

@@ -28,15 +28,14 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 
 /**
  * The Interface ILoggingService exposes methods to use the logger service.
- *
- * @param <M> the generic type
  */
+
 public interface ILoggingService<A> extends IService {
-    
     /**
      * Gets the standard logger.
      *
-     * @param loggerName the logger name
+     * @param loggerName
+     *            the logger name
      * @return the standard logger
      */
     public Logger getStandardLogger(String loggerName);
@@ -44,7 +43,8 @@ public interface ILoggingService<A> extends IService {
     /**
      * Gets the agent logger.
      *
-     * @param loggerName the logger name
+     * @param loggerName
+     *            the logger name
      * @return the agent logger
      */
     public Logger getAgentLogger(String loggerName);

@@ -40,7 +40,6 @@ public class UglyHazelcastObserver {
             System.out.println("id=" + id + "\tknowledge=" + accessor.getKnowledge(id) + "\tknoID="
                 + accessor.getKnowledge(id).getId());
         }
-        // accessor.shutdownInstance();
         Hazelcast.shutdownAll();
     }
 }

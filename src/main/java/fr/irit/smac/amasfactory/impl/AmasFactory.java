@@ -30,13 +30,14 @@ import fr.irit.smac.amasfactory.service.IServices;
 import fr.irit.smac.amasfactory.util.deserializer.impl.AmasFactoryDeserializer;
 
 /**
- * A factory for creating a BasicAmas.
+ * A factory to create an Amas
  *
- * @author lemouzy
- * @param <M>
+ * @param <T>
+ *            the services used
  * @param <A>
+ *            the type of agent
  */
-public class AmasFactory<T extends IServices<A>, A> implements IAmasFactory<T, A> {
+public class AmasFactory<T extends IServices<A>,A> implements IAmasFactory<T> {
 
     /*
      * (non-Javadoc)
@@ -45,18 +46,18 @@ public class AmasFactory<T extends IServices<A>, A> implements IAmasFactory<T, A
      * InputStream)
      */
     @Override
-    public IInfrastructure<T, A> createInfrastructure(
+    public IInfrastructure<T> createInfrastructure(
         InputStream configuration) throws IOException {
 
         AmasFactoryDeserializer parser = AmasFactoryDeserializer.getInstance();
-        IInfrastructure<T, A> infrastructure = parser.deserializeInfrastructure(configuration);
+        IInfrastructure<T> infrastructure = parser.deserializeInfrastructure(configuration);
         infrastructure.start();
 
         return infrastructure;
     }
 
     @Override
-    public IInfrastructure<T, A> createInfrastructure() {
+    public IInfrastructure<T> createInfrastructure() {
         return new Infrastructure<>();
     }
 }

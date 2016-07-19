@@ -34,9 +34,7 @@ import fr.irit.smac.libs.tooling.scheduling.IHookHandler;
  * the multi-agent system.
  *
  * @param <A>
- *            the generic type
- * @param <M>
- *            the generic type
+ *            the type of agent
  */
 public interface IExecutionService<A>
     extends IAgentEventListener<A>, IService, IHookHandler {
@@ -91,11 +89,19 @@ public interface IExecutionService<A>
      */
     @Override
     public void shutdown() throws ShutdownRuntimeException;
-    
+
     public void setAgentHandlerService(IAgentHandlerService<A> agentHandlerService);
 
+    /**
+     * Displays a simple gui allowing to control the steps of the system
+     */
     public void displaySimpleGui();
 
+    /**
+     * Sets the nb of threads used
+     * 
+     * @param nbThreads
+     */
     public void setNbThreads(int nbThreads);
 
 }

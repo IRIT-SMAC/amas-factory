@@ -27,16 +27,16 @@ import fr.irit.smac.amasfactory.IInfrastructure;
 import fr.irit.smac.amasfactory.service.IServices;
 
 /**
- * A BasicInfrastructure controls the services of the system
+ * Controls the services of the system
  *
+ * @param <T>
+ *            the services
  * @param <A>
- *            the generic type
- * @param the
- *            generic type
+ *            the type of a agent
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "className")
 public class Infrastructure<T extends IServices<A>, A>
-    implements IInfrastructure<T, A> {
+    implements IInfrastructure<T> {
 
     protected T services;
 

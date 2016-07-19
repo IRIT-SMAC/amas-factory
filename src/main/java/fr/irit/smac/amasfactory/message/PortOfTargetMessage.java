@@ -21,33 +21,36 @@
  */
 package fr.irit.smac.amasfactory.message;
 
+/**
+ * A message containing the port where the receiver can send value
+ */
 public class PortOfTargetMessage extends Message {
 
     private final Object value;
-    private String portSource;
+    private String       portSource;
     private final String portTarget;
-    
-    public PortOfTargetMessage(String portTarget, String portSource, Object value, String sender){
-    
+
+    public PortOfTargetMessage(String portTarget, String portSource, Object value, String sender) {
+
         super(EMessageType.SEND_PORT_TO_TARGET_MESSAGE, sender);
-        
+
         this.portTarget = portTarget;
         this.portSource = portSource;
         this.value = value;
     }
-    
+
     public Object getValue() {
-        
+
         return value;
     }
-    
+
     public String getPortSource() {
-        
+
         return portSource;
     }
-    
+
     public String getPortTarget() {
-        
+
         return portTarget;
     }
 

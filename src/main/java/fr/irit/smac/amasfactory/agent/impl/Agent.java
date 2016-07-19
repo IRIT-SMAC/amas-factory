@@ -75,11 +75,13 @@ public abstract class Agent<F extends ICommonFeatures, K extends IKnowledge, S e
         this.commonFeatures = commonFeatures;
     }
 
+    @Override
     public K getKnowledge() {
         return knowledge;
     }
 
     @JsonSetter("knowledge")
+    @Override
     public void setKnowledge(K knowledge) {
         this.knowledge = knowledge;
         if (skill != null) {
@@ -87,11 +89,13 @@ public abstract class Agent<F extends ICommonFeatures, K extends IKnowledge, S e
         }
     }
 
+    @Override
     public S getSkill() {
         return skill;
     }
 
     @JsonSetter("skill")
+    @Override
     public void setSkill(S skill) {
         this.skill = skill;
         if (knowledge != null) {
