@@ -5,7 +5,7 @@
 - [Github] (https://github.com/IRIT-SMAC/amas-factory)
 - [Travis] (https://travis-ci.org/IRIT-SMAC/amas-factory)
 - [Coveralls] (https://coveralls.io/github/IRIT-SMAC/amas-factory)
-- Démo : https://github.com/IRIT-SMAC/demo-amas-factory
+- [Démo] https://github.com/IRIT-SMAC/demo-amas-factory
 
 Amas-factory a pour but de faciliter le déploiement de systèmes multi-agents (SMA), et plus particulièrement les systèmes multi-agents coopératifs (AMAS).
 
@@ -87,10 +87,12 @@ Comme expliqué précédemment, un agent possède un knowledge et un skill qui l
 
 	```java
 	public class MyAgent extends Agent<ICommonFeatures, IMyKnowledge, IMySkill<IMyKnowledge>> implements ITwoStepsAgent
-	```
-IMyKnowledge correspond à l'interface du knowledge propre à un agent. IMySkill correspond à l'interface du skill utilisé, et ICommonFeatures à l'interface des features utilisées. Si vous utilisez une liste de features personnalisées, remplacez cette interface par la vôtre.
-TwoStepsAgent est la stratégie utilisée. Plus concrètement, elle définit les méthodes liées au cycle de vie d'un agent. Ainsi, en utilisant la stratégie ITwoStepsAgent, l'agent devra implémenter les méthodes perceive, qui concerne l'étape de perception, et decideAndAct, qui englobe les étapes de décision et d'action dans une seule méthode.
-Pour que le cycle d'un agent se compose d'une seule étape, l'interface IAgentStrategy peut être utilisée à la place de ITwoStepsAgent.
+	```	
+
+	- IMyKnowledge correspond à l'interface du knowledge propre à un agent. 
+	-IMySkill correspond à l'interface du skill utilisé.
+	-ICommonFeatures correspond à l'interface des features utilisées. Si vous utilisez une liste de features personnalisées, remplacez cette interface par la vôtre.
+	- TwoStepsAgent est la stratégie utilisée. Plus concrètement, elle définit les méthodes liées au cycle de vie d'un agent. Ainsi, en utilisant la stratégie ITwoStepsAgent, l'agent devra implémenter les méthodes perceive, qui concerne l'étape de perception, et decideAndAct, qui englobe les étapes de décision et d'action dans une seule méthode. Pour que le cycle d'un agent se compose d'une seule étape, l'interface IAgentStrategy peut être utilisée à la place de ITwoStepsAgent.
 
 - Implémenter les méthodes liées au cycle de vie de l'agent (et donc de la stratégie utilisée).
 Dans le cas de TwoStepsAgent, il faut implémenter les méthodes perceive et decideAndAct.
@@ -115,10 +117,10 @@ Une feature permet d'ajouter des connaissances et des capacités supplémentaire
 	public class MyFeatures extends Features implements IMyFeatures {
 	    
 	    @JsonProperty
-	    public IFeature<IKnowledgeOfMyFeature, ISkillOfMyFeature<IKnowledgeOfMyFeature>> myFeature;
+	    public IFeature<IKnowledgeFeature, ISkillFeature<IKnowledgeFeature>> myFeature;
 	    
 	    @Override
-	    public IFeature<IKnowledgeOfMyFeature, ISkillOfMyCommonFeature<IKnowledgeOfMyFeature>> getMyFeature() {
+	    public IFeature<IKnowledgeFeature, ISkillFeature<IKnowledgeFeature>> getMyFeature() {
 	        return this.myFeature;
 	    }
 	    @Override
@@ -128,6 +130,7 @@ Une feature permet d'ajouter des connaissances et des capacités supplémentaire
 	}
 	```
 	  L'utilisation de l'annotation Jackson @JsonProperty permet d'intégrer l'attribut correspondant à la feature dans les processus de sérialisation et de désérialisation. Ceci est nécessaire pour prendre en compte cette feature quand on initialise le système via un un fichier JSON.
+
 #### Ajout d'un nouveau service
 
 Pour ajouter un service, il suffit de créer la classe et son interface correspondante. Ensuite, il faut ajouter ce service à la liste des services.
