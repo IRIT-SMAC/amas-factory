@@ -5,7 +5,7 @@
 - [Github] (https://github.com/IRIT-SMAC/amas-factory)
 - [Travis] (https://travis-ci.org/IRIT-SMAC/amas-factory)
 - [Coveralls] (https://coveralls.io/github/IRIT-SMAC/amas-factory)
-- [Démo] https://github.com/IRIT-SMAC/demo-amas-factory
+- [Démo] (https://github.com/IRIT-SMAC/demo-amas-factory)
 
 Amas-factory a pour but de faciliter le déploiement de systèmes multi-agents (SMA), et plus particulièrement les systèmes multi-agents coopératifs (AMAS).
 
@@ -173,7 +173,7 @@ Si jamais vous souhaitez rajouter des paramètres ou des méthodes supplémentai
 	```
 	IServices correspond à l'interface de la liste des services utilisées. Si vous utilisez une liste de services personnalisée, renseignez son interface plutôt que celle par défaut (IServices).
 	
-#### Implémentation d'une factory
+#### Implémentation d'une factory personnalisée
 
 Pour initialiser le système, on peut utiliser une factory. La factory de base est AmasFactory.
 Il est possible d'implémenter une nouvelle factory. Pour cela, il suffit de faire hériter la nouvelle factory de la factory de base.

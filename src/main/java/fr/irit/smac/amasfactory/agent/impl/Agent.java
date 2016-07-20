@@ -24,7 +24,6 @@ package fr.irit.smac.amasfactory.agent.impl;
 import org.slf4j.Logger;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
@@ -42,7 +41,6 @@ import fr.irit.smac.amasfactory.agent.features.ICommonFeatures;
  * @param <S>
  *            the skill
  */
-@JsonPropertyOrder(alphabetic = true)
 public abstract class Agent<F extends ICommonFeatures, K extends IKnowledge, S extends ISkill<K>>
     implements IAgent<F, K, S> {
 

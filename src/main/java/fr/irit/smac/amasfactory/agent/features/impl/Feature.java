@@ -22,7 +22,6 @@
 package fr.irit.smac.amasfactory.agent.features.impl;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 import fr.irit.smac.amasfactory.agent.IKnowledge;
@@ -37,7 +36,6 @@ import fr.irit.smac.amasfactory.agent.features.IFeature;
  * @param <S>
  *            the skill of the feature
  */
-@JsonPropertyOrder(alphabetic = true)
 public class Feature<K extends IKnowledge, S extends ISkill<K>> implements IFeature<K, S> {
 
     @JsonProperty
