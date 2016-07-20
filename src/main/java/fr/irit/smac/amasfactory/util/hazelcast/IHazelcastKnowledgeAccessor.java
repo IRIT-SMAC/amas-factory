@@ -19,7 +19,7 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package fr.irit.smac.amasfactory.util;
+package fr.irit.smac.amasfactory.util.hazelcast;
 
 import java.util.Map;
 import java.util.Set;

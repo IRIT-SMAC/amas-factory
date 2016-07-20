@@ -1,5 +1,5 @@
 {
-	"className":"fr.irit.smac.amasfactory.impl.Infrastructure",
+	"className":"fr.irit.smac.amasfactory.infrastructure.impl.Infrastructure",
 	"services":{
 		"className":"fr.irit.smac.amasfactory.service.impl.Services",
 		"agentHandlerService":{

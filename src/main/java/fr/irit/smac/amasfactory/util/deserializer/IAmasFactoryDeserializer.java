@@ -24,7 +24,7 @@ package fr.irit.smac.amasfactory.util.deserializer;
 import java.io.IOException;
 import java.io.InputStream;
 
-import fr.irit.smac.amasfactory.IInfrastructure;
+import fr.irit.smac.amasfactory.infrastructure.IInfrastructure;
 
 /**
  * The Interface IAmasFactoryDeserializer exposes a method to create a

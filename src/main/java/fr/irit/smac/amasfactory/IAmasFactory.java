@@ -24,6 +24,8 @@ package fr.irit.smac.amasfactory;
 import java.io.IOException;
 import java.io.InputStream;
 
+import fr.irit.smac.amasfactory.infrastructure.IInfrastructure;
+
 /**
  * The interface IAmasFactory exposes methods to create an infrastructure.
  *

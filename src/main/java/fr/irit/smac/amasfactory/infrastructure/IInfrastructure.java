@@ -19,7 +19,7 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package fr.irit.smac.amasfactory;
+package fr.irit.smac.amasfactory.infrastructure;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 

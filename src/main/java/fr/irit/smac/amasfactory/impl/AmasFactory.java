@@ -25,7 +25,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import fr.irit.smac.amasfactory.IAmasFactory;
-import fr.irit.smac.amasfactory.IInfrastructure;
+import fr.irit.smac.amasfactory.infrastructure.IInfrastructure;
+import fr.irit.smac.amasfactory.infrastructure.impl.Infrastructure;
 import fr.irit.smac.amasfactory.service.IServices;
 import fr.irit.smac.amasfactory.util.deserializer.impl.AmasFactoryDeserializer;
 

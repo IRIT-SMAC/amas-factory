@@ -31,8 +31,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
-import fr.irit.smac.amasfactory.IInfrastructure;
-import fr.irit.smac.amasfactory.impl.Infrastructure;
+import fr.irit.smac.amasfactory.infrastructure.IInfrastructure;
+import fr.irit.smac.amasfactory.infrastructure.impl.Infrastructure;
 import fr.irit.smac.amasfactory.util.deserializer.IAmasFactoryDeserializer;
 import fr.irit.smac.libs.tooling.scheduling.impl.system.SynchronizedSystemStrategy;
 

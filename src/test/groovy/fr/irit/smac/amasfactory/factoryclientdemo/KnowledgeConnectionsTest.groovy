@@ -2,12 +2,12 @@ package fr.irit.smac.amasfactory.factoryclientdemo
 
 import static org.junit.Assert.*
 import spock.lang.Specification
-import fr.irit.smac.amasfactory.IInfrastructure
 import fr.irit.smac.amasfactory.agent.IAgent
 import fr.irit.smac.amasfactory.agent.features.social.IPort
 import fr.irit.smac.amasfactory.agent.impl.Agent
 import fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2
 import fr.irit.smac.amasfactory.impl.AmasFactory
+import fr.irit.smac.amasfactory.infrastructure.IInfrastructure;
 
 class KnowledgeConnectionsTest extends Specification {
 

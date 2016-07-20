@@ -29,7 +29,7 @@ import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
 
 import fr.irit.smac.amasfactory.agent.features.basic.IKnowledgeBasic;
-import fr.irit.smac.amasfactory.util.IHazelcastKnowledgeAccessor;
+import fr.irit.smac.amasfactory.util.hazelcast.IHazelcastKnowledgeAccessor;
 
 /**
  * Class allowing to connect to the shared knowledge map and to to basic

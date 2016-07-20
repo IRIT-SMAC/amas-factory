@@ -19,11 +19,12 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package fr.irit.smac.amasfactory.impl;
+package fr.irit.smac.amasfactory.infrastructure.impl;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
-import fr.irit.smac.amasfactory.IInfrastructure;
+import fr.irit.smac.amasfactory.impl.ShutdownRuntimeException;
+import fr.irit.smac.amasfactory.infrastructure.IInfrastructure;
 import fr.irit.smac.amasfactory.service.IServices;
 
 /**

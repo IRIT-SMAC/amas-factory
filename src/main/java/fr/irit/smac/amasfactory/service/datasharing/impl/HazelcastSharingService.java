@@ -26,7 +26,7 @@ import fr.irit.smac.amasfactory.agent.features.basic.IKnowledgeBasic;
 import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 import fr.irit.smac.amasfactory.service.datasharing.IDataSharingService;
 import fr.irit.smac.amasfactory.service.execution.IExecutionService;
-import fr.irit.smac.amasfactory.util.IHazelcastKnowledgeAccessor;
+import fr.irit.smac.amasfactory.util.hazelcast.IHazelcastKnowledgeAccessor;
 import fr.irit.smac.amasfactory.util.hazelcast.impl.HazelcastKnowledgeAccessor;
 
 /**

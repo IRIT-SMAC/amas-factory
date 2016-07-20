@@ -1,97 +1,112 @@
 {
-  "services" : {
-    "className" : "fr.irit.smac.amasfactory.service.impl.Services",
-    "agentHandlerService" : {
-      "agentMap" : {
-        "ag1" : {
-          "commonFeatures" : {
-            "className" : "fr.irit.smac.amasfactory.agent.features.impl.CommonFeatures",
-            "featureBasic" : {
-              "skill" : {
-                "className" : "fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
-              },
-              "className" : "fr.irit.smac.amasfactory.agent.features.impl.Feature",
-              "knowledge" : {
-                "className" : "fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
-                "id" : "ag1"
-              }
-            },
-            "featureSocial" : {
-              "skill" : {
-                "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
-              },
-              "className" : "fr.irit.smac.amasfactory.agent.features.impl.Feature",
-              "knowledge" : {
-                "targetMap" : {
-                  "ag2port1" : {
-                    "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Target",
-                    "portTarget" : "port1",
-                    "agentTarget" : "ag2"
-                  }
-                },
-                "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial"
-              }
-            }
-          },
-          "skill" : {
-            "className" : "fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
-          },
-          "className" : "fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
-          "knowledge" : {
-            "className" : "fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
-          }
-        },
-        "ag2" : {
-          "commonFeatures" : {
-            "className" : "fr.irit.smac.amasfactory.agent.features.impl.CommonFeatures",
-            "featureBasic" : {
-              "skill" : {
-                "className" : "fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
-              },
-              "className" : "fr.irit.smac.amasfactory.agent.features.impl.Feature",
-              "knowledge" : {
-                "className" : "fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
-                "id" : "ag2"
-              }
-            },
-            "featureSocial" : {
-              "skill" : {
-                "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
-              },
-              "className" : "fr.irit.smac.amasfactory.agent.features.impl.Feature",
-              "knowledge" : {
-                "targetMap" : { },
-                "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
-                "portMap" : {
-                  "port1" : {
-                    "className" : "fr.irit.smac.amasfactory.agent.features.social.impl.Port",
-                    "id" : "port1"
-                  }
-                }
-              }
-            }
-          },
-          "skill" : {
-            "className" : "fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
-          },
-          "className" : "fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
-          "knowledge" : {
-            "className" : "fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
-          }
-        }
-      },
-      "className" : "fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler"
-    },
-    "executionService" : {
-      "nbThreads" : 8,
-      "className" : "fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService"
-    },
-    "messagingService" : {
-      "className" : "fr.irit.smac.amasfactory.service.messaging.impl.MessagingService"
-    },
-    "loggingService" : {
-      "className" : "fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService"
-    }
-  },
-  "className" : "fr.irit.smac.amasfactory.impl.Infrastructure"
+	"services":{
+		"className":"fr.irit.smac.amasfactory.service.impl.Services",
+		"agentHandlerService":{
+			"agentMap":{
+				"ag1":{
+					"commonFeatures":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.CommonFeatures",
+						"featureBasic":{
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
+							},
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+								"id":"ag1"
+							}
+							
+						},
+						"featureSocial":{
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
+							},
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"targetMap":{
+									"ag2port1":{
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Target",
+										"portTarget":"port1",
+										"agentTarget":"ag2"
+									}
+									
+								},
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial"
+							}
+							
+						}
+						
+					},
+					"skill":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
+					},
+					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
+					"knowledge":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
+					}
+					
+				},
+				"ag2":{
+					"commonFeatures":{
+						"className":"fr.irit.smac.amasfactory.agent.features.impl.CommonFeatures",
+						"featureBasic":{
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.SkillBasic"
+							},
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"className":"fr.irit.smac.amasfactory.agent.features.basic.impl.KnowledgeBasic",
+								"id":"ag2"
+							}
+							
+						},
+						"featureSocial":{
+							"skill":{
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.SkillSocial"
+							},
+							"className":"fr.irit.smac.amasfactory.agent.features.impl.Feature",
+							"knowledge":{
+								"targetMap":{
+									
+								},
+								"className":"fr.irit.smac.amasfactory.agent.features.social.impl.KnowledgeSocial",
+								"portMap":{
+									"port1":{
+										"className":"fr.irit.smac.amasfactory.agent.features.social.impl.Port",
+										"id":"port1"
+									}
+									
+								}
+								
+							}
+							
+						}
+						
+					},
+					"skill":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.SkillCustom"
+					},
+					"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.DemoAgent2",
+					"knowledge":{
+						"className":"fr.irit.smac.amasfactory.factoryclientdemo.example2.impl.KnowledgeCustom"
+					}
+					
+				}
+				
+			},
+			"className":"fr.irit.smac.amasfactory.service.agenthandler.impl.BasicAgentHandler"
+		},
+		"executionService":{
+			"nbThreads":8,
+			"className":"fr.irit.smac.amasfactory.service.execution.impl.TwoStepAgExecutionService"
+		},
+		"messagingService":{
+			"className":"fr.irit.smac.amasfactory.service.messaging.impl.MessagingService"
+		},
+		"loggingService":{
+			"className":"fr.irit.smac.amasfactory.service.logging.impl.AgentLogLoggingService"
+		}
+		
+	},
+	"className":"fr.irit.smac.amasfactory.infrastructure.impl.Infrastructure"
 }

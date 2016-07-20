@@ -19,12 +19,11 @@
  * <http://www.gnu.org/licenses/lgpl-3.0.html>.
  * #L%
  */
-package fr.irit.smac.amasfactory.factoryclientdemo;
+package fr.irit.smac.amasfactory.util.hazelcast.impl;
 
 import com.hazelcast.core.Hazelcast;
 
-import fr.irit.smac.amasfactory.util.IHazelcastKnowledgeAccessor;
-import fr.irit.smac.amasfactory.util.hazelcast.impl.HazelcastKnowledgeAccessor;
+import fr.irit.smac.amasfactory.util.hazelcast.IHazelcastKnowledgeAccessor;
 
 public class UglyHazelcastObserver {
 
