@@ -9,8 +9,31 @@
 
 Amas-factory a pour but de faciliter le déploiement de systèmes multi-agents (SMA), et plus particulièrement les systèmes multi-agents coopératifs (AMAS).
 
-## Installation
-Pour un projet utilisant Maven, placez dans le pom :
+## Installation avec Maven
+
+- Placez dans le pom.xml de votre projet la dépendance avec amas-factory.
+
+	```xml
+	<dependency>
+		<groupId>fr.irit.smac</groupId>
+		<artifactId>amas-factory</artifactId>
+		<version>0.2</version>
+	</dependency>
+	```
+- Rajoutez les lignes suivantes dans le pom.xml. Ainsi, les artefacts nécessaires seront recherchés (et trouvés) dans le dépôt Git [mvn-repo](https://github.com/IRIT-SMAC/mvn-repo).
+
+	```xml
+	<repositories>
+		<repository>
+			<id>IRIT-SMAC-agent-tooling-releases</id>
+			<url>https://github.com/IRIT-SMAC/mvn-repo/raw/master/releases</url>
+		</repository>
+		<repository>
+			<id>IRIT-SMAC-agent-tooling-snapshots</id>
+			<url>https://github.com/IRIT-SMAC/mvn-repo/raw/master/snapshots</url>
+		</repository>
+	</repositories>
+	```
 
 ## Description générale
 Amas-factory se divise en trois entités distinctes principales : l'infrastructure, les services et les agents.
@@ -49,7 +72,7 @@ Avec cette seconde méthode, l'agent expéditeur peut envoyer des données sur u
 
 Deux solutions sont possibles pour initialiser le système :
 
-- Par le code
+- Par du code Java
 - Par un fichier JSON : l'état initial de l'infrastructure, des services et des agents sont décrits dans ce fichier. Ces objets sont désérialisés à l'initialisation du système. Il est possible de créer ce fichier visuellement avec [amas-renderer](https://github.com/IRIT-SMAC/amas-renderer). La bibliothèque de sérialisation/désérialisation Jackson est utilisée. Avec celle-ci, il est possible d'utiliser des annotations pour notamment définir quels attributs sont pris en compte dans les processus de sérialisation et de désérialisation.
 Si, quand vous implémentez une entité, par exemple le knowledge d'un agent, vous souhaitez que des champs de cette entité soit initialisés via le fichier JSON, il suffit de rajouter un @JsonProperty sur ce champ.
 
@@ -66,7 +89,7 @@ Comme expliqué précédemment, un agent possède un knowledge et un skill qui l
 	```java
 	public interface IMyKnowledge extends IKnowledge
 	```
-- Implémenter cette interface.
+- Implémenter cette interface. Cette classe doit également hériter de l'implémentation de base d'un knowledge.
 
 	```java
 	public class MyKnowledge extends Knowledge implements IMyKnowledge
@@ -77,7 +100,7 @@ Comme expliqué précédemment, un agent possède un knowledge et un skill qui l
 	public interface IMySkill<K extends IMyKnowledge> extends ISkill<K>
 	```
 
-- Implémenter cette interface.
+- Implémenter cette interface. Cette classe doit également hériter de l'implémentation de base d'un skill.
 
 	```java
 	public class MySkill<K extends IMyKnowledge> extends Skill<K> implements IMySkill<K>
@@ -92,14 +115,14 @@ Comme expliqué précédemment, un agent possède un knowledge et un skill qui l
 	- IMyKnowledge correspond à l'interface du knowledge propre à un agent. 
 	- IMySkill correspond à l'interface du skill utilisé.
 	- ICommonFeatures correspond à l'interface des features utilisées. Si vous utilisez une liste de features personnalisées, remplacez cette interface par la vôtre.
-	- TwoStepsAgent est la stratégie utilisée. Plus concrètement, elle définit les méthodes liées au cycle de vie d'un agent. Ainsi, en utilisant la stratégie ITwoStepsAgent, l'agent devra implémenter les méthodes perceive, qui concerne l'étape de perception, et decideAndAct, qui englobe les étapes de décision et d'action dans une seule méthode. Pour que le cycle d'un agent se compose d'une seule étape, l'interface IAgentStrategy peut être utilisée à la place de ITwoStepsAgent.
+	- TwoStepsAgent est la stratégie utilisée. Plus concrètement, elle définit les méthodes liées au cycle de vie d'un agent. Ainsi, en utilisant la stratégie ITwoStepsAgent, l'agent devra implémenter les méthodes perceive, qui concerne l'étape de perception, et decideAndAct, qui englobe les étapes de décision et d'action dans une seule méthode. Pour que le cycle d'un agent se compose d'une seule étape, l'interface IAgentStrategy peut être utilisée à la place de ITwoStepsAgent. Ces deux interfaces nécessitent dans tous les cas le service agent-scheduling.
 
 - Implémenter les méthodes liées au cycle de vie de l'agent (et donc de la stratégie utilisée).
-Dans le cas de TwoStepsAgent, il faut implémenter les méthodes perceive et decideAndAct.
+Dans notre exemple, il faut implémenter les méthodes perceive et decideAndAct.
 
 #### Implémentation d'une nouvelle feature commune à plusieurs agents
 
-Une feature permet d'ajouter des connaissances et des capacités supplémentaires à plusieurs agents. Pour cela, il faut implémenter ces deux notions puis rajouter la feature à la liste des features communes.
+Une feature permet d'ajouter des connaissances et des capacités supplémentaires utilisables par tous les agents si besoin. En d'autres termes, elle permet d'ajouter un comportement à un agent que d'autres peuvent également avoir. Pour cela, il faut implémenter le knowledge et le skill de la feature puis rajouter celle-ci à la liste des features communes.
 
 - Définir les interfaces et les implémentations de ces interfaces du knowledge et du skill (de la même façon que dans la partie précédente).
 - Rajouter cette feature à la liste des features communes. Pour cela, il faut définir une nouvelle interface de la liste des features (qui hérite donc de l'interface par défaut de la liste des features communes).
@@ -111,7 +134,7 @@ Une feature permet d'ajouter des connaissances et des capacités supplémentaire
 	    public void setMyFeature(IFeature<IKnowledgeFeature, ISkillFeature<IKnowledgeFeature>> myFeature);
 	}
 	```
-- Implémenter cette nouvelle interface.
+- Implémenter cette nouvelle interface. Cette classe hérite de l'implémentation de base de la liste des features.
 
 	```java
 	public class MyFeatures extends Features implements IMyFeatures {
@@ -125,7 +148,7 @@ Une feature permet d'ajouter des connaissances et des capacités supplémentaire
 	    }
 	    @Override
 	    public void setMyFeature(IFeature<IKnowledgeFeature, ISkillFeature<IKnowledgeFeature>> myFeature) {
-		    this.myFeaute = myFeature;
+		    this.myFeature = myFeature;
 		}
 	}
 	```
@@ -151,7 +174,7 @@ Pour ajouter un service, il suffit de créer la classe et son interface correspo
 	public interface IMyServices<A> extends IServices<A>
 	```
 
-- Implémenter cette nouvelle interface 
+- Implémenter cette nouvelle interface. Cette classe hérite de l'implémentation de base de la liste des services.
 
 	```java
 	public class MyServices<A extends IAgent<F,IKnowledge,ISkill<IKnowledge>>, F extends IFeatures> extends Services<A> implements IMyServices<A>
@@ -206,13 +229,13 @@ MyFactory<T,A> myFactory = new MyFactory();
 IMyInfrastructure<T> infra = myFactory.createInfrastructure(ClassLoader.getSystemResourceAsStream("config.json"));
 ```
 
-Avant agent-scheduling, l'instruction suivante permet d'exécuter les étapes d'un cycle de tous les agents.
+Avec agent-scheduling, l'instruction suivante permet d'exécuter les étapes d'un cycle de tous les agents.
 
 ```java
 infra.getServices().getExecutionService().step();
 ```
 
-Il est également possible d'utiliser une interface graphique minimale pour manipuler le système avec cette instruction :
+Toujours avec agent-scheduling, il est également possible d'utiliser une interface graphique minimale pour manipuler les cycles du système avec cette instruction :
 ```java
 infra.getServices().getExecutionService().displaySimpleGui();
 ```

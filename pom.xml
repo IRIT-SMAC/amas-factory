@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.irit.smac</groupId>
 	<artifactId>amas-factory</artifactId>
-	<version>0.2-SNAPSHOT</version>
+	<version>0.2</version>
 	<name>amas-factory</name>
 	<organization>
 		<name>IRIT - SMAC Team and Brennus Analytics</name>
@@ -42,7 +42,7 @@
 		<repository>
 			<id>internal.repo</id>
 			<name>Temporary Staging Repository</name>
-			<url>file://${project.build.directory}/mvn-repo/snapshots</url>
+			<url>file://${project.build.directory}/mvn-repo/releases</url>
 		</repository>
 	</distributionManagement>
 
@@ -62,7 +62,7 @@
 				<artifactId>maven-deploy-plugin</artifactId>
 				<version>${maven-deploy-plugin-version}</version>
 				<configuration>
-					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo/snapshots</altDeploymentRepository>
+					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo/releases</altDeploymentRepository>
 				</configuration>
 			</plugin>
 
