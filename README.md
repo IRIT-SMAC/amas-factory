@@ -25,11 +25,11 @@ Amas-factory a pour but de faciliter le déploiement de systèmes multi-agents (
 	```xml
 	<repositories>
 		<repository>
-			<id>IRIT-SMAC-agent-tooling-releases</id>
+			<id>IRIT-SMAC-mvn-repo-releases</id>
 			<url>https://github.com/IRIT-SMAC/mvn-repo/raw/master/releases</url>
 		</repository>
 		<repository>
-			<id>IRIT-SMAC-agent-tooling-snapshots</id>
+			<id>IRIT-SMAC-mvn-repo-snapshots</id>
 			<url>https://github.com/IRIT-SMAC/mvn-repo/raw/master/snapshots</url>
 		</repository>
 	</repositories>
