@@ -38,6 +38,8 @@ public interface ISkillSocial<K extends IKnowledgeSocial> extends ISkill<K> {
 
     /**
      * Add the targets according if the name of the port of an agent is received
+     * 
+     * @param message
      */
     public void addTargetFromMessage(PortOfTargetMessage message);
 

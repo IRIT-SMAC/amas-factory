@@ -21,16 +21,15 @@
  */
 package fr.irit.smac.amasfactory.service.messaging;
 
-import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.service.IService;
 import fr.irit.smac.libs.tooling.messaging.IMsgService;
 
 /**
  * The Interface IMessagingService exposes methods to use the messaging service.
  *
- * @param <M> the generic type
+ * @param <M>
+ *            the type of the message
  */
-@SuppressWarnings("hiding")
-public interface IMessagingService<IMessage> extends IService, IMsgService<IMessage> {
+public interface IMessagingService<M> extends IService, IMsgService<M> {
 
 }

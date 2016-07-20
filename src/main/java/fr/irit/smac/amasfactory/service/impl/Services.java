@@ -36,6 +36,14 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 import fr.irit.smac.amasfactory.service.logging.ILoggingService;
 import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
 
+/**
+ * The implementation of the list of services
+ *
+ * @param <A>
+ *            the type of the agents
+ * @param <F>
+ *            the features
+ */
 public class Services<A extends IAgent<F, IKnowledge, ISkill<IKnowledge>>, F extends ICommonFeatures>
     implements IServices<A> {
 

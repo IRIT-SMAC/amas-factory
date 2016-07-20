@@ -45,13 +45,6 @@ public interface IKnowledgeSocial extends IKnowledge {
      */
     public Map<String, ITarget> getTargetMap();
 
-    /**
-     * Sets the output value of the agent
-     * 
-     * @param outputValue
-     *            the output value
-     */
-
     public IMsgBox<IMessage> getMsgBox();
 
     public void setMsgBox(IMsgBox<IMessage> msgBox);

@@ -28,8 +28,10 @@ import fr.irit.smac.amasfactory.service.execution.IExecutionService;
 
 /**
  * The Interface ILoggingService exposes methods to use the logger service.
+ *
+ * @param <A>
+ *            the type of the agent
  */
-
 public interface ILoggingService<A> extends IService {
     /**
      * Gets the standard logger.

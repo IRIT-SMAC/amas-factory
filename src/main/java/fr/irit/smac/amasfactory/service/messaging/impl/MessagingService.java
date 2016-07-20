@@ -24,6 +24,7 @@ package fr.irit.smac.amasfactory.service.messaging.impl;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import fr.irit.smac.amasfactory.message.IMessage;
 import fr.irit.smac.amasfactory.service.messaging.IMessagingService;
 import fr.irit.smac.libs.tooling.messaging.AgentMessaging;
 import fr.irit.smac.libs.tooling.messaging.IDirectory;
@@ -35,14 +36,14 @@ import fr.irit.smac.libs.tooling.messaging.impl.Ref;
  * MessagingService is a service which handles the communication of the agents.
  *
  * @param <M>
- *            the generic type
+ *            the type of the message
  */
-public class MessagingService<IMessage>
-    implements IMessagingService<IMessage>, IMsgService<IMessage> {
+public class MessagingService<M extends IMessage>
+    implements IMessagingService<M>, IMsgService<M> {
 
-    private IMsgService<IMessage> delegatedMsgService;
+    private IMsgService<M> delegatedMsgService;
 
-    private Class<IMessage> messageClass;
+    private Class<M> messageClass;
 
     private static final Logger LOGGER = Logger.getLogger(MessagingService.class.getName());
 
@@ -56,7 +57,7 @@ public class MessagingService<IMessage>
     public MessagingService() {
         super();
         try {
-            messageClass = (Class<IMessage>) Class.forName("fr.irit.smac.amasfactory.message.Message");
+            messageClass = (Class<M>) Class.forName("fr.irit.smac.amasfactory.message.Message");
         }
         catch (ClassNotFoundException e) {
             LOGGER.log(Level.SEVERE, "An error occured during the initialisation of the messagingService", e);
@@ -95,7 +96,7 @@ public class MessagingService<IMessage>
      * @see fr.irit.smac.libs.tooling.messaging.ISender#getDirectory()
      */
     @Override
-    public IDirectory<IMessage> getDirectory() {
+    public IDirectory<M> getDirectory() {
         return delegatedMsgService.getDirectory();
     }
 
@@ -106,7 +107,7 @@ public class MessagingService<IMessage>
      * java.lang.String)
      */
     @Override
-    public boolean send(IMessage msg, String receiverId) {
+    public boolean send(M msg, String receiverId) {
         return delegatedMsgService.send(msg, receiverId);
     }
 
@@ -117,7 +118,7 @@ public class MessagingService<IMessage>
      * fr.irit.smac.libs.tooling.messaging.impl.Ref)
      */
     @Override
-    public boolean send(IMessage msg, Ref<IMessage> receiverRef) {
+    public boolean send(M msg, Ref<M> receiverRef) {
         return delegatedMsgService.send(msg, receiverRef);
     }
 
@@ -129,7 +130,7 @@ public class MessagingService<IMessage>
      * java.lang.String)
      */
     @Override
-    public boolean sendToGroup(IMessage msg, String groupId) {
+    public boolean sendToGroup(M msg, String groupId) {
         return delegatedMsgService.sendToGroup(msg, groupId);
     }
 
@@ -141,7 +142,7 @@ public class MessagingService<IMessage>
      * fr.irit.smac.libs.tooling.messaging.impl.Ref)
      */
     @Override
-    public boolean sendToGroup(IMessage msg, Ref<IMessage> groupRef) {
+    public boolean sendToGroup(M msg, Ref<M> groupRef) {
         return delegatedMsgService.sendToGroup(msg, groupRef);
     }
 
@@ -152,7 +153,7 @@ public class MessagingService<IMessage>
      * fr.irit.smac.libs.tooling.messaging.ISender#broadcast(java.lang.Object)
      */
     @Override
-    public boolean broadcast(IMessage msg) {
+    public boolean broadcast(M msg) {
         return delegatedMsgService.broadcast(msg);
     }
 
@@ -163,7 +164,7 @@ public class MessagingService<IMessage>
      * String)
      */
     @Override
-    public IMsgBox<IMessage> getMsgBox(String agentId) {
+    public IMsgBox<M> getMsgBox(String agentId) {
         return delegatedMsgService.getMsgBox(agentId);
     }
 

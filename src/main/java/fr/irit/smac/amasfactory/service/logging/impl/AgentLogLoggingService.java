@@ -30,7 +30,7 @@ import fr.irit.smac.libs.tooling.logging.AgentLog;
 /**
  * AgentLogLoggingService is a service which allows to write logs about the agents.
  *
- * @param <M> the generic type
+ * @param <A> the type of the agents
  */
 public class AgentLogLoggingService<A> implements ILoggingService<A> {
 
