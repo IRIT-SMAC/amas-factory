@@ -33,7 +33,7 @@ import java.io.InputStream;
 public interface IAmasFactory<T> {
 
     /**
-     * Creates a new infrastructure
+     * Creates a new infrastructure with a json file
      * 
      * @param configuration
      *            the json file
@@ -43,5 +43,10 @@ public interface IAmasFactory<T> {
     public IInfrastructure<T> createInfrastructure(InputStream configuration)
         throws IOException;
 
+    /**
+     * Creates a new infrastructure without a json file
+     * 
+     * @return
+     */
     public IInfrastructure<T> createInfrastructure();
 }
