@@ -1,73 +1,112 @@
+/*
+ * #%L
+ * amas-factory
+ * %%
+ * Copyright (C) 2015 - 2016 IRIT - SMAC Team and Brennus Analytics
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Lesser Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Lesser Public
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/lgpl-3.0.html>.
+ * #L%
+ */
 package fr.irit.smac.amasfactory.service.agenthandler;
 
 import java.util.Collection;
 import java.util.Map;
 
-import fr.irit.smac.amasfactory.agent.IInfrastructureAgent;
-import fr.irit.smac.amasfactory.impl.BasicInfrastructure;
-import fr.irit.smac.amasfactory.service.IInfraService;
+import fr.irit.smac.amasfactory.service.IService;
 
-public interface IAgentHandlerService<A extends IInfrastructureAgent<M>,M> extends IInfraService<A,M>
-{
+/**
+ * The Interface IAgentHandlerService exposes methods to handle the agents.
+ *
+ * @param <A>
+ *            the type of agent
+ */
+public interface IAgentHandlerService<A> extends IService {
+
     /**
-     * 
+     * Gets the agents.
+     *
      * @return a collection containing the agents currently handled by the
      *         system
      */
-    Collection<A> getAgents();
-    
-    Map<String,A> getAgentMap();
-    
-     A getAgent(String id);
-
+    public Collection<A> getAgents();
 
     /**
-     * Add an agent to the system
-     * 
+     * Gets the agent map.
+     *
+     * @return the agent map
+     */
+    public Map<String, A> getAgentMap();
+
+    /**
+     * Gets the agent.
+     *
+     * @param id
+     *            the id
+     * @return the agent
+     */
+    public A getAgent(String id);
+
+    /**
+     * Add an agent to the system.
+     *
      * @param agent
      *            the agent to be added to the system
      */
-    void addAgent(A agent);
+    public void addAgent(A agent);
 
     /**
-     * Remove an agent from the system
-     * 
+     * Remove an agent from the system.
+     *
      * @param agent
      *            the agent to be removed from the system
      */
-    void removeAgent(A agent);
+    public void removeAgent(A agent);
 
     /**
-     * Add a collection of agents to the system
-     * 
+     * Add a collection of agents to the system.
+     *
      * @param agents
      *            the agents to be added to the system
      */
-    void addAgents(Collection<A> agents);
+    public void addAgents(Collection<A> agents);
 
     /**
-     * Remove a collection of agents from the system
-     * 
+     * Remove a collection of agents from the system.
+     *
      * @param agents
      *            the agents to be removed
      */
-    void removeAgents(Collection<A> agents);
-    
-    
-    /**
-     * Add a agentEventListener to be notified when an agent is added
-     * @param listener the listener to be added
-     */
-    void addAgentEventListener(IAgentEventListener<A> listener);
-    
-    
-    /**
-     * Removes a agentEventListener
-     * @param listener the listener to be removed
-     */
-    void removeAgentEventListener(IAgentEventListener<A> listener);
+    public void removeAgents(Collection<A> agents);
 
-	void setInfrastructureAgent(BasicInfrastructure<A, M> basicInfrastructure);
+    /**
+     * Add a agentEventListener to be notified when an agent is added.
+     *
+     * @param listener
+     *            the listener to be added
+     */
+    public void addAgentEventListener(IAgentEventListener<A> listener);
 
-    
+    /**
+     * Removes a agentEventListener.
+     *
+     * @param listener
+     *            the listener to be removed
+     */
+    public void removeAgentEventListener(IAgentEventListener<A> listener);
+
+    public void initAgents();
+
+    public void setAgentMap(Map<String, A> agentMap);
 }
