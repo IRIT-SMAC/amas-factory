@@ -90,14 +90,14 @@ Comme expliqué précédemment, un agent possède un knowledge et un skill qui l
 	```	
 
 	- IMyKnowledge correspond à l'interface du knowledge propre à un agent. 
-	-IMySkill correspond à l'interface du skill utilisé.
-	-ICommonFeatures correspond à l'interface des features utilisées. Si vous utilisez une liste de features personnalisées, remplacez cette interface par la vôtre.
+	- IMySkill correspond à l'interface du skill utilisé.
+	- ICommonFeatures correspond à l'interface des features utilisées. Si vous utilisez une liste de features personnalisées, remplacez cette interface par la vôtre.
 	- TwoStepsAgent est la stratégie utilisée. Plus concrètement, elle définit les méthodes liées au cycle de vie d'un agent. Ainsi, en utilisant la stratégie ITwoStepsAgent, l'agent devra implémenter les méthodes perceive, qui concerne l'étape de perception, et decideAndAct, qui englobe les étapes de décision et d'action dans une seule méthode. Pour que le cycle d'un agent se compose d'une seule étape, l'interface IAgentStrategy peut être utilisée à la place de ITwoStepsAgent.
 
 - Implémenter les méthodes liées au cycle de vie de l'agent (et donc de la stratégie utilisée).
 Dans le cas de TwoStepsAgent, il faut implémenter les méthodes perceive et decideAndAct.
 
-#### Ajout d'une nouvelle feature commune à plusieurs agents
+#### Implémentation d'une nouvelle feature commune à plusieurs agents
 
 Une feature permet d'ajouter des connaissances et des capacités supplémentaires à plusieurs agents. Pour cela, il faut implémenter ces deux notions puis rajouter la feature à la liste des features communes.
 
@@ -131,7 +131,7 @@ Une feature permet d'ajouter des connaissances et des capacités supplémentaire
 	```
 	  L'utilisation de l'annotation Jackson @JsonProperty permet d'intégrer l'attribut correspondant à la feature dans les processus de sérialisation et de désérialisation. Ceci est nécessaire pour prendre en compte cette feature quand on initialise le système via un un fichier JSON.
 
-#### Ajout d'un nouveau service
+#### Implémentation d'un nouveau service
 
 Pour ajouter un service, il suffit de créer la classe et son interface correspondante. Ensuite, il faut ajouter ce service à la liste des services.
 
@@ -187,7 +187,7 @@ De même, si vous utilisez une liste de services personnalisée, renseignez son 
 
 - Ré-implémenter les méthodes createInfrastructure pour créer l'infrastructure
 
-#### Exécution du SMA (main)
+### Exécution du SMA (main)
 
 Une fois toutes les implémentations souhaitées réalisées, il ne reste qu'à implémenter le main pour exécuter le SMA.
 
