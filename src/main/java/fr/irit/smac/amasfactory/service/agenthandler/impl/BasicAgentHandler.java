@@ -121,7 +121,7 @@ public class BasicAgentHandler<A extends IAgent>
      */
     @Override
     public void removeAgent(A agent) {
-        agentMap.remove(agent);
+        agentMap.remove(agent.getFeatures().getFeatureBasic().getKnowledge().getId());
         notifyAgentRemoved(agent);
     }
 
