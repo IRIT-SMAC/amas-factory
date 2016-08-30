@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>fr.irit.smac</groupId>
 	<artifactId>amas-factory</artifactId>
-	<version>0.2</version>
+	<version>0.2.1-SNAPSHOT</version>
 	<name>amas-factory</name>
 	<organization>
 		<name>IRIT - SMAC Team and Brennus Analytics</name>
