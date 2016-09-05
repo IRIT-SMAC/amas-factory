@@ -23,10 +23,10 @@ package fr.irit.smac.amasfactory.service.agenthandler.impl;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import fr.irit.smac.amasfactory.agent.IAgent;
 import fr.irit.smac.amasfactory.service.IService;
@@ -45,7 +45,7 @@ import fr.irit.smac.amasfactory.service.agenthandler.IAgentHandlerService;
 public class BasicAgentHandler<A extends IAgent>
     implements IAgentHandlerService<A>, IService {
 
-    private Map<String, A> agentMap = new HashMap<>();
+    private Map<String, A> agentMap = new ConcurrentHashMap<>();
 
     private Set<IAgentEventListener<A>> listenerSet;
 
@@ -66,7 +66,7 @@ public class BasicAgentHandler<A extends IAgent>
      */
     @Override
     public void setAgentMap(Map<String, A> agentMap) {
-        this.agentMap = agentMap;
+        this.agentMap =  new ConcurrentHashMap<>(agentMap);
 
     }
 
